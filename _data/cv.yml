@@ -2,11 +2,11 @@
   type: map
   contents:
     - name: Full Name
-      value: Albert Einstein
+      value: Omar Essalmani
     - name: Date of Birth
-      value: 14th March 1879
+      value: 17th February 2000
     - name: Languages
-      value: English, German
+      value: English, Fench, Arabe
 
 - title: Education
   type: time_table
