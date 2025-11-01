@@ -13,12 +13,12 @@ profile:
     <p>123 your address street</p>
     <p>Your City, State 12345</p>
 
-selected_papers: true # includes a list of papers marked as "selected={true}"
+selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
 
 announcements:
-  enabled: true # includes a list of news items
-  scrollable: true # adds a vertical scroll bar if there are more than 3 news items
+  enabled: false # includes a list of news items
+  scrollable: false # adds a vertical scroll bar if there are more than 3 news items
   limit: 5 # leave blank to include all the news in the `_news` folder
 
 latest_posts:
@@ -27,8 +27,16 @@ latest_posts:
   limit: 3 # leave blank to include all the blog posts
 ---
 
-Hi, I’m Omar ESSALMANI. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
+<p>
+    Je suis <strong>Omar ESSALMANI</strong>, Ingénieur en Mécanique hautement qualifié et axé sur les résultats.
+    Je suis titulaire d'un prestigieux <strong>double diplôme</strong> de l'<strong>Université de Technologie de Compiègne (UTC)</strong> 🇫🇷 et de l'<strong>École Nationale Supérieure D'arts et Métiers (ENSAM-R)</strong> 🇲🇦.
+</p>
 
-Put your address / P.O. box / other info right below your picture. You can also disable any of these elements by editing `profile` property of the YAML header of your `_pages/about.md`. Edit `_bibliography/papers.bib` and Jekyll will render your [publications page](/al-folio/publications/) automatically.
+<p>
+    Spécialisé en <strong>Conception Mécanique Intégrée</strong> et en <strong>Conception et Simulation Mécanique</strong>, je possède une expertise approfondie dans l'intégralité du cycle de vie du produit, de l'étude initiale à la fabrication.
+    Mes compétences techniques fondamentales incluent la maîtrise de logiciels tels que <strong>Catia V5</strong>, <strong>SolidWorks</strong>, Ansys et Abaqus, ainsi qu'une solide connaissance du <strong>Calcul mécanique (FEA)</strong>, de la <strong>Cotation fonctionnelle ISO - GPS</strong> et des normes critiques comme l'<strong>IEC 60601</strong>.
+</p>
 
-Link to your social media connections, too. This theme is set up to use [Font Awesome icons](https://fontawesome.com/) and [Academicons](https://jpswalsh.github.io/academicons/), like the ones below. Add your Facebook, Twitter, LinkedIn, Google Scholar, or just disable all of them.
+<p>
+    Au-delà de l'ingénierie, je suis passionné par la technologie, notamment la réparation de composants électroniques (PC, Téléphone), et je mets à profit mon expérience de leadership en tant qu'ancien Responsable média du club ROBOTICORE à l'ENSAM.
+</p>
