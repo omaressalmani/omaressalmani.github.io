@@ -2,83 +2,96 @@
   type: map
   contents:
     - name: Full Name
-      value: Omar ESSALMANI
+      value: Albert Einstein
     - name: Date of Birth
-      value: 17th February 2000
+      value: 14th March 1879
     - name: Languages
-      value: English, French and Arabic.
+      value: English, German
 
 - title: Education
   type: time_table
   contents:
-    - title: Engineering degree
-      institution: Université de Technologie de Compiègne, France
-      year: Sep. 2023 - 2025
+    - title: PhD
+      institution: University of Zurich, Zurich, Switzerland
+      year: 1905
       description:
-        - Integrated Mechanical Design
-    - title: Engineering degree
-      institution: École Nationale Supérieure D'arts et Métiers, Morocco
-      year: Sep. 2021 - 2024
+        - Description 1.
+        - Description 2.
+        - title: Description 3.
+          contents:
+            - Sub-description 1.
+            - Sub-description 2.
+    - title: Federal teaching diploma
+      institution: Eidgenössische Technische Hochschule, Zurich, Switzerland
+      year: 1900
       description:
-        - Mechanical Design and Simulation
-      
+        - Description 1.
+        - Description 2.
 
 - title: Experience
   type: time_table
   contents:
-    - title: Final year project internship
-      institution: Guerbet
-      year: Feb 2025 - Jul 2025
+    - title: Professor of Theoretical Physics
+      institution: Institute for Advanced Study, Princeton University
+      year: 1933 - 1955
       description:
-        - Verification and design within the framework of the development of an innovative medical device intended for the injection of contrast agents for medical imaging.
-    - title: Collaborative Project.
-      institution: Cornilleau, Compiègne, France.
-      year: Jul 2024 - Dec 2024
+        - Description 1.
+        - Description 2.
+        - title: Description 3.
+          contents:
+            - Sub-description 1.
+            - Sub-description 2.
+    - title: Visiting Professor
+      institution: California Institute of Technology, Pasadena, California, US
+      year: 1933
       description:
-        - Design and manufacture of a test bench for rotating billiard balls.
+        - Description 1.
+        - Description 2.
 
-    - title: Mechanical engineer internship
-      institution: Usine AICHA, Meknes, Morocco.
-      year: Jul 2023 - Aug 2023
-      description:
-        - Study and design of a Cartesian palletizer for canned food.
+    - title: Director
+      institution: Kaiser Wilhelm Institute for Physics, Berlin, Germany.
+      year: 1917-1933
 
-    - title: Mechanical engineer internship
-      institution: Omnium Général Électricité - OGE, Casablanca, Morocco.
-      year: Jul 2022 - Aug 2022
+    - title: Professor of Theoretical Physics
+      institution: Karl-Ferdinand University, Prague, Czechoslovakia
+      year: 1911 - 1917
       description:
-        - Optimizing the rework rate of parts in electrical cabinet production.
 
-    - title: Final year project internship
-      institution: METEC DIAGNOSTIC, Casablanca, Morocco.
-      year: Feb 2021 - Jul 2021
-      description:
-        - Mechanical design engineer for the development of class IIb medical devices.
-         - title: Final year project internship
-    - title: Maintenance technician internship
-      institution: UMPM
-      year: May 2020 - Jul 2020
-      description:
-        - Preventive maintenance of a HAAS UMC-1000 CNC milling machine.
+    - title: Associate Professor of Theoretical Physics
+      institution: University of Zurich, Zurich, Switzerland
+      year: 1909 - 1911
 
-
+- title: Open Source Projects
+  type: time_table
+  contents:
+    - title: <a href="https://github.com/alshedivat/al-folio">al-folio</a>
+      year: 2015-now
+      description: A beautiful, simple, clean, and responsive Jekyll theme for academics.
 
 - title: Honors and Awards
   type: time_table
   contents:
-    - year: 2021
+    - year: 1921
       items:
-        - 1st Prize in the Roboticore Club Competition
-    
+        - Nobel Prize in Physics
+        - Matteucci Medal
+    - year: 2029
+      items:
+        - Max Planck Medal
 
-- title: certificates
+- title: Academic Interests
   type: nested_list
   contents:
-    - title: 3DSwymer DASSAULT SYSTEMS
-    - title: Part design Solidworks DASSAULT SYSTEMS
-    - title: 3D Creator Associate Solidworks DASSAULT SYSTEMS .. (+ 8 others in SolidWorks)
+    - title: Topic 1.
+      items:
+        - Description 1.
+        - Description 2.
+    - title: Topic 2.
+      items:
+        - Description 1.
+        - Description 2.
 
 - title: Other Interests
   type: list
   contents:
-    - <u>Hobbies:</u> Repair of electronic components (PC, Telephone...), football,Taketaekwondo, design, video editing.
+    - <u>Hobbies:</u> Hobby 1, Hobby 2, etc.
