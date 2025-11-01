@@ -38,16 +38,24 @@ latest_posts:
     <ul>
       <li><strong>CAD:</strong> CATIA V5, SolidWorks, Creo, 3DEX, Fusion 360</li>
       <li><strong>Simulation:</strong> Ansys, Abaqus</li>
-      <li><strong>CAM:</strong> TopSolid</li>
-      <li><strong>Programming:</strong> VBA</li>
+      <li><strong>CAM:</strong> TopSolid, SolidWorks, Fusion 360, CATIA V5, 3DEX and ESPRICAM</li>
+      <li><strong>Programming:</strong> VBA, HTML, VS code, Arduino, C and Python</li>
       <li><strong>Material Selection:</strong> CESedupack</li>
-      <li><strong>Microsoft Office:</strong> Excel, Word, PowerPoint</li>
-      <li><strong>Information Systems:</strong> Windchill, CATIA Magic, PLM</li>
-    </ul>
+      <li><strong>Microsoft Office:</strong> Excel, Word, PowerPoint, Teams and Access</li>
+      <li><strong>System engineering:</strong> Windchill, CATIA Magic, PLM</li>
+    </ul>  
     I also have a strong background in <strong>mechanical analysis (FEA)</strong>, 
-    <strong>ISO Functional Dimensioning (GPS)</strong>, and critical standards such as <strong>IEC 60601</strong> and <strong>Eurocodes</strong>.
+    <strong>ISO Functional Dimensioning (GPS)</strong>, <strong>Stack-UP</strong>, Responsible for preparing technical documentation (<strong>DDR – Design Detail Review</strong>, <strong> DJD – Design Justification Document) </strong>, developing test protocols, managing projects, applying Design for Cost and Manufacturing principles, conducting materials and process engineering, and performing feasibility studies, and critical standards such as <strong>IEC 60601</strong> and <strong>Eurocodes</strong>.
   </p>
 
   <p>
     Beyond engineering, I am passionate about technology, including repairing electronic components such as PCs and phones.
+  </p>
+
+  <p>
+  When I’m not designing, you’ll probably find me on the football field, editing videos, or tinkering with electronic components to bring them back to life.
+  </p>
+  
+   <p>
+  Feel free to reach out!
   </p>
