@@ -13,20 +13,15 @@
   contents:
     - title: Engineering degree
       institution: Université de Technologie de Compiègne, France
-      year: 2025
+      year: Sep.2023 - 2025
       description:
-        - Description 1.
-        - Description 2.
-        - title: Description 3.
-          contents:
-            - Sub-description 1.
-            - Sub-description 2.
-    - title: Federal teaching diploma
-      institution: Eidgenössische Technische Hochschule, Zurich, Switzerland
-      year: 1900
+        - Integrated Mechanical Design
+    - title: Engineering degree
+      institution: École Nationale Supérieure D'arts et Métiers (ENSAM-R), Morocco
+      year: Sep.2021 - 2024
       description:
-        - Description 1.
-        - Description 2.
+        - Mechanical Design and Simulation
+      
 
 - title: Experience
   type: time_table
