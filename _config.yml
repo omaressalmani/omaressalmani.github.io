@@ -3,11 +3,12 @@
 # -----------------------------------------------------------------------------
 
 title: blank # the website title (if blank, full name will be used instead)
-first_name: You
-middle_name: R.
-last_name: Name
+first_name: Omar
+middle_name: 
+last_name: ESSALMANI
 contact_note: >
-  You can even add a little note about which of these is the best way to reach you.
+  I’m always open to discussing new projects, collaborations, or opportunities.  
+  Feel free to reach out via email, LinkedIn, or through the contact form Above.
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
   A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design.
 footer_text: >

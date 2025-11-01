@@ -2,16 +2,13 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
+# subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
 
 profile:
   align: right
   image: profile.jpg
   image_circular: true # crops the image to make it circular
-  more_info: >
-    <p>555 your office number</p>
-    <p>123 your address street</p>
-    <p>Your City, State 12345</p>
+ 
 
 selected_papers: false # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
@@ -28,15 +25,29 @@ latest_posts:
 ---
 
 <p>
-    Je suis <strong>Omar ESSALMANI</strong>, Ingénieur en Mécanique hautement qualifié et axé sur les résultats.
-    Je suis titulaire d'un prestigieux <strong>double diplôme</strong> de l'<strong>Université de Technologie de Compiègne (UTC)</strong> 🇫🇷 et de l'<strong>École Nationale Supérieure D'arts et Métiers (ENSAM-R)</strong> 🇲🇦.
-</p>
+    I am <strong>Omar ESSALMANI</strong>, a highly skilled and results-driven Mechanical Engineer.  
+    I hold a prestigious <strong>dual degree</strong> from 
+    <strong>Université de Technologie de Compiègne (UTC)</strong> 🇫🇷 and 
+    <strong>École Nationale Supérieure D'arts et Métiers (ENSAM-R)</strong> 🇲🇦.
+  </p>
 
-<p>
-    Spécialisé en <strong>Conception Mécanique Intégrée</strong> et en <strong>Conception et Simulation Mécanique</strong>, je possède une expertise approfondie dans l'intégralité du cycle de vie du produit, de l'étude initiale à la fabrication.
-    Mes compétences techniques fondamentales incluent la maîtrise de logiciels tels que <strong>Catia V5</strong>, <strong>SolidWorks</strong>, Ansys et Abaqus, ainsi qu'une solide connaissance du <strong>Calcul mécanique (FEA)</strong>, de la <strong>Cotation fonctionnelle ISO - GPS</strong> et des normes critiques comme l'<strong>IEC 60601</strong>.
-</p>
+  <p>
+    Specialized in <strong>Integrated Mechanical Design</strong> and 
+    <strong>Mechanical Design and Simulation</strong>, I have extensive expertise throughout the product lifecycle, from initial concept to manufacturing.  
+    My core technical skills include proficiency in:  
+    <ul>
+      <li><strong>CAD:</strong> CATIA V5, SolidWorks, Creo, 3DEX, Fusion 360</li>
+      <li><strong>Simulation:</strong> Ansys, Abaqus</li>
+      <li><strong>CAM:</strong> TopSolid</li>
+      <li><strong>Programming:</strong> VBA</li>
+      <li><strong>Material Selection:</strong> CESedupack</li>
+      <li><strong>Microsoft Office:</strong> Excel, Word, PowerPoint</li>
+      <li><strong>Information Systems:</strong> Windchill, CATIA Magic, PLM</li>
+    </ul>
+    I also have a strong background in <strong>mechanical analysis (FEA)</strong>, 
+    <strong>ISO Functional Dimensioning (GPS)</strong>, and critical standards such as <strong>IEC 60601</strong> and <strong>Eurocodes</strong>.
+  </p>
 
-<p>
-    Au-delà de l'ingénierie, je suis passionné par la technologie, notamment la réparation de composants électroniques (PC, Téléphone), et je mets à profit mon expérience de leadership en tant qu'ancien Responsable média du club ROBOTICORE à l'ENSAM.
-</p>
+  <p>
+    Beyond engineering, I am passionate about technology, including repairing electronic components such as PCs and phones.
+  </p>
