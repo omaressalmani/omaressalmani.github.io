@@ -1,79 +1,84 @@
 ---
 layout: page
-title: La rétro-modélisation d'une presse à tomates
-description: Étude et modélisation 3D d’une presse à tomates.
+title: Retro-Modeling of a Tomato Press
+description: Reverse engineering and 3D modeling of a tomato press using 3DEXPERIENCE and CREO.
 img: assets/img/projects/presse-tomates.jpeg
 importance: 1
 category: work
 related_publications: false
 ---
 
-Every project has a beautiful feature showcase page.
-It's easy to include images in a flexible 3-column grid format.
-Make your photos 1/3, 2/3, or full width.
+<div class="lead mt-4">
+  I’m thrilled to share the outcome of an exciting engineering journey:
+  the <strong>retro-modeling of a tomato press</strong>, a project that came to life
+  through the powerful combination of <strong>3DEXPERIENCE Platform</strong> and
+  <strong>CREO Parametric</strong>.
+</div>
 
-To give your project a background in the portfolio page, just add the img tag to the front matter like so:
+<p>
+  Working closely with my teammate, we leveraged the advanced features of both
+  tools while applying <strong>PLM methodologies</strong> to enhance our
+  <strong>collaborative workflow</strong>. The <strong>Skeleton methodology</strong>
+  served as our design compass, ensuring consistency and efficiency throughout the process.
+</p>
 
-    ---
-    layout: page
-    title: project
-    description: a project with a background image
-    img: /assets/img/12.jpg
-    ---
+<p>
+  Over two and a half months, I deepened my skills in
+  <strong>surface modeling</strong> and refined my understanding of
+  <strong>parametric design</strong>. Using CREO was an enriching experience,
+  and the efficiency of collaboration through 3DEXPERIENCE exceeded all expectations.
+</p>
+
+<p>
+  To represent our project, I decided to build this <strong>portfolio</strong> —
+  a decision that allowed me to explore <strong>web development</strong>, step out of my
+  comfort zone, and blend <strong>design engineering</strong> with technology.
+</p>
+
+<p>
+  Huge thanks to my teammate for their dedication and to our professors for their
+  invaluable guidance throughout this journey.  
+  This project has been an incredible adventure of <strong>continuous learning</strong>
+  and <strong>collaborative growth</strong>! 🌟
+</p>
+
+---
+
+### 📸 Project Gallery
 
 <div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/1.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/3.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
-</div>
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    This image can also have a caption. It's like magic.
-</div>
-
-
-Say you wanted to write a bit about your project before you posted the rest of the images.
-You describe how you toiled, sweated, _bled_ for your project, and then... you reveal its glory in the next row of images.
-
-<div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    You can also have artistically styled 2/3 + 1/3 images, like these.
-</div>
-
-The code is simple.
-Just wrap your images with `<div class="col-sm">` and place them inside `<div class="row">` (read more about the <a href="https://getbootstrap.com/docs/4.4/layout/grid/">Bootstrap Grid</a> system).
-To make images responsive, add `img-fluid` class to each; for rounded corners and shadows use `rounded` and `z-depth-1` classes.
-Here's the code for the last row of images above:
-
-{% raw %}
-
-```html
-<div class="row justify-content-sm-center">
-  <div class="col-sm-8 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+  <div class="col-sm mt-3 mt-md-0">
+    {% include figure.liquid loading="eager" path="assets/img/projects/1.jpeg" title="Tomato Press - View 1" class="img-fluid rounded z-depth-1" %}
   </div>
-  <div class="col-sm-4 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+  <div class="col-sm mt-3 mt-md-0">
+    {% include figure.liquid loading="eager" path="assets/img/projects/2.jpeg" title="Tomato Press - View 2" class="img-fluid rounded z-depth-1" %}
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm mt-3 mt-md-0">
+    {% include figure.liquid loading="eager" path="assets/img/projects/3.jpeg" title="Tomato Press - View 3" class="img-fluid rounded z-depth-1" %}
+  </div>
+  <div class="col-sm mt-3 mt-md-0">
+    {% include figure.liquid loading="eager" path="assets/img/projects/4.jpeg" title="Tomato Press - View 4" class="img-fluid rounded z-depth-1" %}
+  </div>
+</div>
+
+<div class="caption">
+  Rendered models of the tomato press — showcasing geometry reconstruction and assembly structure.
+</div>
+
+---
+
+### 🎥 Project Video
+
+<div class="text-center my-4">
+  <video controls style="max-width: 100%; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+    <source src="assets/img/projects/5.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <div class="caption mt-2">
+    A short video showcasing the modeling process and final renderings.
   </div>
 </div>
 ```
