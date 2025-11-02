@@ -146,15 +146,14 @@ newsletter:
 
 collections:
   books:
-    output: true
+    output: false
   news:
     defaults:
       layout: post
     output: true
   projects:
     output: true
-  posts:
-    output: true
+  
 
 # -----------------------------------------------------------------------------
 # Jekyll settings
@@ -196,7 +195,6 @@ exclude:
   - readme_preview/
   - vendor
   - _posts/
-  - _projects/?_project.md
   - _news/announcement_*.md
   
 keep_files:
