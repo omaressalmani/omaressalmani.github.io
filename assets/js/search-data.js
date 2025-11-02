@@ -47,9 +47,9 @@ ninja.data = [{
           description: "Reverse engineering and 3D modeling of a tomato press using 3DEXPERIENCE and CREO.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/1_project.html";
-            },},{id: "projects-project-2",
-          title: 'project 2',
-          description: "a project with a background image and giscus comments",
+            },},{id: "projects-modular-wheelchair-design",
+          title: 'Modular Wheelchair Design',
+          description: "Design and engineering of a configurable modular wheelchair using PLM tools and multidisciplinary collaboration.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/2_project.html";
             },},{
