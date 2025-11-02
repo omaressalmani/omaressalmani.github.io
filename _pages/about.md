@@ -49,9 +49,7 @@ latest_posts:
     <strong>ISO Functional Dimensioning (GPS)</strong>, <strong>Stack-UP</strong>, Responsible for preparing technical documentation (<strong>DDR – Design Detail Review</strong>, <strong> DJD – Design Justification Document) </strong>, developing test protocols, managing projects, applying Design for Cost and Manufacturing principles, conducting materials and process engineering, and performing feasibility studies, and critical standards such as <strong>IEC 60601</strong> and <strong>Eurocodes</strong>.
   </p>
 
-  <p>
-    Beyond engineering, I am passionate about technology, including repairing electronic components such as PCs and phones.
-  </p>
+ 
 
   <p>
   When I’m not designing, you’ll probably find me on the football field, editing videos, or tinkering with electronic components to bring them back to life.
