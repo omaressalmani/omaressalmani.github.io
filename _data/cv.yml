@@ -62,37 +62,14 @@
         - Preventive maintenance of a HAAS UMC-1000 CNC milling machine.
 
 
-- title: Open Source Projects
-  type: time_table
-  contents:
-    - title: <a href="https://github.com/alshedivat/al-folio">al-folio</a>
-      year: 2015-now
-      description: A beautiful, simple, clean, and responsive Jekyll theme for academics.
-
-- title: Honors and Awards
-  type: time_table
-  contents:
-    - year: 1921
-      items:
-        - Nobel Prize in Physics
-        - Matteucci Medal
-    - year: 2029
-      items:
-        - Max Planck Medal
-
-- title: Academic Interests
+- title: certificates
   type: nested_list
   contents:
-    - title: Topic 1.
-      items:
-        - Description 1.
-        - Description 2.
-    - title: Topic 2.
-      items:
-        - Description 1.
-        - Description 2.
+    - title: 3DSwymer DASSAULT SYSTEMS
+    - title: Part design Solidworks DASSAULT SYSTEMS
+    - title: 3D Creator Associate Solidworks DASSAULT SYSTEMS .. (+ 8 others in SolidWorks)
 
 - title: Other Interests
   type: list
   contents:
-    - <u>Hobbies:</u> Hobby 1, Hobby 2, etc.
+    - <u>Hobbies:</u> Repair of electronic components (PC, Telephone...), football,Taketaekwondo, design, video editing.
