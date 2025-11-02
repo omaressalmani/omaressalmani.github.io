@@ -1,6 +1,6 @@
 ---
 layout: about
-title: about
+title: About
 permalink: /
 # subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
 
@@ -55,7 +55,7 @@ latest_posts:
   <p>
   When I’m not designing, you’ll probably find me on the football field, editing videos, or tinkering with electronic components to bring them back to life.
   </p>
-  
+
    <p>
   Feel free to reach out!
   </p>
