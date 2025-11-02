@@ -1,11 +1,11 @@
 ---
 layout: page
-title: La rétro-modélisation d'une presse à tomates
-description: Étude et modélisation 3D d’une presse à tomates traditionnelle à l’aide de SolidWorks et impression 3D.
-img: /assets/img/projects/1.jpg
+title: project 1
+description: with background image
+img: assets/img/12.jpg
 importance: 1
 category: work
-related_publications: false
+related_publications: true
 ---
 
 Every project has a beautiful feature showcase page.
