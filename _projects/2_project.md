@@ -1,81 +1,138 @@
 ---
 layout: page
-title: project 2
-description: a project with a background image and giscus comments
-img: assets/img/3.jpg
+title: Modular Wheelchair Design
+description: Design and engineering of a configurable modular wheelchair using PLM tools and multidisciplinary collaboration.
+img: assets/img/projects/6.jpeg
 importance: 2
 category: work
-giscus_comments: true
+related_publications: false
 ---
 
-Every project has a beautiful feature showcase page.
-It's easy to include images in a flexible 3-column grid format.
-Make your photos 1/3, 2/3, or full width.
+### Modular Wheelchair Design Project
 
-To give your project a background in the portfolio page, just add the img tag to the front matter like so:
+Over the course of **three months**, our team collaborated on the exciting challenge of designing a **configurable and modular wheelchair**.  
+This project aimed to deepen our understanding of the **product design process** within a **collaborative, multidisciplinary environment**.
 
-    ---
-    layout: page
-    title: project
-    description: a project with a background image
-    img: /assets/img/12.jpg
-    ---
+We approached the task as the creation of a **configurable product**, focusing on the early phases of the **Product Lifecycle Management (PLM)** approach — from sizing and design to manufacturing strategy.  
+Using **PTC Windchill PLM**, we efficiently managed product evolution, ensuring smooth data traceability and configuration control throughout the design lifecycle.
+
+---
 
 <div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/1.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/3.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
-</div>
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    This image can also have a caption. It's like magic.
+  <div class="col-sm mt-3 mt-md-0">
+    {% include figure.liquid loading="eager" path="assets/img/projects/6.jpeg" title="Modular Wheelchair Design - Concept" class="img-fluid rounded z-depth-1" %}
+  </div>
+  <div class="col-sm mt-3 mt-md-0">
+    {% include figure.liquid path="assets/img/projects/7.jpeg" title="Design Team Collaboration" class="img-fluid rounded z-depth-1" %}
+  </div>
+  <div class="col-sm mt-3 mt-md-0">
+    {% include figure.liquid path="assets/img/projects/8.jpeg" title="CAD Modeling Process" class="img-fluid rounded z-depth-1" %}
+  </div>
 </div>
 
-You can also put regular text between your rows of images.
-Say you wanted to write a little bit about your project before you posted the rest of the images.
-You describe how you toiled, sweated, _bled_ for your project, and then... you reveal its glory in the next row of images.
-
-<div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    You can also have artistically styled 2/3 + 1/3 images, like these.
+<div class="caption text-muted">
+  Early CAD modeling stages and collaborative design sessions within the PLM environment.
 </div>
 
-The code is simple.
-Just wrap your images with `<div class="col-sm">` and place them inside `<div class="row">` (read more about the <a href="https://getbootstrap.com/docs/4.4/layout/grid/">Bootstrap Grid</a> system).
-To make images responsive, add `img-fluid` class to each; for rounded corners and shadows use `rounded` and `z-depth-1` classes.
-Here's the code for the last row of images above:
+---
 
-{% raw %}
+During development, we leveraged multiple software tools:
+- **Creo Parametric** for detailed 3D design,  
+- **Abaqus** for finite element structural analysis,  
+- and **Windchill PLM** for product data and configuration management.
 
-```html
+This integration of tools allowed seamless coordination across design, analysis, and manufacturing planning.  
+The PLM strategy proved to be a powerful way to create, manage, and share all product-related data across the team.
+
+---
+
 <div class="row justify-content-sm-center">
   <div class="col-sm-8 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+    {% include figure.liquid path="assets/img/projects/9.jpeg" title="Structural Analysis in Abaqus" class="img-fluid rounded z-depth-1" %}
   </div>
   <div class="col-sm-4 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+    {% include figure.liquid path="assets/img/projects/10.jpeg" title="Windchill PLM Workflow" class="img-fluid rounded z-depth-1" %}
   </div>
 </div>
-```
 
-{% endraw %}
+<div class="caption text-muted">
+  Simulation and analysis using Abaqus (left) and PLM workflow visualization in Windchill (right).
+</div>
+
+---
+
+Throughout the process, we developed **three modular configurations** of the wheelchair:
+
+- **Essential** – minimalist, functional, and lightweight.  
+- **Adventure** – robust, optimized for outdoor use.  
+- **Premium** – ergonomic and customizable for comfort and aesthetics.  
+
+These configurations were defined based on performance constraints, adaptability, and manufacturing feasibility.  
+They represent a practical application of **modular product architecture** and **configuration management**.
+
+---
+
+<div class="row">
+  <div class="col-sm mt-3 mt-md-0">
+    {% include figure.liquid path="assets/img/projects/11.jpeg" title="Essential Model" class="img-fluid rounded z-depth-1" %}
+  </div>
+  <div class="col-sm mt-3 mt-md-0">
+    {% include figure.liquid path="assets/img/projects/12.jpeg" title="Adventure Model" class="img-fluid rounded z-depth-1" %}
+  </div>
+  <div class="col-sm mt-3 mt-md-0">
+    {% include figure.liquid path="assets/img/projects/13.jpeg" title="Premium Model" class="img-fluid rounded z-depth-1" %}
+  </div>
+</div>
+
+<div class="caption text-muted">
+  The three finalized configurations — Essential, Adventure, and Premium.
+</div>
+
+---
+
+We also conducted in-depth **finite element analysis (FEA)** on critical components to ensure durability, safety, and compliance with design constraints.  
+These analyses provided valuable insight into stress distribution and structural behavior under realistic loading conditions.
+
+---
+
+<div class="row">
+  <div class="col-sm mt-3 mt-md-0">
+    {% include figure.liquid path="assets/img/projects/14.jpeg" title="FEA Results Overview" class="img-fluid rounded z-depth-1" %}
+  </div>
+  <div class="col-sm mt-3 mt-md-0">
+    {% include figure.liquid path="assets/img/projects/15.jpeg" title="Stress Distribution Analysis" class="img-fluid rounded z-depth-1" %}
+  </div>
+  <div class="col-sm mt-3 mt-md-0">
+    {% include figure.liquid path="assets/img/projects/16.jpeg" title="Deformation Simulation" class="img-fluid rounded z-depth-1" %}
+  </div>
+</div>
+
+<div class="caption text-muted">
+  Finite Element Analysis (FEA) snapshots showing stress and deformation under various load conditions.
+</div>
+
+---
+
+This project provided an invaluable opportunity to combine **theoretical knowledge** with **hands-on engineering practice**.  
+Designing a wheelchair — a seemingly simple yet mechanically complex product — revealed the depth of multidisciplinary collaboration required to create innovative assistive technology.
+
+---
+
+<div class="row justify-content-sm-center">
+  <div class="col-sm-10 mt-3 mt-md-0">
+    {% include figure.liquid path="assets/img/projects/17.jpeg" title="Final Render - Modular Wheelchair" class="img-fluid rounded z-depth-1" %}
+  </div>
+</div>
+
+<div class="caption text-muted">
+  Final high-quality render of the modular wheelchair assembly.
+</div>
+
+---
+
+### Reflections
+
+This project was an incredible experience in **collaborative product design**, **PLM integration**, and **engineering project management**.  
+I am deeply grateful to all my teammates for their creativity and commitment, as well as to our instructors for their expert guidance and support.
+
+> “Innovation is born at the intersection of collaboration, structure, and curiosity.” 🌟
