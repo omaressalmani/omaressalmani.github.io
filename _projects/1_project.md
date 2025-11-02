@@ -5,7 +5,7 @@ description: Étude et modélisation 3D d’une presse à tomates traditionnelle
 img: /assets/img/projects/presse-tomates.jpeg
 importance: 1
 category: work
-related_publications: true
+related_publications: false
 ---
 
 Every project has a beautiful feature showcase page.
