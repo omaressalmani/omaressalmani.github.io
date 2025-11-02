@@ -102,16 +102,10 @@ newsletter:
 # -----------------------------------------------------------------------------
 
 collections:
-  books:
-    output: false
-  news:
-    defaults:
-      layout: post
-    output: true
+
   projects:
     output: true
-  posts:
-    output: true
+  
 
 # -----------------------------------------------------------------------------
 # Jekyll settings
