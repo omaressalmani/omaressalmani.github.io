@@ -52,6 +52,11 @@ ninja.data = [{
           description: "Design and engineering of a configurable modular wheelchair using PLM tools and multidisciplinary collaboration.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/2_project.html";
+            },},{id: "projects-utc-back-to-school-poster",
+          title: 'UTC Back-to-School Poster',
+          description: "Creative poster designed for UTC to welcome students back, created with Adobe Photoshop.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/3_project.html";
             },},{
         id: 'social-email',
         title: 'email',
