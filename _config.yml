@@ -152,9 +152,6 @@ exclude:
   - README.md
   - readme_preview/
   - vendor
-  - _posts/
-  - _projects/?_project.md
-  - _news/announcement_*.md
   
 keep_files:
   - CNAME
