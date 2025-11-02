@@ -17,15 +17,19 @@ We approached the task as the creation of a **configurable product**, focusing o
 Using **PTC Windchill PLM**, we efficiently managed product evolution, ensuring smooth data traceability and configuration control throughout the design lifecycle.
 
 ---
-
+<!-- Row with 2 images side by side -->
 <div class="row">
-  <div class="col-sm mt-3 mt-md-0">
+  <div class="col-md-6 mt-3 mt-md-0">
     {% include figure.liquid loading="eager" path="assets/img/projects/10.jpeg" title="Modular Wheelchair Design - Concept" class="img-fluid rounded z-depth-1" %}
   </div>
-  <div class="col-sm mt-3 mt-md-0">
+  <div class="col-md-6 mt-3 mt-md-0">
     {% include figure.liquid path="assets/img/projects/11.jpeg" title="Design Team Collaboration" class="img-fluid rounded z-depth-1" %}
   </div>
-  <div class="col-sm mt-3 mt-md-0">
+</div>
+
+<!-- Optional single wide image for emphasis -->
+<div class="row mt-4">
+  <div class="col-12">
     {% include figure.liquid path="assets/img/projects/12.jpeg" title="CAD Modeling Process" class="img-fluid rounded z-depth-1" %}
   </div>
 </div>
