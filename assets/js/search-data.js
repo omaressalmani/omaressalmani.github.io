@@ -23,19 +23,19 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "dropdown-bookshelf",
-              title: "bookshelf",
+        },{id: "dropdown-projets",
+              title: "Projets",
               description: "",
               section: "Dropdown",
               handler: () => {
-                window.location.href = "/books/";
+                window.location.href = "/projects/";
               },
-            },{id: "dropdown-blog",
-              title: "blog",
+            },{id: "dropdown-my-resume",
+              title: "My resume",
               description: "",
               section: "Dropdown",
               handler: () => {
-                window.location.href = "/blog/";
+                window.location.href = "/cv/";
               },
             },{id: "books-the-godfather",
           title: 'The Godfather',
