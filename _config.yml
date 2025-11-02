@@ -152,7 +152,7 @@ collections:
       layout: post
     output: true
   projects:
-    output: false
+    output: true
   posts:
     output: true
 
@@ -195,6 +195,7 @@ exclude:
   - README.md
   - readme_preview/
   - vendor
+  - _posts/
   - _projects/?_project.md
   - _news/announcement_*.md
   
