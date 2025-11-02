@@ -20,13 +20,13 @@ Using **PTC Windchill PLM**, we efficiently managed product evolution, ensuring 
 
 <div class="row">
   <div class="col-sm mt-3 mt-md-0">
-    {% include figure.liquid loading="eager" path="assets/img/projects/6.jpeg" title="Modular Wheelchair Design - Concept" class="img-fluid rounded z-depth-1" %}
+    {% include figure.liquid loading="eager" path="assets/img/projects/10.jpeg" title="Modular Wheelchair Design - Concept" class="img-fluid rounded z-depth-1" %}
   </div>
   <div class="col-sm mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/projects/7.jpeg" title="Design Team Collaboration" class="img-fluid rounded z-depth-1" %}
+    {% include figure.liquid path="assets/img/projects/11.jpeg" title="Design Team Collaboration" class="img-fluid rounded z-depth-1" %}
   </div>
   <div class="col-sm mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/projects/8.jpeg" title="CAD Modeling Process" class="img-fluid rounded z-depth-1" %}
+    {% include figure.liquid path="assets/img/projects/12.jpeg" title="CAD Modeling Process" class="img-fluid rounded z-depth-1" %}
   </div>
 </div>
 
@@ -47,16 +47,14 @@ The PLM strategy proved to be a powerful way to create, manage, and share all pr
 ---
 
 <div class="row justify-content-sm-center">
-  <div class="col-sm-8 mt-3 mt-md-0">
+  <div class="col-sm-10 mt-3 mt-md-0">
     {% include figure.liquid path="assets/img/projects/9.jpeg" title="Structural Analysis in Abaqus" class="img-fluid rounded z-depth-1" %}
   </div>
-  <div class="col-sm-4 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/projects/10.jpeg" title="Windchill PLM Workflow" class="img-fluid rounded z-depth-1" %}
-  </div>
+ 
 </div>
 
 <div class="caption text-muted">
-  Simulation and analysis using Abaqus (left) and PLM workflow visualization in Windchill (right).
+  Simulation and analysis using Abaqus 
 </div>
 
 ---
@@ -74,13 +72,13 @@ They represent a practical application of **modular product architecture** and *
 
 <div class="row">
   <div class="col-sm mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/projects/11.jpeg" title="Essential Model" class="img-fluid rounded z-depth-1" %}
+    {% include figure.liquid path="assets/img/projects/6.jpeg" title="Essential Model" class="img-fluid rounded z-depth-1" %}
   </div>
   <div class="col-sm mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/projects/12.jpeg" title="Adventure Model" class="img-fluid rounded z-depth-1" %}
+    {% include figure.liquid path="assets/img/projects/7.jpeg" title="Adventure Model" class="img-fluid rounded z-depth-1" %}
   </div>
   <div class="col-sm mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/projects/13.jpeg" title="Premium Model" class="img-fluid rounded z-depth-1" %}
+    {% include figure.liquid path="assets/img/projects/17.jpeg" title="Premium Model" class="img-fluid rounded z-depth-1" %}
   </div>
 </div>
 
@@ -97,7 +95,7 @@ These analyses provided valuable insight into stress distribution and structural
 
 <div class="row">
   <div class="col-sm mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/projects/14.jpeg" title="FEA Results Overview" class="img-fluid rounded z-depth-1" %}
+    {% include figure.liquid path="assets/img/projects/8.jpeg" title="FEA Results Overview" class="img-fluid rounded z-depth-1" %}
   </div>
   <div class="col-sm mt-3 mt-md-0">
     {% include figure.liquid path="assets/img/projects/15.jpeg" title="Stress Distribution Analysis" class="img-fluid rounded z-depth-1" %}

@@ -2,7 +2,7 @@
 layout: page
 title: Retro-Modeling of a Tomato Press
 description: Reverse engineering and 3D modeling of a tomato press using 3DEXPERIENCE and CREO.
-img: assets/img/projects/presse-tomates.jpeg
+img: assets/img/projects/4.jpeg
 importance: 1
 category: work
 related_publications: false
@@ -60,7 +60,7 @@ related_publications: false
     {% include figure.liquid loading="eager" path="assets/img/projects/3.jpeg" title="Tomato Press - View 3" class="img-fluid rounded z-depth-1" %}
   </div>
   <div class="col-sm mt-3 mt-md-0">
-    {% include figure.liquid loading="eager" path="assets/img/projects/4.jpeg" title="Tomato Press - View 4" class="img-fluid rounded z-depth-1" %}
+    {% include figure.liquid loading="eager" path="assets/img/projects/presse-tomates.jpeg" title="Tomato Press - View 4" class="img-fluid rounded z-depth-1" %}
   </div>
 </div>
 
