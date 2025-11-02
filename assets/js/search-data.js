@@ -42,9 +42,9 @@ ninja.data = [{
           description: "",
           section: "Books",handler: () => {
               window.location.href = "/books/the_godfather.html";
-            },},{id: "projects-la-rétro-modélisation-d-39-une-presse-à-tomates",
-          title: 'La rétro-modélisation d&amp;#39;une presse à tomates',
-          description: "Étude et modélisation 3D d’une presse à tomates.",
+            },},{id: "projects-retro-modeling-of-a-tomato-press",
+          title: 'Retro-Modeling of a Tomato Press',
+          description: "Reverse engineering and 3D modeling of a tomato press using 3DEXPERIENCE and CREO.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/1_project.html";
             },},{id: "projects-project-2",
