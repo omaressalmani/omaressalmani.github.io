@@ -62,6 +62,11 @@ ninja.data = [{
           description: "Design, CAD, and fabrication of a test bench for measuring billiard ball trajectories, including rotation effects.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/4_project.html";
+            },},{id: "projects-utc-saint-gobain-event-poster",
+          title: 'UTC × Saint-Gobain Event Poster',
+          description: "Graphic design for the UTC Career Service event in collaboration with Saint-Gobain, created using Adobe Photoshop.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/5_project.html";
             },},{
         id: 'social-email',
         title: 'email',
