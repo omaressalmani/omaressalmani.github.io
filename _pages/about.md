@@ -54,10 +54,23 @@ announcements:
 <p>
   Feel free to reach out !
   </p>
-  <div class="text-center my-4">
-  <h3>🌐 My Latest LinkedIn Post</h3>
-  <a href="https://www.linkedin.com/posts/omar-essalmani_ingaeznierie-programmation-conceptionmaezcanique-activity-7391136624878862336-ax1C?utm_source=share&utm_medium=member_desktop&rcm=ACoAADLEUCcBZosRbAVy07EE8qdAr5_C6LA6Fpo" target="_blank">
-    <img src="assets/img/linkedin_post.png" alt="LinkedIn Post by Omar ESSALMANI" class="img-fluid rounded shadow-lg" style="max-width:600px;">
+  
+  <div class="text-center my-5">
+  <h3 class="mb-3">🌐 My Latest LinkedIn Post</h3>
+
+  <a href="https://www.linkedin.com/posts/omar-essalmani_ingaeznierie-programmation-conceptionmaezcanique-activity-7391136624878862336-ax1C?utm_source=share&utm_medium=member_desktop&rcm=ACoAADLEUCcBZosRbAVy07EE8qdAr5_C6LA6Fpo" 
+     target="_blank" 
+     style="text-decoration: none;">
+     
+    <img 
+      src="{{ '/assets/img/projects/post.png' | relative_url }}" 
+      alt="LinkedIn Post by Omar ESSALMANI" 
+      class="rounded shadow-lg" 
+      style="width:100%; max-width:700px; height:auto; border: 1px solid #444;">
   </a>
-  <p class="text-muted mt-2">Click the image to read the full post on LinkedIn.</p>
+
+  <p class="text-muted mt-2" style="font-size: 0.9rem;">
+    Click the image to read the full post on LinkedIn.
+  </p>
 </div>
+
