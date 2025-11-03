@@ -77,6 +77,11 @@ ninja.data = [{
           description: "Official event poster designed for the ArabeUT association at UTC, celebrating the Moroccan International Day.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/7_project.html";
+            },},{id: "projects-dassault-systèmes-certifications",
+          title: 'Dassault Systèmes Certifications',
+          description: "A collection of Dassault Systèmes certifications earned on the 3DEXPERIENCE and SolidWorks platforms.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/certif-dassault.html";
             },},{
         id: 'social-email',
         title: 'email',
