@@ -59,19 +59,7 @@ The main objectives were:
 
 ---
 
-#### Additional Views
 
-<div class="row">
-  {% for img in "E F G H I J K L M N O P Q R".split %}
-  <div class="col-md-6 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/projects/{{ img }}.png" title="Project View {{ img }}" class="img-fluid rounded z-depth-1" %}
-  </div>
-  {% endfor %}
-</div>
-
-<div class="caption text-muted">
-  Various images showing CAD details, mechanical assembly, and fabrication steps.
-</div>
 
 ---
 
