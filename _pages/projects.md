@@ -5,7 +5,7 @@ permalink: /projects/
 description: A collection of my creative and technical projects.
 nav: true
 nav_order: 3
-display_categories: [work,fun]
+display_categories: [work,fun, certifications]
 horizontal: false
 ---
 
@@ -17,6 +17,16 @@ horizontal: false
   <a id="{{ category }}" href=".#{{ category }}">
     <h2 class="category">{{ category }}</h2>
   </a>
+  {% if category == "work" %}
+  <h2 class="category">💼 Work Projects</h2>
+{% elsif category == "fun" %}
+  <h2 class="category">🎨 Fun & Creative Projects</h2>
+{% elsif category == "certifications" %}
+  <h2 class="category">🏅 Certifications</h2>
+{% else %}
+  <h2 class="category">{{ category }}</h2>
+{% endif %}
+
   {% assign categorized_projects = site.projects | where: "category", category %}
   {% assign sorted_projects = categorized_projects | sort: "importance" %}
   <!-- Generate cards for each project -->
