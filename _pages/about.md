@@ -54,3 +54,10 @@ announcements:
 <p>
   Feel free to reach out !
   </p>
+  <div class="text-center my-4">
+  <h3>🌐 My Latest LinkedIn Post</h3>
+  <a href="https://www.linkedin.com/posts/omar-essalmani_ingaeznierie-programmation-conceptionmaezcanique-activity-7391136624878862336-ax1C?utm_source=share&utm_medium=member_desktop&rcm=ACoAADLEUCcBZosRbAVy07EE8qdAr5_C6LA6Fpo" target="_blank">
+    <img src="assets/img/linkedin_post.png" alt="LinkedIn Post by Omar ESSALMANI" class="img-fluid rounded shadow-lg" style="max-width:600px;">
+  </a>
+  <p class="text-muted mt-2">Click the image to read the full post on LinkedIn.</p>
+</div>
