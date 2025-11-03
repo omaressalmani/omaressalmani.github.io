@@ -57,6 +57,11 @@ ninja.data = [{
           description: "Creative poster designed for UTC to welcome students back, created with Adobe Photoshop.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/3_project.html";
+            },},{id: "projects-billiard-ball-trajectory-test-bench",
+          title: 'Billiard Ball Trajectory Test Bench',
+          description: "Design, CAD, and fabrication of a test bench for measuring billiard ball trajectories, including rotation effects.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/4_project.html";
             },},{
         id: 'social-email',
         title: 'email',
