@@ -72,6 +72,11 @@ ninja.data = [{
           description: "Graphic design and media communication work for the Roboticore club at ENSAM Rabat, created using Adobe Photoshop.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/6_project.html";
+            },},{id: "projects-arabeut-moroccan-international-day-poster",
+          title: 'ArabeUT – Moroccan International Day Poster',
+          description: "Official event poster designed for the ArabeUT association at UTC, celebrating the Moroccan International Day.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/7_project.html";
             },},{
         id: 'social-email',
         title: 'email',
