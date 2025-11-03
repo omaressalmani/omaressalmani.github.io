@@ -54,7 +54,7 @@ announcements:
 <p>
   Feel free to reach out !
   </p>
-  
+
   <div class="text-center my-5">
   <h3 class="mb-3">🌐 My Latest LinkedIn Post</h3>
 
@@ -66,7 +66,7 @@ announcements:
       src="{{ '/assets/img/projects/post.png' | relative_url }}" 
       alt="LinkedIn Post by Omar ESSALMANI" 
       class="rounded shadow-lg" 
-      style="width:100%; max-width:700px; height:auto; border: 1px solid #444;">
+      style="width:60%; max-width:700px; height:auto; border: 1px solid #444;">
   </a>
 
   <p class="text-muted mt-2" style="font-size: 0.9rem;">
