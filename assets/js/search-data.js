@@ -67,6 +67,11 @@ ninja.data = [{
           description: "Graphic design for the UTC Career Service event in collaboration with Saint-Gobain, created using Adobe Photoshop.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/5_project.html";
+            },},{id: "projects-roboticore-media-experience-ensam-rabat",
+          title: 'Roboticore Media Experience — ENSAM Rabat',
+          description: "Graphic design and media communication work for the Roboticore club at ENSAM Rabat, created using Adobe Photoshop.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/6_project.html";
             },},{
         id: 'social-email',
         title: 'email',
