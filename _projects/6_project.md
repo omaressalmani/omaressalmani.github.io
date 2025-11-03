@@ -18,16 +18,28 @@ Each visual was designed to engage our audience — both online and on campus �
 ---
 
 <div class="row justify-content-center">
-  <div class="col-md-6 mt-3 mt-md-0">
+  <div class="col-md-4 mt-3 mt-md-0">
     {% include figure.liquid path="assets/img/projects/AA.png" title="Roboticore Poster Design 1" class="img-fluid rounded z-depth-1 shadow-lg" %}
   </div>
-  <div class="col-md-6 mt-3 mt-md-0">
+  <div class="col-md-4 mt-3 mt-md-0">
     {% include figure.liquid path="assets/img/projects/BB.png" title="Roboticore Poster Design 2" class="img-fluid rounded z-depth-1 shadow-lg" %}
+  </div>
+  <div class="col-md-4 mt-3 mt-md-0">
+    {% include figure.liquid path="assets/img/projects/L.png" title="Roboticore Poster Design 3" class="img-fluid rounded z-depth-1 shadow-lg" %}
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-md-4 mt-3 mt-md-0">
+    {% include figure.liquid path="assets/img/projects/K.png" title="Roboticore Poster Design 4" class="img-fluid rounded z-depth-1 shadow-lg" %}
+  </div>
+  <div class="col-md-4 mt-3 mt-md-0">
+    {% include figure.liquid path="assets/img/projects/I.png" title="Roboticore Poster Design 5" class="img-fluid rounded z-depth-1 shadow-lg" %}
   </div>
 </div>
 
 <div class="caption text-muted text-center">
-  Sample posters designed for Roboticore events and activities — created with Adobe Photoshop.
+  Selection of posters created for Roboticore events, workshops, and promotions — designed using Adobe Photoshop.
 </div>
 
 ---
