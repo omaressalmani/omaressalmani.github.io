@@ -54,7 +54,7 @@ announcements:
 <p>
   Feel free to reach out !
   </p>
-
+  
 <hr class="my-5">
 
 <div class="text-center my-5">
@@ -64,9 +64,6 @@ announcements:
     shared on my LinkedIn profile.
   </p>
 
- <a id="recommendation"></a>
-<div class="text-center my-4">
-  <h3>💬 Recommendation</h3>
   <a href="https://www.linkedin.com/in/omar-essalmani/" target="_blank" style="text-decoration: none;">
     <img 
       src="{{ '/assets/img/projects/recommendation.png' | relative_url }}" 
@@ -79,7 +76,6 @@ announcements:
     Click the image to view the full recommendation on LinkedIn.
   </p>
 </div>
-
 
 <hr class="my-5">
 
