@@ -54,6 +54,31 @@ announcements:
 <p>
   Feel free to reach out !
   </p>
+  
+<hr class="my-5">
+
+<div class="text-center my-5">
+  <h3 class="mb-3">💬 Professional Recommendation</h3>
+  <p class="text-muted mb-4">
+    A reference from my recent experience as a <strong>Mechanical Engineer Intern at Guerbet</strong>,
+    shared on my LinkedIn profile.
+  </p>
+
+  <a href="https://www.linkedin.com/in/omar-essalmani/" target="_blank" style="text-decoration: none;">
+    <img 
+      src="{{ '/assets/img/projects/recommendation.png' | relative_url }}" 
+      alt="LinkedIn Recommendation for Omar ESSALMANI" 
+      class="rounded shadow-lg" 
+      style="width:100%; max-width:750px; height:auto; border:1px solid #444;">
+  </a>
+
+  <p class="text-muted mt-2" style="font-size: 0.9rem;">
+    Click the image to view the full recommendation on LinkedIn.
+  </p>
+</div>
+
+<hr class="my-5">
+
 
   <div class="text-center my-5">
   <h3 class="mb-3">🌐 My Latest LinkedIn Post</h3>
