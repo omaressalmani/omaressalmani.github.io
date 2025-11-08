@@ -2,7 +2,7 @@
 layout: page
 title: Design and Fabrication of an Active and Instrumented Arm Prosthesis
 description: Development of a functional prosthetic arm integrating mechanical design, sensors, actuators, and embedded electronics.
-img: assets/img/projects/AAA.png
+img: assets/img/projects/A.jpeg
 importance: 1
 category: work
 related_publications: false
