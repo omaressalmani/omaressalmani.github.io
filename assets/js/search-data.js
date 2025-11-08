@@ -77,6 +77,11 @@ ninja.data = [{
           description: "Official event poster designed for the ArabeUT association at UTC, celebrating the Moroccan International Day.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/7_project.html";
+            },},{id: "projects-design-and-fabrication-of-an-active-and-instrumented-arm-prosthesis",
+          title: 'Design and Fabrication of an Active and Instrumented Arm Prosthesis',
+          description: "Development of a functional prosthetic arm integrating mechanical design, sensors, actuators, and embedded electronics.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/8_project.html";
             },},{id: "projects-dassault-systèmes-certifications",
           title: 'Dassault Systèmes Certifications',
           description: "A collection of Dassault Systèmes certifications earned on the 3DEXPERIENCE and SolidWorks platforms.",
