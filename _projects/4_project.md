@@ -2,7 +2,7 @@
 layout: page
 title: Billiard Ball Trajectory Test Bench
 description: Design, CAD, and fabrication of a test bench for measuring billiard ball trajectories, including rotation effects.
-img: assets/img/projects/A.png
+img: assets/img/projects/A2.png
 importance: 2
 category: work
 related_publications: false
