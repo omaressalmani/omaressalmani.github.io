@@ -82,6 +82,11 @@ ninja.data = [{
           description: "Development of a functional prosthetic arm integrating mechanical design, sensors, actuators, and embedded electronics.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/8_project.html";
+            },},{id: "projects-sap-learning-certifications",
+          title: 'SAP Learning Certifications',
+          description: "SAP Learning course completion badges validating my fundamentals in ABAP programming and SAP Business Data Cloud.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/SAP_project.html";
             },},{id: "projects-dassault-systèmes-certifications",
           title: 'Dassault Systèmes Certifications',
           description: "A collection of Dassault Systèmes certifications earned on the 3DEXPERIENCE and SolidWorks platforms.",
