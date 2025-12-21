@@ -9,40 +9,60 @@
 </script>
 
 <style>
-  /* On cible l'élément bouton de SiteSpeakAI par son ID probable et sa classe */
+  /* --- POSITIONNEMENT ET DÉCALAGE GAUCHE --- */
   #sitespeakai-chat-button, 
-  .sitespeakai-chat-button,
   #sitespeakai-widget-container {
-    right: 120px !important; /* Décale le bouton de 120px du bord droit */
-    bottom: 30px !important; /* Aligne la hauteur avec le bouton back-to-top */
-    z-index: 999999 !important; /* Priorité maximale pour passer devant tout */
-  }
-
-  /* Force le décalage de la fenêtre de chat lorsqu'elle s'ouvre */
-  #sitespeakai-chat-window,
-  .sitespeakai-chat-window {
-    right: 120px !important;
-    bottom: 100px !important;
+    right: 180px !important;
+    bottom: 30px !important;
     z-index: 999999 !important;
   }
 
-  /* Ajustements pour les écrans mobiles */
+  /* --- ALIGNEMENT DES COULEURS (Basé sur votre code bleu #007bff) --- */
+  /* Note : Ces sélecteurs tentent de cibler l'iframe si le service le permet */
+  #sitespeakai-chat-window header,
+  .sitespeakai-chat-window-header {
+    background-color: #007bff !important; /* Bleu identique à votre bouton Contact  */
+    background: linear-gradient(135deg, #007bff, #00c6ff) !important;
+  }
+
+  /* --- SUPPRESSION DU "POWERED BY" --- */
+  /* On masque l'élément qui contient la mention SiteSpeakAI en bas  */
+  [class*="powered-by"], 
+  [id*="powered-by"],
+  .sitespeakai-powered-by {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+  }
+
+  /* Ajustements Mobile */
   @media (max-width: 576px) {
-    #sitespeakai-chat-button,
-    #sitespeakai-widget-container {
-      right: 90px !important; /* Un peu moins décalé sur mobile pour gagner de la place */
-      bottom: 20px !important;
-    }
-    
-    #sitespeakai-chat-window {
-      right: 10px !important; /* La fenêtre s'ouvre en plein écran ou presque sur mobile */
-      width: calc(100% - 20px) !important;
-    }
+    #sitespeakai-chat-button { right: 100px !important; }
   }
 </style>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    console.log("SiteSpeakAI Loader: Préparation du décalage du widget pour Omar ESSALMANI.");
+  window.addEventListener('load', function() {
+    // 1. Correction du Titre dans l'onglet/header du widget
+    const updateChatTitle = setInterval(function() {
+      // On cherche les éléments de texte dans le widget qui pourraient contenir "omaar"
+      const allElements = document.querySelectorAll('*');
+      allElements.forEach(el => {
+        if (el.innerText === 'omaar') {
+          el.innerText = "Omar's Tech Assistant!"; [cite: 2]
+        }
+      });
+      
+      // Si on a trouvé et remplacé, on peut arrêter l'intervalle après quelques secondes
+    }, 500);
+
+    // Arrêt de la recherche après 10 secondes pour économiser les ressources
+    setTimeout(() => clearInterval(updateChatTitle), 10000);
+
+    // 2. Ouverture automatique après 3 secondes
+    setTimeout(function() {
+      const chatBtn = document.getElementById('sitespeakai-chat-button') || document.querySelector('.sitespeakai-chat-button');
+      if (chatBtn) chatBtn.click();
+    }, 3000);
   });
 </script>
