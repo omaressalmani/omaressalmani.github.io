@@ -1,0 +1,74 @@
+- title: Informations Générales
+  type: map
+  contents:
+    - name: Nom Complet
+      value: Omar ESSALMANI
+    - name: Date de Naissance
+      value: 17 Février 2000
+    - name: Langues
+      value: Anglais, Français et Arabe.
+
+- title: Formation
+  type: time_table
+  contents:
+    - title: Diplôme d'Ingénieur
+      institution: Université de Technologie de Compiègne, France
+      year: Sept. 2023 - 2025
+      description:
+        - Génie Mécanique, filière Conception Mécanique Intégrée.
+    - title: Diplôme d'Ingénieur
+      institution: École Nationale Supérieure D'arts et Métiers, Maroc
+      year: Sept. 2021 - 2024
+      description:
+        - Conception Mécanique et Simulation.
+
+- title: Expériences Professionnelles
+  type: time_table
+  contents:
+    - title: Stage de fin d'études (PFE)
+      institution: Guerbet
+      year: Fév 2025 - Juil 2025
+      description:
+        - Vérification et conception dans le cadre du développement d'un dispositif médical innovant destiné à l'injection de produits de contraste pour l'imagerie médicale.
+    
+    - title: Projet Collaboratif
+      institution: Cornilleau, Compiègne, France.
+      year: Juil 2024 - Déc 2024
+      description:
+        - Conception et fabrication d'un banc d'essai pour la rotation des billes de billard.
+
+    - title: Stage Ingénieur Mécanique
+      institution: Usine AICHA, Meknès, Maroc.
+      year: Juil 2023 - Août 2023
+      description:
+        - Étude et conception d'un palettiseur cartésien pour conserves alimentaires.
+
+    - title: Stage Ingénieur Mécanique
+      institution: Omnium Général Électricité - OGE, Casablanca, Maroc.
+      year: Juil 2022 - Août 2022
+      description:
+        - Optimisation du taux de retouche des pièces dans la production d'armoires électriques.
+
+    - title: Stage de fin d'études (DUT)
+      institution: METEC DIAGNOSTIC, Casablanca, Maroc.
+      year: Fév 2021 - Juil 2021
+      description:
+        - Ingénieur d'études mécaniques pour le développement de dispositifs médicaux de classe IIb.
+
+    - title: Stage Technicien de Maintenance
+      institution: UMPM
+      year: Mai 2020 - Juil 2020
+      description:
+        - Maintenance préventive d'une fraiseuse CNC HAAS UMC-1000.
+
+- title: Certifications
+  type: nested_list
+  contents:
+    - title: 3DSwymer DASSAULT SYSTÈMES
+    - title: Part Design SolidWorks DASSAULT SYSTÈMES
+    - title: 3D Creator Associate SolidWorks DASSAULT SYSTÈMES .. (+ 8 autres en SolidWorks)
+
+- title: Centres d’Intérêt
+  type: list
+  contents:
+    - <u>Loisirs :</u> Réparation de composants électroniques (PC, Téléphones...), football, Taekwondo, design, montage vidéo.
