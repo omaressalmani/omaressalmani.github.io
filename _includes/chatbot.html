@@ -9,33 +9,29 @@
 </script>
 
 <style>
-  /* --- POSITIONNEMENT ET DÉCALAGE GAUCHE --- */
+  /* Décalage global pour laisser la place au bouton "Back to Top" */
   #sitespeakai-chat-button, 
-  #sitespeakai-widget-container {
+  [id^="sitespeakai-widget"] {
     right: 180px !important;
     bottom: 30px !important;
     z-index: 999999 !important;
   }
 
-  /* --- ALIGNEMENT DES COULEURS (Basé sur votre code bleu #007bff) --- */
-  /* Note : Ces sélecteurs tentent de cibler l'iframe si le service le permet */
-  #sitespeakai-chat-window header,
-  .sitespeakai-chat-window-header {
-    background-color: #007bff !important; /* Bleu identique à votre bouton Contact  */
+  /* Cache le logo et la mention Powered By SiteSpeakAI */
+  .sitespeakai-powered-by,
+  div[class*="PoweredBy"],
+  a[href*="sitespeak.ai"] {
+    display: none !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    pointer-events: none !important;
+  }
+
+  /* Tente d'injecter la couleur bleue de ton site (#007bff) */
+  #sitespeakai-chat-window header {
     background: linear-gradient(135deg, #007bff, #00c6ff) !important;
   }
 
-  /* --- SUPPRESSION DU "POWERED BY" --- */
-  /* On masque l'élément qui contient la mention SiteSpeakAI en bas  */
-  [class*="powered-by"], 
-  [id*="powered-by"],
-  .sitespeakai-powered-by {
-    display: none !important;
-    visibility: hidden !important;
-    height: 0 !important;
-  }
-
-  /* Ajustements Mobile */
   @media (max-width: 576px) {
     #sitespeakai-chat-button { right: 100px !important; }
   }
@@ -43,26 +39,23 @@
 
 <script>
   window.addEventListener('load', function() {
-    // 1. Correction du Titre dans l'onglet/header du widget
-    const updateChatTitle = setInterval(function() {
-      // On cherche les éléments de texte dans le widget qui pourraient contenir "omaar"
-      const allElements = document.querySelectorAll('*');
-      allElements.forEach(el => {
-        if (el.innerText === 'omaar') {
-          el.innerText = "Omar's Tech Assistant!"; [cite: 2]
+    // Changement dynamique du titre "omaar" -> "Omar's Tech Assistant!"
+    const renameAssistant = setInterval(function() {
+      const elements = document.querySelectorAll('*:not(script):not(style)');
+      elements.forEach(el => {
+        if (el.children.length === 0 && el.innerText.includes('omaar')) {
+          el.innerText = el.innerText.replace('omaar', "Omar's Tech Assistant!");
         }
       });
-      
-      // Si on a trouvé et remplacé, on peut arrêter l'intervalle après quelques secondes
     }, 500);
 
-    // Arrêt de la recherche après 10 secondes pour économiser les ressources
-    setTimeout(() => clearInterval(updateChatTitle), 10000);
+    // Stop après 10s
+    setTimeout(() => clearInterval(renameAssistant), 10000);
 
-    // 2. Ouverture automatique après 3 secondes
+    // Ouverture auto après 3 secondes
     setTimeout(function() {
-      const chatBtn = document.getElementById('sitespeakai-chat-button') || document.querySelector('.sitespeakai-chat-button');
-      if (chatBtn) chatBtn.click();
+      const btn = document.getElementById('sitespeakai-chat-button') || document.querySelector('.sitespeakai-chat-button');
+      if (btn) btn.click();
     }, 3000);
   });
 </script>
