@@ -92,6 +92,11 @@ ninja.data = [{
           description: "A collection of Dassault Systèmes certifications earned on the 3DEXPERIENCE and SolidWorks platforms.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/certif-dassault.html";
+            },},{id: "projects-rétro-conception-d-39-un-presse-tomates",
+          title: 'Rétro-conception d&amp;#39;un Presse-Tomates',
+          description: "Ingénierie inverse et modélisation 3D d&#39;un presse-tomates industriel via 3DEXPERIENCE et CREO.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/presse-tomates-fr.html";
             },},{
         id: 'social-email',
         title: 'email',
