@@ -16,6 +16,13 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/projects/";
           },
+        },{id: "nav-mon-cv-resume",
+          title: "Mon CV / Resume",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/fr/cv/";
+          },
         },{id: "nav-resume-cv",
           title: "Resume / CV",
           description: "",
@@ -24,6 +31,20 @@ ninja.data = [{
             window.location.href = "/cv/";
           },
         },{id: "dropdown-projets",
+              title: "Projets",
+              description: "",
+              section: "Dropdown",
+              handler: () => {
+                window.location.href = "/fr/projects/";
+              },
+            },{id: "dropdown-mon-cv",
+              title: "Mon CV",
+              description: "",
+              section: "Dropdown",
+              handler: () => {
+                window.location.href = "/fr/cv/";
+              },
+            },{id: "dropdown-projets",
               title: "Projets",
               description: "",
               section: "Dropdown",
