@@ -1,0 +1,139 @@
+{% assign is_fr = false %}
+{% if page.url contains '/fr/' or page.url == '/fr/' %}
+  {% assign is_fr = true %}
+{% endif %}
+
+<div id="chat-wrapper">
+  <button id="chat-open-btn" onclick="toggleChat()" title="Chat with Omar's Assistant">
+    <i class="fa-solid fa-robot"></i>
+  </button>
+
+  <div id="chat-container" class="chat-hidden">
+    <div id="chat-header">
+      <div class="bot-profile">
+        <img src="{{ '/assets/img/prof_pic.jpg' | relative_url }}" alt="Omar" onerror="this.src='https://ui-avatars.com/api/?name=Omar&background=007bff&color=fff'">
+        <div class="bot-details">
+          <strong>{% if is_fr %}Assistant d'Omar{% else %}Omar's Bot{% endif %}</strong>
+          <span class="status-online">● {% if is_fr %}En ligne{% else %}Online{% endif %}</span>
+        </div>
+      </div>
+      <button onclick="toggleChat()" class="close-chat-btn">&times;</button>
+    </div>
+
+    <div id="chat-messages">
+      <div class="message bot-msg">
+        {% if is_fr %}
+          Bonjour ! Je suis l'assistant virtuel d'Omar. Comment puis-je vous aider aujourd'hui ?
+        {% else %}
+          Hi! I'm Omar's virtual assistant. How can I help you today?
+        {% endif %}
+      </div>
+    </div>
+
+    <div id="chat-options">
+      <button onclick="botAnswer('projects')">{% if is_fr %}🛠️ Voir Projets{% else %}🛠️ See Projects{% endif %}</button>
+      <button onclick="botAnswer('cv')">{% if is_fr %}📄 Mon CV{% else %}📄 View Resume{% endif %}</button>
+      <button onclick="botAnswer('contact')">{% if is_fr %}✉️ Contact{% else %}✉️ Contact Omar{% endif %}</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Conteneur principal */
+  #chat-wrapper { position: fixed; bottom: 30px; right: 30px; z-index: 9999; font-family: inherit; }
+
+  /* Bouton d'ouverture */
+  #chat-open-btn { 
+    width: 60px; height: 60px; border-radius: 50%; background: #007bff; color: white; 
+    border: none; cursor: pointer; box-shadow: 0 5px 20px rgba(0,123,255,0.4); 
+    font-size: 26px; transition: transform 0.3s; 
+  }
+  #chat-open-btn:hover { transform: scale(1.1); }
+
+  /* Fenêtre de chat */
+  #chat-container { 
+    width: 320px; height: 450px; background: var(--global-bg-color); 
+    border: 1px solid var(--global-divider-color); border-radius: 16px; 
+    display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+    position: absolute; bottom: 80px; right: 0; overflow: hidden; transition: 0.3s;
+  }
+  #chat-container.chat-hidden { display: none; opacity: 0; transform: translateY(20px); }
+
+  /* Header */
+  #chat-header { background: #007bff; color: white; padding: 15px; display: flex; align-items: center; justify-content: space-between; }
+  .bot-profile { display: flex; align-items: center; gap: 10px; }
+  .bot-profile img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid white; object-fit: cover; }
+  .bot-details { display: flex; flex-direction: column; line-height: 1.2; }
+  .bot-details strong { font-size: 0.95rem; }
+  .status-online { font-size: 0.75rem; color: #b2ffb2; }
+  .close-chat-btn { background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
+
+  /* Messages */
+  #chat-messages { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background: var(--global-bg-color); }
+  .message { padding: 10px 14px; border-radius: 15px; font-size: 0.9rem; max-width: 85%; line-height: 1.4; }
+  .bot-msg { background: var(--global-card-bg-color); border: 1px solid var(--global-divider-color); align-self: flex-start; color: var(--global-text-color); }
+  .user-msg { background: #007bff; color: white; align-self: flex-end; }
+
+  /* Options / Boutons */
+  #chat-options { padding: 12px; display: flex; flex-wrap: wrap; gap: 8px; border-top: 1px solid var(--global-divider-color); background: var(--global-card-bg-color); }
+  #chat-options button { 
+    background: var(--global-bg-color); border: 1px solid #007bff; color: #007bff; 
+    padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; 
+    transition: 0.2s; font-weight: 500;
+  }
+  #chat-options button:hover { background: #007bff; color: white; }
+
+  /* Scrollbar personnalisée */
+  #chat-messages::-webkit-scrollbar { width: 5px; }
+  #chat-messages::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+</style>
+
+<script>
+  function toggleChat() {
+    const chat = document.getElementById('chat-container');
+    chat.classList.toggle('chat-hidden');
+  }
+
+  function botAnswer(type) {
+    const chatMessages = document.getElementById('chat-messages');
+    const isFrench = {{ is_fr }};
+    let response = "";
+    let userLabel = "";
+
+    // Logique de réponse bilingue
+    if (type === 'projects') {
+      userLabel = isFrench ? "Voir mes projets" : "See my projects";
+      response = isFrench 
+        ? "Vous pouvez explorer mes projets de conception mécanique et de simulation dans la section **Projets**. J'utilise principalement SolidWorks et CREO ! 🛠️" 
+        : "Check out my mechanical design and simulation projects in the **Projects** section. I mostly use SolidWorks and CREO! 🛠️";
+    } 
+    else if (type === 'cv') {
+      userLabel = isFrench ? "Consulter mon CV" : "View my Resume";
+      response = isFrench 
+        ? "Mon CV complet est disponible sur la page dédiée. Je suis actuellement à la recherche d'un stage pour 2025 ! 📄" 
+        : "My full resume is available on the Resume page. I am currently looking for an internship for 2025! 📄";
+    } 
+    else if (type === 'contact') {
+      userLabel = isFrench ? "Contacter Omar" : "Contact Omar";
+      response = isFrench 
+        ? "Le meilleur moyen de me joindre est via LinkedIn ou par email via les icônes en bas de page. À bientôt ! ✉️" 
+        : "The best way to reach me is via LinkedIn or email using the icons at the bottom of the page. Talk soon! ✉️";
+    }
+
+    // Ajouter le message de l'utilisateur
+    const uMsg = document.createElement('div');
+    uMsg.className = "message user-msg";
+    uMsg.innerText = userLabel;
+    chatMessages.appendChild(uMsg);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    // Réponse automatique du bot avec un petit délai
+    setTimeout(() => {
+      const bMsg = document.createElement('div');
+      bMsg.className = "message bot-msg";
+      bMsg.innerHTML = response; // innerHTML pour permettre le gras (**)
+      chatMessages.appendChild(bMsg);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }, 600);
+  }
+</script>
