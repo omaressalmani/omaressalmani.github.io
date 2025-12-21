@@ -1,61 +1,128 @@
-<script type="text/javascript">
-  (function(){
-    d=document;
-    s=d.createElement("script");
-    s.src="https://sitespeak.ai/chatbots/3b45485a-f01d-4b59-80c3-a1513617088b.js";
-    s.async=1;
-    d.getElementsByTagName("head")[0].appendChild(s);
-  })();
-</script>
+{% assign is_fr = false %}
+{% if page.url contains '/fr/' or page.url == '/fr/' %}{% assign is_fr = true %}{% endif %}
+
+<div id="chat-wrapper">
+  <button id="chat-open-btn" onclick="toggleChat()">
+    <span class="notification-badge">1</span>
+    <i class="fa-solid fa-robot"></i>
+  </button>
+
+  <div id="chat-container" class="chat-hidden">
+    <div id="chat-header">
+      <div class="bot-profile">
+        <img src="{{ '/assets/img/prof_pic.jpg' | relative_url }}" alt="Omar" onerror="this.src='https://ui-avatars.com/api/?name=OE&background=007bff&color=fff'">
+        <div class="bot-details">
+          <strong>Omar's Tech Assistant</strong>
+          <span class="typing-status">{% if is_fr %}Expert en Ingénierie{% else %}Engineering Expert{% endif %}</span>
+        </div>
+      </div>
+      <button onclick="toggleChat()" class="close-chat-btn">&times;</button>
+    </div>
+
+    <div id="chat-messages"></div>
+
+    <div id="chat-input-area">
+      <input type="text" id="user-input" placeholder="{% if is_fr %}Posez une question sur mon parcours...{% else %}Ask about my background...{% endif %}" onkeypress="handleKeyPress(event)">
+      <button onclick="processInput()"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+
+    <div id="chat-options">
+      <button onclick="botAnswer('projects')">🚀 Projets</button>
+      <button onclick="botAnswer('cv')">📄 CV</button>
+      <button onclick="botAnswer('contact_menu')">📱 Contact</button>
+    </div>
+  </div>
+</div>
 
 <style>
-  /* Décalage global pour laisser la place au bouton "Back to Top" */
-  #sitespeakai-chat-button, 
-  [id^="sitespeakai-widget"] {
-    right: 180px !important;
-    bottom: 30px !important;
-    z-index: 999999 !important;
+  /* --- DESIGN & POSITIONNEMENT --- */
+  #chat-wrapper { position: fixed; bottom: 30px; right: 180px !important; z-index: 99999; }
+  #chat-open-btn { 
+    width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #007bff, #00c6ff);
+    color: white; border: none; cursor: pointer; box-shadow: 0 8px 25px rgba(0,123,255,0.4); font-size: 24px;
   }
-
-  /* Cache le logo et la mention Powered By SiteSpeakAI */
-  .sitespeakai-powered-by,
-  div[class*="PoweredBy"],
-  a[href*="sitespeak.ai"] {
-    display: none !important;
-    opacity: 0 !important;
-    height: 0 !important;
-    pointer-events: none !important;
+  #chat-container { 
+    width: 350px; height: 500px; background: white; border-radius: 20px; display: flex; flex-direction: column;
+    box-shadow: 0 15px 50px rgba(0,0,0,0.15); position: absolute; bottom: 80px; right: 0; overflow: hidden;
+    transition: 0.4s ease; transform-origin: bottom right;
   }
-
-  /* Tente d'injecter la couleur bleue de ton site (#007bff) */
-  #sitespeakai-chat-window header {
-    background: linear-gradient(135deg, #007bff, #00c6ff) !important;
-  }
-
-  @media (max-width: 576px) {
-    #sitespeakai-chat-button { right: 100px !important; }
-  }
+  [data-theme='dark'] #chat-container { background: #1c1c1e; color: white; border: 1px solid #333; }
+  #chat-container.chat-hidden { visibility: hidden; opacity: 0; transform: scale(0.8) translateY(20px); }
+  #chat-header { background: #007bff; color: white; padding: 15px; display: flex; align-items: center; justify-content: space-between; }
+  .bot-profile { display: flex; align-items: center; gap: 10px; }
+  .bot-profile img { width: 35px; height: 35px; border-radius: 50%; object-fit: cover; border: 2px solid white; }
+  #chat-messages { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; }
+  .message { padding: 10px 14px; border-radius: 15px; max-width: 85%; line-height: 1.4; }
+  .bot-msg { background: #f0f0f2; align-self: flex-start; color: #333; }
+  .user-msg { background: #007bff; color: white; align-self: flex-end; }
+  #chat-input-area { display: flex; padding: 10px; border-top: 1px solid #eee; }
+  #chat-input-area input { flex: 1; border: none; padding: 8px; border-radius: 20px; background: #f0f0f2; outline: none; }
+  #chat-options { padding: 10px; display: flex; gap: 5px; justify-content: center; flex-wrap: wrap; }
+  #chat-options button { border: 1px solid #007bff; background: none; color: #007bff; border-radius: 15px; padding: 5px 10px; font-size: 0.75rem; cursor: pointer; }
+  @media (max-width: 576px) { #chat-wrapper { right: 100px !important; } }
 </style>
 
 <script>
-  window.addEventListener('load', function() {
-    // Changement dynamique du titre "omaar" -> "Omar's Tech Assistant!"
-    const renameAssistant = setInterval(function() {
-      const elements = document.querySelectorAll('*:not(script):not(style)');
-      elements.forEach(el => {
-        if (el.children.length === 0 && el.innerText.includes('omaar')) {
-          el.innerText = el.innerText.replace('omaar', "Omar's Tech Assistant!");
-        }
-      });
+  const isFr = {{ is_fr }};
+  
+  // L'APPRENTISSAGE INTERNE : Base de données issue de ton CV
+  const knowledge = {
+    "ensam": isFr ? "Omar est ingénieur diplômé de l'ENSAM-R, major de sa promotion (1er/47)." : "Omar is an ENSAM-R engineering graduate, ranked 1st in his class.", [cite: 38, 40]
+    "utc": isFr ? "Il détient un diplôme d'ingénieur de l'UTC en Ingénierie Mécanique, option Conception Mécanique Intégrée." : "He holds an engineering degree from UTC in Mechanical Engineering, specializing in Integrated Mechanical Design.", [cite: 36, 37]
+    "guerbet": isFr ? "Il a effectué son stage de fin d'études chez Guerbet (Lyon) sur la conception d'injecteurs de produits de contraste." : "He completed his final internship at Guerbet (Lyon) on the design of contrast media injectors.", [cite: 6, 9, 10]
+    "solidworks": isFr ? "Il maîtrise SolidWorks pour la conception, le calcul FEA et le Design for Manufacturing." : "He is proficient in SolidWorks for design, FEA calculations, and Design for Manufacturing.", [cite: 11, 13, 15]
+    "catia": isFr ? "Maîtrise de CATIA V5 pour le surfaçique et la conception de systèmes comme des prothèses de bras." : "Proficient in CATIA V5 for surfacing and designing systems like prosthetic arms.", [cite: 17, 52]
+    "disponible": isFr ? "Omar est disponible immédiatement pour un CDI en France (Titre APS)." : "Omar is available immediately for a permanent position (CDI) in France.", [cite: 3]
+    "contact": isFr ? "Vous pouvez le contacter à omaressalmani0@gmail.com ou au +33 6 51 74 03 92." : "You can contact him at omaressalmani0@gmail.com or +33 6 51 74 03 92." [cite: 4, 7]
+  };
+
+  function toggleChat() { document.getElementById('chat-container').classList.toggle('chat-hidden'); }
+  
+  function sendBotMessage(text) {
+    const container = document.getElementById('chat-messages');
+    const div = document.createElement('div');
+    div.className = "message bot-msg";
+    div.innerHTML = text;
+    container.appendChild(div);
+    container.scrollTop = container.scrollHeight;
+  }
+
+  function sendUserMessage(text) {
+    const container = document.getElementById('chat-messages');
+    const div = document.createElement('div');
+    div.className = "message user-msg";
+    div.innerText = text;
+    container.appendChild(div);
+  }
+
+  function processInput() {
+    const input = document.getElementById('user-input');
+    const val = input.value.toLowerCase();
+    if (!val) return;
+    sendUserMessage(input.value);
+    input.value = "";
+
+    setTimeout(() => {
+      let response = isFr ? "Je ne suis pas sûr, mais vous pouvez consulter son CV ou le contacter directement !" : "I'm not sure, but you can check his CV or contact him directly!";
+      for (let key in knowledge) {
+        if (val.includes(key)) { response = knowledge[key]; break; }
+      }
+      sendBotMessage(response);
     }, 500);
+  }
 
-    // Stop après 10s
-    setTimeout(() => clearInterval(renameAssistant), 10000);
+  function handleKeyPress(e) { if (e.key === 'Enter') processInput(); }
 
-    // Ouverture auto après 3 secondes
-    setTimeout(function() {
-      const btn = document.getElementById('sitespeakai-chat-button') || document.querySelector('.sitespeakai-chat-button');
-      if (btn) btn.click();
-    }, 3000);
-  });
+  window.onload = () => {
+    setTimeout(() => {
+      toggleChat();
+      sendBotMessage(isFr ? "Bonjour ! Je suis l'assistant d'Omar. Comment puis-je vous aider ?" : "Hi! I'm Omar's assistant. How can I help you?");
+    }, 2000);
+  };
+  
+  function botAnswer(type) {
+    if (type === 'projects') window.location.href = isFr ? "/fr/projects/" : "/projects/";
+    if (type === 'cv') window.location.href = isFr ? "/fr/cv/" : "/cv/";
+    if (type === 'contact_menu') sendBotMessage(knowledge["contact"]);
+  }
 </script>
