@@ -5,6 +5,7 @@ description: A collection of Dassault Systèmes certifications earned on the 3DE
 img: assets/img/projects/C1.jpg
 importance: 1
 category: certifications
+lang: en
 related_publications: false
 ---
 

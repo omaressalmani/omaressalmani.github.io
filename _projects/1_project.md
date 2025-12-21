@@ -5,6 +5,7 @@ description: Reverse engineering and 3D modeling of a tomato press using 3DEXPER
 img: assets/img/projects/4.jpeg
 importance: 1
 category: work
+lang: en
 related_publications: false
 ---
 

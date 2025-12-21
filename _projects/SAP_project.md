@@ -5,6 +5,7 @@ description: Validation of core competencies in ABAP environment and SAP Busines
 img: assets/img/projects/SAP.jpg
 importance: 1
 category: certifications
+lang: en
 related_publications: false
 ---
 

@@ -5,6 +5,7 @@ description: Development of a functional prosthetic arm integrating mechanical d
 img: assets/img/projects/AAAA.jpeg
 importance: 1
 category: work
+lang: en
 related_publications: false
 ---
 

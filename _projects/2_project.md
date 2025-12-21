@@ -5,6 +5,7 @@ description: Design and engineering of a configurable modular wheelchair using P
 img: assets/img/projects/6.jpeg
 importance: 2
 category: work
+lang: en
 related_publications: false
 ---
 

@@ -5,6 +5,7 @@ description: Creative poster designed for UTC to welcome students back, created 
 img: assets/img/projects/UTC.jpg
 importance: 3
 category: fun
+lang: en
 related_publications: false
 ---
 

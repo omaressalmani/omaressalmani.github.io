@@ -5,6 +5,7 @@ description: Official event poster designed for the ArabeUT association at UTC, 
 img: assets/img/projects/arabeut.jpg
 importance: 4
 category: fun
+lang: en
 related_publications: false
 ---
 

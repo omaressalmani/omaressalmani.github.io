@@ -5,6 +5,7 @@ description: Design, CAD, and fabrication of a test bench for measuring billiard
 img: assets/img/projects/A2.png
 importance: 2
 category: work
+lang: en
 related_publications: false
 ---
 

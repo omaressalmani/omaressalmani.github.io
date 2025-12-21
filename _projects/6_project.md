@@ -5,6 +5,7 @@ description: Graphic design and media communication work for the Roboticore club
 img: assets/img/projects/AA.png
 importance: 4
 category: fun
+lang: en
 related_publications: false
 ---
 

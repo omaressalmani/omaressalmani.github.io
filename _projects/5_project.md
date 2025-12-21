@@ -5,6 +5,7 @@ description: Graphic design for the UTC Career Service event in collaboration wi
 img: assets/img/projects/UTC2.png
 importance: 3
 category: fun
+lang: en
 related_publications: false
 ---
 
