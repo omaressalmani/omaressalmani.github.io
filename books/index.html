@@ -1,34 +1,69 @@
 <!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> bookshelf | Omar ESSALMANI </title> <meta name="author" content="Omar ESSALMANI"> <meta name="description" content=""> <link rel="stylesheet" href="/assets/css/bootstrap.min.css?a4b3f509e79c54a512b890d73235ef04"> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="/assets/css/academicons.min.css?f0b7046b84e425c55f3463ac249818f5"> <link defer rel="stylesheet" href="/assets/css/scholar-icons.css?62b2ac103a88034e6882a5be5f3e2772"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%A7%99&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?d41d8cd98f00b204e9800998ecf8427e"> <link rel="canonical" href="https://omaressalmani.github.io/books/"> <script src="/assets/js/theme.js?a81d82887dd692e91686b43de4542f18"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
     initTheme();
-  </script> </head> <body> <div id="chat-wrapper"> <button id="chat-open-btn" onclick="toggleChat()"> <span class="notification-badge">1</span> <i class="fa-solid fa-robot"></i> </button> <div id="chat-container" class="chat-hidden"> <div id="chat-header"> <div class="bot-profile"> <div class="avatar-wrapper"> <img src="/assets/img/prof_pic.jpg" alt="Omar" onerror="this.src='https://ui-avatars.com/api/?name=OE&amp;background=007bff&amp;color=fff'"> <span class="online-indicator"></span> </div> <div class="bot-details"> <strong>Omar's AI Assistant</strong> <span class="typing-status">Replies instantly</span> </div> </div> <button onclick="toggleChat()" class="close-chat-btn">×</button> </div> <div id="chat-messages"> </div> <div id="chat-options"> <button onclick="botAnswer('projects')">🚀 Projects</button> <button onclick="botAnswer('cv')">📄 Resume</button> <button onclick="botAnswer('contact_menu')">📱 Contact</button> </div> </div> </div> <style>#chat-wrapper{position:fixed;bottom:30px;right:30px;z-index:10000}#chat-open-btn{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#007bff,#00c6ff);color:white;border:0;cursor:pointer;box-shadow:0 8px 25px rgba(0,123,255,0.4);font-size:24px;position:relative;transition:all .3s cubic-bezier(0.175,0.885,0.32,1.275)}#chat-open-btn i{display:inline-block;animation:robot-wiggle 4s infinite}@keyframes robot-wiggle{0%,90%{transform:rotate(0)}92%{transform:rotate(15deg)}95%{transform:rotate(-15deg)}97%{transform:rotate(15deg)}100%{transform:rotate(0)}}.notification-badge{position:absolute;top:-2px;right:-2px;background:#ff3b30;color:white;font-size:11px;padding:2px 6px;border-radius:10px;border:2px solid white;font-weight:bold}#chat-container{width:350px;height:500px;max-height:80vh;background:rgba(255,255,255,0.98);backdrop-filter:blur(10px);border:1px solid rgba(0,0,0,0.1);border-radius:24px;display:flex;flex-direction:column;box-shadow:0 15px 50px rgba(0,0,0,0.15);position:absolute;bottom:80px;right:0;overflow:hidden;transition:all .4s cubic-bezier(0.4,0,0.2,1);transform-origin:bottom right}[data-theme='dark'] #chat-container{background:rgba(28,28,30,0.98);border-color:rgba(255,255,255,0.1)}#chat-container.chat-hidden{visibility:hidden;opacity:0;transform:scale(0.7) translateY(100px)}#chat-header{background:#007bff;color:white;padding:18px 15px;display:flex;align-items:center;justify-content:space-between}.bot-profile{display:flex;align-items:center;gap:12px}.avatar-wrapper{position:relative}.online-indicator{position:absolute;bottom:2px;right:2px;width:12px;height:12px;background:#4cd964;border-radius:50%;border:2px solid #007bff}.bot-profile img{width:42px;height:42px;border-radius:50%;object-fit:cover;background:white}.bot-details strong{font-size:.95rem;display:block}.typing-status{font-size:11px;opacity:.9}.close-chat-btn{background:0;border:0;color:white;font-size:26px;cursor:pointer}#chat-messages{flex:1;padding:20px;overflow-y:auto;display:flex;flex-direction:column;gap:12px;scroll-behavior:smooth}.message{padding:12px 16px;border-radius:20px;font-size:.92rem;max-width:85%;animation:fadeInChat .4s ease forwards;line-height:1.4}.bot-msg{background:#f0f0f2;color:#1c1c1e;align-self:flex-start;border-bottom-left-radius:4px}[data-theme='dark'] .bot-msg{background:#2c2c2e;color:#f2f2f7}.user-msg{background:#007bff;color:white;align-self:flex-end;border-bottom-right-radius:4px}#chat-options{padding:15px;display:flex;flex-wrap:wrap;gap:8px;border-top:1px solid rgba(0,0,0,0.05)}#chat-options button{background:var(--global-bg-color);border:1.5px solid #007bff;color:#007bff;padding:8px 16px;border-radius:25px;font-size:.85rem;cursor:pointer;transition:.2s;font-weight:600}#chat-options button:hover{background:#007bff;color:white;transform:translateY(-2px)}.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;width:100%}.contact-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;border-radius:12px;color:white!important;font-size:.8rem;font-weight:600;text-decoration:none!important;transition:.3s}.contact-btn:hover{transform:translateY(-3px);filter:brightness(1.1)}@media(max-width:576px){#chat-container{width:300px;height:450px;bottom:75px;right:-10px}#chat-wrapper{bottom:20px;right:20px}}@keyframes fadeInChat{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}</style> <script>
+  </script> </head> <body> <div id="chat-wrapper"> <button id="chat-open-btn" onclick="toggleChat()"> <span class="notification-badge">1</span> <i class="fa-solid fa-robot"></i> </button> <div id="chat-container" class="chat-hidden"> <div id="chat-header"> <div class="bot-profile"> <div class="avatar-wrapper"> <img src="/assets/img/prof_pic.jpg" alt="Omar" onerror="this.src='https://ui-avatars.com/api/?name=OE&amp;background=007bff&amp;color=fff'"> <span class="online-indicator"></span> </div> <div class="bot-details"> <strong>Omar's Tech Assistant</strong> <span class="typing-status">Engineering AI active</span> </div> </div> <button onclick="toggleChat()" class="close-chat-btn">×</button> </div> <div id="chat-messages"> </div> <div id="chat-input-area"> <input type="text" id="user-input" placeholder="Ask a technical question..." onkeypress="handleKeyPress(event)"> <button onclick="processInput()"><i class="fa-solid fa-paper-plane"></i></button> </div> <div id="chat-options"> <button onclick="botAnswer('projects')">🚀 Projets</button> <button onclick="botAnswer('cv')">📄 CV</button> <button onclick="botAnswer('contact_menu')">📱 Contact</button> </div> </div> </div> <style>#chat-wrapper{position:fixed;bottom:30px;right:100px;z-index:10001}#chat-open-btn{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#007bff,#00c6ff);color:white;border:0;cursor:pointer;box-shadow:0 8px 25px rgba(0,123,255,0.4);font-size:24px;position:relative;transition:.3s}#chat-open-btn i{display:inline-block;animation:robot-wiggle 4s infinite}@keyframes robot-wiggle{0%,90%{transform:rotate(0)}92%{transform:rotate(15deg)}95%{transform:rotate(-15deg)}100%{transform:rotate(0)}}.notification-badge{position:absolute;top:-2px;right:-2px;background:#ff3b30;color:white;font-size:11px;padding:2px 6px;border-radius:10px;border:2px solid white;font-weight:bold}#chat-container{width:350px;height:550px;max-height:80vh;background:rgba(255,255,255,0.98);backdrop-filter:blur(10px);border:1px solid rgba(0,0,0,0.1);border-radius:24px;display:flex;flex-direction:column;box-shadow:0 15px 50px rgba(0,0,0,0.15);position:absolute;bottom:80px;right:0;overflow:hidden;transition:all .4s cubic-bezier(0.4,0,0.2,1);transform-origin:bottom right}[data-theme='dark'] #chat-container{background:rgba(28,28,30,0.98);border-color:rgba(255,255,255,0.1);color:white}#chat-container.chat-hidden{visibility:hidden;opacity:0;transform:scale(0.7) translateY(100px)}#chat-header{background:#007bff;color:white;padding:15px;display:flex;align-items:center;justify-content:space-between}.bot-profile{display:flex;align-items:center;gap:10px}.bot-profile img{width:40px;height:40px;border-radius:50%;background:white;object-fit:cover}.online-indicator{position:absolute;bottom:2px;right:2px;width:10px;height:10px;background:#4cd964;border-radius:50%;border:2px solid #007bff}.close-chat-btn{background:0;border:0;color:white;font-size:26px;cursor:pointer}#chat-messages{flex:1;padding:15px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;scroll-behavior:smooth}.message{padding:10px 14px;border-radius:18px;font-size:.9rem;max-width:85%;line-height:1.4;animation:fadeIn .3s}.bot-msg{background:#f0f0f2;align-self:flex-start;color:#1c1c1e;border-bottom-left-radius:4px}[data-theme='dark'] .bot-msg{background:#3a3a3c;color:#f2f2f7}.user-msg{background:#007bff;color:white;align-self:flex-end;border-bottom-right-radius:4px}#chat-input-area{display:flex;padding:12px;border-top:1px solid rgba(0,0,0,0.05);background:var(--global-bg-color)}#chat-input-area input{flex:1;border:0;padding:10px 15px;border-radius:20px;background:#f0f0f2;font-size:.85rem;outline:0}[data-theme='dark'] #chat-input-area input{background:#2c2c2e;color:white}#chat-input-area button{background:0;border:0;color:#007bff;margin-left:10px;cursor:pointer;font-size:1.1rem}#chat-options{padding:10px;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;border-top:1px solid rgba(0,0,0,0.05)}#chat-options button{background:var(--global-bg-color);border:1.5px solid #007bff;color:#007bff;padding:6px 14px;border-radius:20px;font-size:.8rem;cursor:pointer;font-weight:600;transition:.2s}#chat-options button:hover{background:#007bff;color:white}.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;width:100%}.contact-btn{display:flex;align-items:center;justify-content:center;gap:5px;padding:8px;border-radius:10px;color:white!important;font-size:.75rem;font-weight:600;text-decoration:none!important}@media(max-width:576px){#chat-wrapper{right:80px;bottom:20px}#chat-container{width:280px;right:-20px}}@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}</style> <script>
   const isFrench = false;
-  const socialLinks = {
-    linkedin: "https://www.linkedin.com/in/omar-essalmani",
+  const socialLinks = { 
+    linkedin: "https://www.linkedin.com/in/omar-essalmani", 
     email: "mailto:omaressalmani0@gmail.com",
     github: "https://github.com/omaressalmani",
     instagram: "https://www.instagram.com/essalmaniomar"
   };
 
-  // Ouverture automatique proactive
+  [cite_start]// BASE DE CONNAISSANCES EXTRAITE DE TON CV [cite: 1, 37, 40]
+  const techKnowledge = {
+    "ensam": isFrench ? "Omar est ingénieur ENSAM (Major de promotion 1er/47). Il y a acquis ses bases solides en génie mécanique." : "Omar is an ENSAM Engineer (ranked 1st/47). He gained strong mechanical engineering foundations there.",
+    "utc": isFrench ? "Il complète son profil à l'UTC avec une spécialisation en Conception Mécanique Intégrée." : "He completes his profile at UTC with a specialization in Integrated Mechanical Design.",
+    "solidworks": isFrench ? "Expert SolidWorks, il l'utilise pour la CAO, le FEA et le design for manufacturing, notamment chez Guerbet." : "SolidWorks expert, he uses it for CAD, FEA, and design for manufacturing, notably at Guerbet.",
+    "creo": isFrench ? "Il a utilisé Creo 7.0 pour la conception d'un fauteuil roulant modulaire avec Windchill PDMlink." : "He used Creo 7.0 for designing a modular wheelchair with Windchill PDMlink.",
+    "médical": isFrench ? "Spécialisé en dispositifs médicaux (Guerbet, Metec), il maîtrise les normes ISO 13485 et IEC 60601." : "Specialized in medical devices (Guerbet, Metec), he masters ISO 13485 and IEC 60601 standards.",
+    "catia": isFrench ? "Maîtrise de CATIA V5 pour le surfaçage et la conception de systèmes comme des prothèses de bras." : "Proficient in CATIA V5 for surfacing and designing systems like prosthetic arms.",
+    "ansys": isFrench ? "Utilisé pour valider des choix de conception par simulation numérique (ex: palettiseur cartésien)." : "Used to validate design choices through numerical simulation (e.g., Cartesian palletizer).",
+    "abaqus": "Utilisé pour les calculs FEA complexes et la simulation de structures mécaniques.",
+    "python": "Omar utilise Python et VBA pour automatiser les calculs d'ingénierie et le traitement de données.",
+    "stage": isFrench ? "Il a effectué des stages marquants chez Guerbet (PFE), Cornilleau et OGE. Il recherche un CDI." : "He completed impactful internships at Guerbet (PFE), Cornilleau, and OGE. He is seeking a CDI.",
+    "disponible": isFrench ? "Omar est disponible immédiatement pour un poste en France (Titre APS)." : "Omar is available immediately for a position in France."
+  };
+
   window.addEventListener('load', () => {
     setTimeout(() => {
       const chat = document.getElementById('chat-container');
       if (chat.classList.contains('chat-hidden')) {
         toggleChat();
         setTimeout(() => {
-            sendBotMessage(isFrench ? "Salut ! Je suis l'assistant d'Omar. 👋" : "Hi! I'm Omar's assistant. 👋");
-            setTimeout(() => {
-                sendBotMessage(isFrench ? "Je peux vous aider à parcourir mes projets ou à me contacter directement !" : "I can help you browse my projects or contact me directly!");
-            }, 1000);
-        }, 500);
+            sendBotMessage(isFrench ? "Salut ! Je suis l'assistant intelligent d'Omar. 👋" : "Hi! I'm Omar's smart assistant. 👋");
+            sendBotMessage(isFrench ? "Posez-moi une question sur ses compétences (ex: SolidWorks, ENSAM, Médical...)" : "Ask me about his skills (e.g., SolidWorks, ENSAM, Medical...)");
+        }, 800);
       }
     }, 2500);
   });
 
   function toggleChat() {
-    const chat = document.getElementById('chat-container');
-    chat.classList.toggle('chat-hidden');
+    document.getElementById('chat-container').classList.toggle('chat-hidden');
     document.querySelector('.notification-badge').style.display = 'none';
+  }
+
+  function handleKeyPress(e) { if (e.key === 'Enter') processInput(); }
+
+  function processInput() {
+    const input = document.getElementById('user-input');
+    const text = input.value.trim().toLowerCase();
+    if (!text) return;
+
+    sendUserMessage(input.value);
+    input.value = "";
+
+    setTimeout(() => {
+        let found = false;
+        for (let key in techKnowledge) {
+            if (text.includes(key)) {
+                sendBotMessage(techKnowledge[key]);
+                found = true; break;
+            }
+        }
+        if (!found) {
+            sendBotMessage(isFrench ? "Je ne suis pas sûr pour ce point précis, mais vous pouvez consulter ses projets ou le contacter !" : "I'm not sure about that, but feel free to check his projects or contact him!");
+        }
+    }, 600);
   }
 
   function sendBotMessage(text) {
@@ -52,24 +87,15 @@
   function botAnswer(type) {
     if (type === 'projects') {
       sendUserMessage(isFrench ? "Voir les projets" : "See projects");
-      setTimeout(() => {
-        sendBotMessage(isFrench ? "Direction la galerie des projets..." : "Taking you to the projects gallery...");
-        setTimeout(() => window.location.href = isFrench ? "/fr/projects/" : "/projects/", 1200);
-      }, 600);
+      setTimeout(() => window.location.href = isFrench ? "/fr/projects/" : "/projects/", 1000);
     } 
     else if (type === 'cv') {
-      sendUserMessage(isFrench ? "Consulter le CV" : "View Resume");
-      setTimeout(() => {
-        sendBotMessage(isFrench ? "Voici mon parcours d'ingénieur." : "Opening my engineering background.");
-        setTimeout(() => window.location.href = isFrench ? "/fr/cv/" : "/cv/", 1200);
-      }, 600);
-    } 
+      sendUserMessage(isFrench ? "Ouvrir le CV" : "Open CV");
+      setTimeout(() => window.location.href = isFrench ? "/fr/cv/" : "/cv/", 1000);
+    }
     else if (type === 'contact_menu') {
-      sendUserMessage("Contact");
-      setTimeout(() => {
-        sendBotMessage(isFrench ? "Où préférez-vous me joindre ?" : "Where would you like to connect?");
-        injectContactGrid();
-      }, 600);
+      sendBotMessage(isFrench ? "Voici comment joindre Omar :" : "Here is how to reach Omar:");
+      injectContactGrid();
     }
   }
 
