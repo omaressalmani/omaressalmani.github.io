@@ -3,7 +3,7 @@ layout: page
 title: Projets
 permalink: /fr/projects/
 description: Une collection de mes réalisations techniques et explorations créatives.
-nav: false
+nav: true
 display_categories: [work, certifications, fun]
 horizontal: false
 ---

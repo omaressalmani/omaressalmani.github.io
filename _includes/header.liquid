@@ -1,7 +1,11 @@
 <header>
   <nav id="navbar" class="navbar navbar-light navbar-expand-sm {% if site.navbar_fixed %}fixed-top{% else %}sticky-top{% endif %}" role="navigation">
     <div class="container">
-      {% if page.permalink != '/' %}
+      {% comment %} 
+        CORRECTION : On masque le titre/nom en haut à gauche si on est sur la racine (EN) 
+        OU sur la page d'accueil française (/fr/).
+      {% endcomment %}
+      {% if page.permalink != '/' and page.permalink != '/fr/' %}
         <a class="navbar-brand title font-weight-lighter" href="{{ site.baseurl }}/">
           {% if site.title == 'blank' %}
             {% if site.first_name %}<span class="font-weight-bold">{{ site.first_name }}</span>{% endif %}
@@ -25,13 +29,13 @@
       <div class="collapse navbar-collapse text-right" id="navbarNav">
         <ul class="navbar-nav ml-auto flex-nowrap">
           
-          {% comment %} 1. Détecter la langue actuelle de la page {% endcomment %}
+          {% comment %} 1. Détecter la langue actuelle de la page visitée {% endcomment %}
           {% assign current_lang = "en" %}
           {% if page.url contains '/fr/' or page.url == '/fr/' %}
             {% assign current_lang = "fr" %}
           {% endif %}
 
-          {% comment %} 2. Lien "About" dynamique selon la langue {% endcomment %}
+          {% comment %} 2. Lien "About" / "À propos" dynamique {% endcomment %}
           {% for p in site.pages %}
             {% if current_lang == "en" and p.permalink == "/" %}
               <li class="nav-item {% if page.url == '/' %}active{% endif %}">
@@ -44,17 +48,18 @@
             {% endif %}
           {% endfor %}
 
-          {% comment %} 3. Boucle sur les autres pages avec filtre de langue {% endcomment %}
+          {% comment %} 3. Boucle sur les autres pages avec filtrage de langue {% endcomment %}
           {% assign sorted_pages = site.pages | sort: 'nav_order' %}
           {% for p in sorted_pages %}
             {% if p.nav and p.autogen == null %}
               
-              {% comment %} Déterminer la langue de la page dans la boucle {% endcomment %}
+              {% comment %} Déterminer la langue de chaque page trouvée {% endcomment %}
               {% assign p_lang = "en" %}
               {% if p.url contains '/fr/' %}{% assign p_lang = "fr" %}{% endif %}
 
+              {% comment %} N'afficher le lien que s'il correspond à la langue actuelle {% endcomment %}
               {% if p_lang == current_lang %}
-                {% comment %} Ne pas répéter le lien Home/About déjà traité plus haut {% endcomment %}
+                {% comment %} Éviter de répéter les liens d'accueil déjà gérés plus haut {% endcomment %}
                 {% unless p.permalink == '/' or p.permalink == '/fr/' %}
                   
                   {% if p.dropdown %}
@@ -95,7 +100,7 @@
             {% endif %}
           {% endfor %}
 
-          {% comment %} 4. Sélecteur de langue (EN | FR) {% endcomment %}
+          {% comment %} 4. Sélecteur de langue EN | FR {% endcomment %}
           <li class="nav-item">
             <div class="nav-link" style="display: flex; align-items: center; font-weight: 500; font-size: 0.85rem; letter-spacing: 1px;">
               {% if current_lang == "en" %}
