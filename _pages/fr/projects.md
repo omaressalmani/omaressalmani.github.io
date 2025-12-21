@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Projets
-permalink: /fr/
+permalink: /fr/projects/
 description: Une collection de mes réalisations techniques et explorations créatives.
 nav: false
 display_categories: [work, certifications, fun]
