@@ -1,10 +1,9 @@
 ---
 layout: page
-title: Portfolio
-permalink: /projects/
-description: A curated selection of engineering solutions and technical explorations.
-nav: true
-nav_order: 3
+title: Projets
+permalink: /fr/
+description: Une collection de mes réalisations techniques et explorations créatives.
+nav: false
 display_categories: [work, certifications, fun]
 horizontal: false
 ---
@@ -15,21 +14,21 @@ horizontal: false
     <div class="category-section mb-5">
       <a id="{{ category }}" href=".#{{ category }}" style="text-decoration: none;">
         <h2 class="category-title" style="border-left: 4px solid #007bff; padding-left: 15px; font-weight: 300; text-transform: uppercase; letter-spacing: 2px;">
-          {% if category == "work" %} Professional Work
-          {% elsif category == "fun" %} Creative Lab
-          {% elsif category == "certifications" %} Validations
+          {% if category == "work" %} Expériences Pro
+          {% elsif category == "fun" %} Lab Créatif
+          {% elsif category == "certifications" %} Certifications
           {% else %}{{ category }}{% endif %}
         </h2>
       </a>
       
       <p class="text-muted mb-4" style="font-size: 0.9rem; margin-left: 19px;">
-        {% if category == "work" %} Mechanical design, FEA analysis, and industrial implementations.
-        {% elsif category == "fun" %} Personal experiments in electronics and programming.
-        {% elsif category == "certifications" %} Official credentials from SAP and industry leaders.
+        {% if category == "work" %} Conception mécanique, analyses FEA et intégrations industrielles.
+        {% elsif category == "fun" %} Expérimentations personnelles en électronique et code.
+        {% elsif category == "certifications" %} Diplômes et badges officiels (SAP, etc.).
         {% endif %}
       </p>
 
-      {% assign categorized_projects = site.projects | where: "category", category | where: "lang", "en" %}
+      {% assign categorized_projects = site.projects | where: "category", category | where: "lang", "fr" %}
       {% assign sorted_projects = categorized_projects | sort: "importance" %}
 
       <div class="row row-cols-1 row-cols-md-3 g-4">
