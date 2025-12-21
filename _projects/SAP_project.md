@@ -8,38 +8,25 @@ category: certifications
 related_publications: false
 ---
 
-### 🏅 SAP Learning Certifications
+## SAP Learning Certifications
 
-This project showcases my **official SAP Learning badges**, obtained through the **SAP Learning Hub**.  
-They validate my foundations in **enterprise software**, **business data**, and **ABAP programming**, complementing my engineering background with **IT and digital systems skills**.
+Through the SAP Learning Hub, I completed two foundational courses in enterprise software development and business data management. These certifications complement my mechanical engineering background with practical knowledge in IT systems commonly integrated within industrial environments.
 
----
+### Completed Courses
 
-#### 📜 Certifications Overview
+**Learning Basic ABAP Programming**  
+This beginner-level course covered the core principles of ABAP development, including the programming environment, object-oriented concepts, database access with ABAP SQL, and application development using the ABAP RESTful Programming Model.
 
-**1. Learning Basic ABAP Programming – Course Completion**  
-Beginner-level certification validating fundamentals of:
-- ABAP development environment  
-- Object-Oriented programming concepts  
-- ABAP SQL and database access  
-- Basic application development with ABAP RESTful Programming Model  
+Credential verification:  
+[https://badger.learning.sap.com/verify/xihab-myfar-bogik-vumeh-luvyk](https://badger.learning.sap.com/verify/xihab-myfar-bogik-vumeh-luvyk)
 
-🔗 **Credential link:**  
-https://badger.learning.sap.com/verify/xihab-myfar-bogik-vumeh-luvyk
----
+**Positioning SAP Business Data Cloud**  
+This course focused on understanding the value proposition of SAP Business Data Cloud, with an emphasis on data analysis fundamentals, business positioning strategies, and solution qualification for sales contexts.
 
-**2. Positioning SAP Business Data Cloud – Course Completion**  
-Beginner-level certification focused on:
-- Understanding SAP Business Data Cloud value  
-- Data analysis and business positioning  
-- Sales and solution qualification fundamentals  
+Credential verification:  
+[https://badger.learning.sap.com/verify/xavyt-cysil-cuvos-lehob-sufas](https://badger.learning.sap.com/verify/xavyt-cysil-cuvos-lehob-sufas)
 
-🔗 **Credential link:**  
-https://badger.learning.sap.com/verify/xavyt-cysil-cuvos-lehob-sufas
-
----
-
-### 🖼️ Badges Gallery
+### Course Completion Badges
 
 <div class="row justify-content-center">
   <div class="col-md-5 mt-3 text-center">
@@ -64,23 +51,13 @@ https://badger.learning.sap.com/verify/xavyt-cysil-cuvos-lehob-sufas
 </div>
 
 <div class="caption text-muted text-center mt-3">
-  Official SAP Learning course completion badges issued via the SAP Learning platform.
+  Official badges issued by SAP Learning upon course completion.
 </div>
 
----
+### Technical Skills Acquired
 
-#### 🛠️ Skills & Technologies
+The courses provided foundational knowledge in ABAP programming, SAP Business Data Cloud architecture, enterprise software concepts, and data-driven business analysis—skills increasingly relevant in modern industrial settings where PLM, ERP, and data management systems converge.
 
-- **ABAP Programming (Foundations)**  
-- **SAP Business Data Cloud**  
-- **Enterprise Software Fundamentals**  
-- **Data Analysis & Business Understanding**  
+### Context and Relevance
 
----
-
-#### 💬 Reflection
-
-These certifications reflect my willingness to **extend my engineering mindset beyond mechanics**,  
-by exploring **enterprise software, programming, and data-driven systems**.
-
-They complement my mechanical engineering profile with **digital skills increasingly required in modern industrial environments**, especially where **PLM, ERP, and data systems** intersect.
+These certifications represent a deliberate effort to expand beyond traditional mechanical engineering into the digital systems that support contemporary industrial operations. Understanding enterprise software and data platforms has become essential as engineering roles increasingly interface with information systems for product lifecycle management, operations planning, and data analytics.
