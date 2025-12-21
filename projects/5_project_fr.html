@@ -1,67 +1,78 @@
 <!DOCTYPE html> <html lang="en"> <head> <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> <meta charset="utf-8"> <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <meta http-equiv="X-UA-Compatible" content="IE=edge"> <title> Affiche Événement UTC × Saint-Gobain | Omar ESSALMANI </title> <meta name="author" content="Omar ESSALMANI"> <meta name="description" content="Conception graphique pour le Service Carrière de l'UTC en collaboration avec Saint-Gobain, réalisée avec Adobe Photoshop."> <link rel="stylesheet" href="/assets/css/bootstrap.min.css?a4b3f509e79c54a512b890d73235ef04"> <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/css/mdb.min.css" integrity="sha256-jpjYvU3G3N6nrrBwXJoVEYI/0zw8htfFnhT9ljN3JJw=" crossorigin="anonymous"> <link defer rel="stylesheet" href="/assets/css/academicons.min.css?f0b7046b84e425c55f3463ac249818f5"> <link defer rel="stylesheet" href="/assets/css/scholar-icons.css?62b2ac103a88034e6882a5be5f3e2772"> <link defer rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons&amp;display=swap"> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-github.css?591dab5a4e56573bf4ef7fd332894c99" media="" id="highlight_theme_light"> <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%20100%20100%22&gt;&lt;text%20y=%22.9em%22%20font-size=%2290%22&gt;%F0%9F%A7%99&lt;/text&gt;&lt;/svg&gt;"> <link rel="stylesheet" href="/assets/css/main.css?d41d8cd98f00b204e9800998ecf8427e"> <link rel="canonical" href="https://omaressalmani.github.io/projects/5_project_fr.html"> <script src="/assets/js/theme.js?a81d82887dd692e91686b43de4542f18"></script> <link defer rel="stylesheet" href="/assets/css/jekyll-pygments-themes-native.css?5847e5ed4a4568527aa6cfab446049ca" media="none" id="highlight_theme_dark"> <script>
     initTheme();
-  </script> </head> <body> <div id="chat-wrapper"> <button id="chat-open-btn" onclick="toggleChat()"> <span class="notification-badge">1</span> <i class="fa-solid fa-robot"></i> </button> <div id="chat-container" class="chat-hidden"> <div id="chat-header"> <div class="bot-profile"> <img src="/assets/img/prof_pic.jpg" alt="Omar" onerror="this.src='https://ui-avatars.com/api/?name=OE&amp;background=007bff&amp;color=fff'"> <div class="bot-details"> <strong>Omar's Tech Assistant</strong> <span class="typing-status">Engineering Expert</span> </div> </div> <button onclick="toggleChat()" class="close-chat-btn">×</button> </div> <div id="chat-messages"></div> <div id="chat-input-area"> <input type="text" id="user-input" placeholder="Ask about my background..." onkeypress="handleKeyPress(event)"> <button onclick="processInput()"><i class="fa-solid fa-paper-plane"></i></button> </div> <div id="chat-options"> <button onclick="botAnswer('projects')">🚀 Projets</button> <button onclick="botAnswer('cv')">📄 CV</button> <button onclick="botAnswer('contact_menu')">📱 Contact</button> </div> </div> </div> <style>#chat-wrapper{position:fixed;bottom:30px;right:180px!important;z-index:99999}#chat-open-btn{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#007bff,#00c6ff);color:white;border:0;cursor:pointer;box-shadow:0 8px 25px rgba(0,123,255,0.4);font-size:24px}#chat-container{width:350px;height:500px;background:white;border-radius:20px;display:flex;flex-direction:column;box-shadow:0 15px 50px rgba(0,0,0,0.15);position:absolute;bottom:80px;right:0;overflow:hidden;transition:.4s ease;transform-origin:bottom right}[data-theme='dark'] #chat-container{background:#1c1c1e;color:white;border:1px solid #333}#chat-container.chat-hidden{visibility:hidden;opacity:0;transform:scale(0.8) translateY(20px)}#chat-header{background:#007bff;color:white;padding:15px;display:flex;align-items:center;justify-content:space-between}.bot-profile{display:flex;align-items:center;gap:10px}.bot-profile img{width:35px;height:35px;border-radius:50%;object-fit:cover;border:2px solid white}#chat-messages{flex:1;padding:15px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;font-size:.9rem}.message{padding:10px 14px;border-radius:15px;max-width:85%;line-height:1.4}.bot-msg{background:#f0f0f2;align-self:flex-start;color:#333}.user-msg{background:#007bff;color:white;align-self:flex-end}#chat-input-area{display:flex;padding:10px;border-top:1px solid #eee}#chat-input-area input{flex:1;border:0;padding:8px;border-radius:20px;background:#f0f0f2;outline:0}#chat-options{padding:10px;display:flex;gap:5px;justify-content:center;flex-wrap:wrap}#chat-options button{border:1px solid #007bff;background:0;color:#007bff;border-radius:15px;padding:5px 10px;font-size:.75rem;cursor:pointer}@media(max-width:576px){#chat-wrapper{right:100px!important}}</style> <script>
-  const isFr = false;
-  
-  // L'APPRENTISSAGE INTERNE : Base de données issue de ton CV
-  const knowledge = {
-    "ensam": isFr ? "Omar est ingénieur diplômé de l'ENSAM-R, major de sa promotion (1er/47)." : "Omar is an ENSAM-R engineering graduate, ranked 1st in his class.", [cite: 38, 40]
-    "utc": isFr ? "Il détient un diplôme d'ingénieur de l'UTC en Ingénierie Mécanique, option Conception Mécanique Intégrée." : "He holds an engineering degree from UTC in Mechanical Engineering, specializing in Integrated Mechanical Design.", [cite: 36, 37]
-    "guerbet": isFr ? "Il a effectué son stage de fin d'études chez Guerbet (Lyon) sur la conception d'injecteurs de produits de contraste." : "He completed his final internship at Guerbet (Lyon) on the design of contrast media injectors.", [cite: 6, 9, 10]
-    "solidworks": isFr ? "Il maîtrise SolidWorks pour la conception, le calcul FEA et le Design for Manufacturing." : "He is proficient in SolidWorks for design, FEA calculations, and Design for Manufacturing.", [cite: 11, 13, 15]
-    "catia": isFr ? "Maîtrise de CATIA V5 pour le surfaçique et la conception de systèmes comme des prothèses de bras." : "Proficient in CATIA V5 for surfacing and designing systems like prosthetic arms.", [cite: 17, 52]
-    "disponible": isFr ? "Omar est disponible immédiatement pour un CDI en France (Titre APS)." : "Omar is available immediately for a permanent position (CDI) in France.", [cite: 3]
-    "contact": isFr ? "Vous pouvez le contacter à omaressalmani0@gmail.com ou au +33 6 51 74 03 92." : "You can contact him at omaressalmani0@gmail.com or +33 6 51 74 03 92." [cite: 4, 7]
+  </script> </head> <body> <div id="chat-wrapper"> <button id="chat-open-btn" onclick="toggleChat()"> <span class="notification-badge">1</span> <i class="fa-solid fa-robot"></i> </button> <div id="chat-container" class="chat-hidden"> <div id="chat-header"> <div class="bot-profile"> <div class="avatar-wrapper"> <img src="/assets/img/prof_pic.jpg" alt="Omar" onerror="this.src='https://ui-avatars.com/api/?name=OE&amp;background=007bff&amp;color=fff'"> <span class="online-indicator"></span> </div> <div class="bot-details"> <strong>Omar's Tech Assistant</strong> <span class="typing-status">Engineering Specialized AI</span> </div> </div> <button onclick="toggleChat()" class="close-chat-btn">×</button> </div> <div id="chat-messages"></div> <div id="chat-input-area"> <input type="text" id="user-input" placeholder="Ask a technical question..." onkeypress="handleKeyPress(event)"> <button onclick="processInput()"><i class="fa-solid fa-paper-plane"></i></button> </div> <div id="chat-options"> <button onclick="botAnswer('projects')">🚀 Projets</button> <button onclick="botAnswer('contact_menu')">📱 Contact</button> </div> </div> </div> <style>#chat-wrapper{position:fixed;bottom:30px;right:100px;z-index:10001}#chat-open-btn{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#007bff,#00c6ff);color:white;border:0;cursor:pointer;box-shadow:0 8px 25px rgba(0,123,255,0.4);font-size:24px;position:relative;transition:.3s}#chat-open-btn i{display:inline-block;animation:robot-wiggle 4s infinite}@keyframes robot-wiggle{0%,90%{transform:rotate(0)}92%{transform:rotate(15deg)}95%{transform:rotate(-15deg)}100%{transform:rotate(0)}}#chat-container{width:350px;height:550px;max-height:85vh;background:rgba(255,255,255,0.98);backdrop-filter:blur(10px);border:1px solid rgba(0,0,0,0.1);border-radius:24px;display:flex;flex-direction:column;box-shadow:0 15px 50px rgba(0,0,0,0.15);position:absolute;bottom:80px;right:0;overflow:hidden;transition:.4s cubic-bezier(0.4,0,0.2,1);transform-origin:bottom right}[data-theme='dark'] #chat-container{background:rgba(28,28,30,0.98);border-color:rgba(255,255,255,0.1);color:white}#chat-container.chat-hidden{visibility:hidden;opacity:0;transform:scale(0.7) translateY(100px)}#chat-header{background:#007bff;color:white;padding:15px;display:flex;align-items:center;justify-content:space-between}.bot-profile{display:flex;align-items:center;gap:10px}.bot-profile img{width:40px;height:40px;border-radius:50%;background:white;object-fit:cover}#chat-messages{flex:1;padding:15px;overflow-y:auto;display:flex;flex-direction:column;gap:10px}.message{padding:10px 14px;border-radius:15px;font-size:.9rem;max-width:85%;line-height:1.4;animation:fadeIn .3s}.bot-msg{background:#f0f0f2;align-self:flex-start;color:#1c1c1e}[data-theme='dark'] .bot-msg{background:#3a3a3c;color:#f2f2f7}.user-msg{background:#007bff;color:white;align-self:flex-end}#chat-input-area{display:flex;padding:10px;border-top:1px solid rgba(0,0,0,0.05);background:var(--global-bg-color)}#chat-input-area input{flex:1;border:0;padding:8px 12px;border-radius:20px;background:#f0f0f2;font-size:.85rem;outline:0}[data-theme='dark'] #chat-input-area input{background:#2c2c2e;color:white}#chat-input-area button{background:0;border:0;color:#007bff;margin-left:10px;cursor:pointer;font-size:1.1rem}#chat-options{padding:10px;display:flex;gap:8px;justify-content:center}#chat-options button{background:0;border:1.5px solid #007bff;color:#007bff;padding:5px 12px;border-radius:20px;font-size:.75rem;cursor:pointer;font-weight:600}</style> <script>
+  const isFrench = false;
+  const socialLinks = { linkedin: "https://www.linkedin.com/in/omar-essalmani", email: "mailto:omaressalmani0@gmail.com" };
+
+  // Base de connaissances technique (100% local/gratuit)
+  const techKnowledge = {
+    "solidworks": isFrench ? "Omar utilise SolidWorks pour la conception mécanique et la mise en plan technique depuis plusieurs années." : "Omar has been using SolidWorks for mechanical design and technical drawing for several years.",
+    "catia": isFrench ? "Il maîtrise CATIA V5 pour le surfaçage et la conception de systèmes complexes." : "He is proficient in CATIA V5 for surfacing and complex systems design.",
+    "ansys": isFrench ? "Omar réalise des simulations FEA (analyse par éléments finis) via Ansys pour valider la résistance des pièces." : "Omar performs FEA simulations via Ansys to validate part strength.",
+    "ensam": isFrench ? "Il est étudiant à l'ENSAM, une école d'ingénieurs prestigieuse spécialisée en génie industriel et mécanique." : "He is a student at ENSAM, a prestigious engineering school specialized in industrial and mechanical engineering.",
+    "utc": isFrench ? "Il suit également un cursus à l'UTC, renforçant ses compétences en conception mécanique intégrée." : "He is also studying at UTC, strengthening his skills in integrated mechanical design.",
+    "python": isFrench ? "Omar utilise Python pour automatiser des calculs d'ingénierie et traiter des données techniques." : "Omar uses Python to automate engineering calculations and process technical data."
   };
 
-  function toggleChat() { document.getElementById('chat-container').classList.toggle('chat-hidden'); }
-  
-  function sendBotMessage(text) {
-    const container = document.getElementById('chat-messages');
-    const div = document.createElement('div');
-    div.className = "message bot-msg";
-    div.innerHTML = text;
-    container.appendChild(div);
-    container.scrollTop = container.scrollHeight;
-  }
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+        toggleChat();
+        sendBotMessage(isFrench ? "Bonjour ! Je connais tout sur le parcours d'Omar. Posez-moi une question technique !" : "Hi! I know everything about Omar's background. Ask me a technical question!");
+    }, 2500);
+  });
 
-  function sendUserMessage(text) {
-    const container = document.getElementById('chat-messages');
-    const div = document.createElement('div');
-    div.className = "message user-msg";
-    div.innerText = text;
-    container.appendChild(div);
-  }
+  function toggleChat() { document.getElementById('chat-container').classList.toggle('chat-hidden'); }
+
+  function handleKeyPress(e) { if (e.key === 'Enter') processInput(); }
 
   function processInput() {
     const input = document.getElementById('user-input');
-    const val = input.value.toLowerCase();
-    if (!val) return;
+    const text = input.value.trim().toLowerCase();
+    if (!text) return;
+
     sendUserMessage(input.value);
     input.value = "";
 
     setTimeout(() => {
-      let response = isFr ? "Je ne suis pas sûr, mais vous pouvez consulter son CV ou le contacter directement !" : "I'm not sure, but you can check his CV or contact him directly!";
-      for (let key in knowledge) {
-        if (val.includes(key)) { response = knowledge[key]; break; }
-      }
-      sendBotMessage(response);
-    }, 500);
+        let found = false;
+        for (let key in techKnowledge) {
+            if (text.includes(key)) {
+                sendBotMessage(techKnowledge[key]);
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            sendBotMessage(isFrench ? "C'est une question intéressante ! Je vous suggère de regarder ses projets ou de le contacter directement pour plus de détails." : "That's an interesting question! I suggest checking his projects or contacting him directly for more details.");
+        }
+    }, 600);
   }
 
-  function handleKeyPress(e) { if (e.key === 'Enter') processInput(); }
+  function sendBotMessage(text) {
+    const msgDiv = document.getElementById('chat-messages');
+    const bMsg = document.createElement('div');
+    bMsg.className = "message bot-msg";
+    bMsg.innerHTML = text;
+    msgDiv.appendChild(bMsg);
+    msgDiv.scrollTop = msgDiv.scrollHeight;
+  }
 
-  window.onload = () => {
-    setTimeout(() => {
-      toggleChat();
-      sendBotMessage(isFr ? "Bonjour ! Je suis l'assistant d'Omar. Comment puis-je vous aider ?" : "Hi! I'm Omar's assistant. How can I help you?");
-    }, 2000);
-  };
-  
+  function sendUserMessage(text) {
+    const msgDiv = document.getElementById('chat-messages');
+    const uMsg = document.createElement('div');
+    uMsg.className = "message user-msg";
+    uMsg.innerText = text;
+    msgDiv.appendChild(uMsg);
+    msgDiv.scrollTop = msgDiv.scrollHeight;
+  }
+
   function botAnswer(type) {
-    if (type === 'projects') window.location.href = isFr ? "/fr/projects/" : "/projects/";
-    if (type === 'cv') window.location.href = isFr ? "/fr/cv/" : "/cv/";
-    if (type === 'contact_menu') sendBotMessage(knowledge["contact"]);
+    if (type === 'projects') {
+        sendUserMessage(isFrench ? "Voir les projets" : "See projects");
+        setTimeout(() => window.location.href = isFrench ? "/fr/projects/" : "/projects/", 1000);
+    } else if (type === 'contact_menu') {
+        sendBotMessage(isFrench ? "Vous pouvez le joindre sur <a href='"+socialLinks.linkedin+"' target='_blank'>LinkedIn</a> ou par <a href='"+socialLinks.email+"'>Email</a>." : "You can reach him on <a href='"+socialLinks.linkedin+"' target='_blank'>LinkedIn</a> or via <a href='"+socialLinks.email+"'>Email</a>.");
+    }
   }
 </script> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Omar</span> ESSALMANI </a> <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse text-right" id="navbarNav"> <ul class="navbar-nav ml-auto flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">About</a> </li> <li class="nav-item active"> <a class="nav-link" href="/projects/">Projects<span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">Resume / CV </a> </li> <li class="nav-item dropdown "> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">submenus</a> <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"> <a class="dropdown-item " href="/projects/">Projets</a> <div class="dropdown-divider"></div> <a class="dropdown-item " href="/cv/">My resume</a> </div> </li> <li class="nav-item"> <div class="nav-link" style="display: flex; align-items: center; font-weight: 500; font-size: 0.85rem; letter-spacing: 1px;"> <a href="#" style="color: #007bff; text-decoration: none; pointer-events: none;">EN</a> <span style="margin: 0 8px; opacity: 0.3;">|</span> <a href="/fr/projects/5_project_fr.html" style="color: inherit; text-decoration: none; opacity: 0.5;">FR</a> </div> </li> <li class="nav-item"> <button id="search-toggle" title="Search" onclick="openSearchModal()"> <span class="nav-link">ctrl k <i class="ti ti-search"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" title="Change theme"> <i class="ti ti-sun-moon" id="light-toggle-system"></i> <i class="ti ti-moon-filled" id="light-toggle-dark"></i> <i class="ti ti-sun-filled" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"><span class="progress-bar"></span></div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">Affiche Événement UTC × Saint-Gobain</h1> <p class="post-description">Conception graphique pour le Service Carrière de l'UTC en collaboration avec Saint-Gobain, réalisée avec Adobe Photoshop.</p> </header> <article> <h3 id="-utc--saint-gobain--conception-daffiche-événementielle">🎨 UTC × Saint-Gobain — Conception d’Affiche Événementielle</h3> <p>Dans le cadre d’un <strong>événement organisé par l’Université de Technologie de Compiègne (UTC)</strong>, j’ai eu l’opportunité de concevoir le <strong>visuel de l’affiche</strong> pour le Service Carrière afin de promouvoir une <strong>journée d’immersion exclusive à la Tour Saint-Gobain</strong>.</p> <p>L’objectif était de capturer <strong>l’énergie, l’innovation et l’évolution professionnelle</strong> au cœur de cet événement — en utilisant une <strong>typographie audacieuse, des contrastes de couleurs marqués et une composition moderne</strong> pour interpeller aussi bien les étudiants que les professionnels. Le visuel a été entièrement réalisé sur <strong>Adobe Photoshop</strong>, fusionnant l’identité de l’UTC avec l’esprit dynamique de Saint-Gobain.</p> <hr> <div class="row justify-content-center"> <div class="col-md-10 mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/UTC2-480.webp 480w,/assets/img/projects/UTC2-800.webp 800w,/assets/img/projects/UTC2-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/UTC2.png" class="img-fluid rounded z-depth-1 shadow-lg" width="100%" height="auto" title="Affiche Événement UTC × Saint-Gobain" loading="lazy" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"> </picture> </figure> </div> </div> <div class="caption text-muted text-center"> Affiche officielle conçue pour le Service Carrière de l'UTC — réalisée avec Adobe Photoshop. </div> <hr> <h4 id="-à-propos-de-lévénement">📢 À propos de l’événement</h4> <p>Organisé par le <strong>Service Carrière de l’UTC</strong>, l’événement invitait les étudiants à passer une journée au <strong>siège de Saint-Gobain</strong> pour explorer l’innovation durable dans la construction et échanger avec des experts du secteur.</p> <p>Accompagné par <strong>Karim Hechmi (“Tonton Karim”)</strong>, cet événement offrait un mélange unique d’inspiration, d’expertise et d’opportunités de réseautage pour les futurs ingénieurs.</p> <blockquote> <p>« Une journée d’immersion exclusive chez Saint-Gobain — découvrez, apprenez et connectez-vous avec les leaders qui façonnent l’avenir de la construction durable. »</p> </blockquote> <hr> <h4 id="-publication-officielle-linkedin-utc">🔗 Publication officielle LinkedIn (UTC)</h4> <p>👉 <a href="https://www.linkedin.com/posts/elena-swistek-utc_saintgobain-utc-networking-activity-7257300273591734272-MY48?utm_source=social_share_send&amp;utm_medium=member_desktop_web&amp;rcm=ACoAADLEUCcBZosRbAVy07EE8qdAr5_C6LA6Fpo" rel="external nofollow noopener" target="_blank">Lire l’annonce complète sur la page LinkedIn de l’UTC</a></p> <hr> <p>Ce projet créatif fut une excellente opportunité de contribuer visuellement à une <strong>campagne de communication universitaire</strong>, illustrant comment le <strong>design graphique et le storytelling</strong> peuvent donner vie à un événement !</p> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2025 Omar ESSALMANI. </div> </footer> <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> <script src="/assets/js/bootstrap.bundle.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?a0db7e5d5c70cc3252b3138b0c91dcaf" type="text/javascript"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/js/zoom.js?85ddb88934d28b74e78031fd54cf8308"></script> <script src="/assets/js/no_defer.js?2781658a0a2b13ed609542042a859126"></script> <script defer src="/assets/js/common.js?e0514a05c5c95ac1a93a8dfd5249b92e"></script> <script defer src="/assets/js/copy_code.js?c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?d9f17b6adc2311cbabd747f4538bb15f"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/js/mathjax-setup.js?a5bb4e6a542c546dd929b24b8b236dfd"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script defer src="/assets/js/progress-bar.js?2f30e0e6801ea8f5036fa66e1ab0a71a" type="text/javascript"></script> <script src="/assets/js/vanilla-back-to-top.min.js?f40d453793ff4f64e238e420181a1d17"></script> <script>
     addBackToTop();
