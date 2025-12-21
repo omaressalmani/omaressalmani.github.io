@@ -1,7 +1,7 @@
 ---
 layout: about
 title: À propos
-permalink: /fr/
+permalink: /fr/about/
 # subtitle: <a href='#'>Affiliations</a>. Adresse. Contacts. Devise. Etc.
 
 profile:

@@ -115,18 +115,18 @@
           {% endfor %}
 
          <li class="nav-item">
-            <div class="nav-link" style="display: flex; align-items: center; font-weight: 500; font-size: 0.85rem; letter-spacing: 1px;">
-              <a href="{{ '/' | relative_url }}" 
-                 style="color: {% if page.url == '/' or page.url contains '/en/' %}#007bff{% else %}inherit{% endif %}; text-decoration: none;">
-                 EN
-              </a>
-              <span style="margin: 0 8px; opacity: 0.3; font-weight: 300;">|</span>
-              <a href="{{ '/fr/' | relative_url }}" 
-                 style="color: {% if page.url contains '/fr/' %}#007bff{% else %}inherit{% endif %}; text-decoration: none;">
-                 FR
-              </a>
-            </div>
-          </li>
+  <div class="nav-link" style="display: flex; align-items: center; font-weight: 500; font-size: 0.85rem; letter-spacing: 1px;">
+    {% if page.url contains '/fr/' %}
+      <a href="{{ page.url | remove_first: '/fr' | relative_url }}" style="color: inherit; text-decoration: none; opacity: 0.5;">EN</a>
+      <span style="margin: 0 8px; opacity: 0.3;">|</span>
+      <a href="#" style="color: #007bff; text-decoration: none; pointer-events: none;">FR</a>
+    {% else %}
+      <a href="#" style="color: #007bff; text-decoration: none; pointer-events: none;">EN</a>
+      <span style="margin: 0 8px; opacity: 0.3;">|</span>
+      <a href="{{ '/fr' | append: page.url | relative_url }}" style="color: inherit; text-decoration: none; opacity: 0.5;">FR</a>
+    {% endif %}
+  </div>
+</li>
 
           {% if site.search_enabled %}
             <li class="nav-item">
