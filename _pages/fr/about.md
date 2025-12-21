@@ -1,7 +1,7 @@
 ---
 layout: about
 title: À propos
-permalink: /fr/about/
+permalink: /fr/
 # subtitle: <a href='#'>Affiliations</a>. Adresse. Contacts. Devise. Etc.
 
 profile:
@@ -83,7 +83,7 @@ announcements:
      style="text-decoration: none;">
      
     <img 
-      src="{{ '/assets/img/projects/post.png' | relative_url }}" 
+      src="{{ '/assets/img/projects/Post.jpg' | relative_url }}" 
       alt="Post LinkedIn par Omar ESSALMANI" 
       class="rounded shadow-lg" 
       style="width:60%; max-width:700px; height:auto; border: 1px solid #444;">

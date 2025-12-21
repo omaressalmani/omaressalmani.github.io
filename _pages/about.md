@@ -88,7 +88,7 @@ announcements:
      style="text-decoration: none;">
      
     <img 
-      src="{{ '/assets/img/projects/post.png' | relative_url }}" 
+      src="{{ '/assets/img/projects/Post.jpg' | relative_url }}" 
       alt="LinkedIn Post by Omar ESSALMANI" 
       class="rounded shadow-lg" 
       style="width:60%; max-width:700px; height:auto; border: 1px solid #444;">
