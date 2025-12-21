@@ -1,139 +1,183 @@
 {% assign is_fr = false %}
-{% if page.url contains '/fr/' or page.url == '/fr/' %}
-  {% assign is_fr = true %}
-{% endif %}
+{% if page.url contains '/fr/' or page.url == '/fr/' %}{% assign is_fr = true %}{% endif %}
 
 <div id="chat-wrapper">
-  <button id="chat-open-btn" onclick="toggleChat()" title="Chat with Omar's Assistant">
+  <button id="chat-open-btn" onclick="toggleChat()">
+    <span class="notification-badge">1</span>
     <i class="fa-solid fa-robot"></i>
   </button>
 
   <div id="chat-container" class="chat-hidden">
     <div id="chat-header">
       <div class="bot-profile">
-        <img src="{{ '/assets/img/prof_pic.jpg' | relative_url }}" alt="Omar" onerror="this.src='https://ui-avatars.com/api/?name=Omar&background=007bff&color=fff'">
+        <div class="avatar-wrapper">
+            <img src="{{ '/assets/img/prof_pic.jpg' | relative_url }}" alt="Omar" onerror="this.src='https://ui-avatars.com/api/?name=OE&background=007bff&color=fff'">
+            <span class="online-indicator"></span>
+        </div>
         <div class="bot-details">
-          <strong>{% if is_fr %}Assistant d'Omar{% else %}Omar's Bot{% endif %}</strong>
-          <span class="status-online">● {% if is_fr %}En ligne{% else %}Online{% endif %}</span>
+          <strong>Omar's AI Assistant</strong>
+          <span class="typing-status">{% if is_fr %}Répond instantanément{% else %}Replies instantly{% endif %}</span>
         </div>
       </div>
       <button onclick="toggleChat()" class="close-chat-btn">&times;</button>
     </div>
 
     <div id="chat-messages">
-      <div class="message bot-msg">
-        {% if is_fr %}
-          Bonjour ! Je suis l'assistant virtuel d'Omar. Comment puis-je vous aider aujourd'hui ?
-        {% else %}
-          Hi! I'm Omar's virtual assistant. How can I help you today?
-        {% endif %}
       </div>
-    </div>
 
     <div id="chat-options">
-      <button onclick="botAnswer('projects')">{% if is_fr %}🛠️ Voir Projets{% else %}🛠️ See Projects{% endif %}</button>
-      <button onclick="botAnswer('cv')">{% if is_fr %}📄 Mon CV{% else %}📄 View Resume{% endif %}</button>
-      <button onclick="botAnswer('contact')">{% if is_fr %}✉️ Contact{% else %}✉️ Contact Omar{% endif %}</button>
+      <button onclick="botAnswer('projects')">🚀 {% if is_fr %}Projets{% else %}Projects{% endif %}</button>
+      <button onclick="botAnswer('cv')">📄 {% if is_fr %}Mon CV{% else %}Resume{% endif %}</button>
+      <button onclick="botAnswer('contact_menu')">📱 Contact</button>
     </div>
   </div>
 </div>
 
 <style>
-  /* Conteneur principal */
-  #chat-wrapper { position: fixed; bottom: 30px; right: 30px; z-index: 9999; font-family: inherit; }
+  /* Positionnement pour éviter le bouton "Back to Top" */
+  #chat-wrapper { position: fixed; bottom: 100px; right: 30px; z-index: 9999; }
 
-  /* Bouton d'ouverture */
   #chat-open-btn { 
-    width: 60px; height: 60px; border-radius: 50%; background: #007bff; color: white; 
-    border: none; cursor: pointer; box-shadow: 0 5px 20px rgba(0,123,255,0.4); 
-    font-size: 26px; transition: transform 0.3s; 
+    width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #007bff, #00c6ff);
+    color: white; border: none; cursor: pointer; box-shadow: 0 8px 25px rgba(0,123,255,0.4); 
+    font-size: 24px; position: relative; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
-  #chat-open-btn:hover { transform: scale(1.1); }
+  #chat-open-btn:hover { transform: scale(1.1) rotate(5deg); }
 
-  /* Fenêtre de chat */
+  .notification-badge {
+    position: absolute; top: -2px; right: -2px; background: #ff3b30; color: white;
+    font-size: 11px; padding: 2px 6px; border-radius: 10px; border: 2px solid white; font-weight: bold;
+  }
+
   #chat-container { 
-    width: 320px; height: 450px; background: var(--global-bg-color); 
-    border: 1px solid var(--global-divider-color); border-radius: 16px; 
-    display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
-    position: absolute; bottom: 80px; right: 0; overflow: hidden; transition: 0.3s;
+    width: 340px; height: 500px; background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px); border: 1px solid rgba(0,0,0,0.1); border-radius: 24px; 
+    display: flex; flex-direction: column; box-shadow: 0 15px 50px rgba(0,0,0,0.15); 
+    position: absolute; bottom: 80px; right: 0; overflow: hidden; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: bottom right;
   }
-  #chat-container.chat-hidden { display: none; opacity: 0; transform: translateY(20px); }
+  
+  [data-theme='dark'] #chat-container { background: rgba(28, 28, 30, 0.98); border-color: rgba(255,255,255,0.1); }
+  #chat-container.chat-hidden { visibility: hidden; opacity: 0; transform: scale(0.7) translateY(100px); }
 
-  /* Header */
-  #chat-header { background: #007bff; color: white; padding: 15px; display: flex; align-items: center; justify-content: space-between; }
-  .bot-profile { display: flex; align-items: center; gap: 10px; }
-  .bot-profile img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid white; object-fit: cover; }
-  .bot-details { display: flex; flex-direction: column; line-height: 1.2; }
-  .bot-details strong { font-size: 0.95rem; }
-  .status-online { font-size: 0.75rem; color: #b2ffb2; }
-  .close-chat-btn { background: none; border: none; color: white; font-size: 24px; cursor: pointer; }
+  #chat-header { background: #007bff; color: white; padding: 20px 15px; display: flex; align-items: center; justify-content: space-between; }
+  .bot-profile { display: flex; align-items: center; gap: 12px; }
+  .avatar-wrapper { position: relative; }
+  .online-indicator { position: absolute; bottom: 2px; right: 2px; width: 12px; height: 12px; background: #4cd964; border-radius: 50%; border: 2px solid #007bff; }
+  .bot-profile img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; background: white; }
+  .bot-details strong { font-size: 1rem; display: block; }
+  .typing-status { font-size: 11px; opacity: 0.9; }
+  .close-chat-btn { background: none; border: none; color: white; font-size: 28px; cursor: pointer; opacity: 0.7; }
+  .close-chat-btn:hover { opacity: 1; }
 
-  /* Messages */
-  #chat-messages { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background: var(--global-bg-color); }
-  .message { padding: 10px 14px; border-radius: 15px; font-size: 0.9rem; max-width: 85%; line-height: 1.4; }
-  .bot-msg { background: var(--global-card-bg-color); border: 1px solid var(--global-divider-color); align-self: flex-start; color: var(--global-text-color); }
-  .user-msg { background: #007bff; color: white; align-self: flex-end; }
+  #chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; scroll-behavior: smooth; }
+  .message { padding: 12px 16px; border-radius: 20px; font-size: 0.92rem; max-width: 85%; animation: fadeInChat 0.4s ease forwards; line-height: 1.4; }
+  .bot-msg { background: #f0f0f2; color: #1c1c1e; align-self: flex-start; border-bottom-left-radius: 4px; }
+  [data-theme='dark'] .bot-msg { background: #2c2c2e; color: #f2f2f7; }
+  .user-msg { background: #007bff; color: white; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 500; }
 
-  /* Options / Boutons */
-  #chat-options { padding: 12px; display: flex; flex-wrap: wrap; gap: 8px; border-top: 1px solid var(--global-divider-color); background: var(--global-card-bg-color); }
+  #chat-options { padding: 15px; display: flex; flex-wrap: wrap; gap: 8px; border-top: 1px solid rgba(0,0,0,0.05); background: rgba(0,0,0,0.02); }
   #chat-options button { 
-    background: var(--global-bg-color); border: 1px solid #007bff; color: #007bff; 
-    padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; 
-    transition: 0.2s; font-weight: 500;
+    background: var(--global-bg-color); border: 1.5px solid #007bff; color: #007bff; 
+    padding: 8px 16px; border-radius: 25px; font-size: 0.85rem; cursor: pointer; 
+    transition: 0.2s; font-weight: 600;
   }
-  #chat-options button:hover { background: #007bff; color: white; }
+  #chat-options button:hover { background: #007bff; color: white; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(0,123,255,0.3); }
 
-  /* Scrollbar personnalisée */
-  #chat-messages::-webkit-scrollbar { width: 5px; }
-  #chat-messages::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; width: 100%; }
+  .contact-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px; border-radius: 12px; color: white !important; font-size: 0.85rem; font-weight: 600; text-decoration: none !important; transition: 0.3s; }
+  .contact-btn:hover { transform: translateY(-3px); filter: brightness(1.1); }
+
+  @keyframes fadeInChat { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 </style>
 
 <script>
+  const isFrench = {{ is_fr }};
+  
+  // Vos données sociales issues de _data/socials.yml
+  const socialLinks = {
+    linkedin: "https://www.linkedin.com/in/omar-essalmani",
+    email: "mailto:omaressalmani0@gmail.com",
+    github: "https://github.com/omaressalmani",
+    instagram: "https://www.instagram.com/essalmaniomar"
+  };
+
+  // Ouverture automatique
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const chat = document.getElementById('chat-container');
+      if (chat.classList.contains('chat-hidden')) {
+        toggleChat();
+        setTimeout(() => {
+            sendBotMessage(isFrench ? "Salut ! Je suis l'assistant d'Omar. 👋" : "Hi! I'm Omar's AI assistant. 👋");
+            setTimeout(() => {
+                sendBotMessage(isFrench ? "Je peux vous aider à parcourir ses projets ou à le contacter directement !" : "I can help you browse his projects or contact him directly!");
+            }, 1000);
+        }, 500);
+      }
+    }, 2500);
+  });
+
   function toggleChat() {
     const chat = document.getElementById('chat-container');
     chat.classList.toggle('chat-hidden');
+    document.querySelector('.notification-badge').style.display = 'none';
+  }
+
+  function sendBotMessage(text) {
+    const chatMessages = document.getElementById('chat-messages');
+    const bMsg = document.createElement('div');
+    bMsg.className = "message bot-msg";
+    bMsg.innerHTML = text;
+    chatMessages.appendChild(bMsg);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function sendUserMessage(text) {
+    const chatMessages = document.getElementById('chat-messages');
+    const uMsg = document.createElement('div');
+    uMsg.className = "message user-msg";
+    uMsg.innerText = text;
+    chatMessages.appendChild(uMsg);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
   }
 
   function botAnswer(type) {
-    const chatMessages = document.getElementById('chat-messages');
-    const isFrench = {{ is_fr }};
-    let response = "";
-    let userLabel = "";
-
-    // Logique de réponse bilingue
     if (type === 'projects') {
-      userLabel = isFrench ? "Voir mes projets" : "See my projects";
-      response = isFrench 
-        ? "Vous pouvez explorer mes projets de conception mécanique et de simulation dans la section **Projets**. J'utilise principalement SolidWorks et CREO ! 🛠️" 
-        : "Check out my mechanical design and simulation projects in the **Projects** section. I mostly use SolidWorks and CREO! 🛠️";
+      sendUserMessage(isFrench ? "Voir les projets" : "See projects");
+      setTimeout(() => {
+        sendBotMessage(isFrench ? "Très bien ! Je vous dirige vers la galerie des projets..." : "Sure! Taking you to the projects gallery...");
+        setTimeout(() => window.location.href = isFrench ? "{{ '/fr/projects/' | relative_url }}" : "{{ '/projects/' | relative_url }}", 1200);
+      }, 600);
     } 
     else if (type === 'cv') {
-      userLabel = isFrench ? "Consulter mon CV" : "View my Resume";
-      response = isFrench 
-        ? "Mon CV complet est disponible sur la page dédiée. Je suis actuellement à la recherche d'un stage pour 2025 ! 📄" 
-        : "My full resume is available on the Resume page. I am currently looking for an internship for 2025! 📄";
+      sendUserMessage(isFrench ? "Consulter le CV" : "View Resume");
+      setTimeout(() => {
+        sendBotMessage(isFrench ? "Voici le parcours complet d'Omar en ingénierie." : "Opening Omar's engineering background.");
+        setTimeout(() => window.location.href = isFrench ? "{{ '/fr/cv/' | relative_url }}" : "{{ '/cv/' | relative_url }}", 1200);
+      }, 600);
     } 
-    else if (type === 'contact') {
-      userLabel = isFrench ? "Contacter Omar" : "Contact Omar";
-      response = isFrench 
-        ? "Le meilleur moyen de me joindre est via LinkedIn ou par email via les icônes en bas de page. À bientôt ! ✉️" 
-        : "The best way to reach me is via LinkedIn or email using the icons at the bottom of the page. Talk soon! ✉️";
+    else if (type === 'contact_menu') {
+      sendUserMessage("Contact");
+      setTimeout(() => {
+        sendBotMessage(isFrench ? "Voici les réseaux d'Omar. Où préférez-vous le joindre ?" : "Here are Omar's socials. Where would you like to connect?");
+        injectContactGrid();
+      }, 600);
     }
+  }
 
-    // Ajouter le message de l'utilisateur
-    const uMsg = document.createElement('div');
-    uMsg.className = "message user-msg";
-    uMsg.innerText = userLabel;
-    chatMessages.appendChild(uMsg);
+  function injectContactGrid() {
+    const chatMessages = document.getElementById('chat-messages');
+    const grid = document.createElement('div');
+    grid.className = "contact-grid";
+    
+    grid.innerHTML = `
+      <a href="${socialLinks.linkedin}" target="_blank" class="contact-btn" style="background:#0077b5;"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+      <a href="${socialLinks.email}" class="contact-btn" style="background:#ea4335;"><i class="fa-solid fa-envelope"></i> Email</a>
+      <a href="${socialLinks.github}" target="_blank" class="contact-btn" style="background:#333;"><i class="fa-brands fa-github"></i> GitHub</a>
+      <a href="${socialLinks.instagram}" target="_blank" class="contact-btn" style="background:#e4405f;"><i class="fa-brands fa-instagram"></i> Instagram</a>
+    `;
+    chatMessages.appendChild(grid);
     chatMessages.scrollTop = chatMessages.scrollHeight;
-
-    // Réponse automatique du bot avec un petit délai
-    setTimeout(() => {
-      const bMsg = document.createElement('div');
-      bMsg.className = "message bot-msg";
-      bMsg.innerHTML = response; // innerHTML pour permettre le gras (**)
-      chatMessages.appendChild(bMsg);
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }, 600);
   }
 </script>
