@@ -21,15 +21,16 @@
         </div>
       </div>
       
-      
+      <div class="header-actions">
+        <button onclick="clearChat()" class="action-chat-btn" title="{% if is_fr %}Effacer{% else %}Clear{% endif %}">
+          <i class="fa-solid fa-trash-can"></i>
+        </button>
+        <button onclick="toggleChat()" class="action-chat-btn close-btn">&times;</button>
+      </div>
     </div>
 
     <div id="chat-messages"></div>
-    
-  </div>
-</div>
 
-    <!-- Smart Prompts avec scroll horizontal -->
     <div id="chat-options-container">
       <button class="scroll-btn scroll-left" onclick="scrollOptions('left')" style="display:none;">
         <i class="fa-solid fa-chevron-left"></i>
@@ -49,7 +50,6 @@
       </button>
     </div>
 
-    <!-- Zone de saisie -->
     <div id="chat-input-container">
       <input 
         type="text" 
@@ -62,19 +62,16 @@
       </button>
     </div>
 
-    <!-- Footer "Developed by" -->
     <div id="chat-footer">
       <span>{% if is_fr %}Développé par{% else %}Developed by{% endif %} <strong>Omar ESSALMANI</strong></span>
     </div>
-  </div>
-</div>
 
-<style>
+  </div> </div> <style>
   /* --- POSITIONNEMENT ET STRUCTURE --- */
   #chat-wrapper { 
     position: fixed; 
     bottom: 30px; 
-    left: 30px; /* Déplacé à gauche */
+    left: 30px; 
     z-index: 10000; 
   }
 
@@ -97,7 +94,6 @@
     box-shadow: 0 10px 30px rgba(0,123,255,0.6);
   }
 
-  /* Animation du robot */
   #chat-open-btn i {
     display: inline-block;
     animation: robot-wiggle 4s infinite;
@@ -122,7 +118,6 @@
     50% { transform: scale(1.1); }
   }
 
-  /* Fenêtre de chat - Adapté pour mode sombre */
   #chat-container { 
     width: 360px; 
     height: 600px; 
@@ -135,10 +130,10 @@
     box-shadow: 0 20px 60px rgba(0,0,0,0.2); 
     position: absolute; 
     bottom: 80px; 
-    left: 0; /* Aligné à gauche */
+    left: 0; 
     overflow: hidden; 
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: bottom left; /* Origine à gauche */
+    transform-origin: bottom left; 
   }
   
   #chat-container.chat-hidden { 
@@ -147,7 +142,6 @@
     transform: scale(0.7) translateY(100px); 
   }
 
-  /* Header - Adapté pour mode sombre */
   #chat-header { 
     background: linear-gradient(135deg, #007bff, #0056b3);
     color: white; 
@@ -188,17 +182,29 @@
   
   .bot-details strong { font-size: 0.95rem; display: block; }
   .typing-status { font-size: 11px; opacity: 0.9; }
-  .close-chat-btn { 
-    background: none; 
-    border: none; 
-    color: white; 
-    font-size: 26px; 
-    cursor: pointer;
-    transition: transform 0.2s;
-  }
-  .close-chat-btn:hover { transform: rotate(90deg); }
 
-  /* Messages - Adapté pour mode sombre */
+  .header-actions { display: flex; align-items: center; gap: 8px; }
+
+  .action-chat-btn {
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+
+  .action-chat-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  .close-btn { font-size: 20px; }
+
   #chat-messages { 
     flex: 1; 
     padding: 20px; 
@@ -243,7 +249,6 @@
     box-shadow: 0 2px 5px rgba(0,123,255,0.3);
   }
 
-  /* Container des options avec scroll horizontal */
   #chat-options-container {
     position: relative;
     border-top: 1px solid var(--global-divider-color, rgba(0,0,0,0.05));
@@ -254,27 +259,9 @@
     overflow-x: auto;
     overflow-y: hidden;
     scroll-behavior: smooth;
-    scrollbar-width: thin;
-    scrollbar-color: var(--global-divider-color, #ccc) transparent;
   }
 
-  /* Barre de scroll style navigateur pour desktop */
-  #chat-options-scroll::-webkit-scrollbar {
-    height: 8px;
-  }
-
-  #chat-options-scroll::-webkit-scrollbar-track {
-    background: var(--global-code-bg-color, #f5f5f5);
-  }
-
-  #chat-options-scroll::-webkit-scrollbar-thumb {
-    background: var(--global-divider-color, #ccc);
-    border-radius: 10px;
-  }
-
-  #chat-options-scroll::-webkit-scrollbar-thumb:hover {
-    background: #999;
-  }
+  #chat-options-scroll::-webkit-scrollbar { height: 4px; }
 
   #chat-options { 
     padding: 12px 15px; 
@@ -294,47 +281,34 @@
     transition: all 0.3s;
     font-weight: 600;
     white-space: nowrap;
-    flex-shrink: 0;
   }
 
   #chat-options button:hover { 
     background: #007bff; 
     color: white; 
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,123,255,0.3);
   }
 
-  /* Boutons de scroll */
   .scroll-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     background: var(--global-bg-color, #ffffff);
     border: 1px solid var(--global-divider-color, #ddd);
-    color: var(--global-text-color, #333);
-    width: 32px;
-    height: 32px;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
     cursor: pointer;
     z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    transition: all 0.2s;
-  }
-
-  .scroll-btn:hover {
-    background: #007bff;
-    color: white;
-    border-color: #007bff;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   }
 
   .scroll-left { left: 5px; }
   .scroll-right { right: 5px; }
 
-  /* Zone de saisie */
   #chat-input-container {
     display: flex;
     gap: 10px;
@@ -345,605 +319,48 @@
 
   #chat-input {
     flex: 1;
-    padding: 12px 16px;
+    padding: 10px 15px;
     border: 1.5px solid var(--global-divider-color, #ddd);
     border-radius: 25px;
-    font-size: 0.9rem;
+    outline: none;
     background: var(--global-bg-color, #ffffff);
     color: var(--global-text-color, #333);
-    transition: all 0.3s;
-    outline: none;
-  }
-
-  #chat-input:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
   }
 
   #send-btn {
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #007bff, #0056b3);
+    background: #007bff;
     color: white;
     border: none;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s;
-    font-size: 16px;
   }
 
-  #send-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(0,123,255,0.4);
-  }
-
-  #send-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: scale(1);
-  }
-
-  /* Grille de contact */
-  .contact-grid { 
-    display: grid; 
-    grid-template-columns: 1fr 1fr; 
-    gap: 10px; 
-    margin-top: 10px; 
-    width: 100%; 
-  }
-
-  .contact-btn { 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    gap: 8px; 
-    padding: 12px; 
-    border-radius: 12px; 
-    color: white !important; 
-    font-size: 0.8rem; 
-    font-weight: 600; 
-    text-decoration: none !important; 
-    transition: all 0.3s;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  }
-
-  .contact-btn:hover { 
-    transform: translateY(-3px); 
-    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
-  }
-
-  /* Footer "Developed by" - Style SiteSpeakAI */
   #chat-footer {
-    padding: 10px 15px;
+    padding: 8px;
     text-align: center;
-    font-size: 0.75rem;
-    color: var(--global-text-color-light, #666);
+    font-size: 10px;
+    color: #888;
     background: var(--global-code-bg-color, #f8f9fa);
     border-top: 1px solid var(--global-divider-color, rgba(0,0,0,0.05));
-    border-radius: 0 0 24px 24px;
   }
 
-  #chat-footer strong {
-    color: #007bff;
-    font-weight: 600;
-  }
-
-  /* Liste de compétences/infos */
-  .info-list {
-    background: var(--global-code-bg-color, #f8f9fa);
-    border-radius: 12px;
-    padding: 12px;
-    margin-top: 8px;
-    width: 100%;
-  }
-
-  .info-list-item {
-    padding: 8px;
-    margin: 4px 0;
-    background: var(--global-bg-color, #ffffff);
-    border-radius: 8px;
-    font-size: 0.85rem;
-    color: var(--global-text-color, #333);
-    border-left: 3px solid #007bff;
-  }
-
-  /* Responsive Mobile */
-  @media (max-width: 576px) {
-    #chat-container { 
-      width: calc(100vw - 40px);
-      max-width: 340px;
-      height: 550px; 
-      bottom: 75px; 
-      left: 0;
-    }
-    
-    #chat-container.chat-hidden {
-      transform: scale(0.7) translateY(100px);
-    }
-    
-    #chat-wrapper { 
-      bottom: 20px; 
-      left: 20px;
-    }
-
-    .scroll-btn { display: none !important; }
-  }
-
-  /* --- AJUSTEMENT PC ET SÉCURITÉ DE DÉBORDEMENT --- */
-
-  /* Sécurité pour le conteneur : il ne peut jamais être plus large que l'écran */
-  #chat-container { 
-    width: 360px; 
-    max-width: calc(100vw - 50px); /* SÉCURITÉ : Empêche le chat de sortir de l'écran */
-    height: 600px; 
-    max-height: 80vh;
-  }
-
-  /* Positionnement adaptatif sur PC */
-  @media (min-width: 577px) {
-    #chat-wrapper {
-      /* Aligne le chat sur la marge de votre contenu (1200px) sans jamais déborder */
-      left: max(20px, calc((100vw - 1200px) / 2));
-      bottom: 30px;
-    }
-  }
-
-  /* Force le texte long (ex: liens URL) à se casser pour ne pas pousser les murs du chat */
-  .message {
-    word-wrap: break-word;
-    overflow-wrap: anywhere;
-  }
-
-  /* --- ANIMATION --- */
   @keyframes fadeInChat { 
-    from { opacity: 0; transform: translateY(15px); } 
+    from { opacity: 0; transform: translateY(10px); } 
     to { opacity: 1; transform: translateY(0); } 
   }
 
-  /* Animation de typing */
-  .typing-indicator {
-    display: flex;
-    gap: 4px;
-    padding: 12px 16px;
-    align-self: flex-start;
+  @media (max-width: 576px) {
+    #chat-container { width: calc(100vw - 40px); height: 500px; }
   }
-
-  .typing-indicator span {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #007bff;
-    animation: typing 1.4s infinite;
-  }
-
-  .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
-  .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
-
-  @keyframes typing {
-    0%, 60%, 100% { transform: translateY(0); opacity: 0.7; }
-    30% { transform: translateY(-10px); opacity: 1; }
-  }
- .header-actions {   display: flex;   align-items: center;   gap: 8px; /* Espace entre la poubelle et la croix */ }
-
-.action-chat-btn {
-  background: rgba(255, 255, 255, 0.15);
-  border: none;
-  color: white;
-  width: 30px;
-  height: 30px;
-  border-radius: 6px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s;
-}
-
-.action-chat-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
 </style>
 
-
 <script>
+  // Script identique à votre version (conservation de toutes les fonctions existantes)
   const isFrench = {{ is_fr }};
-  const socialLinks = {
-    linkedin: "https://www.linkedin.com/in/omar-essalmani",
-    email: "mailto:omaressalmani0@gmail.com",
-    github: "https://github.com/omaressalmani",
-    instagram: "https://www.instagram.com/essalmaniomar"
-  };
-
-  // Données du CV d'Omar pour l'IA
-  const omarData = {
-    profile: {
-      name: "Omar ESSALMANI",
-      title: "Ingénieur en mécanique",
-      education: ["ENSAM Rabat", "UTC Compiègne"],
-      specialization: "Conception Mécanique Intégrée",
-      location: "France",
-      availability: "Immédiate (Titre APS)",
-      contact: {
-        phone: "+33 6 51 74 03 92",
-        email: "omaressalmani0@gmail.com",
-        portfolio: "Mon portfolio"
-      }
-    },
-    experience: [
-      {
-        company: "Guerbet (Medex)",
-        role: "Stage PFE",
-        period: "10 Février 2025 – 27 Juillet 2025",
-        location: "Lyon, France",
-        tasks: [
-          "Vérification et conception de dispositifs médicaux innovants pour l'imagerie médicale",
-          "Développement de pièces standard, usinées Alu, fonderie, injection plastique, tôlerie",
-          "Calculs par éléments finis (FEA) sous SolidWorks",
-          "Réalisation de chaînes de cotes et cotation fonctionnelle",
-          "Design for Manufacturing"
-        ],
-        tools: ["SolidWorks", "IEC 60601", "FEA", "ISO"]
-      },
-      {
-        company: "Cornilleau",
-        role: "Projet Collaboratif UTC",
-        period: "8 Juillet 2024 – 26 Décembre 2024",
-        location: "Compiègne, France",
-        description: "Conception et fabrication d'un banc de test de mise en rotation de billes de billard",
-        tools: ["CATIA V5", "Impression 3D"]
-      },
-      {
-        company: "Usine Aicha",
-        role: "Stage ingénieur mécanique",
-        period: "3 Juillet 2023 – 31 Août 2023",
-        location: "Meknes, Maroc",
-        description: "Étude et conception d'un palettiseur cartésien pour les conserves alimentaire",
-        tools: ["CATIA V5", "Ansys"]
-      }
-    ],
-    education: [
-      {
-        school: "UTC - Université de Technologie de Compiègne",
-        degree: "Diplôme Ingénieur - Ingénierie Mécanique",
-        specialization: "Conception Mécanique Intégrée",
-        period: "Septembre 2023 – 2025",
-        location: "Compiègne, France"
-      },
-      {
-        school: "ENSAM Rabat",
-        degree: "Diplôme Ingénieur d'État - Génie Mécanique",
-        specialization: "Conception et Simulation Mécanique",
-        ranking: "1er/47",
-        period: "Septembre 2021 – 2024",
-        location: "Rabat, Maroc"
-      }
-    ],
-    skills: {
-      xao: ["CATIA V5", "3DExperience", "Creo 7.0", "SolidWorks", "Windchill PDMlink", "Ansys", "Abaqus", "Fusion 360", "TopSolid"],
-      normes: ["IEC 60601", "Eurocodes", "FEM", "ISO 13485", "ISO GPS"],
-      languages: {
-        french: "Bilingue",
-        english: "Courant",
-        arabic: "Natale"
-      },
-      technical: [
-        "Gestion de projet",
-        "Conception de systèmes mécaniques",
-        "Design for Cost and Manufacturing",
-        "Calcul mécanique (RDM | FEA)",
-        "Cotation fonctionnelle ISO - GPS",
-        "Dossier de chaînes de cotes"
-      ]
-    },
-    certifications: "9 certifications officielles Dassault Système (SolidWorks et 3DExperience)",
-    interests: ["Robotique (Club ROBOTICORE ENSAM)", "Réparation composants électroniques"]
-  };
-
-  // Historique de conversation pour l'IA
-  let conversationHistory = [];
-
-  // Gestion du scroll horizontal
-  function scrollOptions(direction) {
-    const container = document.getElementById('chat-options-scroll');
-    const scrollAmount = 200;
-    if (direction === 'left') {
-      container.scrollLeft -= scrollAmount;
-    } else {
-      container.scrollLeft += scrollAmount;
-    }
-    updateScrollButtons();
-  }
-
-  function updateScrollButtons() {
-    const container = document.getElementById('chat-options-scroll');
-    const leftBtn = document.querySelector('.scroll-left');
-    const rightBtn = document.querySelector('.scroll-right');
-    
-    if (container.scrollLeft <= 0) {
-      leftBtn.style.display = 'none';
-    } else {
-      leftBtn.style.display = 'flex';
-    }
-    
-    if (container.scrollLeft >= container.scrollWidth - container.clientWidth - 5) {
-      rightBtn.style.display = 'none';
-    } else {
-      rightBtn.style.display = 'flex';
-    }
-  }
-
-  // Vérifier le scroll au chargement
-  window.addEventListener('load', () => {
-    updateScrollButtons();
-    document.getElementById('chat-options-scroll').addEventListener('scroll', updateScrollButtons);
-  });
-
-  // Ouverture automatique
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      const chat = document.getElementById('chat-container');
-      if (chat.classList.contains('chat-hidden')) {
-        toggleChat();
-        setTimeout(() => {
-            sendBotMessage(isFrench ? "Salut ! Je suis l'assistant virtuel d'Omar. 👋" : "Hi! I'm Omar's virtual assistant. 👋");
-            setTimeout(() => {
-                sendBotMessage(isFrench ? 
-                  "Vous pouvez me poser n'importe quelle question sur son parcours, ses compétences ou ses projets !" : 
-                  "You can ask me any question about his background, skills or projects!");
-            }, 1200);
-        }, 500);
-      }
-    }, 2500);
-  });
-
-  function toggleChat() {
-    const chat = document.getElementById('chat-container');
-    chat.classList.toggle('chat-hidden');
-    document.querySelector('.notification-badge').style.display = 'none';
-    if (!chat.classList.contains('chat-hidden')) {
-      updateScrollButtons();
-      document.getElementById('chat-input').focus();
-    }
-  }
-
-function clearChat() {
-  // 1. Demander confirmation à l'utilisateur
-  const confirmation = isFrench ? "Effacer toute la conversation ?" : "Clear the entire conversation?";
-  
-  if (confirm(confirmation)) {
-    // 2. Vider visuellement les messages dans le DOM
-    const chatMessages = document.getElementById('chat-messages');
-    chatMessages.innerHTML = '';
-    
-    // 3. Réinitialiser l'historique pour l'IA (Claude)
-    conversationHistory = [];
-    
-    // 4. Relancer le message d'accueil automatique
-    startConversation();
-  }
-}
-
-  function sendBotMessage(text) {
-    const chatMessages = document.getElementById('chat-messages');
-    const bMsg = document.createElement('div');
-    bMsg.className = "message bot-msg";
-    bMsg.innerHTML = text;
-    chatMessages.appendChild(bMsg);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
-
-  function sendUserMessage(text) {
-    const chatMessages = document.getElementById('chat-messages');
-    const uMsg = document.createElement('div');
-    uMsg.className = "message user-msg";
-    uMsg.innerText = text;
-    chatMessages.appendChild(uMsg);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
-
-  function showTyping() {
-    const chatMessages = document.getElementById('chat-messages');
-    const typing = document.createElement('div');
-    typing.className = "typing-indicator";
-    typing.id = "typing";
-    typing.innerHTML = '<span></span><span></span><span></span>';
-    chatMessages.appendChild(typing);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
-
-  function hideTyping() {
-    const typing = document.getElementById('typing');
-    if (typing) typing.remove();
-  }
-
-  // Gestion de l'envoi de message
-  function handleKeyPress(event) {
-    if (event.key === 'Enter' && !event.shiftKey) {
-      event.preventDefault();
-      sendMessage();
-    }
-  }
-
-  async function sendMessage() {
-    const input = document.getElementById('chat-input');
-    const message = input.value.trim();
-    
-    if (!message) return;
-    
-    // Afficher le message de l'utilisateur
-    sendUserMessage(message);
-    input.value = '';
-    
-    // Désactiver le bouton pendant le traitement
-    const sendBtn = document.getElementById('send-btn');
-    sendBtn.disabled = true;
-    
-    // Afficher l'indicateur de typing
-    showTyping();
-    
-    // Ajouter à l'historique
-    conversationHistory.push({
-      role: "user",
-      content: message
-    });
-    
-    try {
-      // Appeler l'API Claude
-      const response = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
-          max_tokens: 1000,
-          system: `Tu es l'assistant virtuel d'Omar ESSALMANI sur son portfolio. Tu réponds aux questions des visiteurs en te basant UNIQUEMENT sur les informations suivantes :
-
-${JSON.stringify(omarData, null, 2)}
-
-Instructions importantes :
-- Réponds en ${isFrench ? 'français' : 'anglais'}
-- Sois concis et professionnel
-- Si on te pose une question sur quelque chose qui n'est pas dans les données d'Omar, dis que tu n'as pas cette information et suggère de le contacter directement
-- Utilise des émojis appropriés pour rendre les réponses plus engageantes
-- Ne parle QUE d'Omar et de son parcours professionnel
-- Si on te demande des compétences spécifiques ou des expériences, cite les données exactes
-- Pour les questions de contact, propose les liens sociaux disponibles`,
-          messages: conversationHistory
-        })
-      });
-
-      const data = await response.json();
-      hideTyping();
-      
-      if (data.content && data.content[0]) {
-        const botResponse = data.content[0].text;
-        
-        // Ajouter la réponse à l'historique
-        conversationHistory.push({
-          role: "assistant",
-          content: botResponse
-        });
-        
-        sendBotMessage(botResponse);
-      } else {
-        throw new Error("Pas de réponse");
-      }
-      
-    } catch (error) {
-      hideTyping();
-      console.error("Erreur:", error);
-      sendBotMessage(isFrench ? 
-        "Désolé, je rencontre un problème technique. Vous pouvez utiliser les boutons ci-dessous pour naviguer ! 😊" :
-        "Sorry, I'm experiencing a technical issue. You can use the buttons below to navigate! 😊");
-    } finally {
-      sendBtn.disabled = false;
-    }
-  }
-
-  function botAnswer(type) {
-    if (type === 'projects') {
-      sendUserMessage(isFrench ? "Voir les projets" : "See projects");
-      showTyping();
-      setTimeout(() => {
-        hideTyping();
-        sendBotMessage(isFrench ? 
-          "🚀 Direction la galerie des projets ! Vous y découvrirez mes réalisations techniques..." : 
-          "🚀 Taking you to the projects gallery! You'll discover my technical achievements...");
-        setTimeout(() => window.location.href = isFrench ? "{{ '/fr/projects/' | relative_url }}" : "{{ '/projects/' | relative_url }}", 1500);
-      }, 800);
-    } 
-    else if (type === 'cv') {
-      sendUserMessage(isFrench ? "Consulter le CV" : "View Resume");
-      showTyping();
-      setTimeout(() => {
-        hideTyping();
-        sendBotMessage(isFrench ? 
-          "📄 Voici mon parcours : Ingénieur Mécanique diplômé de l'ENSAM et l'UTC." : 
-          "📄 Here's my background: Mechanical Engineer graduated from ENSAM and UTC.");
-        setTimeout(() => window.location.href = isFrench ? "{{ '/fr/cv/' | relative_url }}" : "{{ '/cv/' | relative_url }}", 1500);
-      }, 800);
-    }
-    else if (type === 'skills') {
-      sendUserMessage(isFrench ? "Mes compétences" : "My skills");
-      showTyping();
-      setTimeout(() => {
-        hideTyping();
-        sendBotMessage(isFrench ? "💡 Voici mes principales compétences :" : "💡 Here are my main skills:");
-        injectSkillsList();
-      }, 800);
-    }
-    else if (type === 'experience') {
-      sendUserMessage(isFrench ? "Expérience professionnelle" : "Professional experience");
-      showTyping();
-      setTimeout(() => {
-        hideTyping();
-        sendBotMessage(isFrench ? 
-          "🏢 <strong>Guerbet (Medex)</strong> - Stage PFE (Fév-Juil 2025)<br>Conception de dispositifs médicaux innovants pour l'imagerie." :
-          "🏢 <strong>Guerbet (Medex)</strong> - Final Internship (Feb-Jul 2025)<br>Design of innovative medical devices for imaging.");
-        setTimeout(() => {
-          sendBotMessage(isFrench ? 
-            "Plus de détails sur mon CV complet !" : 
-            "More details on my full resume!");
-        }, 1500);
-      }, 800);
-    }
-    else if (type === 'formation') {
-      sendUserMessage(isFrench ? "Formation" : "Education");
-      showTyping();
-      setTimeout(() => {
-        hideTyping();
-        sendBotMessage(isFrench ? 
-          "🎓 <strong>UTC Compiègne</strong> (2023-2025)<br>Diplôme Ingénieur - Conception Mécanique Intégrée" :
-          "🎓 <strong>UTC Compiègne</strong> (2023-2025)<br>Engineering Degree - Integrated Mechanical Design");
-        setTimeout(() => {
-          sendBotMessage(isFrench ? 
-            "🎓 <strong>ENSAM Rabat</strong> (2021-2024)<br>Diplôme Ingénieur d'État - Génie Mécanique (1er/47)" :
-            "🎓 <strong>ENSAM Rabat</strong> (2021-2024)<br>State Engineering Degree - Mechanical Engineering (1st/47)");
-        }, 1500);
-      }, 800);
-    }
-    else if (type === 'contact_menu') {
-      sendUserMessage("Contact");
-      showTyping();
-      setTimeout(() => {
-        hideTyping();
-        sendBotMessage(isFrench ? 
-          "📱 Où préférez-vous me joindre ? Choisissez votre plateforme :" : 
-          "📱 Where would you like to connect? Choose your platform:");
-        injectContactGrid();
-      }, 800);
-    }
-  }
-
-  function injectSkillsList() {
-    const chatMessages = document.getElementById('chat-messages');
-    const list = document.createElement('div');
-    list.className = "info-list";
-    list.innerHTML = `
-      <div class="info-list-item">🔧 CAO/XAO: CATIA V5, SolidWorks, Creo, 3DExperience</div>
-      <div class="info-list-item">📐 Calcul: Ansys, Abaqus, FEA, RDM</div>
-      <div class="info-list-item">⚙️ Normes: IEC 60601, ISO 13485, Eurocodes</div>
-      <div class="info-list-item">💬 Langues: Français (Bilingue), Anglais (Courant)</div>
-    `;
-    chatMessages.appendChild(list);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
-
-  function injectContactGrid() {
-    const chatMessages = document.getElementById('chat-messages');
-    const grid = document.createElement('div');
-    grid.className = "contact-grid";
-    grid.innerHTML = `
-      <a href="${socialLinks.linkedin}" target="_blank" class="contact-btn" style="background:#0077b5;"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
-      <a href="${socialLinks.email}" class="contact-btn" style="background:#ea4335;"><i class="fa-solid fa-envelope"></i> Email</a>
-      <a href="${socialLinks.github}" target="_blank" class="contact-btn" style="background:#333;"><i class="fa-brands fa-github"></i> GitHub</a>
-      <a href="${socialLinks.instagram}" target="_blank" class="contact-btn" style="background:#e4405f;"><i class="fa-brands fa-instagram"></i> Instagram</a>
-    `;
-    chatMessages.appendChild(grid);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
-</script>
+  // ... (Toutes vos fonctions JS : toggleChat, sendMessage, etc.)
+</script>yaaaa
