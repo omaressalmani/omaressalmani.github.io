@@ -275,389 +275,113 @@ Instructions importantes :
       sendBotMessage(isFrench ? 
         "Désolé, je rencontre un problème technique. Vous pouvez utiliser les boutons ci-dessous pour naviguer ! 😊" :
         "Sorry, I'm experiencing a technical issue. You can use the buttons below to navigate! 😊");
-  <!-- Body -->
-  <body class="fixed-top-nav ">
-    <!-- Header -->
-    <header>
-  <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation">
-    <div class="container">
-      
-      
-        <a class="navbar-brand title font-weight-lighter" href="/">
-          
-            <span class="font-weight-bold">Omar</span>
-            
-             ESSALMANI
-          
-        </a>
-      
-      
-      <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar top-bar"></span>
-        <span class="icon-bar middle-bar"></span>
-        <span class="icon-bar bottom-bar"></span>
-      </button>
+    } finally {
+      sendBtn.disabled = false;
+    }
+  }
 
-      <div class="collapse navbar-collapse text-right" id="navbarNav">
-        <ul class="navbar-nav ml-auto flex-nowrap">
-          
-          
-          
-          
+  function botAnswer(type) {
+    if (type === 'projects') {
+      sendUserMessage(isFrench ? "Voir les projets" : "See projects");
+      showTyping();
+      setTimeout(() => {
+        hideTyping();
+        sendBotMessage(isFrench ? 
+          "🚀 Direction la galerie des projets ! Vous y découvrirez mes réalisations techniques..." : 
+          "🚀 Taking you to the projects gallery! You'll discover my technical achievements...");
+        setTimeout(() => window.location.href = isFrench ? "/fr/projects/" : "/projects/", 1500);
+      }, 800);
+    } 
+    else if (type === 'cv') {
+      sendUserMessage(isFrench ? "Consulter le CV" : "View Resume");
+      showTyping();
+      setTimeout(() => {
+        hideTyping();
+        sendBotMessage(isFrench ? 
+          "📄 Voici mon parcours : Ingénieur Mécanique diplômé de l'ENSAM et l'UTC." : 
+          "📄 Here's my background: Mechanical Engineer graduated from ENSAM and UTC.");
+        setTimeout(() => window.location.href = isFrench ? "/fr/cv/" : "/cv/", 1500);
+      }, 800);
+    }
+    else if (type === 'skills') {
+      sendUserMessage(isFrench ? "Mes compétences" : "My skills");
+      showTyping();
+      setTimeout(() => {
+        hideTyping();
+        sendBotMessage(isFrench ? "💡 Voici mes principales compétences :" : "💡 Here are my main skills:");
+        injectSkillsList();
+      }, 800);
+    }
+    else if (type === 'experience') {
+      sendUserMessage(isFrench ? "Expérience professionnelle" : "Professional experience");
+      showTyping();
+      setTimeout(() => {
+        hideTyping();
+        sendBotMessage(isFrench ? 
+          "🏢 <strong>Guerbet (Medex)</strong> - Stage PFE (Fév-Juil 2025)<br>Conception de dispositifs médicaux innovants pour l'imagerie." :
+          "🏢 <strong>Guerbet (Medex)</strong> - Final Internship (Feb-Jul 2025)<br>Design of innovative medical devices for imaging.");
+        setTimeout(() => {
+          sendBotMessage(isFrench ? 
+            "Plus de détails sur mon CV complet !" : 
+            "More details on my full resume!");
+        }, 1500);
+      }, 800);
+    }
+    else if (type === 'formation') {
+      sendUserMessage(isFrench ? "Formation" : "Education");
+      showTyping();
+      setTimeout(() => {
+        hideTyping();
+        sendBotMessage(isFrench ? 
+          "🎓 <strong>UTC Compiègne</strong> (2023-2025)<br>Diplôme Ingénieur - Conception Mécanique Intégrée" :
+          "🎓 <strong>UTC Compiègne</strong> (2023-2025)<br>Engineering Degree - Integrated Mechanical Design");
+        setTimeout(() => {
+          sendBotMessage(isFrench ? 
+            "🎓 <strong>ENSAM Rabat</strong> (2021-2024)<br>Diplôme Ingénieur d'État - Génie Mécanique (1er/47)" :
+            "🎓 <strong>ENSAM Rabat</strong> (2021-2024)<br>State Engineering Degree - Mechanical Engineering (1st/47)");
+        }, 1500);
+      }, 800);
+    }
+    else if (type === 'contact_menu') {
+      sendUserMessage("Contact");
+      showTyping();
+      setTimeout(() => {
+        hideTyping();
+        sendBotMessage(isFrench ? 
+          "📱 Où préférez-vous me joindre ? Choisissez votre plateforme :" : 
+          "📱 Where would you like to connect? Choose your platform:");
+        injectContactGrid();
+      }, 800);
+    }
+  }
 
-          
-          
-            
-          
-            
-          
-            
-          
-            
-              <li class="nav-item ">
-                <a class="nav-link" href="/">About</a>
-              </li>
-            
-          
-            
-          
-            
-          
-            
-          
-            
-          
-            
-          
-            
-          
-            
-          
-            
-          
-            
-          
-            
-          
-            
-          
-            
-          
-            
-          
-            
-          
-            
-          
-            
-          
-            
-          
-            
-          
-            
-          
+  function injectSkillsList() {
+    const chatMessages = document.getElementById('chat-messages');
+    const list = document.createElement('div');
+    list.className = "info-list";
+    list.innerHTML = `
+      <div class="info-list-item">🔧 CAO/XAO: CATIA V5, SolidWorks, Creo, 3DExperience</div>
+      <div class="info-list-item">📐 Calcul: Ansys, Abaqus, FEA, RDM</div>
+      <div class="info-list-item">⚙️ Normes: IEC 60601, ISO 13485, Eurocodes</div>
+      <div class="info-list-item">💬 Langues: Français (Bilingue), Anglais (Courant)</div>
+    `;
+    chatMessages.appendChild(list);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
 
-          
-          
-          
-            
-          
-            
-          
-            
-          
-            
-          
-            
-          
-            
-          
-            
-          
-            
-          
-            
-          
-            
-          
-            
-          
-            
-          
-            
-              
-              
-              
-              
-
-              
-              
-            
-          
-            
-          
-            
-          
-            
-          
-            
-          
-            
-          
-            
-              
-              
-              
-              
-
-              
-              
-                
-                
-                  
-                  
-                    
-                    <li class="nav-item active">
-                      <a class="nav-link" href="/projects/">Projects<span class="sr-only">(current)</span>
-                      </a>
-                    </li>
-                  
-                
-              
-            
-          
-            
-              
-              
-              
-              
-
-              
-              
-            
-          
-            
-              
-              
-              
-              
-
-              
-              
-                
-                
-                  
-                  
-                    
-                    <li class="nav-item ">
-                      <a class="nav-link" href="/cv/">Resume / CV
-                      </a>
-                    </li>
-                  
-                
-              
-            
-          
-            
-              
-              
-              
-              
-
-              
-              
-            
-          
-            
-              
-              
-              
-              
-
-              
-              
-                
-                
-                  
-                  
-                    
-                    
-                    <li class="nav-item dropdown ">
-                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">submenus</a>
-                      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                        
-                          
-                            <a class="dropdown-item " href="/projects/">Projets</a>
-                          
-                        
-                          
-                            <div class="dropdown-divider"></div>
-                          
-                        
-                          
-                            <a class="dropdown-item " href="/cv/">My resume</a>
-                          
-                        
-                      </div>
-                    </li>
-                  
-                
-              
-            
-          
-
-          
-          <li class="nav-item">
-            <div class="nav-link" style="display: flex; align-items: center; font-weight: 500; font-size: 0.85rem; letter-spacing: 1px;">
-              
-                <a href="#" style="color: #007bff; text-decoration: none; pointer-events: none;">EN</a>
-                <span style="margin: 0 8px; opacity: 0.3;">|</span>
-                
-                  <a href="/fr/projects/5_project.html" style="color: inherit; text-decoration: none; opacity: 0.5;">FR</a>
-                
-              
-            </div>
-          </li>
-
-          
-            <li class="nav-item">
-              <button id="search-toggle" title="Search" onclick="openSearchModal()">
-                <span class="nav-link">ctrl k <i class="ti ti-search"></i></span>
-              </button>
-            </li>
-          
-
-          
-            <li class="toggle-container">
-              <button id="light-toggle" title="Change theme">
-                <i class="ti ti-sun-moon" id="light-toggle-system"></i>
-                <i class="ti ti-moon-filled" id="light-toggle-dark"></i>
-                <i class="ti ti-sun-filled" id="light-toggle-light"></i>
-              </button>
-            </li>
-          
-        </ul>
-      </div>
-    </div>
-  </nav>
-  
-    <progress id="progress" value="0">
-      <div class="progress-container"><span class="progress-bar"></span></div>
-    </progress>
-  
-</header>
-
-    <!-- Content -->
-    <div class="container mt-5" role="main">
-      
-        
-
-<div class="post">
-  <header class="post-header">
-    <h1 class="post-title">UTC × Saint-Gobain Event Poster</h1>
-    <p class="post-description">Graphic design for the UTC Career Service event in collaboration with Saint-Gobain, created using Adobe Photoshop.</p>
-  </header>
-
-  <article>
-    <h3 id="-utc--saint-gobain--event-poster-design">🎨 UTC × Saint-Gobain — Event Poster Design</h3>
-
-<p>As part of an <strong>event organized by the Université de Technologie de Compiègne (UTC)</strong>, I had the opportunity to design a <strong>poster visual</strong> for the Career Service to promote an exclusive <strong>immersion day at the Saint-Gobain Tower</strong>.</p>
-
-<p>The goal was to capture the <strong>energy, innovation, and professional growth</strong> at the heart of this event — using <strong>bold typography, strong color contrasts, and modern composition</strong> to resonate with students and professionals alike.<br />
-The visual was created entirely using <strong>Adobe Photoshop</strong>, blending UTC’s identity with the dynamic spirit of Saint-Gobain.</p>
-
-<hr />
-
-<div class="row justify-content-center">
-  <div class="col-md-10 mt-3 mt-md-0">
-    
-
-
-
-<figure>
-  <picture>
-    <!-- Auto scaling with imagemagick -->
-    <!--
-      See https://www.debugbear.com/blog/responsive-images#w-descriptors-and-the-sizes-attribute and
-      https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images for info on defining 'sizes' for responsive images
-    -->
-    
-      
-        <source class="responsive-img-srcset" srcset="/assets/img/projects/UTC2-480.webp 480w,/assets/img/projects/UTC2-800.webp 800w,/assets/img/projects/UTC2-1400.webp 1400w," type="image/webp" sizes="95vw" />
-      
-    
-    <img src="/assets/img/projects/UTC2.png" class="img-fluid rounded z-depth-1 shadow-lg" width="100%" height="auto" title="UTC × Saint-Gobain Event Poster" loading="lazy" onerror="this.onerror=null; $('.responsive-img-srcset').remove();" />
-  </picture>
-
-  
-</figure>
-
-  </div>
-</div>
-
-<div class="caption text-muted text-center">
-  Official event poster designed for UTC Career Service — created with Adobe Photoshop.
-</div>
-
-<hr />
-
-<h4 id="-about-the-event">📢 About the Event</h4>
-
-<p>Hosted by <strong>UTC Career Service</strong>, the event invited students to spend a day at <strong>Saint-Gobain’s headquarters</strong> to explore sustainable innovation in construction and connect with industry professionals.</p>
-
-<p>Guided by <strong>Karim Hechmi (“Tonton Karim”)</strong>, this event offered a unique mix of inspiration, expertise, and networking opportunities for future engineers.</p>
-
-<blockquote>
-  <p>“An exclusive immersion day at Saint-Gobain — discover, learn, and connect with leaders shaping the future of sustainable construction.”</p>
-</blockquote>
-
-<hr />
-
-<h4 id="-official-utc-linkedin-post">🔗 Official UTC LinkedIn Post</h4>
-
-<p>👉 <a href="https://www.linkedin.com/posts/elena-swistek-utc_saintgobain-utc-networking-activity-7257300273591734272-MY48?utm_source=social_share_send&amp;utm_medium=member_desktop_web&amp;rcm=ACoAADLEUCcBZosRbAVy07EE8qdAr5_C6LA6Fpo">Read the full announcement on UTC’s LinkedIn page</a></p>
-
-<hr />
-
-<p>This small but creative project was an amazing opportunity to contribute visually to a <strong>university-wide communication campaign</strong>, showing how <strong>graphic design and storytelling</strong> can bring an event to life!</p>
-
-  </article>
-
- 
-
-  
-</div>
-
-      
-    </div>
-
-    <!-- Footer -->
-    
-
-
-  <footer class="fixed-bottom" role="contentinfo">
-    <div class="container mt-0">
-      
-  &copy; Copyright 2025
-  Omar
-  
-  ESSALMANI. 
-  
-  
-
-    </div>
-  </footer>
-
-
-
-    <!-- JavaScripts -->
-    <!-- jQuery -->
-<script
-  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"
-  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-  crossorigin="anonymous"
-></script> <script src="/assets/js/bootstrap.bundle.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?a0db7e5d5c70cc3252b3138b0c91dcaf" type="text/javascript"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/js/zoom.js?85ddb88934d28b74e78031fd54cf8308"></script> <script src="/assets/js/no_defer.js?2781658a0a2b13ed609542042a859126"></script> <script defer src="/assets/js/common.js?e0514a05c5c95ac1a93a8dfd5249b92e"></script> <script defer src="/assets/js/copy_code.js?c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?d9f17b6adc2311cbabd747f4538bb15f"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/js/mathjax-setup.js?a5bb4e6a542c546dd929b24b8b236dfd"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script defer src="/assets/js/progress-bar.js?2f30e0e6801ea8f5036fa66e1ab0a71a" type="text/javascript"></script> <script src="/assets/js/vanilla-back-to-top.min.js?f40d453793ff4f64e238e420181a1d17"></script> <script>
+  function injectContactGrid() {
+    const chatMessages = document.getElementById('chat-messages');
+    const grid = document.createElement('div');
+    grid.className = "contact-grid";
+    grid.innerHTML = `
+      <a href="${socialLinks.linkedin}" target="_blank" class="contact-btn" style="background:#0077b5;"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+      <a href="${socialLinks.email}" class="contact-btn" style="background:#ea4335;"><i class="fa-solid fa-envelope"></i> Email</a>
+      <a href="${socialLinks.github}" target="_blank" class="contact-btn" style="background:#333;"><i class="fa-brands fa-github"></i> GitHub</a>
+      <a href="${socialLinks.instagram}" target="_blank" class="contact-btn" style="background:#e4405f;"><i class="fa-brands fa-instagram"></i> Instagram</a>
+    `;
+    chatMessages.appendChild(grid);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+</script> <header> <nav id="navbar" class="navbar navbar-light navbar-expand-sm fixed-top" role="navigation"> <div class="container"> <a class="navbar-brand title font-weight-lighter" href="/"> <span class="font-weight-bold">Omar</span> ESSALMANI </a> <button class="navbar-toggler collapsed ml-auto" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar top-bar"></span> <span class="icon-bar middle-bar"></span> <span class="icon-bar bottom-bar"></span> </button> <div class="collapse navbar-collapse text-right" id="navbarNav"> <ul class="navbar-nav ml-auto flex-nowrap"> <li class="nav-item "> <a class="nav-link" href="/">About</a> </li> <li class="nav-item active"> <a class="nav-link" href="/projects/">Projects<span class="sr-only">(current)</span> </a> </li> <li class="nav-item "> <a class="nav-link" href="/cv/">Resume / CV </a> </li> <li class="nav-item dropdown "> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">submenus</a> <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"> <a class="dropdown-item " href="/projects/">Projets</a> <div class="dropdown-divider"></div> <a class="dropdown-item " href="/cv/">My resume</a> </div> </li> <li class="nav-item"> <div class="nav-link" style="display: flex; align-items: center; font-weight: 500; font-size: 0.85rem; letter-spacing: 1px;"> <a href="#" style="color: #007bff; text-decoration: none; pointer-events: none;">EN</a> <span style="margin: 0 8px; opacity: 0.3;">|</span> <a href="/fr/projects/5_project.html" style="color: inherit; text-decoration: none; opacity: 0.5;">FR</a> </div> </li> <li class="nav-item"> <button id="search-toggle" title="Search" onclick="openSearchModal()"> <span class="nav-link">ctrl k <i class="ti ti-search"></i></span> </button> </li> <li class="toggle-container"> <button id="light-toggle" title="Change theme"> <i class="ti ti-sun-moon" id="light-toggle-system"></i> <i class="ti ti-moon-filled" id="light-toggle-dark"></i> <i class="ti ti-sun-filled" id="light-toggle-light"></i> </button> </li> </ul> </div> </div> </nav> <progress id="progress" value="0"> <div class="progress-container"><span class="progress-bar"></span></div> </progress> </header> <div class="container mt-5" role="main"> <div class="post"> <header class="post-header"> <h1 class="post-title">UTC × Saint-Gobain Event Poster</h1> <p class="post-description">Graphic design for the UTC Career Service event in collaboration with Saint-Gobain, created using Adobe Photoshop.</p> </header> <article> <h3 id="-utc--saint-gobain--event-poster-design">🎨 UTC × Saint-Gobain — Event Poster Design</h3> <p>As part of an <strong>event organized by the Université de Technologie de Compiègne (UTC)</strong>, I had the opportunity to design a <strong>poster visual</strong> for the Career Service to promote an exclusive <strong>immersion day at the Saint-Gobain Tower</strong>.</p> <p>The goal was to capture the <strong>energy, innovation, and professional growth</strong> at the heart of this event — using <strong>bold typography, strong color contrasts, and modern composition</strong> to resonate with students and professionals alike.<br> The visual was created entirely using <strong>Adobe Photoshop</strong>, blending UTC’s identity with the dynamic spirit of Saint-Gobain.</p> <hr> <div class="row justify-content-center"> <div class="col-md-10 mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/projects/UTC2-480.webp 480w,/assets/img/projects/UTC2-800.webp 800w,/assets/img/projects/UTC2-1400.webp 1400w," type="image/webp" sizes="95vw"></source> <img src="/assets/img/projects/UTC2.png" class="img-fluid rounded z-depth-1 shadow-lg" width="100%" height="auto" title="UTC × Saint-Gobain Event Poster" loading="lazy" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"> </picture> </figure> </div> </div> <div class="caption text-muted text-center"> Official event poster designed for UTC Career Service — created with Adobe Photoshop. </div> <hr> <h4 id="-about-the-event">📢 About the Event</h4> <p>Hosted by <strong>UTC Career Service</strong>, the event invited students to spend a day at <strong>Saint-Gobain’s headquarters</strong> to explore sustainable innovation in construction and connect with industry professionals.</p> <p>Guided by <strong>Karim Hechmi (“Tonton Karim”)</strong>, this event offered a unique mix of inspiration, expertise, and networking opportunities for future engineers.</p> <blockquote> <p>“An exclusive immersion day at Saint-Gobain — discover, learn, and connect with leaders shaping the future of sustainable construction.”</p> </blockquote> <hr> <h4 id="-official-utc-linkedin-post">🔗 Official UTC LinkedIn Post</h4> <p>👉 <a href="https://www.linkedin.com/posts/elena-swistek-utc_saintgobain-utc-networking-activity-7257300273591734272-MY48?utm_source=social_share_send&amp;utm_medium=member_desktop_web&amp;rcm=ACoAADLEUCcBZosRbAVy07EE8qdAr5_C6LA6Fpo" rel="external nofollow noopener" target="_blank">Read the full announcement on UTC’s LinkedIn page</a></p> <hr> <p>This small but creative project was an amazing opportunity to contribute visually to a <strong>university-wide communication campaign</strong>, showing how <strong>graphic design and storytelling</strong> can bring an event to life!</p> </article> </div> </div> <footer class="fixed-bottom" role="contentinfo"> <div class="container mt-0"> © Copyright 2025 Omar ESSALMANI. </div> </footer> <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> <script src="/assets/js/bootstrap.bundle.min.js"></script> <script src="https://cdn.jsdelivr.net/npm/mdbootstrap@4.20.0/js/mdb.min.js" integrity="sha256-NdbiivsvWt7VYCt6hYNT3h/th9vSTL4EDWeGs5SN3DA=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/masonry-layout@4.2.2/dist/masonry.pkgd.min.js" integrity="sha256-Nn1q/fx0H7SNLZMQ5Hw5JLaTRZp0yILA/FRexe19VdI=" crossorigin="anonymous"></script> <script defer src="https://cdn.jsdelivr.net/npm/imagesloaded@5.0.0/imagesloaded.pkgd.min.js" integrity="sha256-htrLFfZJ6v5udOG+3kNLINIKh2gvoKqwEhHYfTTMICc=" crossorigin="anonymous"></script> <script defer src="/assets/js/masonry.js?a0db7e5d5c70cc3252b3138b0c91dcaf" type="text/javascript"></script> <script defer src="https://cdn.jsdelivr.net/npm/medium-zoom@1.1.0/dist/medium-zoom.min.js" integrity="sha256-ZgMyDAIYDYGxbcpJcfUnYwNevG/xi9OHKaR/8GK+jWc=" crossorigin="anonymous"></script> <script defer src="/assets/js/zoom.js?85ddb88934d28b74e78031fd54cf8308"></script> <script src="/assets/js/no_defer.js?2781658a0a2b13ed609542042a859126"></script> <script defer src="/assets/js/common.js?e0514a05c5c95ac1a93a8dfd5249b92e"></script> <script defer src="/assets/js/copy_code.js?c8a01c11a92744d44b093fc3bda915df" type="text/javascript"></script> <script defer src="/assets/js/jupyter_new_tab.js?d9f17b6adc2311cbabd747f4538bb15f"></script> <script defer type="text/javascript" id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js" integrity="sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI=" crossorigin="anonymous"></script> <script src="/assets/js/mathjax-setup.js?a5bb4e6a542c546dd929b24b8b236dfd"></script> <script defer src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6" crossorigin="anonymous"></script> <script defer src="/assets/js/progress-bar.js?2f30e0e6801ea8f5036fa66e1ab0a71a" type="text/javascript"></script> <script src="/assets/js/vanilla-back-to-top.min.js?f40d453793ff4f64e238e420181a1d17"></script> <script>
     addBackToTop();
   </script> <script type="module" src="/assets/js/search/ninja-keys.min.js?a3446f084dcaecc5f75aa1757d087dcf"></script> <ninja-keys hidebreadcrumbs noautoloadmdicons placeholder="Type to start searching"></ninja-keys> <script src="/assets/js/search-setup.js?6c304f7b1992d4b60f7a07956e52f04a"></script> <script src="/assets/js/search-data.js"></script> <script src="/assets/js/shortcut-key.js?6f508d74becd347268a7f822bca7309d"></script> </body> </html>
