@@ -6,34 +6,31 @@
     <span class="notification-badge">1</span>
     <i class="fa-solid fa-robot"></i>
   </button>
-<div class="header-actions">
-  <button onclick="clearChat()" class="action-chat-btn" title="Effacer l'historique">
-    <i class="fa-solid fa-trash-can"></i>
-  </button>
-  
-  <button onclick="toggleChat()" class="action-chat-btn close-btn">&times;</button>
-</div>
+
   <div id="chat-container" class="chat-hidden">
-   <div id="chat-header">
-  <div class="bot-profile">
-    <div class="avatar-wrapper">
-        <img src="{{ '/assets/img/prof_pic.jpg' | relative_url }}" alt="Omar" onerror="this.src='https://ui-avatars.com/api/?name=OE&background=007bff&color=fff'">
-        <span class="online-indicator"></span>
+    <div id="chat-header">
+      <div class="bot-profile">
+        <div class="avatar-wrapper">
+          <img src="{{ '/assets/img/prof_pic.jpg' | relative_url }}" alt="Omar" onerror="this.src='https://ui-avatars.com/api/?name=OE&background=007bff&color=fff'">
+          <span class="online-indicator"></span>
+        </div>
+        <div class="bot-details">
+          <strong>Omar's AI Assistant</strong>
+          <span class="typing-status">{% if is_fr %}Répond instantanément{% else %}Replies instantly{% endif %}</span>
+        </div>
+      </div>
+      
+      <div class="header-actions">
+        <button onclick="clearChat()" class="action-chat-btn" title="{% if is_fr %}Effacer{% else %}Clear{% endif %}">
+          <i class="fa-solid fa-trash-can"></i>
+        </button>
+        <button onclick="toggleChat()" class="action-chat-btn close-btn">&times;</button>
+      </div>
     </div>
-    <div class="bot-details">
-      <strong>Omar's AI Assistant</strong>
-      <span class="typing-status">{% if is_fr %}Répond instantanément{% else %}Replies instantly{% endif %}</span>
-    </div>
-  </div>
-  
-  <div class="header-actions">
-    <button onclick="clearChat()" class="action-chat-btn" title="{% if is_fr %}Effacer{% else %}Clear{% endif %}">
-      <i class="fa-solid fa-trash-can"></i>
-    </button>
-    <button onclick="toggleChat()" class="action-chat-btn close-btn">&times;</button>
+
+    <div id="chat-messages"></div>
   </div>
 </div>
-    <div id="chat-messages"></div>
 
     <!-- Smart Prompts avec scroll horizontal -->
     <div id="chat-options-container">
