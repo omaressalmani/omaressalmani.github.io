@@ -784,3 +784,111 @@ Instructions importantes :
       sendBotMessage(isFrench ? 
         "Désolé, je rencontre un problème technique. Vous pouvez utiliser les boutons ci-dessous pour naviguer ! 😊" :
         "Sorry, I'm experiencing a technical issue. You can use the buttons below to navigate! 😊");
+    } finally {
+      sendBtn.disabled = false;
+    }
+  }
+
+  function botAnswer(type) {
+    if (type === 'projects') {
+      sendUserMessage(isFrench ? "Voir les projets" : "See projects");
+      showTyping();
+      setTimeout(() => {
+        hideTyping();
+        sendBotMessage(isFrench ? 
+          "🚀 Direction la galerie des projets ! Vous y découvrirez mes réalisations techniques..." : 
+          "🚀 Taking you to the projects gallery! You'll discover my technical achievements...");
+        setTimeout(() => window.location.href = isFrench ? "{{ '/fr/projects/' | relative_url }}" : "{{ '/projects/' | relative_url }}", 1500);
+      }, 800);
+    } 
+    else if (type === 'cv') {
+      sendUserMessage(isFrench ? "Consulter le CV" : "View Resume");
+      showTyping();
+      setTimeout(() => {
+        hideTyping();
+        sendBotMessage(isFrench ? 
+          "📄 Voici mon parcours : Ingénieur Mécanique diplômé de l'ENSAM et l'UTC." : 
+          "📄 Here's my background: Mechanical Engineer graduated from ENSAM and UTC.");
+        setTimeout(() => window.location.href = isFrench ? "{{ '/fr/cv/' | relative_url }}" : "{{ '/cv/' | relative_url }}", 1500);
+      }, 800);
+    }
+    else if (type === 'skills') {
+      sendUserMessage(isFrench ? "Mes compétences" : "My skills");
+      showTyping();
+      setTimeout(() => {
+        hideTyping();
+        sendBotMessage(isFrench ? "💡 Voici mes principales compétences :" : "💡 Here are my main skills:");
+        injectSkillsList();
+      }, 800);
+    }
+    else if (type === 'experience') {
+      sendUserMessage(isFrench ? "Expérience professionnelle" : "Professional experience");
+      showTyping();
+      setTimeout(() => {
+        hideTyping();
+        sendBotMessage(isFrench ? 
+          "🏢 <strong>Guerbet (Medex)</strong> - Stage PFE (Fév-Juil 2025)<br>Conception de dispositifs médicaux innovants pour l'imagerie." :
+          "🏢 <strong>Guerbet (Medex)</strong> - Final Internship (Feb-Jul 2025)<br>Design of innovative medical devices for imaging.");
+        setTimeout(() => {
+          sendBotMessage(isFrench ? 
+            "Plus de détails sur mon CV complet !" : 
+            "More details on my full resume!");
+        }, 1500);
+      }, 800);
+    }
+    else if (type === 'formation') {
+      sendUserMessage(isFrench ? "Formation" : "Education");
+      showTyping();
+      setTimeout(() => {
+        hideTyping();
+        sendBotMessage(isFrench ? 
+          "🎓 <strong>UTC Compiègne</strong> (2023-2025)<br>Diplôme Ingénieur - Conception Mécanique Intégrée" :
+          "🎓 <strong>UTC Compiègne</strong> (2023-2025)<br>Engineering Degree - Integrated Mechanical Design");
+        setTimeout(() => {
+          sendBotMessage(isFrench ? 
+            "🎓 <strong>ENSAM Rabat</strong> (2021-2024)<br>Diplôme Ingénieur d'État - Génie Mécanique (1er/47)" :
+            "🎓 <strong>ENSAM Rabat</strong> (2021-2024)<br>State Engineering Degree - Mechanical Engineering (1st/47)");
+        }, 1500);
+      }, 800);
+    }
+    else if (type === 'contact_menu') {
+      sendUserMessage("Contact");
+      showTyping();
+      setTimeout(() => {
+        hideTyping();
+        sendBotMessage(isFrench ? 
+          "📱 Où préférez-vous me joindre ? Choisissez votre plateforme :" : 
+          "📱 Where would you like to connect? Choose your platform:");
+        injectContactGrid();
+      }, 800);
+    }
+  }
+
+  function injectSkillsList() {
+    const chatMessages = document.getElementById('chat-messages');
+    const list = document.createElement('div');
+    list.className = "info-list";
+    list.innerHTML = `
+      <div class="info-list-item">🔧 CAO/XAO: CATIA V5, SolidWorks, Creo, 3DExperience</div>
+      <div class="info-list-item">📐 Calcul: Ansys, Abaqus, FEA, RDM</div>
+      <div class="info-list-item">⚙️ Normes: IEC 60601, ISO 13485, Eurocodes</div>
+      <div class="info-list-item">💬 Langues: Français (Bilingue), Anglais (Courant)</div>
+    `;
+    chatMessages.appendChild(list);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function injectContactGrid() {
+    const chatMessages = document.getElementById('chat-messages');
+    const grid = document.createElement('div');
+    grid.className = "contact-grid";
+    grid.innerHTML = `
+      <a href="${socialLinks.linkedin}" target="_blank" class="contact-btn" style="background:#0077b5;"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+      <a href="${socialLinks.email}" class="contact-btn" style="background:#ea4335;"><i class="fa-solid fa-envelope"></i> Email</a>
+      <a href="${socialLinks.github}" target="_blank" class="contact-btn" style="background:#333;"><i class="fa-brands fa-github"></i> GitHub</a>
+      <a href="${socialLinks.instagram}" target="_blank" class="contact-btn" style="background:#e4405f;"><i class="fa-brands fa-instagram"></i> Instagram</a>
+    `;
+    chatMessages.appendChild(grid);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+</script>
