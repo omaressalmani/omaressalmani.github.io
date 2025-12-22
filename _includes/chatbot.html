@@ -11,8 +11,8 @@
     <div id="chat-header">
       <div class="bot-profile">
         <div class="avatar-wrapper">
-          <img src="{{ '/assets/img/prof_pic.jpg' | relative_url }}" alt="Omar" onerror="this.src='https://ui-avatars.com/api/?name=OE&background=007bff&color=fff'">
-          <span class="online-indicator"></span>
+            <img src="{{ '/assets/img/prof_pic.jpg' | relative_url }}" alt="Omar" onerror="this.src='https://ui-avatars.com/api/?name=OE&background=007bff&color=fff'">
+            <span class="online-indicator"></span>
         </div>
         <div class="bot-details">
           <strong>Omar's Tech Assistant</strong>
@@ -41,107 +41,65 @@
 </div>
 
 <style>
-  /* --- POSITIONNEMENT (DÉCALÉ À GAUCHE) --- */
-  #chat-wrapper { 
-    position: fixed; 
-    bottom: 30px; 
-    right: 110px; /* Décalé pour laisser la place au bouton "Back to Top" */
-    z-index: 10000; 
-  }
-
+  /* --- POSITIONNEMENT --- */
+  #chat-wrapper { position: fixed; bottom: 30px; right: 110px; z-index: 10000; }
   #chat-open-btn { 
     width: 60px; height: 60px; border-radius: 50%; 
     background: linear-gradient(135deg, #007bff, #00c6ff);
     color: white; border: none; cursor: pointer; 
-    box-shadow: 0 8px 25px rgba(0,123,255,0.4); 
-    font-size: 24px; position: relative; 
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 8px 25px rgba(0,123,255,0.4); font-size: 24px;
   }
-
   #chat-open-btn i { display: inline-block; animation: robot-wiggle 4s infinite; }
   @keyframes robot-wiggle { 0%, 90% { transform: rotate(0deg); } 92% { transform: rotate(15deg); } 95% { transform: rotate(-15deg); } 100% { transform: rotate(0deg); } }
 
-  .notification-badge {
-    position: absolute; top: -2px; right: -2px; background: #ff3b30; color: white;
-    font-size: 11px; padding: 2px 6px; border-radius: 10px; border: 2px solid white; font-weight: bold;
-  }
-
-  /* --- FENÊTRE DE CHAT ADAPTATIVE (DARK/LIGHT) --- */
+  /* --- CONTENEUR DYNAMIQUE (DARK/LIGHT) --- */
   #chat-container { 
-    width: 350px; height: 520px; max-height: 80vh;
-    background: var(--global-bg-color, #ffffff); /* Utilise la variable du thème */
-    backdrop-filter: blur(10px); 
+    width: 350px; height: 530px; max-height: 80vh;
+    background: var(--global-bg-color, #ffffff);
     border: 1px solid var(--global-divider-color, rgba(0,0,0,0.1)); 
-    border-radius: 24px; 
-    display: flex; flex-direction: column; 
-    box-shadow: 0 15px 50px rgba(0,0,0,0.15); 
-    position: absolute; bottom: 80px; right: 0; 
-    overflow: hidden; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: bottom right;
-    color: var(--global-text-color, #1c1c1e);
+    border-radius: 24px; display: flex; flex-direction: column; 
+    box-shadow: 0 15px 50px rgba(0,0,0,0.15); position: absolute; bottom: 80px; right: 0; 
+    overflow: hidden; transition: all 0.4s ease; transform-origin: bottom right;
   }
-  
   #chat-container.chat-hidden { visibility: hidden; opacity: 0; transform: scale(0.7) translateY(100px); }
 
-  #chat-header { background: #007bff; color: white; padding: 18px 15px; display: flex; align-items: center; justify-content: space-between; }
-  .bot-profile { display: flex; align-items: center; gap: 12px; }
-  .bot-profile img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; background: white; border: 2px solid rgba(255,255,255,0.2); }
-  .close-chat-btn { background: none; border: none; color: white; font-size: 26px; cursor: pointer; }
+  #chat-header { background: #007bff; color: white; padding: 15px; display: flex; align-items: center; justify-content: space-between; }
+  .bot-profile { display: flex; align-items: center; gap: 10px; }
+  .bot-profile img { width: 40px; height: 40px; border-radius: 50%; background: white; object-fit: cover; }
+  .online-indicator { position: absolute; bottom: 2px; right: 2px; width: 10px; height: 10px; background: #4cd964; border-radius: 50%; border: 2px solid #007bff; }
 
-  #chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; scroll-behavior: smooth; }
-  
-  /* Bulles de messages dynamiques */
-  .message { padding: 12px 16px; border-radius: 20px; font-size: 0.92rem; max-width: 85%; animation: fadeInChat 0.4s ease forwards; line-height: 1.4; }
-  .bot-msg { 
-    background: var(--global-card-bg-color, #f0f0f2); 
-    color: var(--global-text-color, #1c1c1e); 
-    align-self: flex-start; border-bottom-left-radius: 4px; 
-  }
-  .user-msg { background: #007bff; color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+  #chat-messages { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+  .message { padding: 10px 14px; border-radius: 18px; font-size: 0.9rem; max-width: 85%; line-height: 1.4; }
+  .bot-msg { background: var(--global-card-bg-color, #f0f0f2); color: var(--global-text-color); align-self: flex-start; }
+  .user-msg { background: #007bff; color: white; align-self: flex-end; }
 
-  /* --- HORIZONTAL SMART PROMPTS --- */
-  #chat-options-container {
-    padding: 10px 0;
-    border-top: 1px solid var(--global-divider-color, rgba(0,0,0,0.05));
-    background: var(--global-bg-color);
-  }
+  /* --- SMART PROMPTS AVEC SCROLLBAR PC --- */
+  #chat-options-container { border-top: 1px solid var(--global-divider-color); padding: 10px 0; }
   #chat-options-scroll {
-    display: flex;
-    overflow-x: auto;
-    gap: 10px;
-    padding: 0 15px;
-    scrollbar-width: none; /* Firefox */
+    display: flex; overflow-x: auto; gap: 8px; padding: 0 15px 5px 15px;
+    scroll-behavior: smooth;
   }
-  #chat-options-scroll::-webkit-scrollbar { display: none; /* Chrome/Safari */ }
   
+  /* Barre de défilement style navigateur pour PC */
+  #chat-options-scroll::-webkit-scrollbar { height: 4px; }
+  #chat-options-scroll::-webkit-scrollbar-track { background: transparent; }
+  #chat-options-scroll::-webkit-scrollbar-thumb { background: #007bff; border-radius: 10px; visibility: hidden; }
+  #chat-options-scroll:hover::-webkit-scrollbar-thumb { visibility: visible; }
+
   #chat-options-scroll button { 
-    white-space: nowrap;
-    background: transparent; 
-    border: 1.5px solid #007bff; 
-    color: #007bff; 
-    padding: 6px 15px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; 
-    transition: 0.2s; font-weight: 600;
+    white-space: nowrap; background: transparent; border: 1.5px solid #007bff; 
+    color: #007bff; padding: 6px 14px; border-radius: 20px; font-size: 0.8rem; 
+    cursor: pointer; font-weight: 600; transition: 0.2s;
   }
   #chat-options-scroll button:hover { background: #007bff; color: white; }
 
-  /* --- FOOTER TYPE SITESPEAKAI --- */
-  #chat-footer {
-    padding: 8px;
-    text-align: center;
-    font-size: 10px;
-    background: var(--global-bg-color);
-    border-top: 1px solid var(--global-divider-color, rgba(0,0,0,0.05));
-    opacity: 0.7;
-    color: var(--global-text-color);
-  }
+  /* --- GRILLE RÉSEAUX SOCIAUX (TON ANCIENNE VERSION) --- */
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; width: 100%; }
+  .contact-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px; border-radius: 12px; color: white !important; font-size: 0.8rem; font-weight: 600; text-decoration: none !important; }
 
-  /* Responsive Mobile */
-  @media (max-width: 576px) {
-    #chat-wrapper { right: 85px; }
-    #chat-container { width: 300px; right: -15px; }
-  }
+  #chat-footer { padding: 8px; text-align: center; font-size: 10px; opacity: 0.7; border-top: 1px solid var(--global-divider-color); color: var(--global-text-color); }
 
-  @keyframes fadeInChat { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 576px) { #chat-wrapper { right: 85px; } #chat-container { width: 300px; right: -15px; } }
 </style>
 
 <script>
@@ -153,29 +111,17 @@
     instagram: "https://www.instagram.com/essalmaniomar"
   };
 
-  const botResponses = {
-    skills: isFrench ? "Expert en CAO (SolidWorks, CATIA, Creo), simulation FEA (Ansys, Abaqus) et fabrication (Impression 3D, Usinage)." : "Expert in CAD (SolidWorks, CATIA, Creo), FEA simulation (Ansys, Abaqus), and manufacturing (3D Printing, Machining).",
-    location: isFrench ? "Je suis basé en France avec une mobilité nationale et disponible immédiatement (Titre APS)." : "I am based in France with national mobility and available immediately."
-  };
-
   window.addEventListener('load', () => {
     setTimeout(() => {
-      const chat = document.getElementById('chat-container');
-      if (chat.classList.contains('chat-hidden')) {
+      if (document.getElementById('chat-container').classList.contains('chat-hidden')) {
         toggleChat();
-        setTimeout(() => {
-            sendBotMessage(isFrench ? "Salut ! Je suis l'assistant d'Omar. 👋" : "Hi! I'm Omar's assistant. 👋");
-            setTimeout(() => {
-                sendBotMessage(isFrench ? "Je connais tout sur son parcours ENSAM & UTC. Que souhaitez-vous savoir ?" : "I know everything about his ENSAM & UTC background. What would you like to know?");
-            }, 1000);
-        }, 500);
+        sendBotMessage(isFrench ? "Salut ! Je suis l'assistant d'Omar. 👋" : "Hi! I'm Omar's assistant. 👋");
       }
     }, 2500);
   });
 
   function toggleChat() {
-    const chat = document.getElementById('chat-container');
-    chat.classList.toggle('chat-hidden');
+    document.getElementById('chat-container').classList.toggle('chat-hidden');
     document.querySelector('.notification-badge').style.display = 'none';
   }
 
@@ -208,18 +154,16 @@
     } 
     else if (type === 'skills') {
       sendUserMessage(isFrench ? "Compétences" : "Skills");
-      setTimeout(() => sendBotMessage(botResponses.skills), 600);
+      sendBotMessage(isFrench ? "Expert en CAO (SolidWorks, CATIA), simulation FEA et dispositifs médicaux [cite: 1, 11, 55]." : "Expert in CAD (SolidWorks, CATIA), FEA simulation, and medical devices[cite: 1, 11, 55].");
     }
     else if (type === 'location') {
       sendUserMessage(isFrench ? "Mobilité" : "Location");
-      setTimeout(() => sendBotMessage(botResponses.location), 600);
+      sendBotMessage(isFrench ? "Basé en France, mobilité nationale, disponible immédiatement [cite: 3]." : "Based in France, national mobility, available immediately[cite: 3].");
     }
     else if (type === 'contact_menu') {
       sendUserMessage("Contact");
-      setTimeout(() => {
-        sendBotMessage(isFrench ? "Où préférez-vous me joindre ?" : "Where would you like to connect?");
-        injectContactGrid();
-      }, 600);
+      sendBotMessage(isFrench ? "Où préférez-vous me joindre ?" : "Where would you like to connect?");
+      injectContactGrid();
     }
   }
 
@@ -230,6 +174,8 @@
     grid.innerHTML = `
       <a href="${socialLinks.linkedin}" target="_blank" class="contact-btn" style="background:#0077b5;"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
       <a href="${socialLinks.email}" class="contact-btn" style="background:#ea4335;"><i class="fa-solid fa-envelope"></i> Email</a>
+      <a href="${socialLinks.github}" target="_blank" class="contact-btn" style="background:#333;"><i class="fa-brands fa-github"></i> GitHub</a>
+      <a href="${socialLinks.instagram}" target="_blank" class="contact-btn" style="background:#e4405f;"><i class="fa-brands fa-instagram"></i> Instagram</a>
     `;
     chatMessages.appendChild(grid);
     chatMessages.scrollTop = chatMessages.scrollHeight;
