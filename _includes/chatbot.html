@@ -26,7 +26,13 @@
     </div>
   </div>
   
- 
+  <div class="header-actions">
+    <button onclick="clearChat()" class="action-chat-btn" title="{% if is_fr %}Effacer{% else %}Clear{% endif %}">
+      <i class="fa-solid fa-trash-can"></i>
+    </button>
+    <button onclick="toggleChat()" class="action-chat-btn close-btn">&times;</button>
+  </div>
+</div>
     <div id="chat-messages"></div>
 
     <!-- Smart Prompts avec scroll horizontal -->
@@ -526,11 +532,7 @@
     0%, 60%, 100% { transform: translateY(0); opacity: 0.7; }
     30% { transform: translateY(-10px); opacity: 1; }
   }
-  .header-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px; /* Espace entre la poubelle et la croix */
-}
+ .header-actions {   display: flex;   align-items: center;   gap: 8px; /* Espace entre la poubelle et la croix */ }
 
 .action-chat-btn {
   background: rgba(255, 255, 255, 0.15);
