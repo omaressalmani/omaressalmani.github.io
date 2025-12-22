@@ -6,7 +6,13 @@
     <span class="notification-badge">1</span>
     <i class="fa-solid fa-robot"></i>
   </button>
-
+<div class="header-actions">
+  <button onclick="clearChat()" class="action-chat-btn" title="Effacer l'historique">
+    <i class="fa-solid fa-trash-can"></i>
+  </button>
+  
+  <button onclick="toggleChat()" class="action-chat-btn close-btn">&times;</button>
+</div>
   <div id="chat-container" class="chat-hidden">
     <div id="chat-header">
       <div class="bot-profile">
@@ -467,19 +473,31 @@
     .scroll-btn { display: none !important; }
   }
 
-  /* Ajustement marge PC pour rester dans la zone de contenu */
-  @media (min-width: 577px) and (max-width: 1200px) {
+  /* --- AJUSTEMENT PC ET SÉCURITÉ DE DÉBORDEMENT --- */
+
+  /* Sécurité pour le conteneur : il ne peut jamais être plus large que l'écran */
+  #chat-container {
+    width: 360px;
+    max-width: calc(100vw - 40px);
+    left: 0;
+  }
+
+  /* Positionnement adaptatif sur PC */
+  @media (min-width: 577px) {
     #chat-wrapper {
-      left: 20px;
+      /* Aligne le chat sur la marge de votre contenu (1200px) sans jamais déborder */
+      left: max(20px, calc((100vw - 1200px) / 2));
+      bottom: 30px;
     }
   }
 
-  @media (min-width: 1201px) {
-    #chat-wrapper {
-      left: max(30px, calc((100vw - 1200px) / 2 + 20px));
-    }
+  /* Force le texte long (ex: liens URL) à se casser pour ne pas pousser les murs du chat */
+  .message {
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
   }
 
+  /* --- ANIMATION --- */
   @keyframes fadeInChat { 
     from { opacity: 0; transform: translateY(15px); } 
     to { opacity: 1; transform: translateY(0); } 
@@ -508,7 +526,31 @@
     0%, 60%, 100% { transform: translateY(0); opacity: 0.7; }
     30% { transform: translateY(-10px); opacity: 1; }
   }
+  .header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Espace entre la poubelle et la croix */
+}
+
+.action-chat-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: white;
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.action-chat-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
 </style>
+
 
 <script>
   const isFrench = {{ is_fr }};
@@ -670,6 +712,23 @@
       document.getElementById('chat-input').focus();
     }
   }
+
+function clearChat() {
+  // 1. Demander confirmation à l'utilisateur
+  const confirmation = isFrench ? "Effacer toute la conversation ?" : "Clear the entire conversation?";
+  
+  if (confirm(confirmation)) {
+    // 2. Vider visuellement les messages dans le DOM
+    const chatMessages = document.getElementById('chat-messages');
+    chatMessages.innerHTML = '';
+    
+    // 3. Réinitialiser l'historique pour l'IA (Claude)
+    conversationHistory = [];
+    
+    // 4. Relancer le message d'accueil automatique
+    startConversation();
+  }
+}
 
   function sendBotMessage(text) {
     const chatMessages = document.getElementById('chat-messages');
