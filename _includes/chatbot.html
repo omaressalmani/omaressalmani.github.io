@@ -1,5 +1,7 @@
 {% assign is_fr = false %}
-{% if page.url contains '/fr/' or page.url == '/fr/' %}{% assign is_fr = true %}{% endif %}
+{% if page.url contains '/fr/' or page.url == '/fr/' %}
+  {% assign is_fr = true %}
+{% endif %}
 
 <div id="chat-wrapper">
   <button id="chat-open-btn" onclick="toggleChat()">
@@ -8,260 +10,230 @@
   </button>
 
   <div id="chat-container" class="chat-hidden">
+    <!-- HEADER -->
     <div id="chat-header">
       <div class="bot-profile">
         <div class="avatar-wrapper">
-            <img src="{{ '/assets/img/prof_pic.jpg' | relative_url }}" alt="Omar" onerror="this.src='https://ui-avatars.com/api/?name=OE&background=007bff&color=fff'">
-            <span class="online-indicator"></span>
+          <img src="{{ '/assets/img/prof_pic.jpg' | relative_url }}">
+          <span class="online-indicator"></span>
         </div>
         <div class="bot-details">
           <strong>Omar's AI Assistant</strong>
-          <span class="typing-status">{% if is_fr %}Répond instantanément{% else %}Replies instantly{% endif %}</span>
+          <span class="typing-status">
+            {% if is_fr %}Répond instantanément{% else %}Replies instantly{% endif %}
+          </span>
         </div>
       </div>
-      <div class="header-actions">
-        <button onclick="clearChat()" class="action-chat-btn" title="{% if is_fr %}Effacer l'historique{% else %}Clear history{% endif %}">
-          <i class="fa-solid fa-trash-can"></i>
+
+      <div class="chat-header-actions">
+        <button class="clear-chat-btn" onclick="clearChat()" title="Clear">
+          <i class="fa-solid fa-trash"></i>
         </button>
-        <button onclick="toggleChat()" class="action-chat-btn close-btn">&times;</button>
+        <button onclick="toggleChat()" class="close-chat-btn">&times;</button>
       </div>
     </div>
 
+    <!-- MESSAGES -->
     <div id="chat-messages"></div>
 
-    <div id="chat-options-container">
-      <button class="scroll-btn scroll-left" onclick="scrollOptions('left')" style="display:none;">
-        <i class="fa-solid fa-chevron-left"></i>
-      </button>
-      <div id="chat-options-scroll">
-        <div id="chat-options">
-          <button onclick="botAnswer('projects')">🚀 {% if is_fr %}Projets{% else %}Projects{% endif %}</button>
-          <button onclick="botAnswer('cv')">📄 {% if is_fr %}CV{% else %}Resume{% endif %}</button>
-          <button onclick="botAnswer('skills')">💡 {% if is_fr %}Compétences{% else %}Skills{% endif %}</button>
-          <button onclick="botAnswer('experience')">🏢 {% if is_fr %}Expérience{% else %}Experience{% endif %}</button>
-          <button onclick="botAnswer('formation')">🎓 {% if is_fr %}Formation{% else %}Education{% endif %}</button>
-          <button onclick="botAnswer('contact_menu')">📱 Contact</button>
-        </div>
-      </div>
-      <button class="scroll-btn scroll-right" onclick="scrollOptions('right')">
-        <i class="fa-solid fa-chevron-right"></i>
-      </button>
-    </div>
-
+    <!-- INPUT -->
     <div id="chat-input-container">
-      <input 
-        type="text" 
-        id="chat-input" 
-        placeholder="{% if is_fr %}Posez votre question...{% else %}Ask your question...{% endif %}"
-        onkeypress="handleKeyPress(event)"
-      >
+      <input id="chat-input"
+             type="text"
+             placeholder="{% if is_fr %}Posez votre question...{% else %}Ask your question...{% endif %}"
+             onkeypress="handleKeyPress(event)">
       <button id="send-btn" onclick="sendMessage()">
         <i class="fa-solid fa-paper-plane"></i>
       </button>
     </div>
 
+    <!-- FOOTER -->
     <div id="chat-footer">
-      <span>{% if is_fr %}Développé par{% else %}Developed by{% endif %} <strong>Omar ESSALMANI</strong></span>
+      {% if is_fr %}Développé par{% else %}Developed by{% endif %}
+      <strong>Omar ESSALMANI</strong>
     </div>
   </div>
 </div>
 
 <style>
-  /* --- POSITIONNEMENT ET STRUCTURE --- */
-  #chat-wrapper { 
-    position: fixed; 
-    bottom: 25px; 
-    left: 25px; 
-    z-index: 10000; 
+/* ================= FIX OVERFLOW PC ================= */
+#chat-wrapper {
+  position: fixed;
+  bottom: 30px;
+  left: 30px;
+  max-width: calc(100vw - 60px);
+  z-index: 10000;
+}
+
+#chat-container {
+  width: 360px;
+  max-width: calc(100vw - 40px);
+  height: 600px;
+  max-height: 85vh;
+  background: #fff;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  bottom: 80px;
+  left: 0;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+
+.chat-hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.7) translateY(100px);
+}
+
+/* ================= HEADER ================= */
+#chat-header {
+  background: linear-gradient(135deg,#007bff,#0056b3);
+  color: white;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-header-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.clear-chat-btn,
+.close-chat-btn {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: white;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.clear-chat-btn:hover,
+.close-chat-btn:hover {
+  background: rgba(255,255,255,0.35);
+}
+
+/* ================= MESSAGES ================= */
+#chat-messages {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.message {
+  padding: 12px 16px;
+  border-radius: 18px;
+  margin-bottom: 10px;
+  max-width: 85%;
+}
+
+.bot-msg {
+  background: #f1f1f1;
+  align-self: flex-start;
+}
+
+.user-msg {
+  background: #007bff;
+  color: white;
+  align-self: flex-end;
+}
+
+/* ================= INPUT ================= */
+#chat-input-container {
+  display: flex;
+  gap: 10px;
+  padding: 15px;
+  border-top: 1px solid #eee;
+}
+
+#chat-input {
+  flex: 1;
+  padding: 10px 15px;
+  border-radius: 25px;
+  border: 1px solid #ddd;
+}
+
+#send-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+/* ================= FOOTER ================= */
+#chat-footer {
+  text-align: center;
+  padding: 10px;
+  font-size: 12px;
+  background: #f8f9fa;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 576px) {
+  #chat-container {
+    width: calc(100vw - 40px);
+    height: 550px;
   }
-
-  /* Correction de la marge PC pour éviter le dépassement */
-  @media (min-width: 1201px) {
-    #chat-wrapper {
-      left: calc((100vw - 1200px) / 2 + 20px);
-      /* Si votre site n'est pas centré, remettez simplement left: 30px; */
-    }
-  }
-
-  #chat-open-btn { 
-    width: 60px; height: 60px; border-radius: 50%; 
-    background: linear-gradient(135deg, #007bff, #00c6ff);
-    color: white; border: none; cursor: pointer; 
-    box-shadow: 0 8px 25px rgba(0,123,255,0.4); 
-    font-size: 24px; position: relative; 
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-
-  #chat-container { 
-    width: 360px; 
-    max-width: calc(100vw - 50px); /* Sécurité pour mobile */
-    height: 600px; 
-    max-height: 80vh;
-    background: var(--global-bg-color, #ffffff);
-    border: 1px solid var(--global-divider-color, rgba(0,0,0,0.1)); 
-    border-radius: 24px; 
-    display: flex; flex-direction: column; 
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2); 
-    position: absolute; bottom: 80px; left: 0; 
-    overflow: hidden; 
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: bottom left;
-  }
-  
-  #chat-container.chat-hidden { visibility: hidden; opacity: 0; transform: scale(0.7) translateY(100px); }
-
-  /* Header */
-  #chat-header { 
-    background: linear-gradient(135deg, #007bff, #0056b3);
-    color: white; padding: 15px; 
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  
-  .header-actions { display: flex; align-items: center; gap: 5px; }
-  
-  .action-chat-btn {
-    background: rgba(255,255,255,0.1);
-    border: none; color: white;
-    width: 32px; height: 32px; border-radius: 8px;
-    cursor: pointer; transition: all 0.2s;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px;
-  }
-
-  .action-chat-btn:hover { background: rgba(255,255,255,0.25); }
-  .action-chat-btn.close-btn { font-size: 22px; }
-
-  .bot-profile { display: flex; align-items: center; gap: 12px; }
-  .avatar-wrapper { position: relative; }
-  .online-indicator { 
-    position: absolute; bottom: 2px; right: 2px; width: 10px; height: 10px; 
-    background: #4cd964; border-radius: 50%; border: 2px solid #007bff;
-  }
-
-  .bot-profile img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; background: white; }
-  .bot-details strong { font-size: 0.9rem; display: block; }
-  .typing-status { font-size: 10px; opacity: 0.9; }
-
-  /* Messages */
-  #chat-messages { 
-    flex: 1; padding: 15px; overflow-y: auto; 
-    display: flex; flex-direction: column; gap: 12px; 
-    background: var(--global-bg-color, #ffffff);
-  }
-
-  .message { 
-    padding: 10px 15px; border-radius: 18px; font-size: 0.9rem; 
-    max-width: 85%; line-height: 1.4; word-wrap: break-word;
-    animation: fadeInChat 0.3s ease forwards;
-  }
-
-  .bot-msg { background: var(--global-code-bg-color, #f0f0f2); color: var(--global-text-color, #1c1c1e); align-self: flex-start; border-bottom-left-radius: 4px; }
-  .user-msg { background: #007bff; color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
-
-  /* Options scroll */
-  #chat-options-container { position: relative; border-top: 1px solid var(--global-divider-color, rgba(0,0,0,0.05)); }
-  #chat-options-scroll { overflow-x: auto; scroll-behavior: smooth; }
-  #chat-options { padding: 10px; display: flex; gap: 8px; width: max-content; }
-  #chat-options button { 
-    background: white; border: 1px solid #007bff; color: #007bff; 
-    padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; cursor: pointer; font-weight: 600;
-  }
-
-  /* Input */
-  #chat-input-container { display: flex; gap: 8px; padding: 12px; border-top: 1px solid var(--global-divider-color, rgba(0,0,0,0.05)); }
-  #chat-input { flex: 1; padding: 10px 15px; border: 1px solid #ddd; border-radius: 20px; outline: none; font-size: 0.9rem; }
-  #send-btn { width: 40px; height: 40px; border-radius: 50%; background: #007bff; color: white; border: none; cursor: pointer; }
-
-  #chat-footer { padding: 8px; text-align: center; font-size: 0.7rem; color: #888; background: #f9f9f9; border-radius: 0 0 24px 24px; }
-
-  @keyframes fadeInChat { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+}
 </style>
 
 <script>
-  const isFrench = {{ is_fr }};
-  const socialLinks = {
-    linkedin: "https://www.linkedin.com/in/omar-essalmani",
-    email: "mailto:omaressalmani0@gmail.com",
-    github: "https://github.com/omaressalmani",
-    instagram: "https://www.instagram.com/essalmaniomar"
-  };
+const isFrench = {{ is_fr }};
+let conversationHistory = [];
 
-  const omarData = { /* ... vos données inchangées ... */ };
+function toggleChat() {
+  document.getElementById('chat-container').classList.toggle('chat-hidden');
+  document.querySelector('.notification-badge').style.display = 'none';
+}
 
-  let conversationHistory = [];
+function sendBotMessage(text) {
+  const div = document.createElement('div');
+  div.className = 'message bot-msg';
+  div.innerHTML = text;
+  chatMessages.appendChild(div);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
 
-  function toggleChat() {
-    const chat = document.getElementById('chat-container');
-    chat.classList.toggle('chat-hidden');
-    document.querySelector('.notification-badge').style.display = 'none';
-    if (!chat.classList.contains('chat-hidden') && document.getElementById('chat-messages').children.length === 0) {
-      startConversation();
-    }
-  }
+function sendUserMessage(text) {
+  const div = document.createElement('div');
+  div.className = 'message user-msg';
+  div.innerText = text;
+  chatMessages.appendChild(div);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
 
-  function startConversation() {
-    setTimeout(() => {
-      sendBotMessage(isFrench ? "Salut ! Je suis l'assistant virtuel d'Omar. 👋" : "Hi! I'm Omar's virtual assistant. 👋");
-      setTimeout(() => {
-        sendBotMessage(isFrench ? "Posez-moi vos questions sur son parcours ou ses projets !" : "Ask me anything about his background or projects!");
-      }, 800);
-    }, 300);
-  }
+function handleKeyPress(e) {
+  if (e.key === 'Enter') sendMessage();
+}
 
-  // NOUVELLE FONCTION : Effacer le chat
-  function clearChat() {
-    if (confirm(isFrench ? "Effacer toute la conversation ?" : "Clear the entire conversation?")) {
-      document.getElementById('chat-messages').innerHTML = '';
-      conversationHistory = [];
-      startConversation();
-    }
-  }
+async function sendMessage() {
+  const input = document.getElementById('chat-input');
+  if (!input.value.trim()) return;
 
-  function sendBotMessage(text) {
-    const chatMessages = document.getElementById('chat-messages');
-    const bMsg = document.createElement('div');
-    bMsg.className = "message bot-msg";
-    bMsg.innerHTML = text;
-    chatMessages.appendChild(bMsg);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
+  sendUserMessage(input.value);
+  conversationHistory.push({ role: "user", content: input.value });
+  input.value = '';
 
-  function sendUserMessage(text) {
-    const chatMessages = document.getElementById('chat-messages');
-    const uMsg = document.createElement('div');
-    uMsg.className = "message user-msg";
-    uMsg.innerText = text;
-    chatMessages.appendChild(uMsg);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-  }
+  sendBotMessage(isFrench ? "⏳ Réflexion..." : "⏳ Thinking...");
+}
 
-  async function sendMessage() {
-    const input = document.getElementById('chat-input');
-    const message = input.value.trim();
-    if (!message) return;
-
-    sendUserMessage(message);
-    input.value = '';
-    conversationHistory.push({ role: "user", content: message });
-    
-    // Logique API Claude (inchangée dans votre code original)
-    // ...
-  }
-
-  // Fonctions de scroll et botAnswer (gardez vos versions actuelles)
-  function scrollOptions(direction) {
-    const container = document.getElementById('chat-options-scroll');
-    container.scrollLeft += (direction === 'left' ? -150 : 150);
-  }
-
-  function botAnswer(type) {
-    // Gardez votre logique actuelle ici
-  }
-
-  function handleKeyPress(e) { if (e.key === 'Enter') sendMessage(); }
-
-  // Ouverture auto au chargement
-  window.addEventListener('load', () => {
-    setTimeout(() => { if (document.getElementById('chat-container').classList.contains('chat-hidden')) toggleChat(); }, 2500);
-  });
+function clearChat() {
+  document.getElementById('chat-messages').innerHTML = '';
+  conversationHistory = [];
+  setTimeout(() => {
+    sendBotMessage(
+      isFrench
+        ? "🧹 Historique effacé !"
+        : "🧹 Chat history cleared!"
+    );
+  }, 300);
+}
 </script>
