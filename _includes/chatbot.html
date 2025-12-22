@@ -8,6 +8,7 @@
   </button>
 
   <div id="chat-container" class="chat-hidden">
+    
     <div id="chat-header">
       <div class="bot-profile">
         <div class="avatar-wrapper">
@@ -20,15 +21,11 @@
         </div>
       </div>
       
-      <div class="header-actions">
-        <button onclick="clearChat()" class="action-chat-btn" title="{% if is_fr %}Effacer{% else %}Clear{% endif %}">
-          <i class="fa-solid fa-trash-can"></i>
-        </button>
-        <button onclick="toggleChat()" class="action-chat-btn close-btn">&times;</button>
-      </div>
+      
     </div>
 
     <div id="chat-messages"></div>
+    
   </div>
 </div>
 
