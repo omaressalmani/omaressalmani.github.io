@@ -65,302 +65,112 @@
     <div id="chat-footer">
       <span>{% if is_fr %}Développé par{% else %}Developed by{% endif %} <strong>Omar ESSALMANI</strong></span>
     </div>
+  </div>
+</div>
 
-  </div> </div> <style>
-  /* --- POSITIONNEMENT ET STRUCTURE --- */
-  #chat-wrapper { 
-    position: fixed; 
-    bottom: 30px; 
-    left: 30px; 
-    z-index: 10000; 
-  }
-
-  #chat-open-btn { 
-    width: 60px; 
-    height: 60px; 
-    border-radius: 50%; 
-    background: linear-gradient(135deg, #007bff, #00c6ff);
-    color: white; 
-    border: none; 
-    cursor: pointer; 
-    box-shadow: 0 8px 25px rgba(0,123,255,0.4); 
-    font-size: 24px; 
-    position: relative; 
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  }
-
-  #chat-open-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 10px 30px rgba(0,123,255,0.6);
-  }
-
-  #chat-open-btn i {
-    display: inline-block;
-    animation: robot-wiggle 4s infinite;
-  }
-
-  @keyframes robot-wiggle {
-    0%, 90% { transform: rotate(0deg); }
-    92% { transform: rotate(15deg); }
-    95% { transform: rotate(-15deg); }
-    97% { transform: rotate(15deg); }
-    100% { transform: rotate(0deg); }
-  }
-
-  .notification-badge {
-    position: absolute; top: -2px; right: -2px; background: #ff3b30; color: white;
-    font-size: 11px; padding: 2px 6px; border-radius: 10px; border: 2px solid white; font-weight: bold;
-    animation: pulse-badge 2s infinite;
-  }
-
-  @keyframes pulse-badge {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-  }
-
-  #chat-container { 
-    width: 360px; 
-    height: 600px; 
-    max-height: 85vh;
-    background: var(--global-bg-color, #ffffff);
-    border: 1px solid var(--global-divider-color, rgba(0,0,0,0.1)); 
-    border-radius: 24px; 
-    display: flex; 
-    flex-direction: column; 
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2); 
-    position: absolute; 
-    bottom: 80px; 
-    left: 0; 
-    overflow: hidden; 
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: bottom left; 
-  }
-  
-  #chat-container.chat-hidden { 
-    visibility: hidden; 
-    opacity: 0; 
-    transform: scale(0.7) translateY(100px); 
-  }
-
-  #chat-header { 
-    background: linear-gradient(135deg, #007bff, #0056b3);
-    color: white; 
-    padding: 18px 15px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: space-between;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  }
-  
+<style>
+  #chat-wrapper { position: fixed; bottom: 30px; left: 30px; z-index: 10000; }
+  #chat-open-btn { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #007bff, #00c6ff); color: white; border: none; cursor: pointer; box-shadow: 0 8px 25px rgba(0,123,255,0.4); font-size: 24px; position: relative; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+  #chat-open-btn:hover { transform: scale(1.1); }
+  #chat-open-btn i { display: inline-block; animation: robot-wiggle 4s infinite; }
+  @keyframes robot-wiggle { 0%, 90% { transform: rotate(0deg); } 92% { transform: rotate(15deg); } 95% { transform: rotate(-15deg); } 97% { transform: rotate(15deg); } 100% { transform: rotate(0deg); } }
+  .notification-badge { position: absolute; top: -2px; right: -2px; background: #ff3b30; color: white; font-size: 11px; padding: 2px 6px; border-radius: 10px; border: 2px solid white; font-weight: bold; animation: pulse-badge 2s infinite; }
+  @keyframes pulse-badge { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+  #chat-container { width: 360px; height: 600px; max-height: 85vh; background: var(--global-bg-color, #ffffff); border: 1px solid var(--global-divider-color, rgba(0,0,0,0.1)); border-radius: 24px; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.2); position: absolute; bottom: 80px; left: 0; overflow: hidden; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); transform-origin: bottom left; }
+  #chat-container.chat-hidden { visibility: hidden; opacity: 0; transform: scale(0.7) translateY(100px); }
+  #chat-header { background: linear-gradient(135deg, #007bff, #0056b3); color: white; padding: 18px 15px; display: flex; align-items: center; justify-content: space-between; }
   .bot-profile { display: flex; align-items: center; gap: 12px; }
   .avatar-wrapper { position: relative; }
-  .online-indicator { 
-    position: absolute; 
-    bottom: 2px; 
-    right: 2px; 
-    width: 12px; 
-    height: 12px; 
-    background: #4cd964; 
-    border-radius: 50%; 
-    border: 2px solid #007bff;
-    animation: pulse-online 2s infinite;
-  }
-
-  @keyframes pulse-online {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
-  }
-
-  .bot-profile img { 
-    width: 42px; 
-    height: 42px; 
-    border-radius: 50%; 
-    object-fit: cover; 
-    background: white;
-    border: 2px solid rgba(255,255,255,0.3);
-  }
-  
-  .bot-details strong { font-size: 0.95rem; display: block; }
-  .typing-status { font-size: 11px; opacity: 0.9; }
-
+  .online-indicator { position: absolute; bottom: 2px; right: 2px; width: 12px; height: 12px; background: #4cd964; border-radius: 50%; border: 2px solid #007bff; }
+  .bot-profile img { width: 42px; height: 42px; border-radius: 50%; object-fit: cover; background: white; border: 2px solid rgba(255,255,255,0.3); }
   .header-actions { display: flex; align-items: center; gap: 8px; }
-
-  .action-chat-btn {
-    background: rgba(255, 255, 255, 0.15);
-    border: none;
-    color: white;
-    width: 30px;
-    height: 30px;
-    border-radius: 6px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.2s;
-  }
-
-  .action-chat-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-  }
-
-  .close-btn { font-size: 20px; }
-
-  #chat-messages { 
-    flex: 1; 
-    padding: 20px; 
-    overflow-y: auto; 
-    display: flex; 
-    flex-direction: column; 
-    gap: 12px; 
-    scroll-behavior: smooth;
-    background: var(--global-bg-color, #ffffff);
-  }
-
-  #chat-messages::-webkit-scrollbar { width: 6px; }
-  #chat-messages::-webkit-scrollbar-track { background: transparent; }
-  #chat-messages::-webkit-scrollbar-thumb { 
-    background: var(--global-divider-color, #ccc); 
-    border-radius: 10px; 
-  }
-
-  .message { 
-    padding: 12px 16px; 
-    border-radius: 20px; 
-    font-size: 0.92rem; 
-    max-width: 85%; 
-    animation: fadeInChat 0.4s ease forwards; 
-    line-height: 1.5;
-    word-wrap: break-word;
-  }
-
-  .bot-msg { 
-    background: var(--global-code-bg-color, #f0f0f2);
-    color: var(--global-text-color, #1c1c1e);
-    align-self: flex-start; 
-    border-bottom-left-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-  }
-
-  .user-msg { 
-    background: linear-gradient(135deg, #007bff, #0056b3);
-    color: white; 
-    align-self: flex-end; 
-    border-bottom-right-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0,123,255,0.3);
-  }
-
-  #chat-options-container {
-    position: relative;
-    border-top: 1px solid var(--global-divider-color, rgba(0,0,0,0.05));
-    background: var(--global-bg-color, #ffffff);
-  }
-
-  #chat-options-scroll {
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-behavior: smooth;
-  }
-
-  #chat-options-scroll::-webkit-scrollbar { height: 4px; }
-
-  #chat-options { 
-    padding: 12px 15px; 
-    display: flex; 
-    gap: 8px;
-    width: max-content;
-  }
-
-  #chat-options button { 
-    background: var(--global-bg-color, #ffffff);
-    border: 1.5px solid #007bff; 
-    color: #007bff; 
-    padding: 8px 16px; 
-    border-radius: 25px; 
-    font-size: 0.85rem; 
-    cursor: pointer; 
-    transition: all 0.3s;
-    font-weight: 600;
-    white-space: nowrap;
-  }
-
-  #chat-options button:hover { 
-    background: #007bff; 
-    color: white; 
-    transform: translateY(-2px);
-  }
-
-  .scroll-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: var(--global-bg-color, #ffffff);
-    border: 1px solid var(--global-divider-color, #ddd);
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    cursor: pointer;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  }
-
-  .scroll-left { left: 5px; }
-  .scroll-right { right: 5px; }
-
-  #chat-input-container {
-    display: flex;
-    gap: 10px;
-    padding: 15px;
-    background: var(--global-bg-color, #ffffff);
-    border-top: 1px solid var(--global-divider-color, rgba(0,0,0,0.05));
-  }
-
-  #chat-input {
-    flex: 1;
-    padding: 10px 15px;
-    border: 1.5px solid var(--global-divider-color, #ddd);
-    border-radius: 25px;
-    outline: none;
-    background: var(--global-bg-color, #ffffff);
-    color: var(--global-text-color, #333);
-  }
-
-  #send-btn {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #007bff;
-    color: white;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  #chat-footer {
-    padding: 8px;
-    text-align: center;
-    font-size: 10px;
-    color: #888;
-    background: var(--global-code-bg-color, #f8f9fa);
-    border-top: 1px solid var(--global-divider-color, rgba(0,0,0,0.05));
-  }
-
-  @keyframes fadeInChat { 
-    from { opacity: 0; transform: translateY(10px); } 
-    to { opacity: 1; transform: translateY(0); } 
-  }
-
-  @media (max-width: 576px) {
-    #chat-container { width: calc(100vw - 40px); height: 500px; }
-  }
+  .action-chat-btn { background: rgba(255, 255, 255, 0.15); border: none; color: white; width: 30px; height: 30px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  #chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background: var(--global-bg-color, #ffffff); }
+  .message { padding: 12px 16px; border-radius: 20px; font-size: 0.92rem; max-width: 85%; line-height: 1.5; }
+  .bot-msg { background: var(--global-code-bg-color, #f0f0f2); color: var(--global-text-color, #1c1c1e); align-self: flex-start; border-bottom-left-radius: 4px; }
+  .user-msg { background: linear-gradient(135deg, #007bff, #0056b3); color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+  #chat-options-container { position: relative; border-top: 1px solid var(--global-divider-color, rgba(0,0,0,0.05)); }
+  #chat-options-scroll { overflow-x: auto; scroll-behavior: smooth; }
+  #chat-options { padding: 12px 15px; display: flex; gap: 8px; width: max-content; }
+  #chat-options button { background: var(--global-bg-color, #ffffff); border: 1.5px solid #007bff; color: #007bff; padding: 8px 16px; border-radius: 25px; font-size: 0.85rem; cursor: pointer; white-space: nowrap; }
+  #chat-input-container { display: flex; gap: 10px; padding: 15px; border-top: 1px solid var(--global-divider-color, rgba(0,0,0,0.05)); }
+  #chat-input { flex: 1; padding: 10px 15px; border: 1.5px solid var(--global-divider-color, #ddd); border-radius: 25px; outline: none; }
+  #send-btn { width: 40px; height: 40px; border-radius: 50%; background: #007bff; color: white; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  #chat-footer { padding: 8px; text-align: center; font-size: 10px; color: #888; background: var(--global-code-bg-color, #f8f9fa); border-radius: 0 0 24px 24px; }
 </style>
 
 <script>
-  // Script identique à votre version (conservation de toutes les fonctions existantes)
   const isFrench = {{ is_fr }};
-  // ... (Toutes vos fonctions JS : toggleChat, sendMessage, etc.)
-</script>yaaaa
+  const socialLinks = { linkedin: "https://www.linkedin.com/in/omar-essalmani", email: "mailto:omaressalmani0@gmail.com", github: "https://github.com/omaressalmani", instagram: "https://www.instagram.com/essalmaniomar" };
+  const omarData = { profile: { name: "Omar ESSALMANI", title: "Ingénieur en mécanique" }, skills: { xao: ["CATIA V5", "SolidWorks"] } };
+  let conversationHistory = [];
+
+  function toggleChat() {
+    const chat = document.getElementById('chat-container');
+    chat.classList.toggle('chat-hidden');
+    document.querySelector('.notification-badge').style.display = 'none';
+  }
+
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      const chat = document.getElementById('chat-container');
+      if (chat.classList.contains('chat-hidden')) {
+        toggleChat();
+        sendBotMessage(isFrench ? "Salut ! Je suis l'assistant virtuel d'Omar. 👋" : "Hi! I'm Omar's virtual assistant. 👋");
+      }
+    }, 2500);
+  });
+
+  function clearChat() {
+    if (confirm(isFrench ? "Effacer toute la conversation ?" : "Clear the entire conversation?")) {
+      document.getElementById('chat-messages').innerHTML = '';
+      conversationHistory = [];
+    }
+  }
+
+  function sendBotMessage(text) {
+    const chatMessages = document.getElementById('chat-messages');
+    const bMsg = document.createElement('div');
+    bMsg.className = "message bot-msg";
+    bMsg.innerHTML = text;
+    chatMessages.appendChild(bMsg);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function sendUserMessage(text) {
+    const chatMessages = document.getElementById('chat-messages');
+    const uMsg = document.createElement('div');
+    uMsg.className = "message user-msg";
+    uMsg.innerText = text;
+    chatMessages.appendChild(uMsg);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function handleKeyPress(event) { if (event.key === 'Enter') sendMessage(); }
+
+  async function sendMessage() {
+    const input = document.getElementById('chat-input');
+    const message = input.value.trim();
+    if (!message) return;
+    sendUserMessage(message);
+    input.value = '';
+    // Logique API ici...
+  }
+
+  function botAnswer(type) {
+    if (type === 'projects') {
+      sendUserMessage(isFrench ? "Voir les projets" : "See projects");
+      setTimeout(() => window.location.href = isFrench ? "{{ '/fr/projects/' | relative_url }}" : "{{ '/projects/' | relative_url }}", 1000);
+    } else if (type === 'cv') {
+      sendUserMessage(isFrench ? "Consulter le CV" : "View Resume");
+      setTimeout(() => window.location.href = isFrench ? "{{ '/fr/cv/' | relative_url }}" : "{{ '/cv/' | relative_url }}", 1000);
+    } else if (type === 'skills') {
+      sendBotMessage(isFrench ? "💡 Compétences : CATIA, SolidWorks, FEA..." : "💡 Skills: CATIA, SolidWorks, FEA...");
+    }
+  }
+
+  function scrollOptions(direction) {
+    const container = document.getElementById('chat-options-scroll');
+    container.scrollLeft += (direction === 'left' ? -200 : 200);
+  }
+</script>
