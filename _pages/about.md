@@ -88,11 +88,11 @@ announcements:
      style="text-decoration: none;">
      
     <img 
-      src="{{ '/assets/img/projects/Post.jpg' | relative_url }}" 
-      alt="LinkedIn Post by Omar ESSALMANI" 
-      class="rounded shadow-lg" 
-      style="width:60%; max-width:700px; height:auto; border: 1px solid #444;">
-  </a>
+  src="{{ '/assets/img/projects/Post.jpg' | relative_url }}" 
+  alt="Post LinkedIn par Omar ESSALMANI" 
+  class="rounded shadow-lg" 
+  style="width:90%; max-width:900px; height:auto; border: 1px solid #444;">
+</a>
 
   <p class="text-muted mt-2" style="font-size: 0.9rem;">
     Click the image to read the full post on LinkedIn.
