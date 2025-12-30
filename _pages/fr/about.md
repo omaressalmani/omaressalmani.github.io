@@ -96,3 +96,113 @@ announcements:
     Cliquez sur l'image pour lire le post complet sur LinkedIn.
   </p>
 </div>
+<section class="contact-section">
+    <div class="contact-container">
+        <h2 class="contact-title">Me Contacter</h2>
+        <p class="contact-subtitle">Un projet en tête ? N'hésitez pas à m'envoyer un message.</p>
+        
+        <form action="https://formspree.io/f/votre_id" method="POST" class="contact-form">
+            <div class="input-group">
+                <input type="text" name="name" placeholder="Votre Nom" required>
+            </div>
+            <div class="input-group">
+                <input type="email" name="email" placeholder="Votre Email" required>
+            </div>
+            <div class="input-group">
+                <textarea name="message" rows="5" placeholder="Votre Message" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Envoyer le message</button>
+        </form>
+    </div>
+</section>
+/* Section Contact */
+.contact-section {
+    width: 100%;
+    padding: 80px 0;
+    display: flex;
+    justify-content: center;
+    background: transparent;
+}
+
+.contact-container {
+    width: 90%;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(15px);
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    text-align: center;
+}
+
+/* Mode sombre pour le contact */
+[data-theme='dark'] .contact-container {
+    background: rgba(45, 45, 50, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+.contact-title {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+[data-theme='dark'] .contact-title { color: #fff; }
+
+.contact-subtitle {
+    color: #666;
+    margin-bottom: 30px;
+}
+
+[data-theme='dark'] .contact-subtitle { color: #bbb; }
+
+/* Formulaire */
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group input, .input-group textarea {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 123, 255, 0.2);
+    background: rgba(255, 255, 255, 0.5);
+    outline: none;
+    transition: all 0.3s;
+    font-family: inherit;
+}
+
+[data-theme='dark'] .input-group input, 
+[data-theme='dark'] .input-group textarea {
+    background: rgba(30, 30, 35, 0.5);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.input-group input:focus, .input-group textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.2);
+}
+
+/* Bouton Envoyer avec l'effet de lueur */
+.submit-btn {
+    padding: 15px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(90deg, #007bff, #00c6ff);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.4s;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.5);
+    filter: brightness(1.1);
+}
