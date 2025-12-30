@@ -143,72 +143,374 @@
             animation-duration: 30s;
         }
     }
-    /* --- SECTION CONTACT --- */
-.contact-section {
-    width: 100%;
-    padding: 60px 0;
-    display: flex;
-    justify-content: center;
-    background: transparent;
-}
-
-.contact-container {
-    width: 100%; /* Prend la largeur du parent dans about.md */
-    max-width: 750px; /* Aligné avec la largeur de vos images LinkedIn */
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(15px);
-    padding: 40px;
-    border-radius: 24px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    text-align: center;
+    .contact-section {
+    padding: 80px 20px;
+    max-width: 650px;
     margin: 0 auto;
+    position: relative;
 }
 
+/* Glassmorphism Container */
+.contact-container {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.7) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 50px 40px;
+    border-radius: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Effet de brillance animé */
+.contact-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transform: rotate(45deg);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0%, 100% { transform: rotate(45deg) translateY(0); }
+    50% { transform: rotate(45deg) translateY(100%); }
+}
+
+/* Mode sombre glassmorphism */
 [data-theme='dark'] .contact-container {
-    background: rgba(45, 45, 50, 0.8);
+    background: linear-gradient(135deg, rgba(45, 45, 50, 0.9) 0%, rgba(28, 28, 30, 0.8) 100%);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
-.contact-title { font-size: 1.8rem; margin-bottom: 10px; font-weight: bold; }
-.contact-subtitle { color: #666; margin-bottom: 30px; font-size: 1rem; }
-[data-theme='dark'] .contact-subtitle { color: #bbb; }
+.contact-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #007bff, #00c6ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
 
-.contact-form { display: flex; flex-direction: column; gap: 15px; }
+.contact-subtitle {
+    font-size: 1.05rem;
+    color: var(--global-text-color-light, #666);
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 1;
+}
 
-.input-group input, .input-group textarea {
+[data-theme='dark'] .contact-subtitle {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Input glassmorphism */
+.input-group input,
+.input-group textarea {
     width: 100%;
-    padding: 12px 15px;
-    border-radius: 10px;
-    border: 1px solid rgba(0, 123, 255, 0.2);
-    background: rgba(255, 255, 255, 0.7);
-    outline: none;
-    transition: all 0.3s;
+    padding: 16px 22px;
+    border: 1.5px solid rgba(0, 123, 255, 0.2);
+    border-radius: 16px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--global-text-color, #333);
+    transition: all 0.3s ease;
     font-family: inherit;
 }
 
-[data-theme='dark'] .input-group input, 
+[data-theme='dark'] .input-group input,
 [data-theme='dark'] .input-group textarea {
-    background: rgba(30, 30, 35, 0.6);
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(45, 45, 50, 0.6);
+    border-color: rgba(0, 198, 255, 0.3);
+    color: rgba(255, 255, 255, 0.9);
 }
 
+.input-group input::placeholder,
+.input-group textarea::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+}
+
+[data-theme='dark'] .input-group input::placeholder,
+[data-theme='dark'] .input-group textarea::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+    outline: none;
+    border-color: #007bff;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1),
+                0 8px 16px rgba(0, 123, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+[data-theme='dark'] .input-group input:focus,
+[data-theme='dark'] .input-group textarea:focus {
+    background: rgba(45, 45, 50, 0.8);
+    border-color: #00c6ff;
+    box-shadow: 0 0 0 4px rgba(0, 198, 255, 0.15),
+                0 8px 16px rgba(0, 198, 255, 0.2);
+}
+
+.input-group textarea {
+    resize: vertical;
+    min-height: 130px;
+}
+
+/* Bouton glassmorphism */
 .submit-btn {
-    padding: 14px;
-    border-radius: 10px;
-    border: none;
-    background: linear-gradient(90deg, #007bff, #00c6ff);
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.9), rgba(0, 86, 179, 0.9));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     color: white;
-    font-weight: bold;
+    padding: 16px 32px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    font-size: 1.05rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: all 0.4s;
-    margin-top: 10px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 123, 255, 0.3);
+}
+
+.submit-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
 }
 
 .submit-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0, 123, 255, 0.4);
+}
+
+.submit-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.submit-btn:active {
+    transform: translateY(-1px);
+}
+
+.submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.submit-btn.loading {
+    pointer-events: none;
+}
+
+.submit-btn.loading::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    margin-left: -10px;
+    margin-top: -10px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    z-index: 2;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Notification glassmorphism */
+.notification {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    background: linear-gradient(135deg, rgba(76, 217, 100, 0.95), rgba(52, 199, 89, 0.95));
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    color: white;
+    padding: 20px 30px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 12px 40px rgba(76, 217, 100, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-weight: 600;
+    font-size: 1rem;
+    z-index: 10000;
+    animation: slideIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+               slideOut 0.4s ease 2.6s;
+    opacity: 0;
+}
+
+.notification.show {
+    opacity: 1;
+}
+
+.notification.error {
+    background: linear-gradient(135deg, rgba(255, 59, 48, 0.95), rgba(255, 45, 85, 0.95));
+    box-shadow: 0 12px 40px rgba(255, 59, 48, 0.4);
+}
+
+.notification-icon {
+    font-size: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(450px) scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(450px) scale(0.8);
+        opacity: 0;
+    }
+}
+
+/* Bordures animées pour l'effet glassmorphism */
+.contact-container::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, 
+        transparent,
+        rgba(0, 123, 255, 0.3),
+        transparent,
+        rgba(0, 198, 255, 0.3),
+        transparent
+    );
+    border-radius: 24px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.contact-container:hover::after {
+    opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contact-section {
+        padding: 60px 15px;
+    }
+
+    .contact-container {
+        padding: 35px 25px;
+    }
+
+    .contact-title {
+        font-size: 1.8rem;
+    }
+
+    .contact-subtitle {
+        font-size: 0.95rem;
+    }
+
+    .notification {
+        right: 15px;
+        left: 15px;
+        top: 15px;
+        padding: 16px 20px;
+        font-size: 0.9rem;
+    }
+
+    .input-group input,
+    .input-group textarea {
+        padding: 14px 18px;
+    }
+}
+
+/* Effet de particules flottantes */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+}
+
+.contact-section::before {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(0, 123, 255, 0.1), transparent);
+    border-radius: 50%;
+    top: 10%;
+    left: 10%;
+    animation: float 6s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.contact-section::after {
+    content: '';
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(0, 198, 255, 0.1), transparent);
+    border-radius: 50%;
+    bottom: 10%;
+    right: 10%;
+    animation: float 8s ease-in-out infinite;
+    animation-delay: 1s;
+    pointer-events: none;
 }
 </style>

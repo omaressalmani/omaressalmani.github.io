@@ -1,6 +1,6 @@
 {% assign is_fr = false %}
 {% if page.url contains '/fr/' or page.url == '/fr/' %}{% assign is_fr = true %}{% endif %}
-
+{% if page.url contains '/about/' or page.url == '/about' or page.url contains '/fr/about/' or page.url == '/fr/about' %}
 <div id="chat-wrapper">
   <button id="chat-open-btn" onclick="toggleChat()">
     <span class="notification-badge">1</span>
@@ -876,3 +876,4 @@ Instructions importantes :
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }
 </script>
+{% endif %}

@@ -101,7 +101,7 @@ announcements:
         <h2 class="contact-title">Me Contacter</h2>
         <p class="contact-subtitle">Un projet en tête ? N'hésitez pas à m'envoyer un message.</p>
         
-        <form action="https://formspree.io/f/xojqonlr" method="POST" class="contact-form">
+        <form id="contact-form" class="contact-form">
             <div class="input-group">
                 <input type="text" name="name" placeholder="Votre Nom" required>
             </div>
@@ -111,7 +111,75 @@ announcements:
             <div class="input-group">
                 <textarea name="message" rows="5" placeholder="Votre Message" required></textarea>
             </div>
-            <button type="submit" class="submit-btn">Envoyer le message</button>
+            <button type="submit" class="submit-btn" id="submit-btn">
+                <span>Envoyer le message</span>
+            </button>
         </form>
     </div>
 </section>
+
+<script>
+    const form = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Désactiver le bouton et afficher le loading
+        submitBtn.disabled = true;
+        submitBtn.classList.add('loading');
+        const btnText = submitBtn.querySelector('span');
+        const originalText = btnText.textContent;
+        btnText.textContent = 'Envoi en cours...';
+        btnText.style.opacity = '0';
+
+        // Récupérer les données du formulaire
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch('https://formspree.io/f/xojqonlr', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                // Succès !
+                showNotification('✓', 'Message envoyé avec succès !', 'success');
+                form.reset();
+            } else {
+                // Erreur du serveur
+                showNotification('✗', 'Oups ! Une erreur est survenue.', 'error');
+            }
+        } catch (error) {
+            // Erreur réseau
+            console.error('Erreur:', error);
+            showNotification('✗', 'Erreur réseau. Veuillez réessayer.', 'error');
+        } finally {
+            // Réactiver le bouton
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('loading');
+            btnText.textContent = originalText;
+            btnText.style.opacity = '1';
+        }
+    });
+
+    function showNotification(icon, message, type) {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.innerHTML = `
+            <span class="notification-icon">${icon}</span>
+            <span>${message}</span>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => notification.classList.add('show'), 10);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    }
+</script>
