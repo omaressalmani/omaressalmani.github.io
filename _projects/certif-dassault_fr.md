@@ -79,6 +79,8 @@ Elles valident mon expertise en **conception 3D**, **simulation**, **systèmes �
 - **SolidWorks** — CAO 3D, Électricité, Simulation & Conception de moules  
 - **Plateforme 3DEXPERIENCE** — Collaboration Cloud & gestion PLM  
 - **SolidWorks Sustainability / Additive Manufacturing** — Éco-conception et méthodes de production modernes  
+---
+
 {% include cad-tools-ticker.html %}
 
 ---
