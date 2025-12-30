@@ -1,6 +1,6 @@
 {% assign is_fr = false %}
 {% if page.url contains '/fr/' or page.url == '/fr/' %}{% assign is_fr = true %}{% endif %}
-{% if page.url contains '/about/' or page.url == '/about' or page.url contains '/fr/about/' or page.url == '/fr/about' %}
+
 <div id="chat-wrapper">
   <button id="chat-open-btn" onclick="toggleChat()">
     <span class="notification-badge">1</span>
@@ -627,11 +627,18 @@
     document.getElementById('chat-options-scroll').addEventListener('scroll', updateScrollButtons);
   });
 
-  // Ouverture automatique
-  window.addEventListener('load', () => {
+ // Au début de votre script, remplacez la section "Ouverture automatique" par ceci :
+
+// Variables de détection de page
+const isAboutPage = window.location.pathname.includes('/about');
+
+// Ouverture automatique UNIQUEMENT sur les pages about
+window.addEventListener('load', () => {
+  // Vérifier si on est sur une page about
+  if (isAboutPage) {
     setTimeout(() => {
       const chat = document.getElementById('chat-container');
-      if (chat.classList.contains('chat-hidden')) {
+      if (chat && chat.classList.contains('chat-hidden')) {
         toggleChat();
         setTimeout(() => {
             sendBotMessage(isFrench ? "Salut ! Je suis l'assistant virtuel d'Omar. 👋" : "Hi! I'm Omar's virtual assistant. 👋");
@@ -643,8 +650,15 @@
         }, 500);
       }
     }, 2500);
-  });
-
+  }
+  
+  // Toujours initialiser les boutons de scroll
+  const optionsScroll = document.getElementById('chat-options-scroll');
+  if (optionsScroll) {
+    updateScrollButtons();
+    optionsScroll.addEventListener('scroll', updateScrollButtons);
+  }
+});
   function toggleChat() {
     const chat = document.getElementById('chat-container');
     chat.classList.toggle('chat-hidden');
@@ -876,4 +890,3 @@ Instructions importantes :
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }
 </script>
-{% endif %}
