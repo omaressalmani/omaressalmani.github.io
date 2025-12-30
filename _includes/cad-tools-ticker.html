@@ -1,4 +1,4 @@
-<div class="tools-ticker-wrapper">
+<div class="tools-ticker-fixed-full">
     <div class="tools-ticker">
         <div class="tool-item"><img src="../assets/img/logos/catia.png" alt="CATIA V5" class="tool-logo"></div>
         <div class="tool-item"><img src="../assets/img/logos/creo.png" alt="CREO" class="tool-logo"></div>
@@ -27,111 +27,67 @@
 </div>
 
 <style>
-    /* Container principal avec effet glassmorphism et dégradé animé */
-    .tools-ticker-wrapper {
-        width: 100%;
-        overflow: hidden;
-        background: linear-gradient(135deg, rgba(0, 123, 255, 0.05) 0%, rgba(0, 198, 255, 0.05) 100%);
-        background-size: 200% 200%;
-        animation: gradientShift 15s ease infinite;
-        backdrop-filter: blur(10px);
-        padding: 50px 0;
-        margin: 60px 0;
+    /* Sortir du conteneur parent pour occuper tout l'écran */
+    .tools-ticker-fixed-full {
+        width: 100vw;               /* Largeur totale de la fenêtre */
         position: relative;
-        border-radius: 20px;
-        /* EFFET DE FLOU SUR LES CÔTÉS */
-        mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-        -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;         /* Astuce pour centrer un élément 100vw dans un parent étroit */
+        margin-right: -50vw;
+        overflow: hidden;
+        background: transparent;    /* Fond transparent */
+        padding: 20px 0;
+        /* Optionnel : masque léger pour que les logos ne touchent pas brutalement le bord de l'écran */
+        mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
     }
 
-    /* Le rail qui contient les logos */
     .tools-ticker {
         display: flex;
-        width: max-content; /* Force la ligne infinie */
+        width: max-content;
         animation: scroll 40s linear infinite;
     }
 
-    /* Animation de défilement fluide */
     @keyframes scroll {
         0% { transform: translateX(0); }
-        100% { transform: translateX(-50%); } /* Se cale parfaitement sur la copie */
+        100% { transform: translateX(-50%); }
     }
 
-    /* Pause au survol */
-    .tools-ticker-wrapper:hover .tools-ticker {
-        animation-play-state: paused;
-    }
-
-    /* Chaque logo (Carte) */
     .tool-item {
-        flex-shrink: 0; /* Empêche l'écrasement des logos */
+        flex-shrink: 0;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 30px;
-        min-width: 180px;
-        height: 100px;
-        background: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(10px);
-        border-radius: 16px;
-        padding: 20px;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        position: relative;
-        overflow: hidden;
+        margin: 0 40px;            /* Espacement entre les logos */
+        width: 150px;              /* Taille ajustable */
+        height: 80px;
+        background: transparent;   /* Fond transparent pour les cartes aussi */
     }
 
-    /* Image du logo */
     .tool-logo {
         width: 100%;
         height: 100%;
         object-fit: contain;
-        transition: all 0.4s ease;
-        filter: grayscale(20%) brightness(0.95);
-    }
-
-    .tool-item:hover {
-        transform: translateY(-10px) scale(1.05);
-        box-shadow: 0 15px 35px rgba(0, 123, 255, 0.3);
-        border: 1px solid rgba(0, 123, 255, 0.2);
+        /* On retire les filtres gris pour garder les couleurs originales si besoin */
+        filter: none; 
+        transition: transform 0.3s ease;
     }
 
     .tool-item:hover .tool-logo {
-        filter: grayscale(0%) brightness(1.1);
-        transform: scale(1.1);
+        transform: scale(1.15);    /* Petit effet de zoom au survol */
     }
 
-    /* Support Mode Sombre */
-    [data-theme='dark'] .tools-ticker-wrapper {
-        background: linear-gradient(135deg, rgba(0, 123, 255, 0.1) 0%, rgba(0, 198, 255, 0.1) 100%);
-    }
-    [data-theme='dark'] .tool-item {
-        background: rgba(45, 45, 50, 0.8);
+    /* Pause au survol */
+    .tools-ticker-fixed-full:hover .tools-ticker {
+        animation-play-state: paused;
     }
 
-    /* Bordures animées (Top/Bottom) */
-    .tools-ticker-wrapper::before, .tools-ticker-wrapper::after {
-        content: '';
-        position: absolute;
-        left: 0; right: 0; height: 2px;
-        background: linear-gradient(90deg, transparent, #007bff, #00c6ff, #007bff, transparent);
-    }
-    .tools-ticker-wrapper::before { top: 0; animation: borderMove 3s linear infinite; }
-    .tools-ticker-wrapper::after { bottom: 0; animation: borderMove 3s linear infinite reverse; }
-
-    @keyframes borderMove {
-        0% { transform: translateX(-100%); }
-        100% { transform: translateX(100%); }
-    }
-
-    @keyframes gradientShift {
-        0%, 100% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-    }
-
-    /* Responsive mobile */
+    /* Ajustement pour mobile */
     @media (max-width: 768px) {
-        .tool-item { min-width: 140px; height: 80px; margin: 0 15px; }
-        .tools-ticker { animation-duration: 25s; }
+        .tool-item {
+            width: 100px;
+            margin: 0 20px;
+        }
     }
 </style>
