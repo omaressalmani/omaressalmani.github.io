@@ -79,6 +79,7 @@ They validate my expertise in **3D design**, **simulation**, **electrical system
 - **SolidWorks** — 3D CAD, Electrical, Simulation & Mold Design  
 - **3DEXPERIENCE Platform** — Cloud collaboration & PLM management  
 - **SolidWorks Sustainability / Additive Manufacturing** — Eco-design and modern production methods  
+{% include cad-tools-ticker.html %}
 
 ---
 
