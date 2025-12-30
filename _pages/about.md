@@ -101,4 +101,23 @@ announcements:
     Click the image to read the full post on LinkedIn.
   </p>
 </div>
+<section class="contact-section">
+    <div class="contact-container">
+        <h2 class="contact-title">Contact Me</h2>
+        <p class="contact-subtitle">Have a project in mind? Feel free to send me a message.</p>
+        
+        <form action="https://formspree.io/f/xojqonlr" method="POST" class="contact-form">
+            <div class="input-group">
+                <input type="text" name="name" placeholder="Your Name" required>
+            </div>
+            <div class="input-group">
+                <input type="email" name="email" placeholder="Your Email" required>
+            </div>
+            <div class="input-group">
+                <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+    </div>
+</section>
 

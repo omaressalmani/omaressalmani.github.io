@@ -101,7 +101,7 @@ announcements:
         <h2 class="contact-title">Me Contacter</h2>
         <p class="contact-subtitle">Un projet en tête ? N'hésitez pas à m'envoyer un message.</p>
         
-        <form action="https://formspree.io/f/votre_id" method="POST" class="contact-form">
+        <form action="https://formspree.io/f/xojqonlr" method="POST" class="contact-form">
             <div class="input-group">
                 <input type="text" name="name" placeholder="Votre Nom" required>
             </div>
