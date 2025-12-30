@@ -41,9 +41,8 @@ announcements:
       <li><strong>Microsoft Office :</strong> Excel, Word, PowerPoint, Teams and Access</li>
       <li><strong>System engineering :</strong> Windchill, CATIA Magic, PLM</li>
     </ul>
-    ---
+    
     {% include cad-tools-ticker.html %}
-    ---
 
     I also have a strong background in <strong>mechanical analysis (FEA)</strong>, 
     <strong>ISO Functional Dimensioning (GPS)</strong>, <strong>Stack-UP</strong>, Responsible for preparing technical documentation (<strong>DDR – Design Detail Review</strong>, <strong> DJD – Design Justification Document) </strong>, developing test protocols, managing projects, applying Design for Cost and Manufacturing principles, conducting materials and process engineering, performing feasibility studies, and critical standards such as <strong>IEC 60601</strong> and <strong>Eurocodes</strong>.

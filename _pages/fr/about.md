@@ -39,9 +39,9 @@ announcements:
       <li><strong>Bureautique :</strong> Excel, Word, PowerPoint, Teams et Access</li>
       <li><strong>Ingénierie système :</strong> Windchill, CATIA Magic, PLM</li>
     </ul>  
-    ---
+    
     {% include cad-tools-ticker.html %}
-    ---
+
     Je dispose également d'une solide expérience en <strong>analyse mécanique (FEA)</strong>, 
     <strong>Cotation Fonctionnelle ISO (GPS)</strong>, et calculs de <strong>chaînes de cotes (Stack-UP)</strong>. Je suis responsable de la préparation de documentations techniques (<strong>DDR – Design Detail Review</strong>, <strong> DJD – Design Justification Document) </strong>, du développement de protocoles de test, de la gestion de projets, et de l'application des principes de Design for Cost et Manufacturing. Je maîtrise également les études de faisabilité et les normes critiques telles que l'<strong>IEC 60601</strong> et les <strong>Eurocodes</strong>.
 </p>
