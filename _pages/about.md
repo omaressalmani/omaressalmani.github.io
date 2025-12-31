@@ -57,6 +57,47 @@ announcements:
 <p>
   Feel free to reach out !
   </p>
+
+<section class="stats-section">
+    <div class="text-center">
+        <h3 class="stats-title">Mon Parcours en Chiffres</h3>
+        <p class="stats-subtitle text-muted">Des résultats concrets au service de l'ingénierie.</p>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon">🎓</div>
+            <span class="stat-number" data-target="2">0</span>
+            <div class="stat-label">Diplômes d'Ingénieur</div>
+            <p class="stat-description">ENSAM & UTC Compiègne</p>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-badge">Expert</div>
+            <div class="stat-icon">🏆</div>
+            <span class="stat-number" data-target="9">0</span>
+            <div class="stat-label">Certifications Dassault</div>
+            <p class="stat-description">SolidWorks & 3DEXPERIENCE</p>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">⭐</div>
+            <div style="display: flex; justify-content: center; align-items: baseline; gap: 5px;">
+                <span class="stat-number" data-special="rank">47</span>
+                <span style="font-size: 1.5rem; font-weight: bold; opacity: 0.5;">/47</span>
+            </div>
+            <div class="stat-label">Classement ENSAM</div>
+            <p class="stat-description">Major de promotion</p>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">⚙️</div>
+            <span class="stat-number" data-target="1000" data-suffix="+">0</span>
+            <div class="stat-label">Heures de CAO</div>
+            <p class="stat-description">CATIA, SolidWorks, Creo</p>
+        </div>
+    </div>
+</section>
   
 <hr class="my-5">
 

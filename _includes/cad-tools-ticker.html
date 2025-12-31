@@ -513,4 +513,138 @@
     animation-delay: 1s;
     pointer-events: none;
 }
+/* --- SECTION STATS --- */
+.stats-section {
+    padding: 80px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(0, 123, 255, 0.1);
+    border-radius: 24px;
+    padding: 35px 25px;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+}
+
+[data-theme='dark'] .stat-card {
+    background: rgba(45, 45, 50, 0.6);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.stat-card:hover {
+    transform: translateY(-10px);
+    border-color: #007bff;
+    box-shadow: 0 15px 35px rgba(0, 123, 255, 0.15);
+}
+
+.stat-icon { font-size: 3rem; margin-bottom: 15px; display: block; }
+
+.stat-number {
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #007bff, #00c6ff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: block;
+    line-height: 1;
+}
+
+.stat-label {
+    font-weight: 700;
+    margin: 10px 0 5px;
+    color: var(--global-text-color);
+}
+
+.stat-description {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* Badge animé */
+.stat-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #ff3b30;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.65rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    animation: pulse-red 2s infinite;
+}
+
+@keyframes pulse-red {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 59, 48, 0.7); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 59, 48, 0); }
+    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 59, 48, 0); }
+}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const observerOptions = { threshold: 0.5 };
+    
+    const animate = (el) => {
+        const target = parseInt(el.getAttribute('data-target'));
+        const suffix = el.getAttribute('data-suffix') || '';
+        let current = 0;
+        const step = target / 50;
+        
+        const interval = setInterval(() => {
+            current += step;
+            if (current >= target) {
+                el.textContent = target + suffix;
+                clearInterval(interval);
+            } else {
+                el.textContent = Math.floor(current) + suffix;
+            }
+        }, 30);
+    };
+
+    const animateRank = (el) => {
+        let current = 47;
+        const interval = setInterval(() => {
+            current--;
+            if (current <= 1) {
+                el.textContent = "1";
+                clearInterval(interval);
+            } else {
+                el.textContent = current;
+            }
+        }, 40);
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const num = entry.target.querySelector('.stat-number');
+                if (num && !num.classList.contains('done')) {
+                    num.classList.add('done');
+                    if (num.getAttribute('data-special') === 'rank') {
+                        animateRank(num);
+                    } else {
+                        animate(num);
+                    }
+                }
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.stat-card').forEach(card => observer.observe(card));
+});
+</script>
+
 </style>
