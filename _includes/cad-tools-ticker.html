@@ -513,54 +513,112 @@
     animation-delay: 1s;
     pointer-events: none;
 }
-/* --- Section LinkedIn - Cohérence Totale --- */
 
-/* On utilise le même fond dégradé subtil que vos stats */
-.linkedin-section-custom {
-    padding: 100px 20px;
-    background: linear-gradient(135deg, rgba(0, 123, 255, 0.03) 0%, rgba(0, 198, 255, 0.03) 100%);
-    position: relative;
-    overflow: hidden;
-    text-align: center;
-}
+    /* Variables de thème (Coordonnées avec vos sections Stats) */
+    :root {
+        --post-text-main: #1a1a1a;
+        --post-text-secondary: #666;
+        --post-card-bg: rgba(255, 255, 255, 0.9);
+        --post-card-border: rgba(0, 123, 255, 0.1);
+        --post-glass-shine: rgba(255, 255, 255, 0.2);
+    }
 
-/* Titre : Style identique à "Mon Parcours en Chiffres" */
-.linkedin-section-custom .section-title {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #0096ff; /* Bleu identique image_842ea6.png */
-    margin-bottom: 15px;
-    text-align: center;
-}
+    [data-theme='dark'] {
+        --post-text-main: #ffffff;
+        --post-text-secondary: #bbb;
+        --post-card-bg: rgba(255, 255, 255, 0.05);
+        --post-card-border: rgba(255, 255, 255, 0.1);
+        --post-glass-shine: rgba(255, 255, 255, 0.1);
+    }
 
-/* Sous-titre : Style identique image_842ea6.png */
-.linkedin-section-custom .section-subtitle {
-    font-size: 1.1rem;
-    color: #666;
-    max-width: 800px;
-    margin: 0 auto 50px auto;
-    line-height: 1.6;
-}
+    .post-section {
+        padding: 80px 20px;
+        background: linear-gradient(135deg, rgba(0, 123, 255, 0.03) 0%, rgba(0, 198, 255, 0.03) 100%);
+    }
 
-/* Conteneur de l'image avec l'arrondi des cartes de diplômes */
-.linkedin-post-card {
-    max-width: 900px;
-    margin: 0 auto;
-    background: #fff; /* Fond blanc comme vos cartes de stats */
-    padding: 15px;
-    border-radius: 24px; /* Même arrondi que image_c60c0e.png */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease;
-}
+    /* Titre Uniforme avec "Mon Parcours" */
+    .post-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 2.8rem;
+        font-style: italic;
+        font-weight: 700;
+        color: var(--post-text-main);
+        text-align: center;
+        margin-bottom: 10px;
+    }
 
-.linkedin-post-card:hover {
-    transform: translateY(-5px);
-}
+    .post-subtitle {
+        text-align: center;
+        color: var(--post-text-secondary);
+        margin-bottom: 50px;
+        font-size: 1.1rem;
+    }
 
-.linkedin-post-card img {
-    width: 100%;
-    border-radius: 15px;
-    display: block;
-}
+    /* Carte unique centrée - Style Glassmorphism */
+    .post-container {
+        display: flex;
+        justify-content: center;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .post-card {
+        background: var(--post-card-bg);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid var(--post-card-border);
+        border-radius: 28px;
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    }
+
+    .post-card:hover {
+        transform: translateY(-10px);
+        border-color: #007bff;
+        box-shadow: 0 20px 50px rgba(0, 123, 255, 0.15);
+    }
+
+    /* Image du post */
+    .post-img {
+        width: 100%;
+        height: auto;
+        border-radius: 18px;
+        display: block;
+        transition: filter 0.3s ease;
+    }
+
+    /* Badge LinkedIn */
+    .linkedin-tag {
+        position: absolute;
+        top: 35px;
+        left: 35px;
+        background: #0077b5;
+        color: white;
+        padding: 6px 14px;
+        border-radius: 8px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        z-index: 2;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    /* Effet de brillance (Glass Shine) */
+    .post-card::after {
+        content: '';
+        position: absolute;
+        top: -50%; left: -50%;
+        width: 200%; height: 200%;
+        background: linear-gradient(45deg, transparent, var(--post-glass-shine), transparent);
+        transform: rotate(45deg);
+        transition: 0.7s;
+        opacity: 0;
+    }
+
+    .post-card:hover::after {
+        opacity: 1;
+        left: 100%;
+    }
 </style>

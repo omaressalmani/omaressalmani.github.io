@@ -63,29 +63,30 @@ announcements:
 {% include rec.html %}
 
 
-<section class="linkedin-section-custom">
-  <div class="container">
-    
-    <h2 class="section-title">My Latest LinkedIn Post</h2>
-    <p class="section-subtitle">
-      Des résultats concrets qui témoignent de mon engagement et de ma passion pour l'ingénierie mécanique.
-    </p>
-
-    <div class="linkedin-post-card">
-      <a href="https://www.linkedin.com/posts/omar-essalmani_ingaeznierie-programmation-conceptionmaezcanique-activity-7391136624878862336-ax1C?utm_source=share&utm_medium=member_desktop&rcm=ACoAADLEUCcBZosRbAVy07EE8qdAr5_C6LA6Fpo" 
-         target="_blank">
-        <img src="{{ '/assets/img/projects/Post.jpg' | relative_url }}" 
-             alt="Post LinkedIn Omar ESSALMANI">
-      </a>
+<section class="post-section">
+    <div class="post-header">
+        <h2 class="post-title">My Latest LinkedIn Post</h2>
+        <p class="post-subtitle">Partages d'expériences et actualités de conception mécanique.</p>
     </div>
 
-    <p class="text-muted mt-4" style="font-size: 0.9rem;">
-      Click the image to read the full post on LinkedIn.
-    </p>
-    
-  </div>
-</section>
+    <div class="post-container">
+        <div class="post-card">
+            <div class="linkedin-tag"><i class="fab fa-linkedin"></i> LinkedIn</div>
+            
+            <a href="https://www.linkedin.com/posts/omar-essalmani_ingaeznierie-programmation-conceptionmaezcanique-activity-7391136624878862336-ax1C" target="_blank">
+                <img src="{{ '/assets/img/projects/Post.jpg' | relative_url }}" 
+                     alt="Dernière publication de Omar ESSALMANI" 
+                     class="post-img">
+            </a>
+        </div>
+    </div>
 
+    <div class="text-center mt-5">
+        <p class="text-muted" style="font-size: 0.9rem; font-style: italic;">
+            Cliquez sur l'image pour lire l'histoire complète et interagir.
+        </p>
+    </div>
+</section>
 <section class="contact-section">
     <div class="contact-container">
         <h2 class="contact-title">Contact Me</h2>
