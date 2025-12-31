@@ -704,96 +704,175 @@ background: transparent;  }
         }
     }
 &lt;/style&gt;
-</code></pre></div></div> <p>&lt;/head&gt;</p> <section class="stats-section"> <div class="stats-container"> <div class="stats-header"> <h2 class="stats-title">Mon Parcours en Chiffres</h2> <p class="stats-subtitle"> Des résultats concrets qui témoignent de mon engagement et de ma passion pour l'ingénierie mécanique </p> </div> <div class="stats-grid"> <div class="stat-card" data-aos=""> <div class="stat-icon">🎓</div> <span class="stat-number" data-target="2" data-suffix="">0</span> <div class="stat-label">Diplômes d'Ingénieur</div> <p class="stat-description">ENSAM Rabat &amp; UTC Compiègne</p> </div> <div class="stat-card" data-aos=""> <div class="stat-badge">Hot</div> <div class="stat-icon">🏆</div> <span class="stat-number" data-target="9" data-suffix="+">0</span> <div class="stat-label">Certifications Dassault</div> <p class="stat-description">SolidWorks &amp; 3DEXPERIENCE</p> </div> <div class="stat-card" data-aos=""> <div class="stat-icon">💼</div> <span class="stat-number" data-target="12" data-suffix="+">0</span> <div class="stat-label">Projets Industriels</div> <p class="stat-description">Conception &amp; prototypage</p> </div> <div class="stat-card" data-aos=""> <div class="stat-icon">⭐</div> <span class="stat-number" data-target="1" data-suffix="">0</span> <span class="stat-suffix">/47</span> <div class="stat-label">Classement ENSAM</div> <p class="stat-description">Major de promotion</p> </div> <div class="stat-card" data-aos=""> <div class="stat-icon">⚙️</div> <span class="stat-number" data-target="9999" data-suffix="+">0</span> <div class="stat-label">Heures de CAO</div> <p class="stat-description">CATIA, SolidWorks, Creo ...</p> </div> <div class="stat-card" data-aos=""> <div class="stat-badge">New</div> <div class="stat-icon">🔧</div> <span class="stat-number" data-target="999" data-suffix="+">0</span> <div class="stat-label">Pièces Conçues</div> <p class="stat-description">Usiné, plasturgie, tôlerie, Frittage, Fondérie</p> </div> </div> </div> <svg width="0" height="0"> <defs> <lineargradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%"> <stop offset="0%" style="stop-color:#007bff;stop-opacity:1"></stop> <stop offset="100%" style="stop-color:#00c6ff;stop-opacity:1"></stop> </lineargradient> </defs> </svg> </section> <script>
-        // Animation des compteurs
-        function animateCounter(element) {
-            const target = parseInt(element.getAttribute('data-target'));
-            const suffix = element.getAttribute('data-suffix') || '';
-            const duration = 2000; // 2 secondes
-            const increment = target / (duration / 16); // 60 FPS
-            let current = 0;
 
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    current = target;
-                    clearInterval(timer);
+
+&lt;section class="stats-section"&gt;
+    &lt;div class="stats-container"&gt;
+        &lt;!-- Header --&gt;
+        &lt;div class="stats-header"&gt;
+            &lt;h2 class="stats-title"&gt;Mon Parcours en Chiffres&lt;/h2&gt;
+            &lt;p class="stats-subtitle"&gt;
+                Des résultats concrets qui témoignent de mon engagement et de ma passion pour l'ingénierie mécanique
+            &lt;/p&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Grid des stats --&gt;
+        &lt;div class="stats-grid"&gt;
+            &lt;!-- Stat 1: Diplômes --&gt;
+            &lt;div class="stat-card" data-aos&gt;
+                &lt;div class="stat-icon"&gt;🎓&lt;/div&gt;
+                &lt;span class="stat-number" data-target="2" data-suffix=""&gt;0&lt;/span&gt;
+                &lt;div class="stat-label"&gt;Diplômes d'Ingénieur&lt;/div&gt;
+                &lt;p class="stat-description"&gt;ENSAM Rabat &amp; UTC Compiègne&lt;/p&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Stat 2: Certifications --&gt;
+            &lt;div class="stat-card" data-aos&gt;
+                &lt;div class="stat-badge"&gt;Hot&lt;/div&gt;
+                &lt;div class="stat-icon"&gt;🏆&lt;/div&gt;
+                &lt;span class="stat-number" data-target="9" data-suffix="+"&gt;0&lt;/span&gt;
+                &lt;div class="stat-label"&gt;Certifications Dassault&lt;/div&gt;
+                &lt;p class="stat-description"&gt;SolidWorks &amp; 3DEXPERIENCE&lt;/p&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Stat 3: Projets --&gt;
+            &lt;div class="stat-card" data-aos&gt;
+                &lt;div class="stat-icon"&gt;💼&lt;/div&gt;
+                &lt;span class="stat-number" data-target="12" data-suffix="+"&gt;0&lt;/span&gt;
+                &lt;div class="stat-label"&gt;Projets Industriels&lt;/div&gt;
+                &lt;p class="stat-description"&gt;Conception &amp; prototypage&lt;/p&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Stat 4: Classement --&gt;
+            &lt;div class="stat-card" data-aos&gt;
+                &lt;div class="stat-icon"&gt;⭐&lt;/div&gt;
+                &lt;span class="stat-number" data-target="1" data-suffix=""&gt;0&lt;/span&gt;
+                &lt;span class="stat-suffix"&gt;/47&lt;/span&gt;
+                &lt;div class="stat-label"&gt;Classement ENSAM&lt;/div&gt;
+                &lt;p class="stat-description"&gt;Major de promotion&lt;/p&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Stat 5: Heures CAO --&gt;
+            &lt;div class="stat-card" data-aos&gt;
+                &lt;div class="stat-icon"&gt;⚙️&lt;/div&gt;
+                &lt;span class="stat-number" data-target="9999" data-suffix="+"&gt;0&lt;/span&gt;
+                &lt;div class="stat-label"&gt;Heures de CAO&lt;/div&gt;
+                &lt;p class="stat-description"&gt;CATIA, SolidWorks, Creo ...&lt;/p&gt;
+            &lt;/div&gt;
+
+            &lt;!-- Stat 6: Pièces conçues --&gt;
+            &lt;div class="stat-card" data-aos&gt;
+                &lt;div class="stat-badge"&gt;New&lt;/div&gt;
+                &lt;div class="stat-icon"&gt;🔧&lt;/div&gt;
+                &lt;span class="stat-number" data-target="999" data-suffix="+"&gt;0&lt;/span&gt;
+                &lt;div class="stat-label"&gt;Pièces Conçues&lt;/div&gt;
+                &lt;p class="stat-description"&gt;Usiné, plasturgie, tôlerie, Frittage, Fondérie&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;!-- SVG Gradient Definition --&gt;
+    &lt;svg width="0" height="0"&gt;
+        &lt;defs&gt;
+            &lt;linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%"&gt;
+                &lt;stop offset="0%" style="stop-color:#007bff;stop-opacity:1" /&gt;
+                &lt;stop offset="100%" style="stop-color:#00c6ff;stop-opacity:1" /&gt;
+            &lt;/linearGradient&gt;
+        &lt;/defs&gt;
+    &lt;/svg&gt;
+&lt;/section&gt;
+
+&lt;script&gt;
+    // Animation des compteurs
+    function animateCounter(element) {
+        const target = parseInt(element.getAttribute('data-target'));
+        const suffix = element.getAttribute('data-suffix') || '';
+        const duration = 2000; // 2 secondes
+        const increment = target / (duration / 16); // 60 FPS
+        let current = 0;
+
+        const timer = setInterval(() =&gt; {
+            current += increment;
+            if (current &gt;= target) {
+                current = target;
+                clearInterval(timer);
+            }
+            element.textContent = Math.floor(current) + suffix;
+        }, 16);
+    }
+
+    // Intersection Observer pour détecter quand l'élément est visible
+    const observerOptions = {
+        threshold: 0.3,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) =&gt; {
+        entries.forEach(entry =&gt; {
+            if (entry.isIntersecting &amp;&amp; !entry.target.classList.contains('counted')) {
+                entry.target.classList.add('counted', 'visible');
+                
+                // Animer le compteur
+                const counter = entry.target.querySelector('.stat-number');
+                if (counter) {
+                    animateCounter(counter);
                 }
-                element.textContent = Math.floor(current) + suffix;
-            }, 16);
-        }
 
-        // Intersection Observer pour détecter quand l'élément est visible
-        const observerOptions = {
-            threshold: 0.3,
-            rootMargin: '0px 0px -100px 0px'
-        };
+                // Animer la progression circulaire (si présente)
+                const progressCircle = entry.target.querySelector('.progress-circle-fill');
+                if (progressCircle) {
+                    const percent = parseInt(entry.target.getAttribute('data-percent')) || 100;
+                    const circumference = 283;
+                    const offset = circumference - (percent / 100) * circumference;
+                    progressCircle.style.strokeDashoffset = offset;
+                }
+            }
+        });
+    }, observerOptions);
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
-                    entry.target.classList.add('counted', 'visible');
+    // Observer toutes les cartes
+    document.addEventListener('DOMContentLoaded', () =&gt; {
+        const cards = document.querySelectorAll('.stat-card[data-aos]');
+        cards.forEach(card =&gt; observer.observe(card));
+    });
+
+    // Animation au hover des icônes
+    const statCards = document.querySelectorAll('.stat-card');
+    statCards.forEach(card =&gt; {
+        card.addEventListener('mouseenter', () =&gt; {
+            const icon = card.querySelector('.stat-icon');
+            icon.style.animation = 'none';
+            setTimeout(() =&gt; {
+                icon.style.animation = '';
+            }, 10);
+        });
+    });
+
+    // Compteur spécial pour le classement (1/47)
+    const rankCard = document.querySelector('.stat-card:nth-child(4) .stat-number');
+    if (rankCard) {
+        const observer = new IntersectionObserver((entries) =&gt; {
+            entries.forEach(entry =&gt; {
+                if (entry.isIntersecting &amp;&amp; !entry.target.classList.contains('counted')) {
+                    entry.target.classList.add('counted');
                     
-                    // Animer le compteur
-                    const counter = entry.target.querySelector('.stat-number');
-                    if (counter) {
-                        animateCounter(counter);
-                    }
-
-                    // Animer la progression circulaire (si présente)
-                    const progressCircle = entry.target.querySelector('.progress-circle-fill');
-                    if (progressCircle) {
-                        const percent = parseInt(entry.target.getAttribute('data-percent')) || 100;
-                        const circumference = 283;
-                        const offset = circumference - (percent / 100) * circumference;
-                        progressCircle.style.strokeDashoffset = offset;
-                    }
+                    let current = 47;
+                    const timer = setInterval(() =&gt; {
+                        current--;
+                        if (current &lt;= 1) {
+                            current = 1;
+                            clearInterval(timer);
+                        }
+                        rankCard.textContent = current;
+                    }, 50);
                 }
             });
         }, observerOptions);
-
-        // Observer toutes les cartes
-        document.addEventListener('DOMContentLoaded', () => {
-            const cards = document.querySelectorAll('.stat-card[data-aos]');
-            cards.forEach(card => observer.observe(card));
-        });
-
-        // Animation au hover des icônes
-        const statCards = document.querySelectorAll('.stat-card');
-        statCards.forEach(card => {
-            card.addEventListener('mouseenter', () => {
-                const icon = card.querySelector('.stat-icon');
-                icon.style.animation = 'none';
-                setTimeout(() => {
-                    icon.style.animation = '';
-                }, 10);
-            });
-        });
-
-        // Compteur spécial pour le classement (1/47)
-        const rankCard = document.querySelector('.stat-card:nth-child(4) .stat-number');
-        if (rankCard) {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
-                        entry.target.classList.add('counted');
-                        
-                        let current = 47;
-                        const timer = setInterval(() => {
-                            current--;
-                            if (current <= 1) {
-                                current = 1;
-                                clearInterval(timer);
-                            }
-                            rankCard.textContent = current;
-                        }, 50);
-                    }
-                });
-            }, observerOptions);
-            
-            observer.observe(rankCard.closest('.stat-card'));
-        }
-    </script> <p>&lt;/html&gt;</p> <hr class="my-5"> <div class="text-center my-5"> <h3 class="mb-3">💬 Professional Recommendation</h3> <p class="text-muted mb-4"> A reference from my recent experience as a <strong>Mechanical Engineer Intern at Guerbet</strong>, shared on my LinkedIn profile. </p> <a href="https://www.linkedin.com/in/omar-essalmani/" target="_blank" style="text-decoration: none;" rel="external nofollow noopener"> <img src="/assets/img/projects/recommendation.png" alt="LinkedIn Recommendation for Omar ESSALMANI" class="rounded shadow-lg" style="width:100%; max-width:750px; height:auto; border:1px solid #444;"> </a> <p class="text-muted mt-2" style="font-size: 0.9rem;"> Click the image to view the full recommendation on LinkedIn. </p> </div> <hr class="my-5"> <div class="text-center my-5"> <h3 class="mb-3">🌐 My Latest LinkedIn Post</h3> <a href="https://www.linkedin.com/posts/omar-essalmani_ingaeznierie-programmation-conceptionmaezcanique-activity-7391136624878862336-ax1C?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAADLEUCcBZosRbAVy07EE8qdAr5_C6LA6Fpo" target="_blank" style="text-decoration: none;" rel="external nofollow noopener"> <img src="/assets/img/projects/Post.jpg" alt="Post LinkedIn par Omar ESSALMANI" class="rounded shadow-lg" style="width:90%; max-width:900px; height:auto; border: 1px solid #444;"> </a> <p class="text-muted mt-2" style="font-size: 0.9rem;"> Click the image to read the full post on LinkedIn. </p> </div> <section class="contact-section"> <div class="contact-container"> <h2 class="contact-title">Contact Me</h2> <p class="contact-subtitle">Have a project in mind? Feel free to send me a message.</p> <form id="contact-form" class="contact-form"> <div class="input-group"> <input type="text" name="name" placeholder="Your Name" required=""> </div> <div class="input-group"> <input type="email" name="email" placeholder="Your Email" required=""> </div> <div class="input-group"> <textarea name="message" rows="5" placeholder="Your Message" required=""></textarea> </div> <button type="submit" class="submit-btn" id="submit-btn"> <span>Send Message</span> </button> </form> </div> </section> <script>
+        
+        observer.observe(rankCard.closest('.stat-card'));
+    }
+&lt;/script&gt;
+</code></pre></div></div> <hr class="my-5"> <div class="text-center my-5"> <h3 class="mb-3">💬 Professional Recommendation</h3> <p class="text-muted mb-4"> A reference from my recent experience as a <strong>Mechanical Engineer Intern at Guerbet</strong>, shared on my LinkedIn profile. </p> <a href="https://www.linkedin.com/in/omar-essalmani/" target="_blank" style="text-decoration: none;" rel="external nofollow noopener"> <img src="/assets/img/projects/recommendation.png" alt="LinkedIn Recommendation for Omar ESSALMANI" class="rounded shadow-lg" style="width:100%; max-width:750px; height:auto; border:1px solid #444;"> </a> <p class="text-muted mt-2" style="font-size: 0.9rem;"> Click the image to view the full recommendation on LinkedIn. </p> </div> <hr class="my-5"> <div class="text-center my-5"> <h3 class="mb-3">🌐 My Latest LinkedIn Post</h3> <a href="https://www.linkedin.com/posts/omar-essalmani_ingaeznierie-programmation-conceptionmaezcanique-activity-7391136624878862336-ax1C?utm_source=share&amp;utm_medium=member_desktop&amp;rcm=ACoAADLEUCcBZosRbAVy07EE8qdAr5_C6LA6Fpo" target="_blank" style="text-decoration: none;" rel="external nofollow noopener"> <img src="/assets/img/projects/Post.jpg" alt="Post LinkedIn par Omar ESSALMANI" class="rounded shadow-lg" style="width:90%; max-width:900px; height:auto; border: 1px solid #444;"> </a> <p class="text-muted mt-2" style="font-size: 0.9rem;"> Click the image to read the full post on LinkedIn. </p> </div> <section class="contact-section"> <div class="contact-container"> <h2 class="contact-title">Contact Me</h2> <p class="contact-subtitle">Have a project in mind? Feel free to send me a message.</p> <form id="contact-form" class="contact-form"> <div class="input-group"> <input type="text" name="name" placeholder="Your Name" required=""> </div> <div class="input-group"> <input type="email" name="email" placeholder="Your Email" required=""> </div> <div class="input-group"> <textarea name="message" rows="5" placeholder="Your Message" required=""></textarea> </div> <button type="submit" class="submit-btn" id="submit-btn"> <span>Send Message</span> </button> </form> </div> </section> <script>
     const form = document.getElementById('contact-form');
     const submitBtn = document.getElementById('submit-btn');
 
