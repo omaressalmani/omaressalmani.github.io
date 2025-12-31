@@ -1,19 +1,26 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-    .stats-section {
-        padding: 100px 20px;
-        background: linear-gradient(135deg, rgba(0, 123, 255, 0.03) 0%, rgba(0, 198, 255, 0.03) 100%);
-        position: relative;
-        font-family: 'Poppins', sans-serif;
-        overflow: hidden;
+    /* Variables pour l'adaptation automatique Light/Dark */
+    :root {
+        --stats-text-main: #1a1a1a; /* Noir en Light Mode */
+        --stats-text-secondary: #666;
+        --card-bg: rgba(255, 255, 255, 0.9);
+        --card-border: rgba(0, 123, 255, 0.1);
+        --glass-shine: rgba(255, 255, 255, 0.2);
     }
 
-    .stats-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        position: relative;
-        z-index: 1;
+    [data-theme='dark'] {
+        --stats-text-main: #ffffff; /* Blanc en Dark Mode */
+        --stats-text-secondary: #bbb;
+        --card-bg: rgba(255, 255, 255, 0.05); /* Effet transparent comme tes logos */
+        --card-border: rgba(255, 255, 255, 0.1);
+        --glass-shine: rgba(255, 255, 255, 0.1);
+    }
+
+    .stats-section {
+        padding: 80px 20px;
+        font-family: 'Poppins', sans-serif;
     }
 
     .stats-header {
@@ -26,40 +33,37 @@
         font-size: 3rem;
         font-style: italic;
         font-weight: 700;
-        background: linear-gradient(135deg, #007bff, #00c6ff);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+        color: var(--stats-text-main); /* Adaptatif Noir/Blanc */
         margin-bottom: 10px;
+        transition: color 0.3s ease;
     }
 
-    .stats-subtitle {
-        font-size: 1rem;
-        color: #666;
-        opacity: 0.8;
-    }
-
+    /* Centrage automatique : Flexbox gère l'alignement des cartes */
     .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center; /* Centre les cartes horizontalement */
+        gap: 25px;
+        max-width: 1200px;
+        margin: 0 auto;
     }
 
+    /* Style des cartes avec effet de brillance */
     .stat-card {
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 2px solid rgba(0, 123, 255, 0.15);
+        background: var(--card-bg);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid var(--card-border);
         border-radius: 24px;
-        padding: 20px 15px;
-        max-width: 250px;
-        margin: 0 auto;
+        padding: 40px 20px;
+        width: 280px;
         text-align: center;
         position: relative;
         overflow: hidden;
-        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        transition: all 0.4s ease;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(20px);
     }
 
     .stat-card.visible {
@@ -68,138 +72,150 @@
     }
 
     .stat-card:hover {
-        transform: translateY(-15px) scale(1.03);
-        box-shadow: 0 25px 60px rgba(0, 123, 255, 0.25);
-        border-color: rgba(0, 123, 255, 0.5);
+        transform: translateY(-10px);
+        border-color: #007bff;
+        box-shadow: 0 15px 45px rgba(0, 123, 255, 0.2);
     }
 
+    /* Effet de brillance (Shine) au survol */
+    .stat-card::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(45deg, transparent, var(--glass-shine), transparent);
+        transform: rotate(45deg);
+        transition: 0.6s;
+        opacity: 0;
+    }
+
+    .stat-card:hover::after {
+        opacity: 1;
+        left: 100%;
+    }
+
+    /* Icônes fixes qui tournent uniquement au hover */
     .stat-icon {
         font-size: 3.5rem;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
         display: inline-block;
-        animation: bounce-icon 2s ease-in-out infinite;
+        transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    @keyframes bounce-icon {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
+    .stat-card:hover .stat-icon {
+        transform: rotate(360deg);
     }
 
     .stat-number {
-        font-size: 3.5rem;
+        font-size: 3rem;
         font-weight: 700;
         background: linear-gradient(135deg, #007bff, #00c6ff);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         display: block;
-        line-height: 1.2;
+        line-height: 1;
+        margin-bottom: 10px;
     }
 
     .stat-label {
         font-size: 1.1rem;
         font-weight: 600;
-        color: #1c1c1e;
-        margin-bottom: 8px;
+        color: var(--stats-text-main);
+        margin-bottom: 5px;
     }
 
     .stat-description {
-        font-size: 0.9rem;
-        color: #666;
-        line-height: 1.5;
+        font-size: 0.85rem;
+        color: var(--stats-text-secondary);
     }
 
     .stat-badge {
         position: absolute;
         top: 15px;
         right: 15px;
-        background: linear-gradient(135deg, #ff3b30, #ff6b6b);
+        background: #ff3b30;
         color: white;
-        padding: 4px 10px;
-        border-radius: 20px;
-        font-size: 0.7rem;
+        padding: 3px 10px;
+        border-radius: 12px;
+        font-size: 0.65rem;
         font-weight: 700;
-        text-transform: uppercase;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-        .stats-grid { grid-template-columns: 1fr; }
-        .stats-title { font-size: 2rem; }
+        z-index: 2;
     }
 </style>
 
 <section class="stats-section">
-    <div class="stats-container">
-        <div class="stats-header">
-            <h2 class="stats-title">Mon Parcours en Chiffres</h2>
-            <p class="stats-subtitle">Des résultats concrets qui témoignent de mon engagement et de ma passion.</p>
+    <div class="stats-header">
+        <h2 class="stats-title">Mon Parcours en Chiffres</h2>
+        <p class="stat-description">Des résultats concrets qui témoignent de mon engagement.</p>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card" data-target="2">
+            <div class="stat-icon">🎓</div>
+            <span class="stat-number" data-target="2">0</span>
+            <div class="stat-label">Diplômes d'Ingénieur</div>
+            <p class="stat-description">ENSAM Rabat & UTC Compiègne</p>
         </div>
 
-        <div class="stats-grid">
-            <div class="stat-card" data-target="2">
-                <div class="stat-icon">🎓</div>
-                <span class="stat-number" data-target="2">0</span>
-                <div class="stat-label">Diplômes d'Ingénieur</div>
-                <p class="stat-description">ENSAM Rabat & UTC Compiègne</p>
-            </div>
+        <div class="stat-card" data-target="9">
+            <div class="stat-badge">Hot</div>
+            <div class="stat-icon">🏆</div>
+            <span class="stat-number" data-target="9" data-suffix="+">0</span>
+            <div class="stat-label">Certifications Dassault</div>
+            <p class="stat-description">SolidWorks & 3DEXPERIENCE</p>
+        </div>
 
-            <div class="stat-card" data-target="9">
-                <div class="stat-badge">Hot</div>
-                <div class="stat-icon">🏆</div>
-                <span class="stat-number" data-target="9" data-suffix="+">0</span>
-                <div class="stat-label">Certifications Dassault</div>
-                <p class="stat-description">SolidWorks & 3DEXPERIENCE</p>
-            </div>
+        <div class="stat-card" data-target="12">
+            <div class="stat-icon">💼</div>
+            <span class="stat-number" data-target="12" data-suffix="+">0</span>
+            <div class="stat-label">Projets Industriels</div>
+            <p class="stat-description">Conception & prototypage</p>
+        </div>
 
-            <div class="stat-card" data-target="12">
-                <div class="stat-icon">💼</div>
-                <span class="stat-number" data-target="12" data-suffix="+">0</span>
-                <div class="stat-label">Projets Industriels</div>
-                <p class="stat-description">Conception & prototypage</p>
+        <div class="stat-card" id="rank-card">
+            <div class="stat-icon">⭐</div>
+            <div style="display: flex; justify-content: center; align-items: baseline;">
+                <span class="stat-number" id="rank-number">47</span>
+                <span style="font-size: 1.5rem; font-weight: 700; color: #007bff;">/47</span>
             </div>
+            <div class="stat-label">Classement ENSAM</div>
+            <p class="stat-description">Major de promotion</p>
+        </div>
 
-            <div class="stat-card" id="rank-card">
-                <div class="stat-icon">⭐</div>
-                <div style="display: flex; justify-content: center; align-items: baseline;">
-                    <span class="stat-number" id="rank-number">47</span>
-                    <span style="font-size: 1.5rem; font-weight: 700; color: #007bff;">/47</span>
-                </div>
-                <div class="stat-label">Classement ENSAM</div>
-                <p class="stat-description">Major de promotion</p>
-            </div>
+        <div class="stat-card" data-target="9999">
+            <div class="stat-icon">⚙️</div>
+            <span class="stat-number" data-target="9999" data-suffix="+">0</span>
+            <div class="stat-label">Heures de CAO</div>
+            <p class="stat-description">CATIA, SolidWorks, Creo ...</p>
+        </div>
 
-            <div class="stat-card" data-target="9999">
-                <div class="stat-icon">⚙️</div>
-                <span class="stat-number" data-target="9999" data-suffix="+">0</span>
-                <div class="stat-label">Heures de CAO</div>
-                <p class="stat-description">CATIA, SolidWorks, Creo ...</p>
-            </div>
-
-            <div class="stat-card" data-target="999">
-                <div class="stat-badge">New</div>
-                <div class="stat-icon">🔧</div>
-                <span class="stat-number" data-target="999" data-suffix="+">0</span>
-                <div class="stat-label">Pièces Conçues</div>
-                <p class="stat-description">Usiné, plasturgie, tôlerie...</p>
-            </div>
+        <div class="stat-card" data-target="999">
+            <div class="stat-badge">New</div>
+            <div class="stat-icon">🔧</div>
+            <span class="stat-number" data-target="999" data-suffix="+">0</span>
+            <div class="stat-label">Pièces Conçues</div>
+            <p class="stat-description">Usiné, plasturgie, tôlerie...</p>
         </div>
     </div>
 </section>
 
 <script>
-    function animateCounter(element, target, suffix = "") {
-        let current = 0;
-        const duration = 2000;
-        const increment = target / (duration / 16);
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-                element.textContent = target + suffix;
-                clearInterval(timer);
+    function animateValue(element, start, end, duration, suffix = "") {
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            const value = Math.floor(progress * (end - start) + start);
+            element.innerHTML = value + suffix;
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
             } else {
-                element.textContent = Math.floor(current) + suffix;
+                element.innerHTML = end + suffix;
             }
-        }, 16);
+        };
+        window.requestAnimationFrame(step);
     }
 
     const observer = new IntersectionObserver((entries) => {
@@ -207,30 +223,29 @@
             if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
                 entry.target.classList.add('visible', 'counted');
                 
-                const num = entry.target.querySelector('.stat-number');
-                if (num && num.id !== 'rank-number') {
-                    const target = parseInt(num.getAttribute('data-target'));
-                    const suffix = num.getAttribute('data-suffix') || "";
-                    animateCounter(num, target, suffix);
-                }
+                const numElement = entry.target.querySelector('.stat-number');
                 
-                // Animation spéciale Major (47 vers 1)
+                if (numElement && numElement.id !== 'rank-number') {
+                    const target = parseInt(numElement.getAttribute('data-target'));
+                    const suffix = numElement.getAttribute('data-suffix') || "";
+                    animateValue(numElement, 0, target, 2000, suffix);
+                }
+
                 if (entry.target.id === 'rank-card') {
                     const rankNum = document.getElementById('rank-number');
-                    let val = 47;
-                    const rankTimer = setInterval(() => {
-                        val--;
-                        if (val <= 1) {
-                            rankNum.textContent = "1";
-                            clearInterval(rankTimer);
-                        } else {
-                            rankNum.textContent = val;
+                    let currentRank = 47;
+                    const interval = setInterval(() => {
+                        currentRank--;
+                        rankNum.innerText = currentRank;
+                        if (currentRank <= 1) {
+                            rankNum.innerText = "1";
+                            clearInterval(interval);
                         }
                     }, 40);
                 }
             }
         });
-    }, { threshold: 0.2 });
+    }, { threshold: 0.1 });
 
     document.querySelectorAll('.stat-card').forEach(card => observer.observe(card));
 </script>
