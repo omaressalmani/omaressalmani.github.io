@@ -63,27 +63,26 @@ announcements:
 {% include rec.html %}
 
 
-<section class="post-section">
-    <div class="post-header">
-        <h2 class="post-title">My Latest LinkedIn Post</h2>
-        <p class="post-subtitle">Partages d'expériences et actualités de conception mécanique.</p>
+<section class="rec-section">
+    <div class="rec-header">
+        <h2 class="rec-title">My Latest LinkedIn Post</h2>
+        <p class="rec-subtitle">Restez informé de mes derniers projets et analyses techniques.</p>
     </div>
 
-    <div class="post-container">
-        <div class="post-card">
-            <div class="linkedin-tag"><i class="fab fa-linkedin"></i> LinkedIn</div>
+    <div class="rec-grid-unique">
+        <div class="rec-card-glass">
+            <div class="linkedin-badge"><i class="fab fa-linkedin"></i> LinkedIn</div>
             
             <a href="https://www.linkedin.com/posts/omar-essalmani_ingaeznierie-programmation-conceptionmaezcanique-activity-7391136624878862336-ax1C" target="_blank">
                 <img src="{{ '/assets/img/projects/Post.jpg' | relative_url }}" 
-                     alt="Dernière publication de Omar ESSALMANI" 
-                     class="post-img">
+                     alt="Dernière publication LinkedIn de Omar ESSALMANI">
             </a>
         </div>
     </div>
 
-    <div class="text-center mt-5">
-        <p class="text-muted" style="font-size: 0.9rem; font-style: italic;">
-            Cliquez sur l'image pour lire l'histoire complète et interagir.
+    <div class="text-center mt-4">
+        <p class="text-muted" style="font-size: 0.85rem; font-style: italic;">
+            Cliquez sur l'image pour voir le post original sur LinkedIn.
         </p>
     </div>
 </section>
