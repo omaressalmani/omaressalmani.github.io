@@ -63,25 +63,36 @@ announcements:
 {% include rec.html %}
 
 
+<div class="stats-section text-center my-5">
+  <div class="stats-container">
+    
+    <header class="stats-header">
+      <h2 class="stats-title">My Latest LinkedIn Post</h2>
+      <p class="stats-subtitle">Restez connecté avec mes dernières actualités et réflexions sur l'ingénierie</p>
+    </header>
 
-  <div class="text-center my-5">
-  <h3 class="mb-3">🌐 My Latest LinkedIn Post</h3>
+    <div class="post-wrapper">
+      <a href="https://www.linkedin.com/posts/omar-essalmani_ingaeznierie-programmation-conceptionmaezcanique-activity-7391136624878862336-ax1C?utm_source=share&utm_medium=member_desktop&rcm=ACoAADLEUCcBZosRbAVy07EE8qdAr5_C6LA6Fpo" 
+         target="_blank" 
+         class="linkedin-link">
+        
+        <img 
+          src="{{ '/assets/img/projects/Post.jpg' | relative_url }}" 
+          alt="Post LinkedIn par Omar ESSALMANI" 
+          class="img-fluid linkedin-post-img">
+          
+        <div class="overlay-hint">
+          <span>Read on LinkedIn →</span>
+        </div>
+      </a>
+    </div>
 
-  <a href="https://www.linkedin.com/posts/omar-essalmani_ingaeznierie-programmation-conceptionmaezcanique-activity-7391136624878862336-ax1C?utm_source=share&utm_medium=member_desktop&rcm=ACoAADLEUCcBZosRbAVy07EE8qdAr5_C6LA6Fpo" 
-     target="_blank" 
-     style="text-decoration: none;">
-     
-    <img 
-  src="{{ '/assets/img/projects/Post.jpg' | relative_url }}" 
-  alt="Post LinkedIn par Omar ESSALMANI" 
-  class="rounded shadow-lg" 
-  style="width:90%; max-width:900px; height:auto; border: 1px solid #444;">
-</a>
-
-  <p class="text-muted mt-2" style="font-size: 0.9rem;">
-    Click the image to read the full post on LinkedIn.
-  </p>
+    <p class="text-muted mt-3" style="font-size: 0.85rem; opacity: 0.6;">
+      Cliquez sur l'image pour lire le post complet.
+    </p>
+  </div>
 </div>
+
 <section class="contact-section">
     <div class="contact-container">
         <h2 class="contact-title">Contact Me</h2>

@@ -513,5 +513,78 @@
     animation-delay: 1s;
     pointer-events: none;
 }
+/* --- Section LinkedIn (Cohérence avec Stats Section) --- */
+
+.linkedin-section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+/* Titre identique à .stats-title */
+.linkedin-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #0096ff; /* Bleu identique à l'image 842ea6.png */
+    margin-bottom: 10px;
+}
+
+/* Sous-titre identique à .stats-subtitle */
+.linkedin-subtitle {
+    font-size: 1.1rem;
+    color: #888;
+    max-width: 800px;
+    margin: 0 auto 40px auto;
+    line-height: 1.6;
+}
+
+/* Conteneur de l'image (Style Carte) */
+.linkedin-post-wrapper {
+    position: relative;
+    display: inline-block;
+    border-radius: 24px; /* Même arrondi que vos cartes de diplômes */
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.linkedin-post-img {
+    max-width: 900px;
+    width: 100%;
+    display: block;
+    transition: filter 0.3s ease;
+}
+
+/* Hover Effects */
+.linkedin-post-wrapper:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
+}
+
+.linkedin-post-wrapper:hover .linkedin-post-img {
+    filter: brightness(0.5);
+}
+
+/* Bouton flottant au survol */
+.linkedin-overlay-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    background: #0077b5; /* Bleu LinkedIn */
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.linkedin-post-wrapper:hover .linkedin-overlay-btn {
+    opacity: 1;
+}
 
 </style>
