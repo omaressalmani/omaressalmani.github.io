@@ -53,30 +53,9 @@ announcements:
 <p>
   N'hésitez pas à me contacter !
 </p>
-  
-<hr class="my-5">
+  {% include stats-counters.html %}
 
-<div class="text-center my-5">
-  <h3 class="mb-3">💬 Recommandation Professionnelle</h3>
-  <p class="text-muted mb-4">
-    Une référence issue de ma récente expérience en tant qu'<strong>Ingénieur Stagiaire Mécanicien chez Guerbet</strong>,
-    partagée sur mon profil LinkedIn.
-  </p>
-
-  <a href="https://www.linkedin.com/in/omar-essalmani/" target="_blank" style="text-decoration: none;">
-    <img 
-      src="{{ '/assets/img/projects/recommendation.png' | relative_url }}" 
-      alt="Recommandation LinkedIn pour Omar ESSALMANI" 
-      class="rounded shadow-lg" 
-      style="width:100%; max-width:750px; height:auto; border:1px solid #444;">
-  </a>
-
-  <p class="text-muted mt-2" style="font-size: 0.9rem;">
-    Cliquez sur l'image pour voir la recommandation complète sur LinkedIn.
-  </p>
-</div>
-
-<hr class="my-5">
+{% include rec.html %}
 
 <div class="text-center my-5">
   <h3 class="mb-3">🌐 Mon Dernier Post LinkedIn</h3>
