@@ -513,78 +513,54 @@
     animation-delay: 1s;
     pointer-events: none;
 }
-/* --- Section LinkedIn (Cohérence avec Stats Section) --- */
+/* --- Section LinkedIn - Cohérence Totale --- */
 
-.linkedin-section {
-    padding: 60px 20px;
+/* On utilise le même fond dégradé subtil que vos stats */
+.linkedin-section-custom {
+    padding: 100px 20px;
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.03) 0%, rgba(0, 198, 255, 0.03) 100%);
+    position: relative;
+    overflow: hidden;
     text-align: center;
 }
 
-/* Titre identique à .stats-title */
-.linkedin-title {
+/* Titre : Style identique à "Mon Parcours en Chiffres" */
+.linkedin-section-custom .section-title {
     font-size: 2.5rem;
     font-weight: 800;
-    color: #0096ff; /* Bleu identique à l'image 842ea6.png */
-    margin-bottom: 10px;
+    color: #0096ff; /* Bleu identique image_842ea6.png */
+    margin-bottom: 15px;
+    text-align: center;
 }
 
-/* Sous-titre identique à .stats-subtitle */
-.linkedin-subtitle {
+/* Sous-titre : Style identique image_842ea6.png */
+.linkedin-section-custom .section-subtitle {
     font-size: 1.1rem;
-    color: #888;
+    color: #666;
     max-width: 800px;
-    margin: 0 auto 40px auto;
+    margin: 0 auto 50px auto;
     line-height: 1.6;
 }
 
-/* Conteneur de l'image (Style Carte) */
-.linkedin-post-wrapper {
-    position: relative;
-    display: inline-block;
-    border-radius: 24px; /* Même arrondi que vos cartes de diplômes */
-    overflow: hidden;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.linkedin-post-img {
+/* Conteneur de l'image avec l'arrondi des cartes de diplômes */
+.linkedin-post-card {
     max-width: 900px;
+    margin: 0 auto;
+    background: #fff; /* Fond blanc comme vos cartes de stats */
+    padding: 15px;
+    border-radius: 24px; /* Même arrondi que image_c60c0e.png */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.linkedin-post-card:hover {
+    transform: translateY(-5px);
+}
+
+.linkedin-post-card img {
     width: 100%;
+    border-radius: 15px;
     display: block;
-    transition: filter 0.3s ease;
 }
-
-/* Hover Effects */
-.linkedin-post-wrapper:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
-}
-
-.linkedin-post-wrapper:hover .linkedin-post-img {
-    filter: brightness(0.5);
-}
-
-/* Bouton flottant au survol */
-.linkedin-overlay-btn {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    background: #0077b5; /* Bleu LinkedIn */
-    color: #fff;
-    padding: 12px 25px;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    pointer-events: none;
-    white-space: nowrap;
-}
-
-.linkedin-post-wrapper:hover .linkedin-overlay-btn {
-    opacity: 1;
-}
-
 </style>

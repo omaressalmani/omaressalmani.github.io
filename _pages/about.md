@@ -63,35 +63,28 @@ announcements:
 {% include rec.html %}
 
 
-<div class="stats-section text-center my-5">
-  <div class="stats-container">
+<section class="linkedin-section-custom">
+  <div class="container">
     
-    <header class="stats-header">
-      <h2 class="stats-title">My Latest LinkedIn Post</h2>
-      <p class="stats-subtitle">Restez connecté avec mes dernières actualités et réflexions sur l'ingénierie</p>
-    </header>
+    <h2 class="section-title">My Latest LinkedIn Post</h2>
+    <p class="section-subtitle">
+      Des résultats concrets qui témoignent de mon engagement et de ma passion pour l'ingénierie mécanique.
+    </p>
 
-    <div class="post-wrapper">
+    <div class="linkedin-post-card">
       <a href="https://www.linkedin.com/posts/omar-essalmani_ingaeznierie-programmation-conceptionmaezcanique-activity-7391136624878862336-ax1C?utm_source=share&utm_medium=member_desktop&rcm=ACoAADLEUCcBZosRbAVy07EE8qdAr5_C6LA6Fpo" 
-         target="_blank" 
-         class="linkedin-link">
-        
-        <img 
-          src="{{ '/assets/img/projects/Post.jpg' | relative_url }}" 
-          alt="Post LinkedIn par Omar ESSALMANI" 
-          class="img-fluid linkedin-post-img">
-          
-        <div class="overlay-hint">
-          <span>Read on LinkedIn →</span>
-        </div>
+         target="_blank">
+        <img src="{{ '/assets/img/projects/Post.jpg' | relative_url }}" 
+             alt="Post LinkedIn Omar ESSALMANI">
       </a>
     </div>
 
-    <p class="text-muted mt-3" style="font-size: 0.85rem; opacity: 0.6;">
-      Cliquez sur l'image pour lire le post complet.
+    <p class="text-muted mt-4" style="font-size: 0.9rem;">
+      Click the image to read the full post on LinkedIn.
     </p>
+    
   </div>
-</div>
+</section>
 
 <section class="contact-section">
     <div class="contact-container">
