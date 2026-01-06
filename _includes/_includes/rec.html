@@ -1,0 +1,217 @@
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+    /* Variables de thème (identiques à tes autres sections) */
+    :root {
+        --rec-text-main: #1a1a1a;
+        --rec-text-secondary: #666;
+        --rec-card-bg: rgba(255, 255, 255, 0.9);
+        --rec-card-border: rgba(0, 123, 255, 0.1);
+        --rec-glass-shine: rgba(255, 255, 255, 0.2);
+    }
+
+    [data-theme='dark'] {
+        --rec-text-main: #ffffff;
+        --rec-text-secondary: #bbb;
+        --rec-card-bg: rgba(255, 255, 255, 0.05);
+        --rec-card-border: rgba(255, 255, 255, 0.1);
+        --rec-glass-shine: rgba(255, 255, 255, 0.1);
+    }
+
+    .rec-section {
+        padding: 80px 20px;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .rec-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .rec-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 3rem;
+        font-style: italic;
+        font-weight: 700;
+        color: var(--rec-text-main);
+        margin-bottom: 10px;
+    }
+
+    /* Centrage automatique de la carte unique */
+    .rec-grid {
+        display: flex;
+        justify-content: center;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    /* Carte Style "Chiffres & Outils" */
+    .rec-card {
+        background: var(--rec-card-bg);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid var(--rec-card-border);
+        border-radius: 24px;
+        padding: 40px;
+        max-width: 600px; /* Plus large pour le texte */
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s ease;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .rec-card:hover {
+        transform: translateY(-10px);
+        border-color: #007bff;
+        box-shadow: 0 15px 45px rgba(0, 123, 255, 0.2);
+    }
+
+    /* Effet de brillance au survol */
+    .rec-card::after {
+        content: '';
+        position: absolute;
+        top: -50%; left: -50%;
+        width: 200%; height: 200%;
+        background: linear-gradient(45deg, transparent, var(--rec-glass-shine), transparent);
+        transform: rotate(45deg);
+        transition: 0.6s;
+        opacity: 0;
+    }
+
+    .rec-card:hover::after {
+        opacity: 1;
+        left: 100%;
+    }
+
+    /* Badge LinkedIn */
+    .linkedin-badge {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background: #0077b5;
+        color: white;
+        padding: 5px 12px;
+        border-radius: 8px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        z-index: 2;
+    }
+
+    .quote-mark {
+        position: absolute;
+        top: 10px;
+        right: 30px;
+        font-size: 5rem;
+        color: #007bff;
+        opacity: 0.1;
+        font-family: serif;
+    }
+
+    .rec-text {
+        font-size: 1rem;
+        line-height: 1.7;
+        color: var(--rec-text-main);
+        font-style: italic;
+        margin: 20px 0 30px 0;
+        text-align: left;
+    }
+
+    /* Profil de Jean Daval */
+    .rec-profile {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        border-top: 1px solid var(--rec-card-border);
+        padding-top: 20px;
+    }
+
+    .profile-img {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid #007bff;
+    }
+
+    .profile-info {
+        text-align: left;
+    }
+
+    .profile-name {
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: var(--rec-text-main);
+        margin: 0;
+    }
+
+    .profile-role {
+        font-size: 0.85rem;
+        color: #007bff;
+        margin: 2px 0;
+    }
+
+    .profile-meta {
+        font-size: 0.75rem;
+        color: var(--rec-text-secondary);
+    }
+
+    /* Bouton CTA LinkedIn */
+    .rec-cta {
+        text-align: center;
+        margin-top: 40px;
+    }
+
+    .btn-linkedin {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 25px;
+        background: #0077b5;
+        color: white;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    .btn-linkedin:hover {
+        transform: scale(1.05);
+        background: #005a87;
+    }
+</style>
+
+<section class="rec-section">
+    <div class="rec-header">
+        <h2 class="rec-title">Recommandations</h2>
+        <p style="color: var(--rec-text-secondary)">Ce que mes responsables disent de mon engagement.</p>
+    </div>
+
+    <div class="rec-grid">
+        <div class="rec-card">
+            <div class="linkedin-badge">LinkedIn</div>
+            <div class="quote-mark">“</div>
+            
+            <p class="rec-text">
+                "Omar s'est rapidement intégré à l'équipe projet. Il assimile rapidement les problématiques et fait preuve d'esprit d'initiative. Ses taches ont été variées avec des essais, une reprise de la conception 3D et la mise en plan 2D en cotation géométrique. Il a ensuite assuré la vérification du montage avec les chaines de cote ainsi que le dimensionnement avec les calculs par éléments finis. Enfin, il a apporté un soin particulier à la mise en forme des résultats lors d'une présentation de synthèse très complète. Je recommande vivement Omar !"
+            </p>
+
+            <div class="rec-profile">
+                <img src="assets/img/Daval.jpeg" alt="Jean Daval" class="profile-img">
+                <div class="profile-info">
+                    <h4 class="profile-name">Jean Daval</h4>
+                    <p class="profile-role">Mechanical Engineer - Technical Lead</p>
+                    <p class="profile-meta">Recommandé le 3 novembre 2025</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="rec-cta">
+        <a href="https://www.linkedin.com/in/omar-essalmani" target="_blank" class="btn-linkedin">
+            Voir mon profil LinkedIn
+        </a>
+    </div>
+</section>

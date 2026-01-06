@@ -53,28 +53,37 @@ announcements:
 <p>
   N'hésitez pas à me contacter !
 </p>
-  {% include stats-counters.html %}
 
-{% include rec.html %}
+{% include stats-counters.html %}
 
-<div class="text-center my-5">
-  <h3 class="mb-3">🌐 Mon Dernier Post LinkedIn</h3>
+{% _include rec.html %}
 
-  <a href="https://www.linkedin.com/posts/omar-essalmani_ingaeznierie-programmation-conceptionmaezcanique-activity-7391136624878862336-ax1C?utm_source=share&utm_medium=member_desktop&rcm=ACoAADLEUCcBZosRbAVy07EE8qdAr5_C6LA6Fpo" 
-     target="_blank" 
-     style="text-decoration: none;">
-     
-    <img 
-  src="{{ '/assets/img/projects/Post.jpg' | relative_url }}" 
-  alt="Post LinkedIn par Omar ESSALMANI" 
-  class="rounded shadow-lg" 
-  style="width:90%; max-width:900px; height:auto; border: 1px solid #444;">
-</a>
+{% _include Parcours.html %}
 
-  <p class="text-muted mt-2" style="font-size: 0.9rem;">
-    Cliquez sur l'image pour lire le post complet sur LinkedIn.
-  </p>
-</div>
+<section class="rec-section">
+    <div class="rec-header">
+        <h2 class="rec-title"> Mon dernier post LinkedIn</h2>
+        <p class="rec-subtitle">Restez informé de mes derniers projets et analyses techniques.</p>
+    </div>
+
+    <div class="rec-grid-unique">
+        <div class="rec-card-glass">
+            <div class="linkedin-badge"><i class="fab fa-linkedin"></i> LinkedIn</div>
+            
+            <a href="https://www.linkedin.com/posts/omar-essalmani_utc-ensam-graduation-ugcPost-7407430842324553729-BBcX?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAADLEUCcBZosRbAVy07EE8qdAr5_C6LA6Fpo" target="_blank">
+                <img src="{{ '/assets/img/projects/Post.jpg' | relative_url }}" 
+                     alt="Dernière publication LinkedIn de Omar ESSALMANI">
+            </a>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <p class="text-muted" style="font-size: 0.85rem; font-style: italic;">
+            Cliquez sur l'image pour voir le post original sur LinkedIn.
+        </p>
+    </div>
+</section>
+
 <section class="contact-section">
     <div class="contact-container">
         <h2 class="contact-title">Me Contacter</h2>

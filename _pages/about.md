@@ -62,18 +62,19 @@ announcements:
   
 {% include rec.html %}
 
+{% include Parcours.html %}
 
 <section class="rec-section">
     <div class="rec-header">
         <h2 class="rec-title">My Latest LinkedIn Post</h2>
-        <p class="rec-subtitle">Restez informé de mes derniers projets et analyses techniques.</p>
+        <p class="rec-subtitle">Stay informed about my latest projects and technical analyses.</p>
     </div>
 
     <div class="rec-grid-unique">
         <div class="rec-card-glass">
             <div class="linkedin-badge"><i class="fab fa-linkedin"></i> LinkedIn</div>
             
-            <a href="https://www.linkedin.com/posts/omar-essalmani_ingaeznierie-programmation-conceptionmaezcanique-activity-7391136624878862336-ax1C" target="_blank">
+            <a href="https://www.linkedin.com/posts/omar-essalmani_utc-ensam-graduation-ugcPost-7407430842324553729-BBcX?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAADLEUCcBZosRbAVy07EE8qdAr5_C6LA6Fpo" target="_blank">
                 <img src="{{ '/assets/img/projects/Post.jpg' | relative_url }}" 
                      alt="Dernière publication LinkedIn de Omar ESSALMANI">
             </a>
@@ -82,12 +83,10 @@ announcements:
 
     <div class="text-center mt-4">
         <p class="text-muted" style="font-size: 0.85rem; font-style: italic;">
-            Cliquez sur l'image pour voir le post original sur LinkedIn.
+        Click on the image to see the original LinkedIn post.
         </p>
     </div>
 </section>
-
-{% include 3DViewer.html %}
 
 <section class="contact-section">
     <div class="contact-container">
