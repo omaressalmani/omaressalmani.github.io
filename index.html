@@ -444,1616 +444,821 @@ Instructions importantes :
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.stat-card').forEach(card => observer.observe(card));
-</script> <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&amp;family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet"> <style>:root{--rec-text-main:#1a1a1a;--rec-text-secondary:#666;--rec-card-bg:rgba(255,255,255,0.9);--rec-card-border:rgba(0,123,255,0.1);--rec-glass-shine:rgba(255,255,255,0.2)}[data-theme='dark']{--rec-text-main:#fff;--rec-text-secondary:#bbb;--rec-card-bg:rgba(255,255,255,0.05);--rec-card-border:rgba(255,255,255,0.1);--rec-glass-shine:rgba(255,255,255,0.1)}.rec-section{padding:80px 20px;font-family:'Poppins',sans-serif}.rec-header{text-align:center;margin-bottom:50px}.rec-title{font-family:'Playfair Display',serif;font-size:3rem;font-style:italic;font-weight:700;color:var(--rec-text-main);margin-bottom:10px}.rec-grid{display:flex;justify-content:center;max-width:1200px;margin:0 auto}.rec-card{background:var(--rec-card-bg);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);border:1px solid var(--rec-card-border);border-radius:24px;padding:40px;max-width:600px;position:relative;overflow:hidden;transition:all .4s ease;box-shadow:0 10px 30px rgba(0,0,0,0.1)}.rec-card:hover{transform:translateY(-10px);border-color:#007bff;box-shadow:0 15px 45px rgba(0,123,255,0.2)}.rec-card::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(45deg,transparent,var(--rec-glass-shine),transparent);transform:rotate(45deg);transition:.6s;opacity:0}.rec-card:hover::after{opacity:1;left:100%}.linkedin-badge{position:absolute;top:20px;left:20px;background:#0077b5;color:white;padding:5px 12px;border-radius:8px;font-size:.7rem;font-weight:600;display:flex;align-items:center;gap:5px;z-index:2}.quote-mark{position:absolute;top:10px;right:30px;font-size:5rem;color:#007bff;opacity:.1;font-family:serif}.rec-text{font-size:1rem;line-height:1.7;color:var(--rec-text-main);font-style:italic;margin:20px 0 30px 0;text-align:left}.rec-profile{display:flex;align-items:center;gap:20px;border-top:1px solid var(--rec-card-border);padding-top:20px}.profile-img{width:70px;height:70px;border-radius:50%;object-fit:cover;border:2px solid #007bff}.profile-info{text-align:left}.profile-name{font-weight:700;font-size:1.1rem;color:var(--rec-text-main);margin:0}.profile-role{font-size:.85rem;color:#007bff;margin:2px 0}.profile-meta{font-size:.75rem;color:var(--rec-text-secondary)}.rec-cta{text-align:center;margin-top:40px}.btn-linkedin{display:inline-flex;align-items:center;gap:10px;padding:12px 25px;background:#0077b5;color:white;text-decoration:none;border-radius:50px;font-weight:600;transition:.3s}.btn-linkedin:hover{transform:scale(1.05);background:#005a87}</style> <section class="rec-section"> <div class="rec-header"> <h2 class="rec-title">Recommandations</h2> <p style="color: var(--rec-text-secondary)">Ce que mes responsables disent de mon engagement.</p> </div> <div class="rec-grid"> <div class="rec-card"> <div class="linkedin-badge">LinkedIn</div> <div class="quote-mark">“</div> <p class="rec-text"> "Omar s'est rapidement intégré à l'équipe projet. Il assimile rapidement les problématiques et fait preuve d'esprit d'initiative. Ses taches ont été variées avec des essais, une reprise de la conception 3D et la mise en plan 2D en cotation géométrique. Il a ensuite assuré la vérification du montage avec les chaines de cote ainsi que le dimensionnement avec les calculs par éléments finis. Enfin, il a apporté un soin particulier à la mise en forme des résultats lors d'une présentation de synthèse très complète. Je recommande vivement Omar !" </p> <div class="rec-profile"> <img src="assets/img/Daval.jpeg" alt="Jean Daval" class="profile-img"> <div class="profile-info"> <h4 class="profile-name">Jean Daval</h4> <p class="profile-role">Mechanical Engineer - Technical Lead</p> <p class="profile-meta">Recommandé le 3 novembre 2025</p> </div> </div> </div> </div> <div class="rec-cta"> <a href="https://www.linkedin.com/in/omar-essalmani" target="_blank" class="btn-linkedin" rel="external nofollow noopener"> Voir mon profil LinkedIn </a> </div> </section> <section class="rec-section"> <div class="rec-header"> <h2 class="rec-title">My Latest LinkedIn Post</h2> <p class="rec-subtitle">Restez informé de mes derniers projets et analyses techniques.</p> </div> <div class="rec-grid-unique"> <div class="rec-card-glass"> <div class="linkedin-badge"> <i class="fab fa-linkedin"></i> LinkedIn</div> <a href="https://www.linkedin.com/posts/omar-essalmani_ingaeznierie-programmation-conceptionmaezcanique-activity-7391136624878862336-ax1C" target="_blank" rel="external nofollow noopener"> <img src="/assets/img/projects/Post.jpg" alt="Dernière publication LinkedIn de Omar ESSALMANI"> </a> </div> </div> <div class="text-center mt-4"> <p class="text-muted" style="font-size: 0.85rem; font-style: italic;"> Cliquez sur l'image pour voir le post original sur LinkedIn. </p> </div> </section> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"&gt;&lt;/script&gt;
-&lt;style&gt;
-    .viewer-section {
-        padding: 100px 20px;
-        background: linear-gradient(135deg, rgba(0, 123, 255, 0.03) 0%, rgba(0, 198, 255, 0.03) 100%);
-        position: relative;
-        overflow: hidden;
-    }
-
-    /* Mode sombre pour la section */
-    [data-theme='dark'] .viewer-section {
-        background: linear-gradient(135deg, rgba(0, 123, 255, 0.08) 0%, rgba(0, 198, 255, 0.08) 100%);
-    }
-
-    /* Particules de fond animées */
-    .viewer-section::before,
-    .viewer-section::after {
-        content: '';
-        position: absolute;
-        border-radius: 50%;
-        pointer-events: none;
-        animation: float-particles 20s ease-in-out infinite;
-    }
-
-    .viewer-section::before {
-        width: 600px;
-        height: 600px;
-        background: radial-gradient(circle, rgba(0, 123, 255, 0.08), transparent);
-        top: -300px;
-        right: -300px;
-        animation-delay: 0s;
-    }
-
-    .viewer-section::after {
-        width: 500px;
-        height: 500px;
-        background: radial-gradient(circle, rgba(0, 198, 255, 0.06), transparent);
-        bottom: -250px;
-        left: -250px;
-        animation-delay: 5s;
-    }
-
-    @keyframes float-particles {
-        0%, 100% { 
-            transform: translate(0, 0) scale(1);
-            opacity: 0.5;
-        }
-        33% { 
-            transform: translate(50px, -50px) scale(1.1);
-            opacity: 0.8;
-        }
-        66% { 
-            transform: translate(-30px, 30px) scale(0.9);
-            opacity: 0.6;
-        }
-    }
-
-    /* Effet de brillance global sur la section */
-    .viewer-section::after {
-        content: '';
-        position: absolute;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: linear-gradient(
-            45deg,
-            transparent 0%,
-            transparent 45%,
-            rgba(255, 255, 255, 0.03) 48%,
-            rgba(255, 255, 255, 0.08) 50%,
-            rgba(255, 255, 255, 0.03) 52%,
-            transparent 55%,
-            transparent 100%
-        );
-        animation: shimmer-section 8s linear infinite;
-        pointer-events: none;
-        z-index: 0;
-    }
-
-    @keyframes shimmer-section {
-        0% {
-            transform: translateX(-100%) translateY(-100%) rotate(45deg);
-        }
-        100% {
-            transform: translateX(100%) translateY(100%) rotate(45deg);
-        }
-    }
-
-    /* Container */
-    .viewer-container {
-        max-width: 1400px;
-        margin: 0 auto;
-        position: relative;
-        z-index: 1;
-    }
-
-    /* Header */
-    .viewer-header {
-        text-align: center;
-        margin-bottom: 50px;
-    }
-
-    .viewer-title {
-        font-size: 2.8rem;
-        font-weight: 700;
-        background: linear-gradient(135deg, #007bff, #00c6ff);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        margin-bottom: 15px;
-    }
-
-    .viewer-subtitle {
-        font-size: 1.15rem;
-        color: var(--global-text-color-light, #666);
-        max-width: 700px;
-        margin: 0 auto;
-    }
-
-    [data-theme='dark'] .viewer-subtitle {
-        color: rgba(255, 255, 255, 0.7);
-    }
-
-    /* Main 3D Viewer */
-    .viewer-card {
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
-        backdrop-filter: blur(20px);
-        border: 2px solid rgba(0, 123, 255, 0.15);
-        border-radius: 24px;
-        padding: 30px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-        position: relative;
-        overflow: hidden;
-    }
-
-    [data-theme='dark'] .viewer-card {
-        background: linear-gradient(135deg, rgba(45, 45, 50, 0.95), rgba(28, 28, 30, 0.85));
-        border: 2px solid rgba(0, 198, 255, 0.2);
-    }
-
-    /* Canvas 3D */
-    #canvas-3d {
-        width: 100%;
-        height: 600px;
-        border-radius: 16px;
-        background: linear-gradient(135deg, #1a1a2e, #16213e);
-        cursor: grab;
-        display: block;
-    }
-
-    #canvas-3d:active {
-        cursor: grabbing;
-    }
-
-    /* Controls Panel */
-    .controls-panel {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 15px;
-        margin-top: 30px;
-        padding: 25px;
-        background: rgba(0, 123, 255, 0.05);
-        border-radius: 16px;
-    }
-
-    .control-group {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .control-label {
-        font-size: 0.9rem;
-        font-weight: 600;
-        color: var(--global-text-color, #333);
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
-
-    [data-theme='dark'] .control-label {
-        color: rgba(255, 255, 255, 0.9);
-    }
-
-    .control-button {
-        padding: 12px 20px;
-        background: linear-gradient(135deg, rgba(0, 123, 255, 0.1), rgba(0, 198, 255, 0.05));
-        border: 2px solid rgba(0, 123, 255, 0.3);
-        border-radius: 12px;
-        color: var(--global-text-color, #333);
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-    }
-
-    [data-theme='dark'] .control-button {
-        color: rgba(255, 255, 255, 0.9);
-    }
-
-    .control-button:hover {
-        background: linear-gradient(135deg, #007bff, #00c6ff);
-        color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3);
-    }
-
-    .control-button.active {
-        background: linear-gradient(135deg, #007bff, #00c6ff);
-        color: white;
-        border-color: transparent;
-    }
-
-    /* Slider */
-    .control-slider {
-        width: 100%;
-        height: 8px;
-        border-radius: 4px;
-        background: rgba(0, 123, 255, 0.2);
-        outline: none;
-        -webkit-appearance: none;
-    }
-
-    .control-slider::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #007bff, #00c6ff);
-        cursor: pointer;
-        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
-    }
-
-    .control-slider::-moz-range-thumb {
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #007bff, #00c6ff);
-        cursor: pointer;
-        border: none;
-    }
-
-    /* Info Box */
-    .info-box {
-        margin-top: 25px;
-        padding: 20px;
-        background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 152, 0, 0.05));
-        border-left: 4px solid #ffc107;
-        border-radius: 12px;
-    }
-
-    .info-title {
-        font-weight: 700;
-        color: #ffa000;
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .info-content {
-        color: var(--global-text-color, #333);
-        line-height: 1.6;
-    }
-
-    [data-theme='dark'] .info-content {
-        color: rgba(255, 255, 255, 0.8);
-    }
-
-    /* Loading */
-    .loading-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 16px;
-        z-index: 100;
-    }
-
-    .loading-spinner {
-        width: 60px;
-        height: 60px;
-        border: 6px solid rgba(255, 255, 255, 0.1);
-        border-top-color: #007bff;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-        to { transform: rotate(360deg); }
-    }
-
-    /* Stats Display */
-    .stats-display {
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        background: rgba(0, 0, 0, 0.7);
-        backdrop-filter: blur(10px);
-        padding: 15px 20px;
-        border-radius: 12px;
-        color: white;
-        font-size: 0.85rem;
-        z-index: 10;
-    }
-
-    .stat-item {
-        display: flex;
-        justify-content: space-between;
-        gap: 15px;
-        margin-bottom: 5px;
-    }
-
-    .stat-label {
-        opacity: 0.7;
-    }
-
-    .stat-value {
-        font-weight: 700;
-        color: #00c6ff;
-    }
-
-    /* Instructions */
-    .instructions {
-        position: absolute;
-        bottom: 20px;
-        left: 20px;
-        background: rgba(0, 0, 0, 0.7);
-        backdrop-filter: blur(10px);
-        padding: 15px 20px;
-        border-radius: 12px;
-        color: white;
-        font-size: 0.85rem;
-        z-index: 10;
-    }
-
-    .instruction-item {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-bottom: 5px;
-    }
-
-    .instruction-icon {
-        font-size: 1.2rem;
-    }
-
-    /* Dimension Lines */
-    .dimension-line {
-        position: absolute;
-        pointer-events: none;
-        z-index: 5;
-    }
-
-    .dimension-line-path {
-        stroke: #00c6ff;
-        stroke-width: 2;
-        fill: none;
-    }
-
-    .dimension-arrow {
-        fill: #00c6ff;
-    }
-
-    .dimension-text {
-        position: absolute;
-        background: rgba(0, 198, 255, 0.9);
-        color: white;
-        padding: 4px 10px;
-        border-radius: 6px;
-        font-size: 0.8rem;
-        font-weight: 700;
-        white-space: nowrap;
-        pointer-events: none;
-        box-shadow: 0 4px 12px rgba(0, 198, 255, 0.4);
-    }
-
-    /* Annotations */
-    .annotation {
-        position: absolute;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        pointer-events: all;
-        cursor: pointer;
-        z-index: 5;
-    }
-
-    .annotation-dot {
-        width: 12px;
-        height: 12px;
-        background: #ff3b30;
-        border: 3px solid white;
-        border-radius: 50%;
-        box-shadow: 0 4px 12px rgba(255, 59, 48, 0.5);
-        animation: pulse-annotation 2s infinite;
-    }
-
-    @keyframes pulse-annotation {
-        0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.2); }
-    }
-
-    .annotation-label {
-        background: rgba(255, 59, 48, 0.95);
-        color: white;
-        padding: 8px 14px;
-        border-radius: 8px;
-        font-size: 0.85rem;
-        font-weight: 600;
-        box-shadow: 0 4px 15px rgba(255, 59, 48, 0.4);
-        max-width: 200px;
-        line-height: 1.4;
-        display: none;
-    }
-
-    .annotation:hover .annotation-label {
-        display: block;
-    }
-
-    /* Export notification */
-    .export-notification {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: linear-gradient(135deg, rgba(76, 217, 100, 0.98), rgba(52, 199, 89, 0.95));
-        backdrop-filter: blur(20px);
-        color: white;
-        padding: 30px 40px;
-        border-radius: 20px;
-        box-shadow: 0 20px 60px rgba(76, 217, 100, 0.5);
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        z-index: 10000;
-        display: none;
-        text-align: center;
-        animation: fade-scale-in 0.4s ease;
-    }
-
-    .export-notification.show {
-        display: block;
-    }
-
-    .export-notification-icon {
-        font-size: 3rem;
-        margin-bottom: 10px;
-    }
-
-    .export-notification-title {
-        font-size: 1.3rem;
-        font-weight: 700;
-        margin-bottom: 5px;
-    }
-
-    .export-notification-text {
-        font-size: 0.95rem;
-        opacity: 0.9;
-    }
-
-    /* Measure Mode */
-    .measure-mode-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        z-index: 8;
-    }
-
-    .measure-point {
-        position: absolute;
-        width: 16px;
-        height: 16px;
-        background: #ff3b30;
-        border: 3px solid white;
-        border-radius: 50%;
-        transform: translate(-50%, -50%);
-        box-shadow: 0 4px 15px rgba(255, 59, 48, 0.6);
-        animation: pulse-measure 1.5s infinite;
-        pointer-events: none;
-    }
-
-    @keyframes pulse-measure {
-        0%, 100% { transform: translate(-50%, -50%) scale(1); }
-        50% { transform: translate(-50%, -50%) scale(1.3); }
-    }
-
-    .measure-line {
-        position: absolute;
-        height: 3px;
-        background: linear-gradient(90deg, #ff3b30, #ff9500);
-        transform-origin: left center;
-        box-shadow: 0 2px 10px rgba(255, 59, 48, 0.5);
-        pointer-events: none;
-    }
-
-    .measure-result {
-        position: absolute;
-        background: linear-gradient(135deg, rgba(255, 59, 48, 0.95), rgba(255, 149, 0, 0.95));
-        color: white;
-        padding: 10px 20px;
-        border-radius: 12px;
-        font-weight: 700;
-        font-size: 1rem;
-        transform: translate(-50%, -120%);
-        box-shadow: 0 8px 25px rgba(255, 59, 48, 0.5);
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        white-space: nowrap;
-        pointer-events: none;
-        animation: fade-scale-in 0.3s ease;
-    }
-
-    .measure-result::after {
-        content: '';
-        position: absolute;
-        bottom: -8px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 0;
-        height: 0;
-        border-left: 8px solid transparent;
-        border-right: 8px solid transparent;
-        border-top: 8px solid rgba(255, 59, 48, 0.95);
-    }
-
-    .measure-instruction {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: rgba(0, 0, 0, 0.85);
-        backdrop-filter: blur(10px);
-        color: white;
-        padding: 20px 30px;
-        border-radius: 16px;
-        font-size: 1.1rem;
-        font-weight: 600;
-        text-align: center;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        pointer-events: none;
-        z-index: 9;
-        animation: fade-in 0.3s ease;
-    }
-
-    .measure-instruction-icon {
-        font-size: 2.5rem;
-        margin-bottom: 10px;
-    }
-
-    .measure-clear-btn {
-        position: absolute;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: linear-gradient(135deg, #ff3b30, #ff6b6b);
-        color: white;
-        padding: 10px 20px;
-        border-radius: 50px;
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        font-weight: 600;
-        cursor: pointer;
-        box-shadow: 0 8px 20px rgba(255, 59, 48, 0.4);
-        transition: all 0.3s;
-        z-index: 9;
-    }
-
-    .measure-clear-btn:hover {
-        transform: translateX(-50%) translateY(-2px);
-        box-shadow: 0 12px 30px rgba(255, 59, 48, 0.6);
-    }
-
-    /* Clickable points on model */
-    .click-indicator {
-        position: absolute;
-        width: 8px;
-        height: 8px;
-        background: #00c6ff;
-        border: 2px solid white;
-        border-radius: 50%;
-        transform: translate(-50%, -50%);
-        pointer-events: none;
-        opacity: 0;
-        animation: click-ripple 0.6s ease;
-    }
-
-    @keyframes click-ripple {
-        0% {
-            opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
-        }
-        100% {
-            opacity: 0;
-            transform: translate(-50%, -50%) scale(4);
-        }
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-        .viewer-section {
-            padding: 60px 15px;
+</script> <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&amp;family=Poppins:wght@400;600&amp;display=swap" rel="stylesheet"> <style>:root{--rec-text-main:#1a1a1a;--rec-text-secondary:#666;--rec-card-bg:rgba(255,255,255,0.9);--rec-card-border:rgba(0,123,255,0.1);--rec-glass-shine:rgba(255,255,255,0.2)}[data-theme='dark']{--rec-text-main:#fff;--rec-text-secondary:#bbb;--rec-card-bg:rgba(255,255,255,0.05);--rec-card-border:rgba(255,255,255,0.1);--rec-glass-shine:rgba(255,255,255,0.1)}.rec-section{padding:80px 20px;font-family:'Poppins',sans-serif}.rec-header{text-align:center;margin-bottom:50px}.rec-title{font-family:'Playfair Display',serif;font-size:3rem;font-style:italic;font-weight:700;color:var(--rec-text-main);margin-bottom:10px}.rec-grid{display:flex;justify-content:center;max-width:1200px;margin:0 auto}.rec-card{background:var(--rec-card-bg);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);border:1px solid var(--rec-card-border);border-radius:24px;padding:40px;max-width:600px;position:relative;overflow:hidden;transition:all .4s ease;box-shadow:0 10px 30px rgba(0,0,0,0.1)}.rec-card:hover{transform:translateY(-10px);border-color:#007bff;box-shadow:0 15px 45px rgba(0,123,255,0.2)}.rec-card::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:linear-gradient(45deg,transparent,var(--rec-glass-shine),transparent);transform:rotate(45deg);transition:.6s;opacity:0}.rec-card:hover::after{opacity:1;left:100%}.linkedin-badge{position:absolute;top:20px;left:20px;background:#0077b5;color:white;padding:5px 12px;border-radius:8px;font-size:.7rem;font-weight:600;display:flex;align-items:center;gap:5px;z-index:2}.quote-mark{position:absolute;top:10px;right:30px;font-size:5rem;color:#007bff;opacity:.1;font-family:serif}.rec-text{font-size:1rem;line-height:1.7;color:var(--rec-text-main);font-style:italic;margin:20px 0 30px 0;text-align:left}.rec-profile{display:flex;align-items:center;gap:20px;border-top:1px solid var(--rec-card-border);padding-top:20px}.profile-img{width:70px;height:70px;border-radius:50%;object-fit:cover;border:2px solid #007bff}.profile-info{text-align:left}.profile-name{font-weight:700;font-size:1.1rem;color:var(--rec-text-main);margin:0}.profile-role{font-size:.85rem;color:#007bff;margin:2px 0}.profile-meta{font-size:.75rem;color:var(--rec-text-secondary)}.rec-cta{text-align:center;margin-top:40px}.btn-linkedin{display:inline-flex;align-items:center;gap:10px;padding:12px 25px;background:#0077b5;color:white;text-decoration:none;border-radius:50px;font-weight:600;transition:.3s}.btn-linkedin:hover{transform:scale(1.05);background:#005a87}</style> <section class="rec-section"> <div class="rec-header"> <h2 class="rec-title">Recommandations</h2> <p style="color: var(--rec-text-secondary)">Ce que mes responsables disent de mon engagement.</p> </div> <div class="rec-grid"> <div class="rec-card"> <div class="linkedin-badge">LinkedIn</div> <div class="quote-mark">“</div> <p class="rec-text"> "Omar s'est rapidement intégré à l'équipe projet. Il assimile rapidement les problématiques et fait preuve d'esprit d'initiative. Ses taches ont été variées avec des essais, une reprise de la conception 3D et la mise en plan 2D en cotation géométrique. Il a ensuite assuré la vérification du montage avec les chaines de cote ainsi que le dimensionnement avec les calculs par éléments finis. Enfin, il a apporté un soin particulier à la mise en forme des résultats lors d'une présentation de synthèse très complète. Je recommande vivement Omar !" </p> <div class="rec-profile"> <img src="assets/img/Daval.jpeg" alt="Jean Daval" class="profile-img"> <div class="profile-info"> <h4 class="profile-name">Jean Daval</h4> <p class="profile-role">Mechanical Engineer - Technical Lead</p> <p class="profile-meta">Recommandé le 3 novembre 2025</p> </div> </div> </div> </div> <div class="rec-cta"> <a href="https://www.linkedin.com/in/omar-essalmani" target="_blank" class="btn-linkedin" rel="external nofollow noopener"> Voir mon profil LinkedIn </a> </div> </section> <section class="rec-section"> <div class="rec-header"> <h2 class="rec-title">My Latest LinkedIn Post</h2> <p class="rec-subtitle">Restez informé de mes derniers projets et analyses techniques.</p> </div> <div class="rec-grid-unique"> <div class="rec-card-glass"> <div class="linkedin-badge"> <i class="fab fa-linkedin"></i> LinkedIn</div> <a href="https://www.linkedin.com/posts/omar-essalmani_ingaeznierie-programmation-conceptionmaezcanique-activity-7391136624878862336-ax1C" target="_blank" rel="external nofollow noopener"> <img src="/assets/img/projects/Post.jpg" alt="Dernière publication LinkedIn de Omar ESSALMANI"> </a> </div> </div> <div class="text-center mt-4"> <p class="text-muted" style="font-size: 0.85rem; font-style: italic;"> Cliquez sur l'image pour voir le post original sur LinkedIn. </p> </div> </section> <style>.viewer-title-custom{font-family:'Playfair Display',serif!important;font-size:2.5rem!important;font-style:italic!important;font-weight:700!important;background:linear-gradient(135deg,#007bff,#00c6ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-align:center;margin:30px 0}.viewer-glass-container{background:var(--rec-card-bg,rgba(255,255,255,0.7));backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);border:1px solid var(--rec-card-border,rgba(255,255,255,0.2));border-radius:24px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,0.1);margin-bottom:50px}.control-button{background:white;border:1px solid rgba(0,123,255,0.2);padding:8px 15px;border-radius:8px;margin:4px;cursor:pointer;transition:.3s;font-weight:600}.control-button.active{background:linear-gradient(135deg,#007bff,#00c6ff);color:white;border:0}#canvas-container{height:500px;border-radius:16px;overflow:hidden;position:relative}</style> <h2 class="viewer-title-custom">Interactive 3D Tool Preview</h2> <div class="viewer-glass-container"> <div id="canvas-container"> <canvas id="canvas-3d"></canvas> <div class="instructions"> <div class="instruction-item"> <span class="instruction-icon">🖱️</span> <span class="instruction-desktop">Glisser pour pivoter</span> </div> </div> </div> <div class="controls-panel"> <div class="control-group"> <label class="control-label"><span>🎨</span> Mode d'affichage</label> <button class="control-button active" id="btn-solid" onclick="setRenderMode('solid')">Solide</button> <button class="control-button" id="btn-wireframe" onclick="setRenderMode('wireframe')">Filaire</button> </div> </div> <div class="info-box"> <div class="info-title">💡 À propos de ce modèle</div> <div class="info-content"> <strong>Pièce mécanique personnalisée</strong> - Ce modèle 3D représente un exemple de conception mécanique... </div> </div> </div> <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script> <script>
+    /* 1. COPIEZ ICI TOUT LE JAVASCRIPT DE VOTRE FICHIER A.txt */
+    /* (Toutes les variables et fonctions : init, animate, etc.) */
+ // === THREE.JS SETUP ===
+        let scene, camera, renderer, mesh, material;
+        let isRotating = false;
+        let mouseDown = false;
+        let mouseX = 0, mouseY = 0;
+        let dimensionsVisible = false;
+        let annotationsVisible = false;
+        let dimensionElements = [];
+        let annotationElements = [];
+        
+        // Measure mode variables
+        let measureMode = false;
+        let measurePoints = [];
+        let measureElements = [];
+        let raycaster = new THREE.Raycaster();
+        let mouse = new THREE.Vector2();
+
+        function init() {
+            const canvas = document.getElementById('canvas-3d');
+            const container = canvas.parentElement;
+
+            // Scene
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x1a1a2e);
+
+            // Camera
+            camera = new THREE.PerspectiveCamera(
+                75,
+                canvas.clientWidth / canvas.clientHeight,
+                0.1,
+                1000
+            );
+            camera.position.z = 5;
+
+            // Renderer
+            renderer = new THREE.WebGLRenderer({ 
+                canvas: canvas,
+                antialias: true 
+            });
+            renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+
+            // Lights
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+            scene.add(ambientLight);
+
+            const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight1.position.set(5, 5, 5);
+            scene.add(directionalLight1);
+
+            const directionalLight2 = new THREE.DirectionalLight(0x00c6ff, 0.4);
+            directionalLight2.position.set(-5, -5, -5);
+            scene.add(directionalLight2);
+
+            // Create a mechanical part geometry (gear-like shape)
+            createMechanicalPart();
+
+            // Mouse controls
+            setupControls();
+
+            // Start animation
+            animate();
+
+            // Handle resize
+            window.addEventListener('resize', onWindowResize);
         }
 
-        .viewer-title {
-            font-size: 2rem;
+        function createMechanicalPart() {
+            // Create a complex mechanical shape
+            const group = new THREE.Group();
+
+            // Main cylinder body
+            const bodyGeometry = new THREE.CylinderGeometry(1.5, 1.5, 2, 32);
+            material = new THREE.MeshStandardMaterial({
+                color: 0x007bff,
+                metalness: 0.5,
+                roughness: 0.3
+            });
+            const body = new THREE.Mesh(bodyGeometry, material);
+            group.add(body);
+
+            // Create gear teeth
+            const toothGeometry = new THREE.BoxGeometry(0.3, 2.2, 0.4);
+            const toothMaterial = new THREE.MeshStandardMaterial({
+                color: 0x007bff,
+                metalness: 0.5,
+                roughness: 0.3
+            });
+
+            const teethCount = 12;
+            for (let i = 0; i < teethCount; i++) {
+                const angle = (i / teethCount) * Math.PI * 2;
+                const tooth = new THREE.Mesh(toothGeometry, toothMaterial);
+                tooth.position.x = Math.cos(angle) * 1.65;
+                tooth.position.z = Math.sin(angle) * 1.65;
+                tooth.rotation.y = angle;
+                group.add(tooth);
+            }
+
+            // Center hole
+            const holeGeometry = new THREE.CylinderGeometry(0.5, 0.5, 2.3, 32);
+            const holeMaterial = new THREE.MeshStandardMaterial({
+                color: 0x0a0a0a,
+                metalness: 0.8,
+                roughness: 0.2
+            });
+            const hole = new THREE.Mesh(holeGeometry, holeMaterial);
+            group.add(hole);
+
+            // Add mounting holes
+            const mountHoleGeometry = new THREE.CylinderGeometry(0.15, 0.15, 2.3, 16);
+            const positions = [
+                { x: 0.8, z: 0 },
+                { x: -0.8, z: 0 },
+                { x: 0, z: 0.8 },
+                { x: 0, z: -0.8 }
+            ];
+
+            positions.forEach(pos => {
+                const mountHole = new THREE.Mesh(mountHoleGeometry, holeMaterial);
+                mountHole.position.set(pos.x, 0, pos.z);
+                group.add(mountHole);
+            });
+
+            mesh = group;
+            scene.add(mesh);
+
+            // Update stats
+            updateStats();
         }
 
-        #canvas-3d {
-            height: 400px;
-        }
+        function setupControls() {
+            const canvas = document.getElementById('canvas-3d');
 
-        .controls-panel {
-            grid-template-columns: 1fr;
-        }
-
-        .stats-display,
-        .instructions {
-            font-size: 0.75rem;
-            padding: 10px 15px;
-        }
-
-        /* Mobile instructions */
-        .instruction-desktop {
-            display: none;
-        }
-
-        .instruction-mobile {
-            display: inline !important;
-        }
-
-        .instruction-desktop-only {
-            display: none !important;
-        }
-
-        /* Touch-friendly buttons */
-        .control-button {
-            padding: 14px 22px;
-            font-size: 0.95rem;
-        }
-    }
-&lt;/style&gt;
-
-
-
-        &lt;!-- Header --&gt;
-        &lt;div class="viewer-header"&gt;
-            &lt;h2 class="viewer-title"&gt;Visualisation 3D Interactive&lt;/h2&gt;
-            &lt;p class="viewer-subtitle"&gt;
-                Explorez un modèle de pièce mécanique en temps réel
-            &lt;/p&gt;
-        &lt;/div&gt;
-
-        &lt;!-- 3D Viewer Card --&gt;
-        &lt;div class="viewer-card"&gt;
-            &lt;div id="canvas-container" style="position: relative;"&gt;
-                &lt;canvas id="canvas-3d"&gt;&lt;/canvas&gt;
+            // === MOUSE CONTROLS (Desktop) ===
+            canvas.addEventListener('mousedown', (e) => {
+                if (measureMode) {
+                    handleMeasureClick(e);
+                    return;
+                }
                 
-                &lt;!-- Loading --&gt;
-                &lt;div class="loading-overlay" id="loading" style="display: none;"&gt;
-                    &lt;div class="loading-spinner"&gt;&lt;/div&gt;
-                &lt;/div&gt;
-
-                &lt;!-- Stats --&gt;
-                &lt;div class="stats-display"&gt;
-                    &lt;div class="stat-item"&gt;
-                        &lt;span class="stat-label"&gt;Vertices:&lt;/span&gt;
-                        &lt;span class="stat-value" id="stat-vertices"&gt;0&lt;/span&gt;
-                    &lt;/div&gt;
-                    &lt;div class="stat-item"&gt;
-                        &lt;span class="stat-label"&gt;Faces:&lt;/span&gt;
-                        &lt;span class="stat-value" id="stat-faces"&gt;0&lt;/span&gt;
-                    &lt;/div&gt;
-                    &lt;div class="stat-item"&gt;
-                        &lt;span class="stat-label"&gt;FPS:&lt;/span&gt;
-                        &lt;span class="stat-value" id="stat-fps"&gt;60&lt;/span&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-
-                &lt;!-- Instructions --&gt;
-                &lt;div class="instructions"&gt;
-                    &lt;div class="instruction-item"&gt;
-                        &lt;span class="instruction-icon"&gt;🖱️&lt;/span&gt;
-                        &lt;span class="instruction-desktop"&gt;Glisser pour pivoter&lt;/span&gt;
-                        &lt;span class="instruction-mobile" style="display: none;"&gt;Glisser 1 doigt pour pivoter&lt;/span&gt;
-                    &lt;/div&gt;
-                    &lt;div class="instruction-item"&gt;
-                        &lt;span class="instruction-icon"&gt;🔍&lt;/span&gt;
-                        &lt;span class="instruction-desktop"&gt;Molette pour zoomer&lt;/span&gt;
-                        &lt;span class="instruction-mobile" style="display: none;"&gt;Pincer pour zoomer&lt;/span&gt;
-                    &lt;/div&gt;
-                    &lt;div class="instruction-item instruction-desktop-only"&gt;
-                        &lt;span class="instruction-icon"&gt;⌨️&lt;/span&gt;
-                        &lt;span&gt;Clic droit pour déplacer&lt;/span&gt;
-                    &lt;/div&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-
-            &lt;!-- Controls --&gt;
-            &lt;div class="controls-panel"&gt;
-                &lt;div class="control-group"&gt;
-                    &lt;label class="control-label"&gt;
-                        &lt;span&gt;🎨&lt;/span&gt; Mode d'affichage
-                    &lt;/label&gt;
-                    &lt;button class="control-button active" id="btn-solid" onclick="setRenderMode('solid')"&gt;
-                        Solide
-                    &lt;/button&gt;
-                    &lt;button class="control-button" id="btn-wireframe" onclick="setRenderMode('wireframe')"&gt;
-                        Filaire
-                    &lt;/button&gt;
-                &lt;/div&gt;
-
-                &lt;div class="control-group"&gt;
-                    &lt;label class="control-label"&gt;
-                        &lt;span&gt;💡&lt;/span&gt; Affichage
-                    &lt;/label&gt;
-                    &lt;button class="control-button" onclick="toggleRotation()"&gt;
-                        &lt;span id="rotation-icon"&gt;▶️&lt;/span&gt; Auto-rotation
-                    &lt;/button&gt;
-                    &lt;button class="control-button" onclick="resetCamera()"&gt;
-                        🔄 Réinitialiser
-                    &lt;/button&gt;
-                &lt;/div&gt;
-
-                &lt;div class="control-group"&gt;
-                    &lt;label class="control-label"&gt;
-                        &lt;span&gt;📏&lt;/span&gt; Mesures
-                    &lt;/label&gt;
-                    &lt;button class="control-button" id="btn-measure" onclick="toggleMeasureMode()"&gt;
-                        📐 Mode Mesure
-                    &lt;/button&gt;
-                    &lt;button class="control-button" id="btn-dimensions" onclick="toggleDimensions()"&gt;
-                        Afficher cotations
-                    &lt;/button&gt;
-                    &lt;button class="control-button" id="btn-annotations" onclick="toggleAnnotations()"&gt;
-                        Afficher annotations
-                    &lt;/button&gt;
-                &lt;/div&gt;
-
-                &lt;div class="control-group"&gt;
-                    &lt;label class="control-label"&gt;
-                        &lt;span&gt;💾&lt;/span&gt; Export
-                    &lt;/label&gt;
-                    &lt;button class="control-button" onclick="exportScreenshot()"&gt;
-                        📸 Screenshot PNG
-                    &lt;/button&gt;
-                    &lt;button class="control-button" onclick="exportModel()"&gt;
-                        📦 Modèle STL
-                    &lt;/button&gt;
-                &lt;/div&gt;
-
-                &lt;div class="control-group"&gt;
-                    &lt;label class="control-label"&gt;
-                        &lt;span&gt;🌈&lt;/span&gt; Couleur: &lt;span id="color-value"&gt;#007bff&lt;/span&gt;
-                    &lt;/label&gt;
-                    &lt;input type="range" class="control-slider" id="color-hue" min="0" max="360" value="210" oninput="updateColor(this.value)"&gt;
-                &lt;/div&gt;
-
-                &lt;div class="control-group"&gt;
-                    &lt;label class="control-label"&gt;
-                        &lt;span&gt;✨&lt;/span&gt; Métallique: &lt;span id="metalness-value"&gt;0.5&lt;/span&gt;
-                    &lt;/label&gt;
-                    &lt;input type="range" class="control-slider" id="metalness" min="0" max="1" step="0.1" value="0.5" oninput="updateMetalness(this.value)"&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-
-            &lt;!-- Info Box --&gt;
-            &lt;div class="info-box"&gt;
-                &lt;div class="info-title"&gt;
-                    💡 À propos de ce modèle
-                &lt;/div&gt;
-                &lt;div class="info-content"&gt;
-                    &lt;strong&gt;Pièce mécanique personnalisée&lt;/strong&gt; - Ce modèle 3D représente un exemple de conception mécanique. 
-                    Utilisez les contrôles ci-dessus pour explorer la géométrie sous différents angles et modes de rendu. 
-                    Cette visualisation démontre l'intégration de Three.js pour présenter des modèles CAO de manière interactive.
-                &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-&lt;/section&gt;
-
-&lt;!-- Export Notification --&gt;
-&lt;div class="export-notification" id="export-notification"&gt;
-    &lt;div class="export-notification-icon"&gt;✅&lt;/div&gt;
-    &lt;div class="export-notification-title"&gt;Export réussi !&lt;/div&gt;
-    &lt;div class="export-notification-text"&gt;Le fichier a été téléchargé&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;script&gt;
-    // === THREE.JS SETUP ===
-    let scene, camera, renderer, mesh, material;
-    let isRotating = false;
-    let mouseDown = false;
-    let mouseX = 0, mouseY = 0;
-    let dimensionsVisible = false;
-    let annotationsVisible = false;
-    let dimensionElements = [];
-    let annotationElements = [];
-    
-    // Measure mode variables
-    let measureMode = false;
-    let measurePoints = [];
-    let measureElements = [];
-    let raycaster = new THREE.Raycaster();
-    let mouse = new THREE.Vector2();
-
-    function init() {
-        const canvas = document.getElementById('canvas-3d');
-        const container = canvas.parentElement;
-
-        // Scene
-        scene = new THREE.Scene();
-        scene.background = new THREE.Color(0x1a1a2e);
-
-        // Camera
-        camera = new THREE.PerspectiveCamera(
-            75,
-            canvas.clientWidth / canvas.clientHeight,
-            0.1,
-            1000
-        );
-        camera.position.z = 5;
-
-        // Renderer
-        renderer = new THREE.WebGLRenderer({ 
-            canvas: canvas,
-            antialias: true 
-        });
-        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-        renderer.setPixelRatio(window.devicePixelRatio);
-
-        // Lights
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-        scene.add(ambientLight);
-
-        const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.8);
-        directionalLight1.position.set(5, 5, 5);
-        scene.add(directionalLight1);
-
-        const directionalLight2 = new THREE.DirectionalLight(0x00c6ff, 0.4);
-        directionalLight2.position.set(-5, -5, -5);
-        scene.add(directionalLight2);
-
-        // Create a mechanical part geometry (gear-like shape)
-        createMechanicalPart();
-
-        // Mouse controls
-        setupControls();
-
-        // Start animation
-        animate();
-
-        // Handle resize
-        window.addEventListener('resize', onWindowResize);
-    }
-
-    function createMechanicalPart() {
-        // Create a complex mechanical shape
-        const group = new THREE.Group();
-
-        // Main cylinder body
-        const bodyGeometry = new THREE.CylinderGeometry(1.5, 1.5, 2, 32);
-        material = new THREE.MeshStandardMaterial({
-            color: 0x007bff,
-            metalness: 0.5,
-            roughness: 0.3
-        });
-        const body = new THREE.Mesh(bodyGeometry, material);
-        group.add(body);
-
-        // Create gear teeth
-        const toothGeometry = new THREE.BoxGeometry(0.3, 2.2, 0.4);
-        const toothMaterial = new THREE.MeshStandardMaterial({
-            color: 0x007bff,
-            metalness: 0.5,
-            roughness: 0.3
-        });
-
-        const teethCount = 12;
-        for (let i = 0; i &lt; teethCount; i++) {
-            const angle = (i / teethCount) * Math.PI * 2;
-            const tooth = new THREE.Mesh(toothGeometry, toothMaterial);
-            tooth.position.x = Math.cos(angle) * 1.65;
-            tooth.position.z = Math.sin(angle) * 1.65;
-            tooth.rotation.y = angle;
-            group.add(tooth);
-        }
-
-        // Center hole
-        const holeGeometry = new THREE.CylinderGeometry(0.5, 0.5, 2.3, 32);
-        const holeMaterial = new THREE.MeshStandardMaterial({
-            color: 0x0a0a0a,
-            metalness: 0.8,
-            roughness: 0.2
-        });
-        const hole = new THREE.Mesh(holeGeometry, holeMaterial);
-        group.add(hole);
-
-        // Add mounting holes
-        const mountHoleGeometry = new THREE.CylinderGeometry(0.15, 0.15, 2.3, 16);
-        const positions = [
-            { x: 0.8, z: 0 },
-            { x: -0.8, z: 0 },
-            { x: 0, z: 0.8 },
-            { x: 0, z: -0.8 }
-        ];
-
-        positions.forEach(pos =&gt; {
-            const mountHole = new THREE.Mesh(mountHoleGeometry, holeMaterial);
-            mountHole.position.set(pos.x, 0, pos.z);
-            group.add(mountHole);
-        });
-
-        mesh = group;
-        scene.add(mesh);
-
-        // Update stats
-        updateStats();
-    }
-
-    function setupControls() {
-        const canvas = document.getElementById('canvas-3d');
-
-        // === MOUSE CONTROLS (Desktop) ===
-        canvas.addEventListener('mousedown', (e) =&gt; {
-            if (measureMode) {
-                handleMeasureClick(e);
-                return;
-            }
-            
-            mouseDown = true;
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-
-        canvas.addEventListener('mouseup', () =&gt; {
-            if (!measureMode) {
-                mouseDown = false;
-            }
-        });
-
-        canvas.addEventListener('mousemove', (e) =&gt; {
-            if (measureMode) {
-                return; // Pas de rotation en mode mesure
-            }
-            
-            if (mouseDown) {
-                const deltaX = e.clientX - mouseX;
-                const deltaY = e.clientY - mouseY;
-
-                mesh.rotation.y += deltaX * 0.01;
-                mesh.rotation.x += deltaY * 0.01;
-
+                mouseDown = true;
                 mouseX = e.clientX;
                 mouseY = e.clientY;
-            }
-        });
+            });
 
-        canvas.addEventListener('wheel', (e) =&gt; {
-            e.preventDefault();
-            camera.position.z += e.deltaY * 0.01;
-            camera.position.z = Math.max(2, Math.min(10, camera.position.z));
-        });
+            canvas.addEventListener('mouseup', () => {
+                if (!measureMode) {
+                    mouseDown = false;
+                }
+            });
 
-        // === TOUCH CONTROLS (Mobile/Tablet) ===
-        let touchStartX = 0;
-        let touchStartY = 0;
-        let touchStartDistance = 0;
-        let initialCameraZ = camera.position.z;
-        let isTwoFingerTouch = false;
-
-        // Touch Start
-        canvas.addEventListener('touchstart', (e) =&gt; {
-            e.preventDefault();
-            
-            if (measureMode &amp;&amp; e.touches.length === 1) {
-                handleMeasureTouch(e);
-                return;
-            }
-            
-            if (e.touches.length === 1) {
-                // Single finger - rotation
-                isTwoFingerTouch = false;
-                touchStartX = e.touches[0].clientX;
-                touchStartY = e.touches[0].clientY;
-            } else if (e.touches.length === 2) {
-                // Two fingers - pinch zoom
-                isTwoFingerTouch = true;
-                const dx = e.touches[0].clientX - e.touches[1].clientX;
-                const dy = e.touches[0].clientY - e.touches[1].clientY;
-                touchStartDistance = Math.sqrt(dx * dx + dy * dy);
-                initialCameraZ = camera.position.z;
-            }
-        }, { passive: false });
-
-        // Touch Move
-        canvas.addEventListener('touchmove', (e) =&gt; {
-            e.preventDefault();
-            
-            if (measureMode) {
-                return; // Pas de mouvement en mode mesure
-            }
-            
-            if (e.touches.length === 1 &amp;&amp; !isTwoFingerTouch) {
-                // Single finger - rotation
-                const touchX = e.touches[0].clientX;
-                const touchY = e.touches[0].clientY;
+            canvas.addEventListener('mousemove', (e) => {
+                if (measureMode) {
+                    return; // Pas de rotation en mode mesure
+                }
                 
-                const deltaX = touchX - touchStartX;
-                const deltaY = touchY - touchStartY;
+                if (mouseDown) {
+                    const deltaX = e.clientX - mouseX;
+                    const deltaY = e.clientY - mouseY;
 
-                mesh.rotation.y += deltaX * 0.01;
-                mesh.rotation.x += deltaY * 0.01;
+                    mesh.rotation.y += deltaX * 0.01;
+                    mesh.rotation.x += deltaY * 0.01;
 
-                touchStartX = touchX;
-                touchStartY = touchY;
-            } else if (e.touches.length === 2) {
-                // Two fingers - pinch zoom
-                const dx = e.touches[0].clientX - e.touches[1].clientX;
-                const dy = e.touches[0].clientY - e.touches[1].clientY;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                
-                const zoomFactor = touchStartDistance / distance;
-                camera.position.z = initialCameraZ * zoomFactor;
+                    mouseX = e.clientX;
+                    mouseY = e.clientY;
+                }
+            });
+
+            canvas.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                camera.position.z += e.deltaY * 0.01;
                 camera.position.z = Math.max(2, Math.min(10, camera.position.z));
-            }
-        }, { passive: false });
+            });
 
-        // Touch End
-        canvas.addEventListener('touchend', (e) =&gt; {
-            if (e.touches.length &lt; 2) {
-                isTwoFingerTouch = false;
-            }
-        });
+            // === TOUCH CONTROLS (Mobile/Tablet) ===
+            let touchStartX = 0;
+            let touchStartY = 0;
+            let touchStartDistance = 0;
+            let initialCameraZ = camera.position.z;
+            let isTwoFingerTouch = false;
 
-        // Prevent context menu on long press (mobile)
-        canvas.addEventListener('contextmenu', (e) =&gt; {
-            e.preventDefault();
-        });
-    }
+            // Touch Start
+            canvas.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                
+                if (measureMode && e.touches.length === 1) {
+                    handleMeasureTouch(e);
+                    return;
+                }
+                
+                if (e.touches.length === 1) {
+                    // Single finger - rotation
+                    isTwoFingerTouch = false;
+                    touchStartX = e.touches[0].clientX;
+                    touchStartY = e.touches[0].clientY;
+                } else if (e.touches.length === 2) {
+                    // Two fingers - pinch zoom
+                    isTwoFingerTouch = true;
+                    const dx = e.touches[0].clientX - e.touches[1].clientX;
+                    const dy = e.touches[0].clientY - e.touches[1].clientY;
+                    touchStartDistance = Math.sqrt(dx * dx + dy * dy);
+                    initialCameraZ = camera.position.z;
+                }
+            }, { passive: false });
 
-    function animate() {
-        requestAnimationFrame(animate);
+            // Touch Move
+            canvas.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                
+                if (measureMode) {
+                    return; // Pas de mouvement en mode mesure
+                }
+                
+                if (e.touches.length === 1 && !isTwoFingerTouch) {
+                    // Single finger - rotation
+                    const touchX = e.touches[0].clientX;
+                    const touchY = e.touches[0].clientY;
+                    
+                    const deltaX = touchX - touchStartX;
+                    const deltaY = touchY - touchStartY;
 
-        if (isRotating) {
-            mesh.rotation.y += 0.005;
+                    mesh.rotation.y += deltaX * 0.01;
+                    mesh.rotation.x += deltaY * 0.01;
+
+                    touchStartX = touchX;
+                    touchStartY = touchY;
+                } else if (e.touches.length === 2) {
+                    // Two fingers - pinch zoom
+                    const dx = e.touches[0].clientX - e.touches[1].clientX;
+                    const dy = e.touches[0].clientY - e.touches[1].clientY;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    const zoomFactor = touchStartDistance / distance;
+                    camera.position.z = initialCameraZ * zoomFactor;
+                    camera.position.z = Math.max(2, Math.min(10, camera.position.z));
+                }
+            }, { passive: false });
+
+            // Touch End
+            canvas.addEventListener('touchend', (e) => {
+                if (e.touches.length < 2) {
+                    isTwoFingerTouch = false;
+                }
+            });
+
+            // Prevent context menu on long press (mobile)
+            canvas.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+            });
         }
 
-        renderer.render(scene, camera);
-        updateFPS();
-        
-        // Update dimensions and annotations positions
-        if (dimensionsVisible) {
+        function animate() {
+            requestAnimationFrame(animate);
+
+            if (isRotating) {
+                mesh.rotation.y += 0.005;
+            }
+
+            renderer.render(scene, camera);
+            updateFPS();
+            
+            // Update dimensions and annotations positions
+            if (dimensionsVisible) {
+                updateDimensionPositions();
+            }
+            if (annotationsVisible) {
+                updateAnnotationPositions();
+            }
+        }
+
+        function onWindowResize() {
+            const canvas = document.getElementById('canvas-3d');
+            camera.aspect = canvas.clientWidth / canvas.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+        }
+
+        // === CONTROLS ===
+        function setRenderMode(mode) {
+            document.getElementById('btn-solid').classList.remove('active');
+            document.getElementById('btn-wireframe').classList.remove('active');
+            document.getElementById(`btn-${mode}`).classList.add('active');
+
+            mesh.traverse((child) => {
+                if (child.isMesh && child.material) {
+                    child.material.wireframe = (mode === 'wireframe');
+                }
+            });
+        }
+
+        function toggleRotation() {
+            isRotating = !isRotating;
+            document.getElementById('rotation-icon').textContent = isRotating ? '⏸️' : '▶️';
+        }
+
+        function resetCamera() {
+            camera.position.set(0, 0, 5);
+            mesh.rotation.set(0, 0, 0);
+        }
+
+        function updateColor(hue) {
+            const color = new THREE.Color(`hsl(${hue}, 100%, 50%)`);
+            mesh.traverse((child) => {
+                if (child.isMesh && child.material && child.material.color) {
+                    child.material.color = color;
+                }
+            });
+            document.getElementById('color-value').textContent = `#${color.getHexString()}`;
+        }
+
+        function updateMetalness(value) {
+            mesh.traverse((child) => {
+                if (child.isMesh && child.material && child.material.metalness !== undefined) {
+                    child.material.metalness = parseFloat(value);
+                }
+            });
+            document.getElementById('metalness-value').textContent = value;
+        }
+
+        // === STATS ===
+        function updateStats() {
+            let vertices = 0;
+            let faces = 0;
+
+            mesh.traverse((child) => {
+                if (child.isMesh && child.geometry) {
+                    vertices += child.geometry.attributes.position.count;
+                    faces += child.geometry.index ? child.geometry.index.count / 3 : child.geometry.attributes.position.count / 3;
+                }
+            });
+
+            document.getElementById('stat-vertices').textContent = vertices.toLocaleString();
+            document.getElementById('stat-faces').textContent = Math.floor(faces).toLocaleString();
+        }
+
+        let lastTime = Date.now();
+        let fps = 60;
+
+        function updateFPS() {
+            const now = Date.now();
+            const delta = now - lastTime;
+            fps = Math.round(1000 / delta);
+            document.getElementById('stat-fps').textContent = fps;
+            lastTime = now;
+        }
+
+        // === DIMENSIONS (COTATIONS) ===
+        function toggleDimensions() {
+            dimensionsVisible = !dimensionsVisible;
+            const btn = document.getElementById('btn-dimensions');
+            
+            if (dimensionsVisible) {
+                btn.classList.add('active');
+                createDimensions();
+            } else {
+                btn.classList.remove('active');
+                removeDimensions();
+            }
+        }
+
+        function createDimensions() {
+            const container = document.getElementById('canvas-container');
+            
+            // Dimension 1: Diamètre extérieur
+            const dim1 = createDimensionElement('Ø 3.30 mm', 'diameter');
+            dimensionElements.push(dim1);
+            container.appendChild(dim1.element);
+            
+            // Dimension 2: Hauteur
+            const dim2 = createDimensionElement('H 2.00 mm', 'height');
+            dimensionElements.push(dim2);
+            container.appendChild(dim2.element);
+            
+            // Dimension 3: Trou central
+            const dim3 = createDimensionElement('Ø 1.00 mm', 'hole');
+            dimensionElements.push(dim3);
+            container.appendChild(dim3.element);
+            
             updateDimensionPositions();
         }
-        if (annotationsVisible) {
+
+        function createDimensionElement(text, type) {
+            const element = document.createElement('div');
+            element.className = 'dimension-text';
+            element.textContent = text;
+            element.style.display = 'none';
+            
+            return { element, text, type };
+        }
+
+        function updateDimensionPositions() {
+            dimensionElements.forEach(dim => {
+                let worldPos;
+                
+                switch(dim.type) {
+                    case 'diameter':
+                        worldPos = new THREE.Vector3(2, 0, 0);
+                        break;
+                    case 'height':
+                        worldPos = new THREE.Vector3(2.5, 0, 0);
+                        break;
+                    case 'hole':
+                        worldPos = new THREE.Vector3(0, 0, 0);
+                        break;
+                }
+                
+                worldPos.applyMatrix4(mesh.matrixWorld);
+                const screenPos = toScreenPosition(worldPos);
+                
+                if (screenPos.z < 1) {
+                    dim.element.style.left = screenPos.x + 'px';
+                    dim.element.style.top = screenPos.y + 'px';
+                    dim.element.style.display = 'block';
+                } else {
+                    dim.element.style.display = 'none';
+                }
+            });
+        }
+
+        function removeDimensions() {
+            dimensionElements.forEach(dim => {
+                if (dim.element.parentNode) {
+                    dim.element.parentNode.removeChild(dim.element);
+                }
+            });
+            dimensionElements = [];
+        }
+
+        // === ANNOTATIONS ===
+        function toggleAnnotations() {
+            annotationsVisible = !annotationsVisible;
+            const btn = document.getElementById('btn-annotations');
+            
+            if (annotationsVisible) {
+                btn.classList.add('active');
+                createAnnotations();
+            } else {
+                btn.classList.remove('active');
+                removeAnnotations();
+            }
+        }
+
+        function createAnnotations() {
+            const container = document.getElementById('canvas-container');
+            
+            const annotations = [
+                { 
+                    position: new THREE.Vector3(1.65, 0.5, 0),
+                    label: 'Dents de l\'engrenage (12x)',
+                    color: '#ff3b30'
+                },
+                { 
+                    position: new THREE.Vector3(0, 0, 0),
+                    label: 'Trou central Ø1.0mm',
+                    color: '#ff9500'
+                },
+                { 
+                    position: new THREE.Vector3(0.8, 0.8, 0),
+                    label: 'Trou de fixation M3',
+                    color: '#34c759'
+                }
+            ];
+            
+            annotations.forEach(ann => {
+                const element = createAnnotationElement(ann);
+                annotationElements.push({ element, position: ann.position });
+                container.appendChild(element);
+            });
+            
             updateAnnotationPositions();
         }
-    }
 
-    function onWindowResize() {
-        const canvas = document.getElementById('canvas-3d');
-        camera.aspect = canvas.clientWidth / canvas.clientHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-    }
-
-    // === CONTROLS ===
-    function setRenderMode(mode) {
-        document.getElementById('btn-solid').classList.remove('active');
-        document.getElementById('btn-wireframe').classList.remove('active');
-        document.getElementById(`btn-${mode}`).classList.add('active');
-
-        mesh.traverse((child) =&gt; {
-            if (child.isMesh &amp;&amp; child.material) {
-                child.material.wireframe = (mode === 'wireframe');
-            }
-        });
-    }
-
-    function toggleRotation() {
-        isRotating = !isRotating;
-        document.getElementById('rotation-icon').textContent = isRotating ? '⏸️' : '▶️';
-    }
-
-    function resetCamera() {
-        camera.position.set(0, 0, 5);
-        mesh.rotation.set(0, 0, 0);
-    }
-
-    function updateColor(hue) {
-        const color = new THREE.Color(`hsl(${hue}, 100%, 50%)`);
-        mesh.traverse((child) =&gt; {
-            if (child.isMesh &amp;&amp; child.material &amp;&amp; child.material.color) {
-                child.material.color = color;
-            }
-        });
-        document.getElementById('color-value').textContent = `#${color.getHexString()}`;
-    }
-
-    function updateMetalness(value) {
-        mesh.traverse((child) =&gt; {
-            if (child.isMesh &amp;&amp; child.material &amp;&amp; child.material.metalness !== undefined) {
-                child.material.metalness = parseFloat(value);
-            }
-        });
-        document.getElementById('metalness-value').textContent = value;
-    }
-
-    // === STATS ===
-    function updateStats() {
-        let vertices = 0;
-        let faces = 0;
-
-        mesh.traverse((child) =&gt; {
-            if (child.isMesh &amp;&amp; child.geometry) {
-                vertices += child.geometry.attributes.position.count;
-                faces += child.geometry.index ? child.geometry.index.count / 3 : child.geometry.attributes.position.count / 3;
-            }
-        });
-
-        document.getElementById('stat-vertices').textContent = vertices.toLocaleString();
-        document.getElementById('stat-faces').textContent = Math.floor(faces).toLocaleString();
-    }
-
-    let lastTime = Date.now();
-    let fps = 60;
-
-    function updateFPS() {
-        const now = Date.now();
-        const delta = now - lastTime;
-        fps = Math.round(1000 / delta);
-        document.getElementById('stat-fps').textContent = fps;
-        lastTime = now;
-    }
-
-    // === DIMENSIONS (COTATIONS) ===
-    function toggleDimensions() {
-        dimensionsVisible = !dimensionsVisible;
-        const btn = document.getElementById('btn-dimensions');
-        
-        if (dimensionsVisible) {
-            btn.classList.add('active');
-            createDimensions();
-        } else {
-            btn.classList.remove('active');
-            removeDimensions();
+        function createAnnotationElement(annotation) {
+            const div = document.createElement('div');
+            div.className = 'annotation';
+            
+            const dot = document.createElement('div');
+            dot.className = 'annotation-dot';
+            dot.style.background = annotation.color;
+            
+            const label = document.createElement('div');
+            label.className = 'annotation-label';
+            label.style.background = annotation.color;
+            label.textContent = annotation.label;
+            
+            div.appendChild(dot);
+            div.appendChild(label);
+            
+            return div;
         }
-    }
 
-    function createDimensions() {
-        const container = document.getElementById('canvas-container');
-        
-        // Dimension 1: Diamètre extérieur
-        const dim1 = createDimensionElement('Ø 3.30 mm', 'diameter');
-        dimensionElements.push(dim1);
-        container.appendChild(dim1.element);
-        
-        // Dimension 2: Hauteur
-        const dim2 = createDimensionElement('H 2.00 mm', 'height');
-        dimensionElements.push(dim2);
-        container.appendChild(dim2.element);
-        
-        // Dimension 3: Trou central
-        const dim3 = createDimensionElement('Ø 1.00 mm', 'hole');
-        dimensionElements.push(dim3);
-        container.appendChild(dim3.element);
-        
-        updateDimensionPositions();
-    }
-
-    function createDimensionElement(text, type) {
-        const element = document.createElement('div');
-        element.className = 'dimension-text';
-        element.textContent = text;
-        element.style.display = 'none';
-        
-        return { element, text, type };
-    }
-
-    function updateDimensionPositions() {
-        dimensionElements.forEach(dim =&gt; {
-            let worldPos;
-            
-            switch(dim.type) {
-                case 'diameter':
-                    worldPos = new THREE.Vector3(2, 0, 0);
-                    break;
-                case 'height':
-                    worldPos = new THREE.Vector3(2.5, 0, 0);
-                    break;
-                case 'hole':
-                    worldPos = new THREE.Vector3(0, 0, 0);
-                    break;
-            }
-            
-            worldPos.applyMatrix4(mesh.matrixWorld);
-            const screenPos = toScreenPosition(worldPos);
-            
-            if (screenPos.z &lt; 1) {
-                dim.element.style.left = screenPos.x + 'px';
-                dim.element.style.top = screenPos.y + 'px';
-                dim.element.style.display = 'block';
-            } else {
-                dim.element.style.display = 'none';
-            }
-        });
-    }
-
-    function removeDimensions() {
-        dimensionElements.forEach(dim =&gt; {
-            if (dim.element.parentNode) {
-                dim.element.parentNode.removeChild(dim.element);
-            }
-        });
-        dimensionElements = [];
-    }
-
-    // === ANNOTATIONS ===
-    function toggleAnnotations() {
-        annotationsVisible = !annotationsVisible;
-        const btn = document.getElementById('btn-annotations');
-        
-        if (annotationsVisible) {
-            btn.classList.add('active');
-            createAnnotations();
-        } else {
-            btn.classList.remove('active');
-            removeAnnotations();
+        function updateAnnotationPositions() {
+            annotationElements.forEach(ann => {
+                const worldPos = ann.position.clone();
+                worldPos.applyMatrix4(mesh.matrixWorld);
+                const screenPos = toScreenPosition(worldPos);
+                
+                if (screenPos.z < 1) {
+                    ann.element.style.left = (screenPos.x - 6) + 'px';
+                    ann.element.style.top = (screenPos.y - 6) + 'px';
+                    ann.element.style.display = 'flex';
+                } else {
+                    ann.element.style.display = 'none';
+                }
+            });
         }
-    }
 
-    function createAnnotations() {
-        const container = document.getElementById('canvas-container');
-        
-        const annotations = [
-            { 
-                position: new THREE.Vector3(1.65, 0.5, 0),
-                label: 'Dents de l\'engrenage (12x)',
-                color: '#ff3b30'
-            },
-            { 
-                position: new THREE.Vector3(0, 0, 0),
-                label: 'Trou central Ø1.0mm',
-                color: '#ff9500'
-            },
-            { 
-                position: new THREE.Vector3(0.8, 0.8, 0),
-                label: 'Trou de fixation M3',
-                color: '#34c759'
-            }
-        ];
-        
-        annotations.forEach(ann =&gt; {
-            const element = createAnnotationElement(ann);
-            annotationElements.push({ element, position: ann.position });
-            container.appendChild(element);
-        });
-        
-        updateAnnotationPositions();
-    }
+        function removeAnnotations() {
+            annotationElements.forEach(ann => {
+                if (ann.element.parentNode) {
+                    ann.element.parentNode.removeChild(ann.element);
+                }
+            });
+            annotationElements = [];
+        }
 
-    function createAnnotationElement(annotation) {
-        const div = document.createElement('div');
-        div.className = 'annotation';
-        
-        const dot = document.createElement('div');
-        dot.className = 'annotation-dot';
-        dot.style.background = annotation.color;
-        
-        const label = document.createElement('div');
-        label.className = 'annotation-label';
-        label.style.background = annotation.color;
-        label.textContent = annotation.label;
-        
-        div.appendChild(dot);
-        div.appendChild(label);
-        
-        return div;
-    }
-
-    function updateAnnotationPositions() {
-        annotationElements.forEach(ann =&gt; {
-            const worldPos = ann.position.clone();
-            worldPos.applyMatrix4(mesh.matrixWorld);
-            const screenPos = toScreenPosition(worldPos);
+        // Convert 3D world position to 2D screen position
+        function toScreenPosition(position) {
+            const vector = position.clone();
+            vector.project(camera);
             
-            if (screenPos.z &lt; 1) {
-                ann.element.style.left = (screenPos.x - 6) + 'px';
-                ann.element.style.top = (screenPos.y - 6) + 'px';
-                ann.element.style.display = 'flex';
-            } else {
-                ann.element.style.display = 'none';
-            }
-        });
-    }
+            const canvas = document.getElementById('canvas-3d');
+            const widthHalf = canvas.clientWidth / 2;
+            const heightHalf = canvas.clientHeight / 2;
+            
+            return {
+                x: (vector.x * widthHalf) + widthHalf,
+                y: -(vector.y * heightHalf) + heightHalf,
+                z: vector.z
+            };
+        }
 
-    function removeAnnotations() {
-        annotationElements.forEach(ann =&gt; {
-            if (ann.element.parentNode) {
-                ann.element.parentNode.removeChild(ann.element);
-            }
-        });
-        annotationElements = [];
-    }
+        // === EXPORT FUNCTIONS ===
+        function exportScreenshot() {
+            // Render a high-quality frame
+            renderer.render(scene, camera);
+            
+            // Get canvas as image
+            const canvas = document.getElementById('canvas-3d');
+            canvas.toBlob((blob) => {
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.download = 'model-3d-screenshot.png';
+                link.href = url;
+                link.click();
+                URL.revokeObjectURL(url);
+                
+                showExportNotification('Screenshot PNG téléchargé !');
+            });
+        }
 
-    // Convert 3D world position to 2D screen position
-    function toScreenPosition(position) {
-        const vector = position.clone();
-        vector.project(camera);
-        
-        const canvas = document.getElementById('canvas-3d');
-        const widthHalf = canvas.clientWidth / 2;
-        const heightHalf = canvas.clientHeight / 2;
-        
-        return {
-            x: (vector.x * widthHalf) + widthHalf,
-            y: -(vector.y * heightHalf) + heightHalf,
-            z: vector.z
-        };
-    }
-
-    // === EXPORT FUNCTIONS ===
-    function exportScreenshot() {
-        // Render a high-quality frame
-        renderer.render(scene, camera);
-        
-        // Get canvas as image
-        const canvas = document.getElementById('canvas-3d');
-        canvas.toBlob((blob) =&gt; {
+        function exportModel() {
+            // Export as STL
+            const exporter = new STLExporter();
+            
+            // Simple STL export implementation
+            let output = 'solid model\n';
+            
+            mesh.traverse((child) => {
+                if (child.isMesh && child.geometry) {
+                    const geometry = child.geometry;
+                    const matrix = child.matrixWorld;
+                    
+                    const position = geometry.attributes.position;
+                    const index = geometry.index;
+                    
+                    if (index) {
+                        for (let i = 0; i < index.count; i += 3) {
+                            const v1 = new THREE.Vector3().fromBufferAttribute(position, index.getX(i));
+                            const v2 = new THREE.Vector3().fromBufferAttribute(position, index.getX(i + 1));
+                            const v3 = new THREE.Vector3().fromBufferAttribute(position, index.getX(i + 2));
+                            
+                            v1.applyMatrix4(matrix);
+                            v2.applyMatrix4(matrix);
+                            v3.applyMatrix4(matrix);
+                            
+                            const normal = new THREE.Vector3()
+                                .subVectors(v2, v1)
+                                .cross(new THREE.Vector3().subVectors(v3, v1))
+                                .normalize();
+                            
+                            output += `facet normal ${normal.x} ${normal.y} ${normal.z}\n`;
+                            output += ' outer loop\n';
+                            output += `  vertex ${v1.x} ${v1.y} ${v1.z}\n`;
+                            output += `  vertex ${v2.x} ${v2.y} ${v2.z}\n`;
+                            output += `  vertex ${v3.x} ${v3.y} ${v3.z}\n`;
+                            output += ' endloop\n';
+                            output += 'endfacet\n';
+                        }
+                    }
+                }
+            });
+            
+            output += 'endsolid model\n';
+            
+            // Download
+            const blob = new Blob([output], { type: 'text/plain' });
             const url = URL.createObjectURL(blob);
             const link = document.createElement('a');
-            link.download = 'model-3d-screenshot.png';
+            link.download = 'model-3d.stl';
             link.href = url;
             link.click();
             URL.revokeObjectURL(url);
             
-            showExportNotification('Screenshot PNG téléchargé !');
-        });
-    }
+            showExportNotification('Modèle STL téléchargé !');
+        }
 
-    function exportModel() {
-        // Export as STL
-        const exporter = new STLExporter();
-        
-        // Simple STL export implementation
-        let output = 'solid model\n';
-        
-        mesh.traverse((child) =&gt; {
-            if (child.isMesh &amp;&amp; child.geometry) {
-                const geometry = child.geometry;
-                const matrix = child.matrixWorld;
+        // Simple STL Exporter class
+        class STLExporter {
+            constructor() {}
+        }
+
+        function showExportNotification(message) {
+            const notification = document.getElementById('export-notification');
+            notification.querySelector('.export-notification-text').textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // === INTERACTIVE MEASURE MODE ===
+        function toggleMeasureMode() {
+            measureMode = !measureMode;
+            const btn = document.getElementById('btn-measure');
+            const canvas = document.getElementById('canvas-3d');
+            const container = document.getElementById('canvas-container');
+            
+            if (measureMode) {
+                btn.classList.add('active');
+                canvas.style.cursor = 'crosshair';
                 
-                const position = geometry.attributes.position;
-                const index = geometry.index;
+                // Show instruction
+                const instruction = document.createElement('div');
+                instruction.className = 'measure-instruction';
+                instruction.id = 'measure-instruction';
+                instruction.innerHTML = `
+                    <div class="measure-instruction-icon">📐</div>
+                    <div>Cliquez sur 2 points du modèle pour mesurer la distance</div>
+                `;
+                container.appendChild(instruction);
                 
-                if (index) {
-                    for (let i = 0; i &lt; index.count; i += 3) {
-                        const v1 = new THREE.Vector3().fromBufferAttribute(position, index.getX(i));
-                        const v2 = new THREE.Vector3().fromBufferAttribute(position, index.getX(i + 1));
-                        const v3 = new THREE.Vector3().fromBufferAttribute(position, index.getX(i + 2));
-                        
-                        v1.applyMatrix4(matrix);
-                        v2.applyMatrix4(matrix);
-                        v3.applyMatrix4(matrix);
-                        
-                        const normal = new THREE.Vector3()
-                            .subVectors(v2, v1)
-                            .cross(new THREE.Vector3().subVectors(v3, v1))
-                            .normalize();
-                        
-                        output += `facet normal ${normal.x} ${normal.y} ${normal.z}\n`;
-                        output += ' outer loop\n';
-                        output += `  vertex ${v1.x} ${v1.y} ${v1.z}\n`;
-                        output += `  vertex ${v2.x} ${v2.y} ${v2.z}\n`;
-                        output += `  vertex ${v3.x} ${v3.y} ${v3.z}\n`;
-                        output += ' endloop\n';
-                        output += 'endfacet\n';
-                    }
+                // Disable rotation
+                isRotating = false;
+                document.getElementById('rotation-icon').textContent = '▶️';
+            } else {
+                btn.classList.remove('active');
+                canvas.style.cursor = 'grab';
+                clearMeasurements();
+                
+                const instruction = document.getElementById('measure-instruction');
+                if (instruction) instruction.remove();
+            }
+        }
+
+        function handleMeasureClick(event) {
+            const canvas = document.getElementById('canvas-3d');
+            const rect = canvas.getBoundingClientRect();
+            
+            mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+            mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+            
+            performRaycast(event.clientX, event.clientY);
+        }
+
+        function handleMeasureTouch(event) {
+            const canvas = document.getElementById('canvas-3d');
+            const rect = canvas.getBoundingClientRect();
+            const touch = event.touches[0];
+            
+            mouse.x = ((touch.clientX - rect.left) / rect.width) * 2 - 1;
+            mouse.y = -((touch.clientY - rect.top) / rect.height) * 2 + 1;
+            
+            performRaycast(touch.clientX, touch.clientY);
+        }
+
+        function performRaycast(screenX, screenY) {
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObject(mesh, true);
+            
+            if (intersects.length > 0) {
+                const point = intersects[0].point;
+                const screenPos = toScreenPosition(point);
+                
+                addMeasurePoint(point, screenPos, screenX, screenY);
+                
+                // Click indicator effect
+                showClickIndicator(screenPos.x, screenPos.y);
+                
+                if (measurePoints.length === 2) {
+                    calculateAndDisplayDistance();
                 }
             }
-        });
-        
-        output += 'endsolid model\n';
-        
-        // Download
-        const blob = new Blob([output], { type: 'text/plain' });
-        const url = URL.createObjectURL(blob);
-        const link = document.createElement('a');
-        link.download = 'model-3d.stl';
-        link.href = url;
-        link.click();
-        URL.revokeObjectURL(url);
-        
-        showExportNotification('Modèle STL téléchargé !');
-    }
+        }
 
-    // Simple STL Exporter class
-    class STLExporter {
-        constructor() {}
-    }
+        function addMeasurePoint(worldPoint, screenPos, clickX, clickY) {
+            const container = document.getElementById('canvas-container');
+            
+            // Store point
+            measurePoints.push({
+                world: worldPoint.clone(),
+                screen: { x: clickX, y: clickY }
+            });
+            
+            // Create visual point
+            const pointEl = document.createElement('div');
+            pointEl.className = 'measure-point';
+            pointEl.style.left = screenPos.x + 'px';
+            pointEl.style.top = screenPos.y + 'px';
+            container.appendChild(pointEl);
+            measureElements.push(pointEl);
+            
+            // Hide instruction after first click
+            if (measurePoints.length === 1) {
+                const instruction = document.getElementById('measure-instruction');
+                if (instruction) instruction.style.display = 'none';
+            }
+        }
 
-    function showExportNotification(message) {
-        const notification = document.getElementById('export-notification');
-        notification.querySelector('.export-notification-text').textContent = message;
-        notification.classList.add('show');
-        
-        setTimeout(() =&gt; {
-            notification.classList.remove('show');
-        }, 3000);
-    }
+        function calculateAndDisplayDistance() {
+            const point1 = measurePoints[0].world;
+            const point2 = measurePoints[1].world;
+            const distance = point1.distanceTo(point2);
+            
+            // Convert to mm (assuming model units are in mm)
+            const distanceMM = distance.toFixed(2);
+            
+            // Calculate midpoint
+            const midpoint = new THREE.Vector3()
+                .addVectors(point1, point2)
+                .multiplyScalar(0.5);
+            const midScreen = toScreenPosition(midpoint);
+            
+            // Create line
+            const container = document.getElementById('canvas-container');
+            const p1 = toScreenPosition(point1);
+            const p2 = toScreenPosition(point2);
+            
+            const dx = p2.x - p1.x;
+            const dy = p2.y - p1.y;
+            const length = Math.sqrt(dx * dx + dy * dy);
+            const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+            
+            const line = document.createElement('div');
+            line.className = 'measure-line';
+            line.style.left = p1.x + 'px';
+            line.style.top = p1.y + 'px';
+            line.style.width = length + 'px';
+            line.style.transform = `rotate(${angle}deg)`;
+            container.appendChild(line);
+            measureElements.push(line);
+            
+            // Create result label
+            const result = document.createElement('div');
+            result.className = 'measure-result';
+            result.textContent = `${distanceMM} mm`;
+            result.style.left = midScreen.x + 'px';
+            result.style.top = midScreen.y + 'px';
+            container.appendChild(result);
+            measureElements.push(result);
+            
+            // Show clear button
+            const clearBtn = document.createElement('button');
+            clearBtn.className = 'measure-clear-btn';
+            clearBtn.textContent = '🗑️ Effacer la mesure';
+            clearBtn.onclick = clearMeasurements;
+            container.appendChild(clearBtn);
+            measureElements.push(clearBtn);
+            
+            // Disable further clicks
+            measurePoints.length = 2; // Lock at 2 points
+        }
 
-    // === INTERACTIVE MEASURE MODE ===
-    function toggleMeasureMode() {
-        measureMode = !measureMode;
-        const btn = document.getElementById('btn-measure');
-        const canvas = document.getElementById('canvas-3d');
-        const container = document.getElementById('canvas-container');
-        
-        if (measureMode) {
-            btn.classList.add('active');
-            canvas.style.cursor = 'crosshair';
+        function clearMeasurements() {
+            measurePoints = [];
+            measureElements.forEach(el => {
+                if (el.parentNode) {
+                    el.parentNode.removeChild(el);
+                }
+            });
+            measureElements = [];
             
-            // Show instruction
-            const instruction = document.createElement('div');
-            instruction.className = 'measure-instruction';
-            instruction.id = 'measure-instruction';
-            instruction.innerHTML = `
-                &lt;div class="measure-instruction-icon"&gt;📐&lt;/div&gt;
-                &lt;div&gt;Cliquez sur 2 points du modèle pour mesurer la distance&lt;/div&gt;
-            `;
-            container.appendChild(instruction);
-            
-            // Disable rotation
-            isRotating = false;
-            document.getElementById('rotation-icon').textContent = '▶️';
-        } else {
-            btn.classList.remove('active');
-            canvas.style.cursor = 'grab';
-            clearMeasurements();
-            
+            // Show instruction again
             const instruction = document.getElementById('measure-instruction');
-            if (instruction) instruction.remove();
-        }
-    }
-
-    function handleMeasureClick(event) {
-        const canvas = document.getElementById('canvas-3d');
-        const rect = canvas.getBoundingClientRect();
-        
-        mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-        mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-        
-        performRaycast(event.clientX, event.clientY);
-    }
-
-    function handleMeasureTouch(event) {
-        const canvas = document.getElementById('canvas-3d');
-        const rect = canvas.getBoundingClientRect();
-        const touch = event.touches[0];
-        
-        mouse.x = ((touch.clientX - rect.left) / rect.width) * 2 - 1;
-        mouse.y = -((touch.clientY - rect.top) / rect.height) * 2 + 1;
-        
-        performRaycast(touch.clientX, touch.clientY);
-    }
-
-    function performRaycast(screenX, screenY) {
-        raycaster.setFromCamera(mouse, camera);
-        const intersects = raycaster.intersectObject(mesh, true);
-        
-        if (intersects.length &gt; 0) {
-            const point = intersects[0].point;
-            const screenPos = toScreenPosition(point);
-            
-            addMeasurePoint(point, screenPos, screenX, screenY);
-            
-            // Click indicator effect
-            showClickIndicator(screenPos.x, screenPos.y);
-            
-            if (measurePoints.length === 2) {
-                calculateAndDisplayDistance();
+            if (instruction) {
+                instruction.style.display = 'block';
             }
         }
-    }
 
-    function addMeasurePoint(worldPoint, screenPos, clickX, clickY) {
-        const container = document.getElementById('canvas-container');
-        
-        // Store point
-        measurePoints.push({
-            world: worldPoint.clone(),
-            screen: { x: clickX, y: clickY }
-        });
-        
-        // Create visual point
-        const pointEl = document.createElement('div');
-        pointEl.className = 'measure-point';
-        pointEl.style.left = screenPos.x + 'px';
-        pointEl.style.top = screenPos.y + 'px';
-        container.appendChild(pointEl);
-        measureElements.push(pointEl);
-        
-        // Hide instruction after first click
-        if (measurePoints.length === 1) {
-            const instruction = document.getElementById('measure-instruction');
-            if (instruction) instruction.style.display = 'none';
+        function showClickIndicator(x, y) {
+            const container = document.getElementById('canvas-container');
+            const indicator = document.createElement('div');
+            indicator.className = 'click-indicator';
+            indicator.style.left = x + 'px';
+            indicator.style.top = y + 'px';
+            container.appendChild(indicator);
+            
+            setTimeout(() => {
+                if (indicator.parentNode) {
+                    indicator.parentNode.removeChild(indicator);
+                }
+            }, 600);
         }
-    }
-
-    function calculateAndDisplayDistance() {
-        const point1 = measurePoints[0].world;
-        const point2 = measurePoints[1].world;
-        const distance = point1.distanceTo(point2);
-        
-        // Convert to mm (assuming model units are in mm)
-        const distanceMM = distance.toFixed(2);
-        
-        // Calculate midpoint
-        const midpoint = new THREE.Vector3()
-            .addVectors(point1, point2)
-            .multiplyScalar(0.5);
-        const midScreen = toScreenPosition(midpoint);
-        
-        // Create line
-        const container = document.getElementById('canvas-container');
-        const p1 = toScreenPosition(point1);
-        const p2 = toScreenPosition(point2);
-        
-        const dx = p2.x - p1.x;
-        const dy = p2.y - p1.y;
-        const length = Math.sqrt(dx * dx + dy * dy);
-        const angle = Math.atan2(dy, dx) * (180 / Math.PI);
-        
-        const line = document.createElement('div');
-        line.className = 'measure-line';
-        line.style.left = p1.x + 'px';
-        line.style.top = p1.y + 'px';
-        line.style.width = length + 'px';
-        line.style.transform = `rotate(${angle}deg)`;
-        container.appendChild(line);
-        measureElements.push(line);
-        
-        // Create result label
-        const result = document.createElement('div');
-        result.className = 'measure-result';
-        result.textContent = `${distanceMM} mm`;
-        result.style.left = midScreen.x + 'px';
-        result.style.top = midScreen.y + 'px';
-        container.appendChild(result);
-        measureElements.push(result);
-        
-        // Show clear button
-        const clearBtn = document.createElement('button');
-        clearBtn.className = 'measure-clear-btn';
-        clearBtn.textContent = '🗑️ Effacer la mesure';
-        clearBtn.onclick = clearMeasurements;
-        container.appendChild(clearBtn);
-        measureElements.push(clearBtn);
-        
-        // Disable further clicks
-        measurePoints.length = 2; // Lock at 2 points
-    }
-
-    function clearMeasurements() {
-        measurePoints = [];
-        measureElements.forEach(el =&gt; {
-            if (el.parentNode) {
-                el.parentNode.removeChild(el);
-            }
-        });
-        measureElements = [];
-        
-        // Show instruction again
-        const instruction = document.getElementById('measure-instruction');
-        if (instruction) {
-            instruction.style.display = 'block';
-        }
-    }
-
-    function showClickIndicator(x, y) {
-        const container = document.getElementById('canvas-container');
-        const indicator = document.createElement('div');
-        indicator.className = 'click-indicator';
-        indicator.style.left = x + 'px';
-        indicator.style.top = y + 'px';
-        container.appendChild(indicator);
-        
-        setTimeout(() =&gt; {
-            if (indicator.parentNode) {
-                indicator.parentNode.removeChild(indicator);
-            }
-        }, 600);
-    }
-
+    /* 2. À LA TOUTE FIN DU SCRIPT, REMPLACEZ VOTRE LIGNE PAR CELLE-CI : */
     document.addEventListener('DOMContentLoaded', function() {
-    if (typeof init === 'function') {
-        init();
-    }
-});
-&lt;/script&gt;
-</code></pre></div></div> <section class="contact-section"> <div class="contact-container"> <h2 class="contact-title">Contact Me</h2> <p class="contact-subtitle">Have a project in mind? Feel free to send me a message.</p> <form id="contact-form" class="contact-form"> <div class="input-group"> <input type="text" name="name" placeholder="Your Name" required=""> </div> <div class="input-group"> <input type="email" name="email" placeholder="Your Email" required=""> </div> <div class="input-group"> <textarea name="message" rows="5" placeholder="Your Message" required=""></textarea> </div> <button type="submit" class="submit-btn" id="submit-btn"> <span>Send Message</span> </button> </form> </div> </section> <script>
+        if (typeof init === 'function') {
+            init();
+        }
+    });
+</script> <section class="contact-section"> <div class="contact-container"> <h2 class="contact-title">Contact Me</h2> <p class="contact-subtitle">Have a project in mind? Feel free to send me a message.</p> <form id="contact-form" class="contact-form"> <div class="input-group"> <input type="text" name="name" placeholder="Your Name" required=""> </div> <div class="input-group"> <input type="email" name="email" placeholder="Your Email" required=""> </div> <div class="input-group"> <textarea name="message" rows="5" placeholder="Your Message" required=""></textarea> </div> <button type="submit" class="submit-btn" id="submit-btn"> <span>Send Message</span> </button> </form> </div> </section> <script>
     const form = document.getElementById('contact-form');
     const submitBtn = document.getElementById('submit-btn');
 
