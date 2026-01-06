@@ -1,6 +1,12 @@
-{% raw %}
-<style>
-    .viewer-section {
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualisation 3D</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <style>
+        .viewer-section {
             padding: 100px 20px;
             background: linear-gradient(135deg, rgba(0, 123, 255, 0.03) 0%, rgba(0, 198, 255, 0.03) 100%);
             position: relative;
@@ -647,9 +653,18 @@
                 font-size: 0.95rem;
             }
         }
-</style>
-
-<h2 class="rec-title" style="text-align: center;">Interactive 3D Tool</h2>
+    </style>
+</head>
+<body>
+    <section class="viewer-section">
+        <div class="viewer-container">
+            <!-- Header -->
+            <div class="viewer-header">
+                <h2 class="viewer-title">Visualisation 3D Interactive</h2>
+                <p class="viewer-subtitle">
+                    Explorez un modèle de pièce mécanique en temps réel
+                </p>
+            </div>
 
             <!-- 3D Viewer Card -->
             <div class="viewer-card">
@@ -775,14 +790,19 @@
                         Cette visualisation démontre l'intégration de Three.js pour présenter des modèles CAO de manière interactive.
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Export Notification -->
+    <div class="export-notification" id="export-notification">
+        <div class="export-notification-icon">✅</div>
+        <div class="export-notification-title">Export réussi !</div>
+        <div class="export-notification-text">Le fichier a été téléchargé</div>
+    </div>
 
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script>
-    /* 1. COPIEZ ICI TOUT LE JAVASCRIPT DE VOTRE FICHIER A.txt */
-    /* (Toutes les variables et fonctions : init, animate, etc.) */
- // === THREE.JS SETUP ===
+    <script>
+        // === THREE.JS SETUP ===
         let scene, camera, renderer, mesh, material;
         let isRotating = false;
         let mouseDown = false;
@@ -1587,8 +1607,9 @@
                 }
             }, 600);
         }
-    /* 2. À LA TOUTE FIN DU SCRIPT, REMPLACEZ VOTRE LIGNE PAR CELLE-CI : */
-  document.addEventListener('DOMContentLoaded', init);
 
-</script>
-{% endraw %}
+        // Initialize on load
+        window.addEventListener('load', init);
+    </script>
+</body>
+</html>
