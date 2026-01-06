@@ -86,7 +86,7 @@ announcements:
         </p>
     </div>
 </section>
-
+{% include 3DViewer.html %}
 <section class="contact-section">
     <div class="contact-container">
         <h2 class="contact-title">Contact Me</h2>
