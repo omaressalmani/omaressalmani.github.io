@@ -1379,11 +1379,8 @@ Instructions importantes :
             }, 600);
         }
     /* 2. À LA TOUTE FIN DU SCRIPT, REMPLACEZ VOTRE LIGNE PAR CELLE-CI : */
-    document.addEventListener('DOMContentLoaded', function() {
-        if (typeof init === 'function') {
-            init();
-        }
-    });
+  document.addEventListener('DOMContentLoaded', init);
+
 </script> <section class="contact-section"> <div class="contact-container"> <h2 class="contact-title">Contact Me</h2> <p class="contact-subtitle">Have a project in mind? Feel free to send me a message.</p> <form id="contact-form" class="contact-form"> <div class="input-group"> <input type="text" name="name" placeholder="Your Name" required=""> </div> <div class="input-group"> <input type="email" name="email" placeholder="Your Email" required=""> </div> <div class="input-group"> <textarea name="message" rows="5" placeholder="Your Message" required=""></textarea> </div> <button type="submit" class="submit-btn" id="submit-btn"> <span>Send Message</span> </button> </form> </div> </section> <script>
     const form = document.getElementById('contact-form');
     const submitBtn = document.getElementById('submit-btn');
