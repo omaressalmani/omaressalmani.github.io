@@ -1587,9 +1587,6 @@
             }, 600);
         }
     /* 2. À LA TOUTE FIN DU SCRIPT, REMPLACEZ VOTRE LIGNE PAR CELLE-CI : */
-    document.addEventListener('DOMContentLoaded', function() {
-        if (typeof init === 'function') {
-            init();
-        }
-    });
+  document.addEventListener('DOMContentLoaded', init);
+
 </script>
