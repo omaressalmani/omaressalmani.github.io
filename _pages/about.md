@@ -62,6 +62,7 @@ announcements:
   
 {% include rec.html %}
 
+{% include 3d-viewer.html %}
 
 <section class="rec-section">
     <div class="rec-header">
