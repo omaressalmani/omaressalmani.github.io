@@ -1,12 +1,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
     /* Variables pour adaptation Light/Dark */
     :root {
         --timeline-text-main: #1a1a1a;
@@ -59,6 +53,7 @@
         margin: 0 auto;
         position: relative;
         padding: 40px 0;
+        min-height: 200px;
     }
 
     /* Ligne centrale */
@@ -87,20 +82,16 @@
         transform: translateX(-50%);
         transition: height 0.3s ease;
         box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+        z-index: 1;
     }
 
     /* Timeline item */
     .timeline-item {
         position: relative;
         margin-bottom: 60px;
-        opacity: 0;
-        transform: translateY(30px);
-        transition: all 0.6s ease;
-    }
-
-    .timeline-item.visible {
         opacity: 1;
         transform: translateY(0);
+        transition: all 0.6s ease;
     }
 
     /* Alternance gauche-droite */
@@ -124,23 +115,18 @@
         transform: translateX(-50%);
         width: 18px;
         height: 18px;
-        background: var(--card-bg);
+        background: #007bff;
         border: 3px solid #007bff;
         border-radius: 50%;
         z-index: 10;
         cursor: pointer;
         transition: all 0.3s ease;
-        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.4);
-    }
-
-    .timeline-item.visible .timeline-dot {
-        background: #007bff;
-        transform: translateX(-50%) scale(1.2);
         box-shadow: 0 0 0 8px rgba(0, 123, 255, 0.2);
     }
 
     .timeline-dot:hover {
         transform: translateX(-50%) scale(1.4);
+        box-shadow: 0 0 0 12px rgba(0, 123, 255, 0.3);
     }
 
     /* Icône dans le point */
@@ -150,12 +136,6 @@
         left: 50%;
         transform: translate(-50%, -50%);
         font-size: 20px;
-        opacity: 0;
-        transition: opacity 0.3s;
-    }
-
-    .timeline-item.visible .timeline-dot-icon {
-        opacity: 1;
     }
 
     /* Carte glassmorphisme */
@@ -186,6 +166,7 @@
         transform: rotate(45deg);
         transition: 0.6s;
         opacity: 0;
+        pointer-events: none;
     }
 
     .timeline-content:hover::before {
@@ -338,7 +319,7 @@
         <div class="timeline-progress" id="timeline-progress"></div>
 
         <!-- Guerbet -->
-        <div class="timeline-item" data-aos>
+        <div class="timeline-item">
             <div class="timeline-dot">
                 <span class="timeline-dot-icon">🏥</span>
             </div>
@@ -363,7 +344,7 @@
         </div>
 
         <!-- Cornilleau -->
-        <div class="timeline-item" data-aos>
+        <div class="timeline-item">
             <div class="timeline-dot">
                 <span class="timeline-dot-icon">🎓</span>
             </div>
@@ -385,7 +366,7 @@
         </div>
 
         <!-- UTC -->
-        <div class="timeline-item" data-aos>
+        <div class="timeline-item">
             <div class="timeline-dot">
                 <span class="timeline-dot-icon">🎓</span>
             </div>
@@ -407,7 +388,7 @@
         </div>
 
         <!-- Usine Aicha -->
-        <div class="timeline-item" data-aos>
+        <div class="timeline-item">
             <div class="timeline-dot">
                 <span class="timeline-dot-icon">🏭</span>
             </div>
@@ -429,7 +410,7 @@
         </div>
 
         <!-- ENSAM -->
-        <div class="timeline-item" data-aos>
+        <div class="timeline-item">
             <div class="timeline-dot">
                 <span class="timeline-dot-icon">🏆</span>
             </div>
@@ -452,7 +433,7 @@
         </div>
 
         <!-- OGE -->
-        <div class="timeline-item" data-aos>
+        <div class="timeline-item">
             <div class="timeline-dot">
                 <span class="timeline-dot-icon">⚡</span>
             </div>
@@ -477,42 +458,47 @@
 </section>
 
 <script>
-    const observerOptions = {
-        threshold: 0.2,
-        rootMargin: '0px 0px -100px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                updateProgress();
+    // Mise à jour de la barre de progression au scroll
+    function updateProgress() {
+        const container = document.querySelector('.timeline-container');
+        const progress = document.getElementById('timeline-progress');
+        const items = document.querySelectorAll('.timeline-item');
+        
+        if (!container || !progress || items.length === 0) return;
+        
+        const containerRect = container.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        
+        // Calculer le pourcentage visible
+        let maxVisibleDot = 0;
+        items.forEach(item => {
+            const dot = item.querySelector('.timeline-dot');
+            if (dot) {
+                const dotRect = dot.getBoundingClientRect();
+                if (dotRect.top < windowHeight * 0.8) {
+                    const dotPosition = dot.offsetTop + dot.offsetHeight / 2;
+                    maxVisibleDot = Math.max(maxVisibleDot, dotPosition);
+                }
             }
         });
-    }, observerOptions);
-
-    document.querySelectorAll('.timeline-item').forEach(item => {
-        observer.observe(item);
-    });
-
-    function updateProgress() {
-        const items = document.querySelectorAll('.timeline-item.visible');
-        const progress = document.getElementById('timeline-progress');
         
-        if (items.length > 0) {
-            const lastItem = items[items.length - 1];
-            const dot = lastItem.querySelector('.timeline-dot');
-            const dotPosition = dot.offsetTop + dot.offsetHeight / 2;
-            progress.style.height = dotPosition + 'px';
-        }
+        progress.style.height = maxVisibleDot + 'px';
     }
 
+    // Smooth scroll sur clic
     document.querySelectorAll('.timeline-dot, .timeline-content').forEach(el => {
         el.addEventListener('click', function() {
             const item = this.closest('.timeline-item');
-            item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            if (item) {
+                item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
         });
     });
 
+    // Écouter le scroll
+    window.addEventListener('scroll', updateProgress);
     window.addEventListener('resize', updateProgress);
+    
+    // Initialisation
+    setTimeout(updateProgress, 100);
 </script>
