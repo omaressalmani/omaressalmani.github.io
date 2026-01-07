@@ -64,6 +64,8 @@ announcements:
 
 {% include Parcours.html %}
 
+{% include 3DViewer.html %}
+
 <section class="rec-section">
     <div class="rec-header">
         <h2 class="rec-title">My Latest LinkedIn Post</h2>

@@ -820,19 +820,23 @@
         // Afficher le loading
         document.getElementById('loading').style.display = 'flex';
         
-        // Liste des chemins possibles à essayer
+        // Liste des chemins et formats possibles
         const possiblePaths = [
             'assets/img/3Dtest.gltf',
+            'assets/img/3Dtest.glb',
             './assets/img/3Dtest.gltf',
+            './assets/img/3Dtest.glb',
             '../assets/img/3Dtest.gltf',
-            '/assets/img/3Dtest.gltf'
+            '../assets/img/3Dtest.glb',
+            '/assets/img/3Dtest.gltf',
+            '/assets/img/3Dtest.glb'
         ];
         
         let pathIndex = 0;
         
         function tryLoadModel() {
             const currentPath = possiblePaths[pathIndex];
-            console.log('Tentative de chargement:', currentPath);
+            console.log('🔄 Tentative de chargement:', currentPath);
             
             loader.load(
                 currentPath,
@@ -847,7 +851,11 @@
                     const center = box.getCenter(new THREE.Vector3());
                     const size = box.getSize(new THREE.Vector3());
                     
-                    console.log('Dimensions du modèle:', size);
+                    console.log('📏 Dimensions du modèle:', {
+                        x: size.x.toFixed(2),
+                        y: size.y.toFixed(2),
+                        z: size.z.toFixed(2)
+                    });
                     
                     // Centrer
                     mesh.position.x = -center.x;
@@ -859,15 +867,20 @@
                     const scale = maxDim > 0 ? 3 / maxDim : 1;
                     mesh.scale.set(scale, scale, scale);
                     
+                    console.log('🔧 Échelle appliquée:', scale.toFixed(3));
+                    
                     // Groupe pour rotation
                     const group = new THREE.Group();
                     group.add(mesh);
                     mesh = group;
                     scene.add(mesh);
                     
-                    // Appliquer matériaux
+                    // Compter les meshes
+                    let meshCount = 0;
                     mesh.traverse((child) => {
                         if (child.isMesh) {
+                            meshCount++;
+                            // Appliquer un matériau si manquant
                             if (!child.material) {
                                 child.material = new THREE.MeshStandardMaterial({
                                     color: 0x007bff,
@@ -875,11 +888,17 @@
                                     roughness: 0.3
                                 });
                             }
-                            // Assurer que le matériau est visible
-                            child.material.needsUpdate = true;
+                            // S'assurer que le matériau répond à la lumière
+                            if (child.material) {
+                                child.material.needsUpdate = true;
+                                child.castShadow = true;
+                                child.receiveShadow = true;
+                            }
                             if (!material) material = child.material;
                         }
                     });
+                    
+                    console.log('🎨 Nombre de meshes:', meshCount);
                     
                     updateStats();
                     document.getElementById('loading').style.display = 'none';
@@ -887,24 +906,27 @@
                 
                 // Progression
                 function(xhr) {
-                    const percent = (xhr.loaded / xhr.total * 100).toFixed(0);
-                    console.log(percent + '% chargé');
+                    if (xhr.lengthComputable) {
+                        const percent = (xhr.loaded / xhr.total * 100).toFixed(0);
+                        console.log('⏳', percent + '% chargé');
+                    }
                 },
                 
                 // Erreur
                 function(error) {
-                    console.error('❌ Erreur chargement depuis:', currentPath, error);
+                    console.error('❌ Erreur chargement depuis:', currentPath, error.message || error);
                     pathIndex++;
                     
                     // Essayer le chemin suivant
                     if (pathIndex < possiblePaths.length) {
-                        console.log('Essai du chemin suivant...');
-                        tryLoadModel();
+                        console.log('🔄 Essai du chemin suivant...');
+                        setTimeout(tryLoadModel, 100);
                     } else {
                         // Tous les chemins ont échoué
-                        console.error('Tous les chemins ont échoué. Utilisation du modèle de secours.');
+                        console.error('💥 Tous les chemins ont échoué');
+                        console.log('📂 Chemins testés:', possiblePaths);
                         document.getElementById('loading').style.display = 'none';
-                        alert('⚠️ Impossible de charger 3Dtest.glb\n\nChemins testés:\n' + possiblePaths.join('\n') + '\n\nUtilisation du modèle de démonstration.');
+                        alert('⚠️ Impossible de charger le modèle 3D\n\nChemins testés:\n' + possiblePaths.slice(0, 4).join('\n') + '\n\n✅ Utilisez la console (F12) pour plus de détails\n\n🔄 Affichage du modèle de démonstration');
                         createFallbackModel();
                     }
                 }
