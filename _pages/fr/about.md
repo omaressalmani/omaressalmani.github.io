@@ -56,9 +56,9 @@ announcements:
 
 {% include stats-counters.html %}
 
-{% _include rec.html %}
+{% include _includes/rec.html %}
 
-{% _include Parcours.html %}
+{% include _includes/Parcours.html %}
 
 <section class="rec-section">
     <div class="rec-header">
