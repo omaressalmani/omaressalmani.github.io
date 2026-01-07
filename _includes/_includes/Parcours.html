@@ -89,9 +89,14 @@
     .timeline-item {
         position: relative;
         margin-bottom: 60px;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.6s ease;
+    }
+
+    .timeline-item.visible {
         opacity: 1;
         transform: translateY(0);
-        transition: all 0.6s ease;
     }
 
     /* Alternance gauche-droite */
@@ -115,12 +120,18 @@
         transform: translateX(-50%);
         width: 18px;
         height: 18px;
-        background: #007bff;
+        background: var(--card-bg);
         border: 3px solid #007bff;
         border-radius: 50%;
         z-index: 10;
         cursor: pointer;
         transition: all 0.3s ease;
+        box-shadow: 0 0 0 0 rgba(0, 123, 255, 0.2);
+    }
+
+    .timeline-item.visible .timeline-dot {
+        background: #007bff;
+        transform: translateX(-50%) scale(1.2);
         box-shadow: 0 0 0 8px rgba(0, 123, 255, 0.2);
     }
 
@@ -136,6 +147,12 @@
         left: 50%;
         transform: translate(-50%, -50%);
         font-size: 20px;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .timeline-item.visible .timeline-dot-icon {
+        opacity: 1;
     }
 
     /* Carte glassmorphisme */
@@ -458,31 +475,39 @@
 </section>
 
 <script>
-    // Mise à jour de la barre de progression au scroll
-    function updateProgress() {
-        const container = document.querySelector('.timeline-container');
-        const progress = document.getElementById('timeline-progress');
-        const items = document.querySelectorAll('.timeline-item');
-        
-        if (!container || !progress || items.length === 0) return;
-        
-        const containerRect = container.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        
-        // Calculer le pourcentage visible
-        let maxVisibleDot = 0;
-        items.forEach(item => {
-            const dot = item.querySelector('.timeline-dot');
-            if (dot) {
-                const dotRect = dot.getBoundingClientRect();
-                if (dotRect.top < windowHeight * 0.8) {
-                    const dotPosition = dot.offsetTop + dot.offsetHeight / 2;
-                    maxVisibleDot = Math.max(maxVisibleDot, dotPosition);
-                }
+    // Intersection Observer pour l'animation au scroll
+    const observerOptions = {
+        threshold: 0.3,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                updateProgress();
             }
         });
+    }, observerOptions);
+
+    // Observer chaque item
+    document.querySelectorAll('.timeline-item').forEach(item => {
+        observer.observe(item);
+    });
+
+    // Mise à jour de la barre de progression
+    function updateProgress() {
+        const items = document.querySelectorAll('.timeline-item.visible');
+        const progress = document.getElementById('timeline-progress');
         
-        progress.style.height = maxVisibleDot + 'px';
+        if (!progress || items.length === 0) return;
+        
+        const lastItem = items[items.length - 1];
+        const dot = lastItem.querySelector('.timeline-dot');
+        if (dot) {
+            const dotPosition = dot.offsetTop + dot.offsetHeight / 2;
+            progress.style.height = dotPosition + 'px';
+        }
     }
 
     // Smooth scroll sur clic
@@ -495,7 +520,7 @@
         });
     });
 
-    // Écouter le scroll
+    // Écouter le scroll et resize
     window.addEventListener('scroll', updateProgress);
     window.addEventListener('resize', updateProgress);
     
