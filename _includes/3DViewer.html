@@ -1,1626 +1,1390 @@
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<h2 class="viewer-title-custom">Interactive 3D Tool Preview</h2>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <style>
-        .viewer-section {
-            padding: 100px 20px;
-            background: linear-gradient(135deg, rgba(0, 123, 255, 0.03) 0%, rgba(0, 198, 255, 0.03) 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        /* Titre style Playfair Display comme votre ticker */
-    .viewer-title-custom {
-        font-family: 'Playfair Display', serif !important;
-        font-size: 2.5rem !important;
-        font-style: italic !important;
-        font-weight: 700 !important;
-        background: linear-gradient(135deg, #007bff, #00c6ff);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        text-align: center;
-        margin: 30px 0;
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+
+<style>
+    /* Variables pour adaptation Light/Dark */
+    :root {
+        --viewer-text-main: #1a1a1a;
+        --viewer-text-secondary: #666;
+        --card-bg: rgba(255, 255, 255, 0.9);
+        --card-border: rgba(0, 123, 255, 0.1);
+        --glass-shine: rgba(255, 255, 255, 0.2);
     }
 
-        /* Mode sombre pour la section */
-        [data-theme='dark'] .viewer-section {
-            background: linear-gradient(135deg, rgba(0, 123, 255, 0.08) 0%, rgba(0, 198, 255, 0.08) 100%);
-        }
+    [data-theme='dark'] {
+        --viewer-text-main: #ffffff;
+        --viewer-text-secondary: #bbb;
+        --card-bg: rgba(255, 255, 255, 0.05);
+        --card-border: rgba(255, 255, 255, 0.1);
+        --glass-shine: rgba(255, 255, 255, 0.1);
+    }
 
-        /* Particules de fond animées */
-        .viewer-section::before,
-        .viewer-section::after {
-            content: '';
-            position: absolute;
-            border-radius: 50%;
-            pointer-events: none;
-            animation: float-particles 20s ease-in-out infinite;
-        }
+    .viewer-section {
+        padding: 80px 20px;
+        font-family: 'Poppins', sans-serif;
+        position: relative;
+        overflow: hidden;
+    }
 
-        .viewer-section::before {
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(0, 123, 255, 0.08), transparent);
-            top: -300px;
-            right: -300px;
-            animation-delay: 0s;
-        }
+    /* Header élégant */
+    .viewer-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
 
-        .viewer-section::after {
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(0, 198, 255, 0.06), transparent);
-            bottom: -250px;
-            left: -250px;
-            animation-delay: 5s;
-        }
+    .viewer-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 3rem;
+        font-style: italic;
+        font-weight: 700;
+        color: var(--viewer-text-main);
+        margin-bottom: 10px;
+        transition: color 0.3s ease;
+    }
 
-        @keyframes float-particles {
-            0%, 100% { 
-                transform: translate(0, 0) scale(1);
-                opacity: 0.5;
-            }
-            33% { 
-                transform: translate(50px, -50px) scale(1.1);
-                opacity: 0.8;
-            }
-            66% { 
-                transform: translate(-30px, 30px) scale(0.9);
-                opacity: 0.6;
-            }
-        }
+    .viewer-subtitle {
+        font-size: 1rem;
+        color: var(--viewer-text-secondary);
+        font-weight: 400;
+        max-width: 700px;
+        margin: 0 auto;
+    }
 
-        /* Effet de brillance global sur la section */
-        .viewer-section::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(
-                45deg,
-                transparent 0%,
-                transparent 45%,
-                rgba(255, 255, 255, 0.03) 48%,
-                rgba(255, 255, 255, 0.08) 50%,
-                rgba(255, 255, 255, 0.03) 52%,
-                transparent 55%,
-                transparent 100%
-            );
-            animation: shimmer-section 8s linear infinite;
-            pointer-events: none;
-            z-index: 0;
-        }
+    /* Container */
+    .viewer-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        position: relative;
+    }
 
-        @keyframes shimmer-section {
-            0% {
-                transform: translateX(-100%) translateY(-100%) rotate(45deg);
-            }
-            100% {
-                transform: translateX(100%) translateY(100%) rotate(45deg);
-            }
-        }
+    /* Card principale avec glassmorphisme */
+    .viewer-card {
+        background: var(--card-bg);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid var(--card-border);
+        border-radius: 24px;
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+        transition: all 0.4s ease;
+    }
 
-        /* Container */
-        .viewer-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
+    .viewer-card:hover {
+        box-shadow: 0 15px 45px rgba(0, 123, 255, 0.2);
+        border-color: rgba(0, 123, 255, 0.3);
+    }
 
-        /* Header */
-        .viewer-header {
-            text-align: center;
-            margin-bottom: 50px;
+    /* Effet brillance */
+    .viewer-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(45deg, transparent, var(--glass-shine), transparent);
+        transform: rotate(45deg);
+        transition: 0.6s;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .viewer-card:hover::before {
+        opacity: 1;
+        left: 100%;
+    }
+
+    /* Canvas 3D */
+    #canvas-3d {
+        width: 100%;
+        height: 600px;
+        border-radius: 16px;
+        background: linear-gradient(135deg, #1a1a2e, #16213e);
+        cursor: grab;
+        display: block;
+    }
+
+    #canvas-3d:active {
+        cursor: grabbing;
+    }
+
+    /* Controls Panel */
+    .controls-panel {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 12px;
+        margin-top: 25px;
+        padding: 20px;
+        background: rgba(0, 123, 255, 0.05);
+        border-radius: 16px;
+    }
+
+    .control-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .control-label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--viewer-text-main);
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .control-button {
+        padding: 10px 18px;
+        background: rgba(0, 123, 255, 0.08);
+        border: 1px solid rgba(0, 123, 255, 0.15);
+        border-radius: 12px;
+        color: var(--viewer-text-main);
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 0.85rem;
+    }
+
+    .control-button:hover {
+        background: #007bff;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3);
+    }
+
+    .control-button.active {
+        background: linear-gradient(135deg, #007bff, #00c6ff);
+        color: white;
+        border-color: transparent;
+    }
+
+    /* Slider */
+    .control-slider {
+        width: 100%;
+        height: 6px;
+        border-radius: 3px;
+        background: rgba(0, 123, 255, 0.2);
+        outline: none;
+        -webkit-appearance: none;
+    }
+
+    .control-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #007bff, #00c6ff);
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+    }
+
+    .control-slider::-moz-range-thumb {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #007bff, #00c6ff);
+        cursor: pointer;
+        border: none;
+    }
+
+    /* Info Box */
+    .info-box {
+        margin-top: 25px;
+        padding: 20px;
+        background: linear-gradient(135deg, rgba(255, 193, 7, 0.08), rgba(255, 152, 0, 0.05));
+        border-left: 4px solid #ffc107;
+        border-radius: 12px;
+    }
+
+    .info-title {
+        font-weight: 700;
+        color: #ffa000;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 0.95rem;
+    }
+
+    .info-content {
+        color: var(--viewer-text-main);
+        line-height: 1.6;
+        font-size: 0.9rem;
+    }
+
+    /* Stats Display */
+    .stats-display {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(10px);
+        padding: 12px 16px;
+        border-radius: 12px;
+        color: white;
+        font-size: 0.8rem;
+        z-index: 10;
+    }
+
+    .stat-item {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        margin-bottom: 4px;
+    }
+
+    .stat-label {
+        opacity: 0.7;
+    }
+
+    .stat-value {
+        font-weight: 700;
+        color: #00c6ff;
+    }
+
+    /* Instructions */
+    .instructions {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(10px);
+        padding: 12px 16px;
+        border-radius: 12px;
+        color: white;
+        font-size: 0.8rem;
+        z-index: 10;
+    }
+
+    .instruction-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 4px;
+    }
+
+    .instruction-icon {
+        font-size: 1rem;
+    }
+
+    /* Loading */
+    .loading-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 16px;
+        z-index: 100;
+    }
+
+    .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid rgba(255, 255, 255, 0.1);
+        border-top-color: #007bff;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+
+    /* Export notification */
+    .export-notification {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: linear-gradient(135deg, rgba(76, 217, 100, 0.98), rgba(52, 199, 89, 0.95));
+        backdrop-filter: blur(20px);
+        color: white;
+        padding: 25px 35px;
+        border-radius: 20px;
+        box-shadow: 0 20px 60px rgba(76, 217, 100, 0.5);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        z-index: 10000;
+        display: none;
+        text-align: center;
+        animation: fade-scale-in 0.4s ease;
+    }
+
+    .export-notification.show {
+        display: block;
+    }
+
+    .export-notification-icon {
+        font-size: 2.5rem;
+        margin-bottom: 8px;
+    }
+
+    .export-notification-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 4px;
+    }
+
+    .export-notification-text {
+        font-size: 0.9rem;
+        opacity: 0.9;
+    }
+
+    @keyframes fade-scale-in {
+        from {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.8);
+        }
+        to {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+    }
+
+    /* Dimension & Annotation elements */
+    .dimension-text {
+        position: absolute;
+        background: rgba(0, 198, 255, 0.9);
+        color: white;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        white-space: nowrap;
+        pointer-events: none;
+        box-shadow: 0 4px 12px rgba(0, 198, 255, 0.4);
+    }
+
+    .annotation {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        pointer-events: all;
+        cursor: pointer;
+        z-index: 5;
+    }
+
+    .annotation-dot {
+        width: 12px;
+        height: 12px;
+        background: #ff3b30;
+        border: 3px solid white;
+        border-radius: 50%;
+        box-shadow: 0 4px 12px rgba(255, 59, 48, 0.5);
+        animation: pulse-annotation 2s infinite;
+    }
+
+    @keyframes pulse-annotation {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.2); }
+    }
+
+    .annotation-label {
+        background: rgba(255, 59, 48, 0.95);
+        color: white;
+        padding: 6px 12px;
+        border-radius: 8px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        box-shadow: 0 4px 15px rgba(255, 59, 48, 0.4);
+        max-width: 200px;
+        line-height: 1.4;
+        display: none;
+    }
+
+    .annotation:hover .annotation-label {
+        display: block;
+    }
+
+    /* Measure Mode */
+    .measure-point {
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        background: #ff3b30;
+        border: 3px solid white;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0 4px 15px rgba(255, 59, 48, 0.6);
+        animation: pulse-measure 1.5s infinite;
+        pointer-events: none;
+    }
+
+    @keyframes pulse-measure {
+        0%, 100% { transform: translate(-50%, -50%) scale(1); }
+        50% { transform: translate(-50%, -50%) scale(1.3); }
+    }
+
+    .measure-line {
+        position: absolute;
+        height: 3px;
+        background: linear-gradient(90deg, #ff3b30, #ff9500);
+        transform-origin: left center;
+        box-shadow: 0 2px 10px rgba(255, 59, 48, 0.5);
+        pointer-events: none;
+    }
+
+    .measure-result {
+        position: absolute;
+        background: linear-gradient(135deg, rgba(255, 59, 48, 0.95), rgba(255, 149, 0, 0.95));
+        color: white;
+        padding: 8px 16px;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        transform: translate(-50%, -120%);
+        box-shadow: 0 8px 25px rgba(255, 59, 48, 0.5);
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        white-space: nowrap;
+        pointer-events: none;
+    }
+
+    .measure-result::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 8px solid rgba(255, 59, 48, 0.95);
+    }
+
+    .measure-instruction {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(10px);
+        color: white;
+        padding: 18px 28px;
+        border-radius: 16px;
+        font-size: 1rem;
+        font-weight: 600;
+        text-align: center;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+        pointer-events: none;
+        z-index: 9;
+    }
+
+    .measure-instruction-icon {
+        font-size: 2rem;
+        margin-bottom: 8px;
+    }
+
+    .measure-clear-btn {
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(135deg, #ff3b30, #ff6b6b);
+        color: white;
+        padding: 8px 18px;
+        border-radius: 50px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(255, 59, 48, 0.4);
+        transition: all 0.3s;
+        z-index: 9;
+        font-size: 0.85rem;
+    }
+
+    .measure-clear-btn:hover {
+        transform: translateX(-50%) translateY(-2px);
+        box-shadow: 0 12px 30px rgba(255, 59, 48, 0.6);
+    }
+
+    .click-indicator {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        background: #00c6ff;
+        border: 2px solid white;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        opacity: 0;
+        animation: click-ripple 0.6s ease;
+    }
+
+    @keyframes click-ripple {
+        0% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        100% {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(4);
+        }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .viewer-section {
+            padding: 60px 15px;
         }
 
         .viewer-title {
-            font-size: 2.8rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, #007bff, #00c6ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
+            font-size: 2.2rem;
         }
 
-        .viewer-subtitle {
-            font-size: 1.15rem;
-            color: var(--global-text-color-light, #666);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        [data-theme='dark'] .viewer-subtitle {
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        /* Main 3D Viewer */
-        .viewer-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
-            backdrop-filter: blur(20px);
-            border: 2px solid rgba(0, 123, 255, 0.15);
-            border-radius: 24px;
-            padding: 30px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        [data-theme='dark'] .viewer-card {
-            background: linear-gradient(135deg, rgba(45, 45, 50, 0.95), rgba(28, 28, 30, 0.85));
-            border: 2px solid rgba(0, 198, 255, 0.2);
-        }
-
-        /* Canvas 3D */
         #canvas-3d {
-            width: 100%;
-            height: 600px;
-            border-radius: 16px;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            cursor: grab;
-            display: block;
+            height: 400px;
         }
 
-        #canvas-3d:active {
-            cursor: grabbing;
-        }
-
-        /* Controls Panel */
         .controls-panel {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 30px;
-            padding: 25px;
-            background: rgba(0, 123, 255, 0.05);
-            border-radius: 16px;
+            grid-template-columns: 1fr;
         }
 
-        .control-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
+        .stats-display,
+        .instructions {
+            font-size: 0.7rem;
+            padding: 10px 12px;
         }
 
-        .control-label {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: var(--global-text-color, #333);
-            display: flex;
-            align-items: center;
-            gap: 6px;
+        .instruction-desktop {
+            display: none;
         }
 
-        [data-theme='dark'] .control-label {
-            color: rgba(255, 255, 255, 0.9);
+        .instruction-mobile {
+            display: inline !important;
+        }
+
+        .instruction-desktop-only {
+            display: none !important;
         }
 
         .control-button {
             padding: 12px 20px;
-            background: linear-gradient(135deg, rgba(0, 123, 255, 0.1), rgba(0, 198, 255, 0.05));
-            border: 2px solid rgba(0, 123, 255, 0.3);
-            border-radius: 12px;
-            color: var(--global-text-color, #333);
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
         }
+    }
+</style>
 
-        [data-theme='dark'] .control-button {
-            color: rgba(255, 255, 255, 0.9);
-        }
+<section class="viewer-section">
+    <div class="viewer-container">
+        <!-- Header -->
+        <div class="viewer-header">
+            <h2 class="viewer-title">Visualisation 3D Interactive</h2>
+            <p class="viewer-subtitle">
+                Explorez un modèle de pièce mécanique en temps réel avec contrôles avancés
+            </p>
+        </div>
 
-        .control-button:hover {
-            background: linear-gradient(135deg, #007bff, #00c6ff);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3);
-        }
+        <!-- 3D Viewer Card -->
+        <div class="viewer-card">
+            <div id="canvas-container" style="position: relative;">
+                <canvas id="canvas-3d"></canvas>
+                
+                <!-- Loading -->
+                <div class="loading-overlay" id="loading" style="display: flex;">
+                    <div class="loading-spinner"></div>
+                </div>
 
-        .control-button.active {
-            background: linear-gradient(135deg, #007bff, #00c6ff);
-            color: white;
-            border-color: transparent;
-        }
+                <!-- Stats -->
+                <div class="stats-display">
+                    <div class="stat-item">
+                        <span class="stat-label">Vertices:</span>
+                        <span class="stat-value" id="stat-vertices">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Faces:</span>
+                        <span class="stat-value" id="stat-faces">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">FPS:</span>
+                        <span class="stat-value" id="stat-fps">60</span>
+                    </div>
+                </div>
 
-        /* Slider */
-        .control-slider {
-            width: 100%;
-            height: 8px;
-            border-radius: 4px;
-            background: rgba(0, 123, 255, 0.2);
-            outline: none;
-            -webkit-appearance: none;
-        }
-
-        .control-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #007bff, #00c6ff);
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
-        }
-
-        .control-slider::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #007bff, #00c6ff);
-            cursor: pointer;
-            border: none;
-        }
-
-        /* Info Box */
-        .info-box {
-            margin-top: 25px;
-            padding: 20px;
-            background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 152, 0, 0.05));
-            border-left: 4px solid #ffc107;
-            border-radius: 12px;
-        }
-
-        .info-title {
-            font-weight: 700;
-            color: #ffa000;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .info-content {
-            color: var(--global-text-color, #333);
-            line-height: 1.6;
-        }
-
-        [data-theme='dark'] .info-content {
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        /* Loading */
-        .loading-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 16px;
-            z-index: 100;
-        }
-
-        .loading-spinner {
-            width: 60px;
-            height: 60px;
-            border: 6px solid rgba(255, 255, 255, 0.1);
-            border-top-color: #007bff;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Stats Display */
-        .stats-display {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            padding: 15px 20px;
-            border-radius: 12px;
-            color: white;
-            font-size: 0.85rem;
-            z-index: 10;
-        }
-
-        .stat-item {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            margin-bottom: 5px;
-        }
-
-        .stat-label {
-            opacity: 0.7;
-        }
-
-        .stat-value {
-            font-weight: 700;
-            color: #00c6ff;
-        }
-
-        /* Instructions */
-        .instructions {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(10px);
-            padding: 15px 20px;
-            border-radius: 12px;
-            color: white;
-            font-size: 0.85rem;
-            z-index: 10;
-        }
-
-        .instruction-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 5px;
-        }
-
-        .instruction-icon {
-            font-size: 1.2rem;
-        }
-
-        /* Dimension Lines */
-        .dimension-line {
-            position: absolute;
-            pointer-events: none;
-            z-index: 5;
-        }
-
-        .dimension-line-path {
-            stroke: #00c6ff;
-            stroke-width: 2;
-            fill: none;
-        }
-
-        .dimension-arrow {
-            fill: #00c6ff;
-        }
-
-        .dimension-text {
-            position: absolute;
-            background: rgba(0, 198, 255, 0.9);
-            color: white;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: 700;
-            white-space: nowrap;
-            pointer-events: none;
-            box-shadow: 0 4px 12px rgba(0, 198, 255, 0.4);
-        }
-
-        /* Annotations */
-        .annotation {
-            position: absolute;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            pointer-events: all;
-            cursor: pointer;
-            z-index: 5;
-        }
-
-        .annotation-dot {
-            width: 12px;
-            height: 12px;
-            background: #ff3b30;
-            border: 3px solid white;
-            border-radius: 50%;
-            box-shadow: 0 4px 12px rgba(255, 59, 48, 0.5);
-            animation: pulse-annotation 2s infinite;
-        }
-
-        @keyframes pulse-annotation {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-        }
-
-        .annotation-label {
-            background: rgba(255, 59, 48, 0.95);
-            color: white;
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(255, 59, 48, 0.4);
-            max-width: 200px;
-            line-height: 1.4;
-            display: none;
-        }
-
-        .annotation:hover .annotation-label {
-            display: block;
-        }
-
-        /* Export notification */
-        .export-notification {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: linear-gradient(135deg, rgba(76, 217, 100, 0.98), rgba(52, 199, 89, 0.95));
-            backdrop-filter: blur(20px);
-            color: white;
-            padding: 30px 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(76, 217, 100, 0.5);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            z-index: 10000;
-            display: none;
-            text-align: center;
-            animation: fade-scale-in 0.4s ease;
-        }
-
-        .export-notification.show {
-            display: block;
-        }
-
-        .export-notification-icon {
-            font-size: 3rem;
-            margin-bottom: 10px;
-        }
-
-        .export-notification-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-
-        .export-notification-text {
-            font-size: 0.95rem;
-            opacity: 0.9;
-        }
-
-        /* Measure Mode */
-        .measure-mode-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 8;
-        }
-
-        .measure-point {
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            background: #ff3b30;
-            border: 3px solid white;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            box-shadow: 0 4px 15px rgba(255, 59, 48, 0.6);
-            animation: pulse-measure 1.5s infinite;
-            pointer-events: none;
-        }
-
-        @keyframes pulse-measure {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); }
-            50% { transform: translate(-50%, -50%) scale(1.3); }
-        }
-
-        .measure-line {
-            position: absolute;
-            height: 3px;
-            background: linear-gradient(90deg, #ff3b30, #ff9500);
-            transform-origin: left center;
-            box-shadow: 0 2px 10px rgba(255, 59, 48, 0.5);
-            pointer-events: none;
-        }
-
-        .measure-result {
-            position: absolute;
-            background: linear-gradient(135deg, rgba(255, 59, 48, 0.95), rgba(255, 149, 0, 0.95));
-            color: white;
-            padding: 10px 20px;
-            border-radius: 12px;
-            font-weight: 700;
-            font-size: 1rem;
-            transform: translate(-50%, -120%);
-            box-shadow: 0 8px 25px rgba(255, 59, 48, 0.5);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            white-space: nowrap;
-            pointer-events: none;
-            animation: fade-scale-in 0.3s ease;
-        }
-
-        .measure-result::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-top: 8px solid rgba(255, 59, 48, 0.95);
-        }
-
-        .measure-instruction {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(10px);
-            color: white;
-            padding: 20px 30px;
-            border-radius: 16px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-align: center;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            pointer-events: none;
-            z-index: 9;
-            animation: fade-in 0.3s ease;
-        }
-
-        .measure-instruction-icon {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
-
-        .measure-clear-btn {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, #ff3b30, #ff6b6b);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 50px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 8px 20px rgba(255, 59, 48, 0.4);
-            transition: all 0.3s;
-            z-index: 9;
-        }
-
-        .measure-clear-btn:hover {
-            transform: translateX(-50%) translateY(-2px);
-            box-shadow: 0 12px 30px rgba(255, 59, 48, 0.6);
-        }
-
-        /* Clickable points on model */
-        .click-indicator {
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            background: #00c6ff;
-            border: 2px solid white;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            pointer-events: none;
-            opacity: 0;
-            animation: click-ripple 0.6s ease;
-        }
-
-        @keyframes click-ripple {
-            0% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(4);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .viewer-section {
-                padding: 60px 15px;
-            }
-
-            .viewer-title {
-                font-size: 2rem;
-            }
-
-            #canvas-3d {
-                height: 400px;
-            }
-
-            .controls-panel {
-                grid-template-columns: 1fr;
-            }
-
-            .stats-display,
-            .instructions {
-                font-size: 0.75rem;
-                padding: 10px 15px;
-            }
-
-            /* Mobile instructions */
-            .instruction-desktop {
-                display: none;
-            }
-
-            .instruction-mobile {
-                display: inline !important;
-            }
-
-            .instruction-desktop-only {
-                display: none !important;
-            }
-
-            /* Touch-friendly buttons */
-            .control-button {
-                padding: 14px 22px;
-                font-size: 0.95rem;
-            }
-        }
-    </style>
-</head>
-<body>
-    <section class="viewer-section">
-        <div class="viewer-container">
-            <!-- Header -->
-            <div class="viewer-header">
-                <h2 class="viewer-title">Visualisation 3D Interactive</h2>
-                <p class="viewer-subtitle">
-                    Explorez un modèle de pièce mécanique en temps réel
-                </p>
+                <!-- Instructions -->
+                <div class="instructions">
+                    <div class="instruction-item">
+                        <span class="instruction-icon">🖱️</span>
+                        <span class="instruction-desktop">Glisser pour pivoter</span>
+                        <span class="instruction-mobile" style="display: none;">Glisser 1 doigt</span>
+                    </div>
+                    <div class="instruction-item">
+                        <span class="instruction-icon">🔍</span>
+                        <span class="instruction-desktop">Molette pour zoomer</span>
+                        <span class="instruction-mobile" style="display: none;">Pincer pour zoomer</span>
+                    </div>
+                    <div class="instruction-item instruction-desktop-only">
+                        <span class="instruction-icon">⌨️</span>
+                        <span>Clic droit pour déplacer</span>
+                    </div>
+                </div>
             </div>
 
-            <!-- 3D Viewer Card -->
-            <div class="viewer-card">
-                <div id="canvas-container" style="position: relative;">
-                    <canvas id="canvas-3d"></canvas>
-                    
-                    <!-- Loading -->
-                    <div class="loading-overlay" id="loading" style="display: none;">
-                        <div class="loading-spinner"></div>
-                    </div>
-
-                    <!-- Stats -->
-                    <div class="stats-display">
-                        <div class="stat-item">
-                            <span class="stat-label">Vertices:</span>
-                            <span class="stat-value" id="stat-vertices">0</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">Faces:</span>
-                            <span class="stat-value" id="stat-faces">0</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-label">FPS:</span>
-                            <span class="stat-value" id="stat-fps">60</span>
-                        </div>
-                    </div>
-
-                    <!-- Instructions -->
-                    <div class="instructions">
-                        <div class="instruction-item">
-                            <span class="instruction-icon">🖱️</span>
-                            <span class="instruction-desktop">Glisser pour pivoter</span>
-                            <span class="instruction-mobile" style="display: none;">Glisser 1 doigt pour pivoter</span>
-                        </div>
-                        <div class="instruction-item">
-                            <span class="instruction-icon">🔍</span>
-                            <span class="instruction-desktop">Molette pour zoomer</span>
-                            <span class="instruction-mobile" style="display: none;">Pincer pour zoomer</span>
-                        </div>
-                        <div class="instruction-item instruction-desktop-only">
-                            <span class="instruction-icon">⌨️</span>
-                            <span>Clic droit pour déplacer</span>
-                        </div>
-                    </div>
+            <!-- Controls -->
+            <div class="controls-panel">
+                <div class="control-group">
+                    <label class="control-label">
+                        <span>🎨</span> Mode d'affichage
+                    </label>
+                    <button class="control-button active" id="btn-solid" onclick="setRenderMode('solid')">
+                        Solide
+                    </button>
+                    <button class="control-button" id="btn-wireframe" onclick="setRenderMode('wireframe')">
+                        Filaire
+                    </button>
                 </div>
 
-                <!-- Controls -->
-                <div class="controls-panel">
-                    <div class="control-group">
-                        <label class="control-label">
-                            <span>🎨</span> Mode d'affichage
-                        </label>
-                        <button class="control-button active" id="btn-solid" onclick="setRenderMode('solid')">
-                            Solide
-                        </button>
-                        <button class="control-button" id="btn-wireframe" onclick="setRenderMode('wireframe')">
-                            Filaire
-                        </button>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">
-                            <span>💡</span> Affichage
-                        </label>
-                        <button class="control-button" onclick="toggleRotation()">
-                            <span id="rotation-icon">▶️</span> Auto-rotation
-                        </button>
-                        <button class="control-button" onclick="resetCamera()">
-                            🔄 Réinitialiser
-                        </button>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">
-                            <span>📏</span> Mesures
-                        </label>
-                        <button class="control-button" id="btn-measure" onclick="toggleMeasureMode()">
-                            📐 Mode Mesure
-                        </button>
-                        <button class="control-button" id="btn-dimensions" onclick="toggleDimensions()">
-                            Afficher cotations
-                        </button>
-                        <button class="control-button" id="btn-annotations" onclick="toggleAnnotations()">
-                            Afficher annotations
-                        </button>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">
-                            <span>💾</span> Export
-                        </label>
-                        <button class="control-button" onclick="exportScreenshot()">
-                            📸 Screenshot PNG
-                        </button>
-                        <button class="control-button" onclick="exportModel()">
-                            📦 Modèle STL
-                        </button>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">
-                            <span>🌈</span> Couleur: <span id="color-value">#007bff</span>
-                        </label>
-                        <input type="range" class="control-slider" id="color-hue" min="0" max="360" value="210" oninput="updateColor(this.value)">
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label">
-                            <span>✨</span> Métallique: <span id="metalness-value">0.5</span>
-                        </label>
-                        <input type="range" class="control-slider" id="metalness" min="0" max="1" step="0.1" value="0.5" oninput="updateMetalness(this.value)">
-                    </div>
+                <div class="control-group">
+                    <label class="control-label">
+                        <span>💡</span> Affichage
+                    </label>
+                    <button class="control-button" onclick="toggleRotation()">
+                        <span id="rotation-icon">▶️</span> Auto-rotation
+                    </button>
+                    <button class="control-button" onclick="resetCamera()">
+                        🔄 Réinitialiser
+                    </button>
                 </div>
 
-                <!-- Info Box -->
-                <div class="info-box">
-                    <div class="info-title">
-                        💡 À propos de ce modèle
-                    </div>
-                    <div class="info-content">
-                        <strong>Pièce mécanique personnalisée</strong> - Ce modèle 3D représente un exemple de conception mécanique. 
-                        Utilisez les contrôles ci-dessus pour explorer la géométrie sous différents angles et modes de rendu. 
-                        Cette visualisation démontre l'intégration de Three.js pour présenter des modèles CAO de manière interactive.
-                    </div>
+                <div class="control-group">
+                    <label class="control-label">
+                        <span>📏</span> Mesures
+                    </label>
+                    <button class="control-button" id="btn-measure" onclick="toggleMeasureMode()">
+                        📐 Mode Mesure
+                    </button>
+                    <button class="control-button" id="btn-dimensions" onclick="toggleDimensions()">
+                        Cotations
+                    </button>
+                    <button class="control-button" id="btn-annotations" onclick="toggleAnnotations()">
+                        Annotations
+                    </button>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">
+                        <span>💾</span> Export
+                    </label>
+                    <button class="control-button" onclick="exportScreenshot()">
+                        📸 Screenshot
+                    </button>
+                    <button class="control-button" onclick="exportModel()">
+                        📦 Modèle STL
+                    </button>
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">
+                        <span>🌈</span> Couleur: <span id="color-value">#007bff</span>
+                    </label>
+                    <input type="range" class="control-slider" id="color-hue" min="0" max="360" value="210" oninput="updateColor(this.value)">
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">
+                        <span>✨</span> Métallique: <span id="metalness-value">0.5</span>
+                    </label>
+                    <input type="range" class="control-slider" id="metalness" min="0" max="1" step="0.1" value="0.5" oninput="updateMetalness(this.value)">
+                </div>
+            </div>
+
+            <!-- Info Box -->
+            <div class="info-box">
+                <div class="info-title">
+                    🚧 Outil en cours de développement
+                </div>
+                <div class="info-content">
+                    <strong>Visualiseur 3D interactif</strong> - Cet outil est actuellement en développement et sera bientôt disponible dans la section <strong>Projets</strong> pour explorer mes réalisations en 3D. 
+                    Vous pourrez visualiser et manipuler les modèles CAO de mes projets mécaniques directement dans votre navigateur. 
+                    Cette fonctionnalité permettra d'examiner chaque pièce sous tous les angles avec des mesures interactives et des annotations techniques.
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Export Notification -->
-    <div class="export-notification" id="export-notification">
-        <div class="export-notification-icon">✅</div>
-        <div class="export-notification-title">Export réussi !</div>
-        <div class="export-notification-text">Le fichier a été téléchargé</div>
     </div>
+</section>
 
-    <script>
-        // === THREE.JS SETUP ===
-        let scene, camera, renderer, mesh, material;
-        let isRotating = false;
-        let mouseDown = false;
-        let mouseX = 0, mouseY = 0;
-        let dimensionsVisible = false;
-        let annotationsVisible = false;
-        let dimensionElements = [];
-        let annotationElements = [];
+<!-- Export Notification -->
+<div class="export-notification" id="export-notification">
+    <div class="export-notification-icon">✅</div>
+    <div class="export-notification-title">Export réussi !</div>
+    <div class="export-notification-text">Le fichier a été téléchargé</div>
+</div>
+
+<script>
+    // === THREE.JS SETUP ===
+    let scene, camera, renderer, mesh, material;
+    let isRotating = false;
+    let mouseDown = false;
+    let mouseX = 0, mouseY = 0;
+    let dimensionsVisible = false;
+    let annotationsVisible = false;
+    let dimensionElements = [];
+    let annotationElements = [];
+    
+    // Measure mode variables
+    let measureMode = false;
+    let measurePoints = [];
+    let measureElements = [];
+    let raycaster = new THREE.Raycaster();
+    let mouse = new THREE.Vector2();
+
+    function init() {
+        const canvas = document.getElementById('canvas-3d');
+        const container = canvas.parentElement;
+
+        // Scene
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x1a1a2e);
+
+        // Camera
+        camera = new THREE.PerspectiveCamera(
+            75,
+            canvas.clientWidth / canvas.clientHeight,
+            0.1,
+            1000
+        );
+        camera.position.z = 5;
+
+        // Renderer
+        renderer = new THREE.WebGLRenderer({ 
+            canvas: canvas,
+            antialias: true 
+        });
+        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+
+        // Lights
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene.add(ambientLight);
+
+        const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight1.position.set(5, 5, 5);
+        scene.add(directionalLight1);
+
+        const directionalLight2 = new THREE.DirectionalLight(0x00c6ff, 0.4);
+        directionalLight2.position.set(-5, -5, -5);
+        scene.add(directionalLight2);
+
+        // Create mechanical part
+        createMechanicalPart();
+
+        // Controls
+        setupControls();
+
+        // Animation
+        animate();
+
+        // Resize
+        window.addEventListener('resize', onWindowResize);
+    }
+
+    function createMechanicalPart() {
+        const loader = new THREE.GLTFLoader();
         
-        // Measure mode variables
-        let measureMode = false;
-        let measurePoints = [];
-        let measureElements = [];
-        let raycaster = new THREE.Raycaster();
-        let mouse = new THREE.Vector2();
-
-        function init() {
-            const canvas = document.getElementById('canvas-3d');
-            const container = canvas.parentElement;
-
-            // Scene
-            scene = new THREE.Scene();
-            scene.background = new THREE.Color(0x1a1a2e);
-
-            // Camera
-            camera = new THREE.PerspectiveCamera(
-                75,
-                canvas.clientWidth / canvas.clientHeight,
-                0.1,
-                1000
-            );
-            camera.position.z = 5;
-
-            // Renderer
-            renderer = new THREE.WebGLRenderer({ 
-                canvas: canvas,
-                antialias: true 
-            });
-            renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
-
-            // Lights
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
-            scene.add(ambientLight);
-
-            const directionalLight1 = new THREE.DirectionalLight(0xffffff, 0.8);
-            directionalLight1.position.set(5, 5, 5);
-            scene.add(directionalLight1);
-
-            const directionalLight2 = new THREE.DirectionalLight(0x00c6ff, 0.4);
-            directionalLight2.position.set(-5, -5, -5);
-            scene.add(directionalLight2);
-
-            // Create a mechanical part geometry (gear-like shape)
-            createMechanicalPart();
-
-            // Mouse controls
-            setupControls();
-
-            // Start animation
-            animate();
-
-            // Handle resize
-            window.addEventListener('resize', onWindowResize);
-        }
-
-        function createMechanicalPart() {
-            // Create a complex mechanical shape
-            const group = new THREE.Group();
-
-            // Main cylinder body
-            const bodyGeometry = new THREE.CylinderGeometry(1.5, 1.5, 2, 32);
-            material = new THREE.MeshStandardMaterial({
-                color: 0x007bff,
-                metalness: 0.5,
-                roughness: 0.3
-            });
-            const body = new THREE.Mesh(bodyGeometry, material);
-            group.add(body);
-
-            // Create gear teeth
-            const toothGeometry = new THREE.BoxGeometry(0.3, 2.2, 0.4);
-            const toothMaterial = new THREE.MeshStandardMaterial({
-                color: 0x007bff,
-                metalness: 0.5,
-                roughness: 0.3
-            });
-
-            const teethCount = 12;
-            for (let i = 0; i < teethCount; i++) {
-                const angle = (i / teethCount) * Math.PI * 2;
-                const tooth = new THREE.Mesh(toothGeometry, toothMaterial);
-                tooth.position.x = Math.cos(angle) * 1.65;
-                tooth.position.z = Math.sin(angle) * 1.65;
-                tooth.rotation.y = angle;
-                group.add(tooth);
-            }
-
-            // Center hole
-            const holeGeometry = new THREE.CylinderGeometry(0.5, 0.5, 2.3, 32);
-            const holeMaterial = new THREE.MeshStandardMaterial({
-                color: 0x0a0a0a,
-                metalness: 0.8,
-                roughness: 0.2
-            });
-            const hole = new THREE.Mesh(holeGeometry, holeMaterial);
-            group.add(hole);
-
-            // Add mounting holes
-            const mountHoleGeometry = new THREE.CylinderGeometry(0.15, 0.15, 2.3, 16);
-            const positions = [
-                { x: 0.8, z: 0 },
-                { x: -0.8, z: 0 },
-                { x: 0, z: 0.8 },
-                { x: 0, z: -0.8 }
-            ];
-
-            positions.forEach(pos => {
-                const mountHole = new THREE.Mesh(mountHoleGeometry, holeMaterial);
-                mountHole.position.set(pos.x, 0, pos.z);
-                group.add(mountHole);
-            });
-
-            mesh = group;
-            scene.add(mesh);
-
-            // Update stats
-            updateStats();
-        }
-
-        function setupControls() {
-            const canvas = document.getElementById('canvas-3d');
-
-            // === MOUSE CONTROLS (Desktop) ===
-            canvas.addEventListener('mousedown', (e) => {
-                if (measureMode) {
-                    handleMeasureClick(e);
-                    return;
-                }
+        // Afficher le loading
+        document.getElementById('loading').style.display = 'flex';
+        
+        // Charger le modèle GLTF
+        loader.load(
+            'assets/img/3Dtest.glb',
+            
+            // Succès
+            function(gltf) {
+                mesh = gltf.scene;
                 
-                mouseDown = true;
+                // Calculer la boîte englobante pour centrer
+                const box = new THREE.Box3().setFromObject(mesh);
+                const center = box.getCenter(new THREE.Vector3());
+                const size = box.getSize(new THREE.Vector3());
+                
+                // Centrer le modèle
+                mesh.position.x = -center.x;
+                mesh.position.y = -center.y;
+                mesh.position.z = -center.z;
+                
+                // Calculer l'échelle pour que le modèle rentre dans la vue
+                const maxDim = Math.max(size.x, size.y, size.z);
+                const scale = 3 / maxDim; // Ajuster à une taille visible
+                mesh.scale.set(scale, scale, scale);
+                
+                // Créer un groupe pour contenir le modèle
+                const group = new THREE.Group();
+                group.add(mesh);
+                
+                // Remplacer mesh par le groupe pour la rotation
+                mesh = group;
+                scene.add(mesh);
+                
+                // Appliquer le matériau par défaut si nécessaire
+                mesh.traverse((child) => {
+                    if (child.isMesh) {
+                        // Garder le matériau d'origine s'il existe
+                        if (!child.material) {
+                            child.material = new THREE.MeshStandardMaterial({
+                                color: 0x007bff,
+                                metalness: 0.5,
+                                roughness: 0.3
+                            });
+                        }
+                        // Sauvegarder le matériau original pour les modifications
+                        if (!material) {
+                            material = child.material;
+                        }
+                    }
+                });
+                
+                updateStats();
+                
+                // Cacher le loading
+                document.getElementById('loading').style.display = 'none';
+            },
+            
+            // Progression
+            function(xhr) {
+                console.log((xhr.loaded / xhr.total * 100) + '% chargé');
+            },
+            
+            // Erreur
+            function(error) {
+                console.error('Erreur de chargement du modèle:', error);
+                document.getElementById('loading').style.display = 'none';
+                
+                // Créer un modèle de secours si le fichier n'est pas trouvé
+                alert('Erreur: Impossible de charger le modèle 3Dtest.glb\n\nVérifiez que le fichier est bien dans: assets/img/3Dtest.glb');
+                createFallbackModel();
+            }
+        );
+    }
+    
+    // Modèle de secours en cas d'erreur
+    function createFallbackModel() {
+        const group = new THREE.Group();
+        const bodyGeometry = new THREE.CylinderGeometry(1.5, 1.5, 2, 32);
+        material = new THREE.MeshStandardMaterial({
+            color: 0x007bff,
+            metalness: 0.5,
+            roughness: 0.3
+        });
+        const body = new THREE.Mesh(bodyGeometry, material);
+        group.add(body);
+        
+        const toothGeometry = new THREE.BoxGeometry(0.3, 2.2, 0.4);
+        const teethCount = 12;
+        for (let i = 0; i < teethCount; i++) {
+            const angle = (i / teethCount) * Math.PI * 2;
+            const tooth = new THREE.Mesh(toothGeometry, material);
+            tooth.position.x = Math.cos(angle) * 1.65;
+            tooth.position.z = Math.sin(angle) * 1.65;
+            tooth.rotation.y = angle;
+            group.add(tooth);
+        }
+        
+        mesh = group;
+        scene.add(mesh);
+        updateStats();
+    }
+
+    function setupControls() {
+        const canvas = document.getElementById('canvas-3d');
+
+        // Mouse controls
+        canvas.addEventListener('mousedown', (e) => {
+            if (measureMode) {
+                handleMeasureClick(e);
+                return;
+            }
+            mouseDown = true;
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            if (!measureMode) mouseDown = false;
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (measureMode) return;
+            if (mouseDown) {
+                const deltaX = e.clientX - mouseX;
+                const deltaY = e.clientY - mouseY;
+                mesh.rotation.y += deltaX * 0.01;
+                mesh.rotation.x += deltaY * 0.01;
                 mouseX = e.clientX;
                 mouseY = e.clientY;
-            });
+            }
+        });
 
-            canvas.addEventListener('mouseup', () => {
-                if (!measureMode) {
-                    mouseDown = false;
-                }
-            });
+        canvas.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            camera.position.z += e.deltaY * 0.01;
+            camera.position.z = Math.max(2, Math.min(10, camera.position.z));
+        });
 
-            canvas.addEventListener('mousemove', (e) => {
-                if (measureMode) {
-                    return; // Pas de rotation en mode mesure
-                }
-                
-                if (mouseDown) {
-                    const deltaX = e.clientX - mouseX;
-                    const deltaY = e.clientY - mouseY;
+        // Touch controls
+        let touchStartX = 0, touchStartY = 0;
+        let touchStartDistance = 0;
+        let initialCameraZ = camera.position.z;
+        let isTwoFingerTouch = false;
 
-                    mesh.rotation.y += deltaX * 0.01;
-                    mesh.rotation.x += deltaY * 0.01;
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            if (measureMode && e.touches.length === 1) {
+                handleMeasureTouch(e);
+                return;
+            }
+            if (e.touches.length === 1) {
+                isTwoFingerTouch = false;
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+            } else if (e.touches.length === 2) {
+                isTwoFingerTouch = true;
+                const dx = e.touches[0].clientX - e.touches[1].clientX;
+                const dy = e.touches[0].clientY - e.touches[1].clientY;
+                touchStartDistance = Math.sqrt(dx * dx + dy * dy);
+                initialCameraZ = camera.position.z;
+            }
+        }, { passive: false });
 
-                    mouseX = e.clientX;
-                    mouseY = e.clientY;
-                }
-            });
-
-            canvas.addEventListener('wheel', (e) => {
-                e.preventDefault();
-                camera.position.z += e.deltaY * 0.01;
+        canvas.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+            if (measureMode) return;
+            if (e.touches.length === 1 && !isTwoFingerTouch) {
+                const touchX = e.touches[0].clientX;
+                const touchY = e.touches[0].clientY;
+                const deltaX = touchX - touchStartX;
+                const deltaY = touchY - touchStartY;
+                mesh.rotation.y += deltaX * 0.01;
+                mesh.rotation.x += deltaY * 0.01;
+                touchStartX = touchX;
+                touchStartY = touchY;
+            } else if (e.touches.length === 2) {
+                const dx = e.touches[0].clientX - e.touches[1].clientX;
+                const dy = e.touches[0].clientY - e.touches[1].clientY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                const zoomFactor = touchStartDistance / distance;
+                camera.position.z = initialCameraZ * zoomFactor;
                 camera.position.z = Math.max(2, Math.min(10, camera.position.z));
-            });
-
-            // === TOUCH CONTROLS (Mobile/Tablet) ===
-            let touchStartX = 0;
-            let touchStartY = 0;
-            let touchStartDistance = 0;
-            let initialCameraZ = camera.position.z;
-            let isTwoFingerTouch = false;
-
-            // Touch Start
-            canvas.addEventListener('touchstart', (e) => {
-                e.preventDefault();
-                
-                if (measureMode && e.touches.length === 1) {
-                    handleMeasureTouch(e);
-                    return;
-                }
-                
-                if (e.touches.length === 1) {
-                    // Single finger - rotation
-                    isTwoFingerTouch = false;
-                    touchStartX = e.touches[0].clientX;
-                    touchStartY = e.touches[0].clientY;
-                } else if (e.touches.length === 2) {
-                    // Two fingers - pinch zoom
-                    isTwoFingerTouch = true;
-                    const dx = e.touches[0].clientX - e.touches[1].clientX;
-                    const dy = e.touches[0].clientY - e.touches[1].clientY;
-                    touchStartDistance = Math.sqrt(dx * dx + dy * dy);
-                    initialCameraZ = camera.position.z;
-                }
-            }, { passive: false });
-
-            // Touch Move
-            canvas.addEventListener('touchmove', (e) => {
-                e.preventDefault();
-                
-                if (measureMode) {
-                    return; // Pas de mouvement en mode mesure
-                }
-                
-                if (e.touches.length === 1 && !isTwoFingerTouch) {
-                    // Single finger - rotation
-                    const touchX = e.touches[0].clientX;
-                    const touchY = e.touches[0].clientY;
-                    
-                    const deltaX = touchX - touchStartX;
-                    const deltaY = touchY - touchStartY;
-
-                    mesh.rotation.y += deltaX * 0.01;
-                    mesh.rotation.x += deltaY * 0.01;
-
-                    touchStartX = touchX;
-                    touchStartY = touchY;
-                } else if (e.touches.length === 2) {
-                    // Two fingers - pinch zoom
-                    const dx = e.touches[0].clientX - e.touches[1].clientX;
-                    const dy = e.touches[0].clientY - e.touches[1].clientY;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    const zoomFactor = touchStartDistance / distance;
-                    camera.position.z = initialCameraZ * zoomFactor;
-                    camera.position.z = Math.max(2, Math.min(10, camera.position.z));
-                }
-            }, { passive: false });
-
-            // Touch End
-            canvas.addEventListener('touchend', (e) => {
-                if (e.touches.length < 2) {
-                    isTwoFingerTouch = false;
-                }
-            });
-
-            // Prevent context menu on long press (mobile)
-            canvas.addEventListener('contextmenu', (e) => {
-                e.preventDefault();
-            });
-        }
-
-        function animate() {
-            requestAnimationFrame(animate);
-
-            if (isRotating) {
-                mesh.rotation.y += 0.005;
             }
+        }, { passive: false });
 
-            renderer.render(scene, camera);
-            updateFPS();
-            
-            // Update dimensions and annotations positions
-            if (dimensionsVisible) {
-                updateDimensionPositions();
+        canvas.addEventListener('touchend', (e) => {
+            if (e.touches.length < 2) isTwoFingerTouch = false;
+        });
+
+        canvas.addEventListener('contextmenu', (e) => e.preventDefault());
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        if (isRotating) mesh.rotation.y += 0.005;
+        renderer.render(scene, camera);
+        updateFPS();
+        if (dimensionsVisible) updateDimensionPositions();
+        if (annotationsVisible) updateAnnotationPositions();
+    }
+
+    function onWindowResize() {
+        const canvas = document.getElementById('canvas-3d');
+        camera.aspect = canvas.clientWidth / canvas.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+    }
+
+    // Controls
+    function setRenderMode(mode) {
+        document.getElementById('btn-solid').classList.remove('active');
+        document.getElementById('btn-wireframe').classList.remove('active');
+        document.getElementById(`btn-${mode}`).classList.add('active');
+        mesh.traverse((child) => {
+            if (child.isMesh && child.material) {
+                child.material.wireframe = (mode === 'wireframe');
             }
-            if (annotationsVisible) {
-                updateAnnotationPositions();
-            }
-        }
+        });
+    }
 
-        function onWindowResize() {
-            const canvas = document.getElementById('canvas-3d');
-            camera.aspect = canvas.clientWidth / canvas.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(canvas.clientWidth, canvas.clientHeight);
-        }
+    function toggleRotation() {
+        isRotating = !isRotating;
+        document.getElementById('rotation-icon').textContent = isRotating ? '⏸️' : '▶️';
+    }
 
-        // === CONTROLS ===
-        function setRenderMode(mode) {
-            document.getElementById('btn-solid').classList.remove('active');
-            document.getElementById('btn-wireframe').classList.remove('active');
-            document.getElementById(`btn-${mode}`).classList.add('active');
+    function resetCamera() {
+        camera.position.set(0, 0, 5);
+        mesh.rotation.set(0, 0, 0);
+    }
 
+    function updateColor(hue) {
+        const color = new THREE.Color(`hsl(${hue}, 100%, 50%)`);
+        if (mesh) {
             mesh.traverse((child) => {
                 if (child.isMesh && child.material) {
-                    child.material.wireframe = (mode === 'wireframe');
-                }
-            });
-        }
-
-        function toggleRotation() {
-            isRotating = !isRotating;
-            document.getElementById('rotation-icon').textContent = isRotating ? '⏸️' : '▶️';
-        }
-
-        function resetCamera() {
-            camera.position.set(0, 0, 5);
-            mesh.rotation.set(0, 0, 0);
-        }
-
-        function updateColor(hue) {
-            const color = new THREE.Color(`hsl(${hue}, 100%, 50%)`);
-            mesh.traverse((child) => {
-                if (child.isMesh && child.material && child.material.color) {
-                    child.material.color = color;
-                }
-            });
-            document.getElementById('color-value').textContent = `#${color.getHexString()}`;
-        }
-
-        function updateMetalness(value) {
-            mesh.traverse((child) => {
-                if (child.isMesh && child.material && child.material.metalness !== undefined) {
-                    child.material.metalness = parseFloat(value);
-                }
-            });
-            document.getElementById('metalness-value').textContent = value;
-        }
-
-        // === STATS ===
-        function updateStats() {
-            let vertices = 0;
-            let faces = 0;
-
-            mesh.traverse((child) => {
-                if (child.isMesh && child.geometry) {
-                    vertices += child.geometry.attributes.position.count;
-                    faces += child.geometry.index ? child.geometry.index.count / 3 : child.geometry.attributes.position.count / 3;
-                }
-            });
-
-            document.getElementById('stat-vertices').textContent = vertices.toLocaleString();
-            document.getElementById('stat-faces').textContent = Math.floor(faces).toLocaleString();
-        }
-
-        let lastTime = Date.now();
-        let fps = 60;
-
-        function updateFPS() {
-            const now = Date.now();
-            const delta = now - lastTime;
-            fps = Math.round(1000 / delta);
-            document.getElementById('stat-fps').textContent = fps;
-            lastTime = now;
-        }
-
-        // === DIMENSIONS (COTATIONS) ===
-        function toggleDimensions() {
-            dimensionsVisible = !dimensionsVisible;
-            const btn = document.getElementById('btn-dimensions');
-            
-            if (dimensionsVisible) {
-                btn.classList.add('active');
-                createDimensions();
-            } else {
-                btn.classList.remove('active');
-                removeDimensions();
-            }
-        }
-
-        function createDimensions() {
-            const container = document.getElementById('canvas-container');
-            
-            // Dimension 1: Diamètre extérieur
-            const dim1 = createDimensionElement('Ø 3.30 mm', 'diameter');
-            dimensionElements.push(dim1);
-            container.appendChild(dim1.element);
-            
-            // Dimension 2: Hauteur
-            const dim2 = createDimensionElement('H 2.00 mm', 'height');
-            dimensionElements.push(dim2);
-            container.appendChild(dim2.element);
-            
-            // Dimension 3: Trou central
-            const dim3 = createDimensionElement('Ø 1.00 mm', 'hole');
-            dimensionElements.push(dim3);
-            container.appendChild(dim3.element);
-            
-            updateDimensionPositions();
-        }
-
-        function createDimensionElement(text, type) {
-            const element = document.createElement('div');
-            element.className = 'dimension-text';
-            element.textContent = text;
-            element.style.display = 'none';
-            
-            return { element, text, type };
-        }
-
-        function updateDimensionPositions() {
-            dimensionElements.forEach(dim => {
-                let worldPos;
-                
-                switch(dim.type) {
-                    case 'diameter':
-                        worldPos = new THREE.Vector3(2, 0, 0);
-                        break;
-                    case 'height':
-                        worldPos = new THREE.Vector3(2.5, 0, 0);
-                        break;
-                    case 'hole':
-                        worldPos = new THREE.Vector3(0, 0, 0);
-                        break;
-                }
-                
-                worldPos.applyMatrix4(mesh.matrixWorld);
-                const screenPos = toScreenPosition(worldPos);
-                
-                if (screenPos.z < 1) {
-                    dim.element.style.left = screenPos.x + 'px';
-                    dim.element.style.top = screenPos.y + 'px';
-                    dim.element.style.display = 'block';
-                } else {
-                    dim.element.style.display = 'none';
-                }
-            });
-        }
-
-        function removeDimensions() {
-            dimensionElements.forEach(dim => {
-                if (dim.element.parentNode) {
-                    dim.element.parentNode.removeChild(dim.element);
-                }
-            });
-            dimensionElements = [];
-        }
-
-        // === ANNOTATIONS ===
-        function toggleAnnotations() {
-            annotationsVisible = !annotationsVisible;
-            const btn = document.getElementById('btn-annotations');
-            
-            if (annotationsVisible) {
-                btn.classList.add('active');
-                createAnnotations();
-            } else {
-                btn.classList.remove('active');
-                removeAnnotations();
-            }
-        }
-
-        function createAnnotations() {
-            const container = document.getElementById('canvas-container');
-            
-            const annotations = [
-                { 
-                    position: new THREE.Vector3(1.65, 0.5, 0),
-                    label: 'Dents de l\'engrenage (12x)',
-                    color: '#ff3b30'
-                },
-                { 
-                    position: new THREE.Vector3(0, 0, 0),
-                    label: 'Trou central Ø1.0mm',
-                    color: '#ff9500'
-                },
-                { 
-                    position: new THREE.Vector3(0.8, 0.8, 0),
-                    label: 'Trou de fixation M3',
-                    color: '#34c759'
-                }
-            ];
-            
-            annotations.forEach(ann => {
-                const element = createAnnotationElement(ann);
-                annotationElements.push({ element, position: ann.position });
-                container.appendChild(element);
-            });
-            
-            updateAnnotationPositions();
-        }
-
-        function createAnnotationElement(annotation) {
-            const div = document.createElement('div');
-            div.className = 'annotation';
-            
-            const dot = document.createElement('div');
-            dot.className = 'annotation-dot';
-            dot.style.background = annotation.color;
-            
-            const label = document.createElement('div');
-            label.className = 'annotation-label';
-            label.style.background = annotation.color;
-            label.textContent = annotation.label;
-            
-            div.appendChild(dot);
-            div.appendChild(label);
-            
-            return div;
-        }
-
-        function updateAnnotationPositions() {
-            annotationElements.forEach(ann => {
-                const worldPos = ann.position.clone();
-                worldPos.applyMatrix4(mesh.matrixWorld);
-                const screenPos = toScreenPosition(worldPos);
-                
-                if (screenPos.z < 1) {
-                    ann.element.style.left = (screenPos.x - 6) + 'px';
-                    ann.element.style.top = (screenPos.y - 6) + 'px';
-                    ann.element.style.display = 'flex';
-                } else {
-                    ann.element.style.display = 'none';
-                }
-            });
-        }
-
-        function removeAnnotations() {
-            annotationElements.forEach(ann => {
-                if (ann.element.parentNode) {
-                    ann.element.parentNode.removeChild(ann.element);
-                }
-            });
-            annotationElements = [];
-        }
-
-        // Convert 3D world position to 2D screen position
-        function toScreenPosition(position) {
-            const vector = position.clone();
-            vector.project(camera);
-            
-            const canvas = document.getElementById('canvas-3d');
-            const widthHalf = canvas.clientWidth / 2;
-            const heightHalf = canvas.clientHeight / 2;
-            
-            return {
-                x: (vector.x * widthHalf) + widthHalf,
-                y: -(vector.y * heightHalf) + heightHalf,
-                z: vector.z
-            };
-        }
-
-        // === EXPORT FUNCTIONS ===
-        function exportScreenshot() {
-            // Render a high-quality frame
-            renderer.render(scene, camera);
-            
-            // Get canvas as image
-            const canvas = document.getElementById('canvas-3d');
-            canvas.toBlob((blob) => {
-                const url = URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.download = 'model-3d-screenshot.png';
-                link.href = url;
-                link.click();
-                URL.revokeObjectURL(url);
-                
-                showExportNotification('Screenshot PNG téléchargé !');
-            });
-        }
-
-        function exportModel() {
-            // Export as STL
-            const exporter = new STLExporter();
-            
-            // Simple STL export implementation
-            let output = 'solid model\n';
-            
-            mesh.traverse((child) => {
-                if (child.isMesh && child.geometry) {
-                    const geometry = child.geometry;
-                    const matrix = child.matrixWorld;
-                    
-                    const position = geometry.attributes.position;
-                    const index = geometry.index;
-                    
-                    if (index) {
-                        for (let i = 0; i < index.count; i += 3) {
-                            const v1 = new THREE.Vector3().fromBufferAttribute(position, index.getX(i));
-                            const v2 = new THREE.Vector3().fromBufferAttribute(position, index.getX(i + 1));
-                            const v3 = new THREE.Vector3().fromBufferAttribute(position, index.getX(i + 2));
-                            
-                            v1.applyMatrix4(matrix);
-                            v2.applyMatrix4(matrix);
-                            v3.applyMatrix4(matrix);
-                            
-                            const normal = new THREE.Vector3()
-                                .subVectors(v2, v1)
-                                .cross(new THREE.Vector3().subVectors(v3, v1))
-                                .normalize();
-                            
-                            output += `facet normal ${normal.x} ${normal.y} ${normal.z}\n`;
-                            output += ' outer loop\n';
-                            output += `  vertex ${v1.x} ${v1.y} ${v1.z}\n`;
-                            output += `  vertex ${v2.x} ${v2.y} ${v2.z}\n`;
-                            output += `  vertex ${v3.x} ${v3.y} ${v3.z}\n`;
-                            output += ' endloop\n';
-                            output += 'endfacet\n';
-                        }
+                    // Créer un nouveau matériau si nécessaire
+                    if (!child.material.color) {
+                        child.material = new THREE.MeshStandardMaterial({
+                            color: color,
+                            metalness: child.material.metalness || 0.5,
+                            roughness: child.material.roughness || 0.3
+                        });
+                    } else {
+                        child.material.color = color;
                     }
                 }
             });
-            
-            output += 'endsolid model\n';
-            
-            // Download
-            const blob = new Blob([output], { type: 'text/plain' });
+        }
+        document.getElementById('color-value').textContent = `#${color.getHexString()}`;
+    }
+
+    function updateMetalness(value) {
+        if (mesh) {
+            mesh.traverse((child) => {
+                if (child.isMesh && child.material) {
+                    if (child.material.metalness !== undefined) {
+                        child.material.metalness = parseFloat(value);
+                    }
+                }
+            });
+        }
+        document.getElementById('metalness-value').textContent = value;
+    }
+
+    // Stats
+    function updateStats() {
+        let vertices = 0, faces = 0;
+        mesh.traverse((child) => {
+            if (child.isMesh && child.geometry) {
+                vertices += child.geometry.attributes.position.count;
+                faces += child.geometry.index ? child.geometry.index.count / 3 : child.geometry.attributes.position.count / 3;
+            }
+        });
+        document.getElementById('stat-vertices').textContent = vertices.toLocaleString();
+        document.getElementById('stat-faces').textContent = Math.floor(faces).toLocaleString();
+    }
+
+    let lastTime = Date.now(), fps = 60;
+    function updateFPS() {
+        const now = Date.now();
+        const delta = now - lastTime;
+        fps = Math.round(1000 / delta);
+        document.getElementById('stat-fps').textContent = fps;
+        lastTime = now;
+    }
+
+    // Dimensions
+    function toggleDimensions() {
+        dimensionsVisible = !dimensionsVisible;
+        const btn = document.getElementById('btn-dimensions');
+        if (dimensionsVisible) {
+            btn.classList.add('active');
+            createDimensions();
+        } else {
+            btn.classList.remove('active');
+            removeDimensions();
+        }
+    }
+
+    function createDimensions() {
+        const container = document.getElementById('canvas-container');
+        const dims = [
+            { text: 'Ø 3.30 mm', type: 'diameter' },
+            { text: 'H 2.00 mm', type: 'height' },
+            { text: 'Ø 1.00 mm', type: 'hole' }
+        ];
+        dims.forEach(d => {
+            const el = document.createElement('div');
+            el.className = 'dimension-text';
+            el.textContent = d.text;
+            el.style.display = 'none';
+            dimensionElements.push({ element: el, type: d.type });
+            container.appendChild(el);
+        });
+        updateDimensionPositions();
+    }
+
+    function updateDimensionPositions() {
+        dimensionElements.forEach(dim => {
+            let worldPos;
+            switch(dim.type) {
+                case 'diameter': worldPos = new THREE.Vector3(2, 0, 0); break;
+                case 'height': worldPos = new THREE.Vector3(2.5, 0, 0); break;
+                case 'hole': worldPos = new THREE.Vector3(0, 0, 0); break;
+            }
+            worldPos.applyMatrix4(mesh.matrixWorld);
+            const screenPos = toScreenPosition(worldPos);
+            if (screenPos.z < 1) {
+                dim.element.style.left = screenPos.x + 'px';
+                dim.element.style.top = screenPos.y + 'px';
+                dim.element.style.display = 'block';
+            } else {
+                dim.element.style.display = 'none';
+            }
+        });
+    }
+
+    function removeDimensions() {
+        dimensionElements.forEach(d => d.element.parentNode && d.element.parentNode.removeChild(d.element));
+        dimensionElements = [];
+    }
+
+    // Annotations
+    function toggleAnnotations() {
+        annotationsVisible = !annotationsVisible;
+        const btn = document.getElementById('btn-annotations');
+        if (annotationsVisible) {
+            btn.classList.add('active');
+            createAnnotations();
+        } else {
+            btn.classList.remove('active');
+            removeAnnotations();
+        }
+    }
+
+    function createAnnotations() {
+        const container = document.getElementById('canvas-container');
+        const anns = [
+            { position: new THREE.Vector3(1.65, 0.5, 0), label: 'Dents engrenage (12x)', color: '#ff3b30' },
+            { position: new THREE.Vector3(0, 0, 0), label: 'Trou central Ø1.0mm', color: '#ff9500' },
+            { position: new THREE.Vector3(0.8, 0.8, 0), label: 'Trou fixation M3', color: '#34c759' }
+        ];
+        anns.forEach(a => {
+            const div = document.createElement('div');
+            div.className = 'annotation';
+            const dot = document.createElement('div');
+            dot.className = 'annotation-dot';
+            dot.style.background = a.color;
+            const label = document.createElement('div');
+            label.className = 'annotation-label';
+            label.style.background = a.color;
+            label.textContent = a.label;
+            div.appendChild(dot);
+            div.appendChild(label);
+            annotationElements.push({ element: div, position: a.position });
+            container.appendChild(div);
+        });
+        updateAnnotationPositions();
+    }
+
+    function updateAnnotationPositions() {
+        annotationElements.forEach(a => {
+            const worldPos = a.position.clone();
+            worldPos.applyMatrix4(mesh.matrixWorld);
+            const screenPos = toScreenPosition(worldPos);
+            if (screenPos.z < 1) {
+                a.element.style.left = (screenPos.x - 6) + 'px';
+                a.element.style.top = (screenPos.y - 6) + 'px';
+                a.element.style.display = 'flex';
+            } else {
+                a.element.style.display = 'none';
+            }
+        });
+    }
+
+    function removeAnnotations() {
+        annotationElements.forEach(a => a.element.parentNode && a.element.parentNode.removeChild(a.element));
+        annotationElements = [];
+    }
+
+    function toScreenPosition(position) {
+        const vector = position.clone();
+        vector.project(camera);
+        const canvas = document.getElementById('canvas-3d');
+        const widthHalf = canvas.clientWidth / 2;
+        const heightHalf = canvas.clientHeight / 2;
+        return {
+            x: (vector.x * widthHalf) + widthHalf,
+            y: -(vector.y * heightHalf) + heightHalf,
+            z: vector.z
+        };
+    }
+
+    // Export
+    function exportScreenshot() {
+        renderer.render(scene, camera);
+        const canvas = document.getElementById('canvas-3d');
+        canvas.toBlob((blob) => {
             const url = URL.createObjectURL(blob);
             const link = document.createElement('a');
-            link.download = 'model-3d.stl';
+            link.download = 'model-3d-screenshot.png';
             link.href = url;
             link.click();
             URL.revokeObjectURL(url);
-            
-            showExportNotification('Modèle STL téléchargé !');
-        }
+            showExportNotification('Screenshot PNG téléchargé !');
+        });
+    }
 
-        // Simple STL Exporter class
-        class STLExporter {
-            constructor() {}
-        }
-
-        function showExportNotification(message) {
-            const notification = document.getElementById('export-notification');
-            notification.querySelector('.export-notification-text').textContent = message;
-            notification.classList.add('show');
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
-        }
-
-        // === INTERACTIVE MEASURE MODE ===
-        function toggleMeasureMode() {
-            measureMode = !measureMode;
-            const btn = document.getElementById('btn-measure');
-            const canvas = document.getElementById('canvas-3d');
-            const container = document.getElementById('canvas-container');
-            
-            if (measureMode) {
-                btn.classList.add('active');
-                canvas.style.cursor = 'crosshair';
-                
-                // Show instruction
-                const instruction = document.createElement('div');
-                instruction.className = 'measure-instruction';
-                instruction.id = 'measure-instruction';
-                instruction.innerHTML = `
-                    <div class="measure-instruction-icon">📐</div>
-                    <div>Cliquez sur 2 points du modèle pour mesurer la distance</div>
-                `;
-                container.appendChild(instruction);
-                
-                // Disable rotation
-                isRotating = false;
-                document.getElementById('rotation-icon').textContent = '▶️';
-            } else {
-                btn.classList.remove('active');
-                canvas.style.cursor = 'grab';
-                clearMeasurements();
-                
-                const instruction = document.getElementById('measure-instruction');
-                if (instruction) instruction.remove();
-            }
-        }
-
-        function handleMeasureClick(event) {
-            const canvas = document.getElementById('canvas-3d');
-            const rect = canvas.getBoundingClientRect();
-            
-            mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
-            mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
-            
-            performRaycast(event.clientX, event.clientY);
-        }
-
-        function handleMeasureTouch(event) {
-            const canvas = document.getElementById('canvas-3d');
-            const rect = canvas.getBoundingClientRect();
-            const touch = event.touches[0];
-            
-            mouse.x = ((touch.clientX - rect.left) / rect.width) * 2 - 1;
-            mouse.y = -((touch.clientY - rect.top) / rect.height) * 2 + 1;
-            
-            performRaycast(touch.clientX, touch.clientY);
-        }
-
-        function performRaycast(screenX, screenY) {
-            raycaster.setFromCamera(mouse, camera);
-            const intersects = raycaster.intersectObject(mesh, true);
-            
-            if (intersects.length > 0) {
-                const point = intersects[0].point;
-                const screenPos = toScreenPosition(point);
-                
-                addMeasurePoint(point, screenPos, screenX, screenY);
-                
-                // Click indicator effect
-                showClickIndicator(screenPos.x, screenPos.y);
-                
-                if (measurePoints.length === 2) {
-                    calculateAndDisplayDistance();
+    function exportModel() {
+        let output = 'solid model\n';
+        mesh.traverse((child) => {
+            if (child.isMesh && child.geometry) {
+                const geometry = child.geometry;
+                const matrix = child.matrixWorld;
+                const position = geometry.attributes.position;
+                const index = geometry.index;
+                if (index) {
+                    for (let i = 0; i < index.count; i += 3) {
+                        const v1 = new THREE.Vector3().fromBufferAttribute(position, index.getX(i));
+                        const v2 = new THREE.Vector3().fromBufferAttribute(position, index.getX(i + 1));
+                        const v3 = new THREE.Vector3().fromBufferAttribute(position, index.getX(i + 2));
+                        v1.applyMatrix4(matrix);
+                        v2.applyMatrix4(matrix);
+                        v3.applyMatrix4(matrix);
+                        const normal = new THREE.Vector3().subVectors(v2, v1).cross(new THREE.Vector3().subVectors(v3, v1)).normalize();
+                        output += `facet normal ${normal.x} ${normal.y} ${normal.z}\n outer loop\n  vertex ${v1.x} ${v1.y} ${v1.z}\n  vertex ${v2.x} ${v2.y} ${v2.z}\n  vertex ${v3.x} ${v3.y} ${v3.z}\n endloop\nendfacet\n`;
+                    }
                 }
             }
-        }
+        });
+        output += 'endsolid model\n';
+        const blob = new Blob([output], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.download = 'model-3d.stl';
+        link.href = url;
+        link.click();
+        URL.revokeObjectURL(url);
+        showExportNotification('Modèle STL téléchargé !');
+    }
 
-        function addMeasurePoint(worldPoint, screenPos, clickX, clickY) {
-            const container = document.getElementById('canvas-container');
-            
-            // Store point
-            measurePoints.push({
-                world: worldPoint.clone(),
-                screen: { x: clickX, y: clickY }
-            });
-            
-            // Create visual point
-            const pointEl = document.createElement('div');
-            pointEl.className = 'measure-point';
-            pointEl.style.left = screenPos.x + 'px';
-            pointEl.style.top = screenPos.y + 'px';
-            container.appendChild(pointEl);
-            measureElements.push(pointEl);
-            
-            // Hide instruction after first click
-            if (measurePoints.length === 1) {
-                const instruction = document.getElementById('measure-instruction');
-                if (instruction) instruction.style.display = 'none';
-            }
-        }
+    function showExportNotification(message) {
+        const notif = document.getElementById('export-notification');
+        notif.querySelector('.export-notification-text').textContent = message;
+        notif.classList.add('show');
+        setTimeout(() => notif.classList.remove('show'), 3000);
+    }
 
-        function calculateAndDisplayDistance() {
-            const point1 = measurePoints[0].world;
-            const point2 = measurePoints[1].world;
-            const distance = point1.distanceTo(point2);
-            
-            // Convert to mm (assuming model units are in mm)
-            const distanceMM = distance.toFixed(2);
-            
-            // Calculate midpoint
-            const midpoint = new THREE.Vector3()
-                .addVectors(point1, point2)
-                .multiplyScalar(0.5);
-            const midScreen = toScreenPosition(midpoint);
-            
-            // Create line
-            const container = document.getElementById('canvas-container');
-            const p1 = toScreenPosition(point1);
-            const p2 = toScreenPosition(point2);
-            
-            const dx = p2.x - p1.x;
-            const dy = p2.y - p1.y;
-            const length = Math.sqrt(dx * dx + dy * dy);
-            const angle = Math.atan2(dy, dx) * (180 / Math.PI);
-            
-            const line = document.createElement('div');
-            line.className = 'measure-line';
-            line.style.left = p1.x + 'px';
-            line.style.top = p1.y + 'px';
-            line.style.width = length + 'px';
-            line.style.transform = `rotate(${angle}deg)`;
-            container.appendChild(line);
-            measureElements.push(line);
-            
-            // Create result label
-            const result = document.createElement('div');
-            result.className = 'measure-result';
-            result.textContent = `${distanceMM} mm`;
-            result.style.left = midScreen.x + 'px';
-            result.style.top = midScreen.y + 'px';
-            container.appendChild(result);
-            measureElements.push(result);
-            
-            // Show clear button
-            const clearBtn = document.createElement('button');
-            clearBtn.className = 'measure-clear-btn';
-            clearBtn.textContent = '🗑️ Effacer la mesure';
-            clearBtn.onclick = clearMeasurements;
-            container.appendChild(clearBtn);
-            measureElements.push(clearBtn);
-            
-            // Disable further clicks
-            measurePoints.length = 2; // Lock at 2 points
+    // Measure mode
+    function toggleMeasureMode() {
+        measureMode = !measureMode;
+        const btn = document.getElementById('btn-measure');
+        const canvas = document.getElementById('canvas-3d');
+        const container = document.getElementById('canvas-container');
+        if (measureMode) {
+            btn.classList.add('active');
+            canvas.style.cursor = 'crosshair';
+            const instr = document.createElement('div');
+            instr.className = 'measure-instruction';
+            instr.id = 'measure-instruction';
+            instr.innerHTML = '<div class="measure-instruction-icon">📐</div><div>Cliquez sur 2 points pour mesurer</div>';
+            container.appendChild(instr);
+            isRotating = false;
+            document.getElementById('rotation-icon').textContent = '▶️';
+        } else {
+            btn.classList.remove('active');
+            canvas.style.cursor = 'grab';
+            clearMeasurements();
+            const instr = document.getElementById('measure-instruction');
+            if (instr) instr.remove();
         }
+    }
 
-        function clearMeasurements() {
-            measurePoints = [];
-            measureElements.forEach(el => {
-                if (el.parentNode) {
-                    el.parentNode.removeChild(el);
-                }
-            });
-            measureElements = [];
-            
-            // Show instruction again
-            const instruction = document.getElementById('measure-instruction');
-            if (instruction) {
-                instruction.style.display = 'block';
-            }
+    function handleMeasureClick(e) {
+        const canvas = document.getElementById('canvas-3d');
+        const rect = canvas.getBoundingClientRect();
+        mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+        performRaycast(e.clientX, e.clientY);
+    }
+
+    function handleMeasureTouch(e) {
+        const canvas = document.getElementById('canvas-3d');
+        const rect = canvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        mouse.x = ((touch.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((touch.clientY - rect.top) / rect.height) * 2 + 1;
+        performRaycast(touch.clientX, touch.clientY);
+    }
+
+    function performRaycast(screenX, screenY) {
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObject(mesh, true);
+        if (intersects.length > 0) {
+            const point = intersects[0].point;
+            const screenPos = toScreenPosition(point);
+            addMeasurePoint(point, screenPos, screenX, screenY);
+            showClickIndicator(screenPos.x, screenPos.y);
+            if (measurePoints.length === 2) calculateAndDisplayDistance();
         }
+    }
 
-        function showClickIndicator(x, y) {
-            const container = document.getElementById('canvas-container');
-            const indicator = document.createElement('div');
-            indicator.className = 'click-indicator';
-            indicator.style.left = x + 'px';
-            indicator.style.top = y + 'px';
-            container.appendChild(indicator);
-            
-            setTimeout(() => {
-                if (indicator.parentNode) {
-                    indicator.parentNode.removeChild(indicator);
-                }
-            }, 600);
+    function addMeasurePoint(worldPoint, screenPos, clickX, clickY) {
+        const container = document.getElementById('canvas-container');
+        measurePoints.push({ world: worldPoint.clone(), screen: { x: clickX, y: clickY } });
+        const pointEl = document.createElement('div');
+        pointEl.className = 'measure-point';
+        pointEl.style.left = screenPos.x + 'px';
+        pointEl.style.top = screenPos.y + 'px';
+        container.appendChild(pointEl);
+        measureElements.push(pointEl);
+        if (measurePoints.length === 1) {
+            const instr = document.getElementById('measure-instruction');
+            if (instr) instr.style.display = 'none';
         }
+    }
 
-        // Initialize on load
-        window.addEventListener('load', init);
-    </script>
-</body>
-</html>
+    function calculateAndDisplayDistance() {
+        const p1 = measurePoints[0].world;
+        const p2 = measurePoints[1].world;
+        const distance = p1.distanceTo(p2).toFixed(2);
+        const midpoint = new THREE.Vector3().addVectors(p1, p2).multiplyScalar(0.5);
+        const midScreen = toScreenPosition(midpoint);
+        const container = document.getElementById('canvas-container');
+        const s1 = toScreenPosition(p1);
+        const s2 = toScreenPosition(p2);
+        const dx = s2.x - s1.x;
+        const dy = s2.y - s1.y;
+        const length = Math.sqrt(dx * dx + dy * dy);
+        const angle = Math.atan2(dy, dx) * (180 / Math.PI);
+        const line = document.createElement('div');
+        line.className = 'measure-line';
+        line.style.left = s1.x + 'px';
+        line.style.top = s1.y + 'px';
+        line.style.width = length + 'px';
+        line.style.transform = `rotate(${angle}deg)`;
+        container.appendChild(line);
+        measureElements.push(line);
+        const result = document.createElement('div');
+        result.className = 'measure-result';
+        result.textContent = `${distance} mm`;
+        result.style.left = midScreen.x + 'px';
+        result.style.top = midScreen.y + 'px';
+        container.appendChild(result);
+        measureElements.push(result);
+        const clearBtn = document.createElement('button');
+        clearBtn.className = 'measure-clear-btn';
+        clearBtn.textContent = '🗑️ Effacer';
+        clearBtn.onclick = clearMeasurements;
+        container.appendChild(clearBtn);
+        measureElements.push(clearBtn);
+        measurePoints.length = 2;
+    }
+
+    function clearMeasurements() {
+        measurePoints = [];
+        measureElements.forEach(el => el.parentNode && el.parentNode.removeChild(el));
+        measureElements = [];
+        const instr = document.getElementById('measure-instruction');
+        if (instr) instr.style.display = 'block';
+    }
+
+    function showClickIndicator(x, y) {
+        const container = document.getElementById('canvas-container');
+        const indicator = document.createElement('div');
+        indicator.className = 'click-indicator';
+        indicator.style.left = x + 'px';
+        indicator.style.top = y + 'px';
+        container.appendChild(indicator);
+        setTimeout(() => indicator.parentNode && indicator.parentNode.removeChild(indicator), 600);
+    }
+
+    window.addEventListener('load', init);
