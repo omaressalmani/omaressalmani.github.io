@@ -226,7 +226,7 @@
         position: absolute;
         top: 20px;
         right: 20px;
-        background: rgba(0, 0, 0, 0.7);
+        background: rgba(0, 0, 0, 0.85);
         backdrop-filter: blur(10px);
         padding: 12px 16px;
         border-radius: 12px;
@@ -240,10 +240,12 @@
         justify-content: space-between;
         gap: 12px;
         margin-bottom: 4px;
+        color: white;
     }
 
     .stat-label {
-        opacity: 0.7;
+        opacity: 0.9;
+        color: white;
     }
 
     .stat-value {
@@ -256,13 +258,18 @@
         position: absolute;
         bottom: 20px;
         left: 20px;
-        background: rgba(0, 0, 0, 0.7);
+        background: rgba(255, 255, 255, 0.95);
         backdrop-filter: blur(10px);
         padding: 12px 16px;
         border-radius: 12px;
-        color: white;
         font-size: 0.8rem;
         z-index: 10;
+        border: 1px solid rgba(0, 123, 255, 0.2);
+    }
+
+    [data-theme='dark'] .instructions {
+        background: rgba(30, 30, 35, 0.95);
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .instruction-item {
@@ -270,10 +277,26 @@
         align-items: center;
         gap: 8px;
         margin-bottom: 4px;
+        color: #1a1a1a;
+    }
+
+    [data-theme='dark'] .instruction-item {
+        color: #ffffff;
     }
 
     .instruction-icon {
         font-size: 1rem;
+    }
+
+    .instruction-desktop,
+    .instruction-mobile {
+        color: #1a1a1a;
+        font-weight: 500;
+    }
+
+    [data-theme='dark'] .instruction-desktop,
+    [data-theme='dark'] .instruction-mobile {
+        color: #ffffff;
     }
 
     /* Loading */
@@ -797,76 +820,99 @@
         // Afficher le loading
         document.getElementById('loading').style.display = 'flex';
         
-        // Charger le modèle GLTF
-        loader.load(
-            'assets/img/3Dtest.glb',
+        // Liste des chemins possibles à essayer
+        const possiblePaths = [
+            'assets/img/3Dtest.gltf',
+            './assets/img/3Dtest.gltf',
+            '../assets/img/3Dtest.gltf',
+            '/assets/img/3Dtest.gltf'
+        ];
+        
+        let pathIndex = 0;
+        
+        function tryLoadModel() {
+            const currentPath = possiblePaths[pathIndex];
+            console.log('Tentative de chargement:', currentPath);
             
-            // Succès
-            function(gltf) {
-                mesh = gltf.scene;
+            loader.load(
+                currentPath,
                 
-                // Calculer la boîte englobante pour centrer
-                const box = new THREE.Box3().setFromObject(mesh);
-                const center = box.getCenter(new THREE.Vector3());
-                const size = box.getSize(new THREE.Vector3());
-                
-                // Centrer le modèle
-                mesh.position.x = -center.x;
-                mesh.position.y = -center.y;
-                mesh.position.z = -center.z;
-                
-                // Calculer l'échelle pour que le modèle rentre dans la vue
-                const maxDim = Math.max(size.x, size.y, size.z);
-                const scale = 3 / maxDim; // Ajuster à une taille visible
-                mesh.scale.set(scale, scale, scale);
-                
-                // Créer un groupe pour contenir le modèle
-                const group = new THREE.Group();
-                group.add(mesh);
-                
-                // Remplacer mesh par le groupe pour la rotation
-                mesh = group;
-                scene.add(mesh);
-                
-                // Appliquer le matériau par défaut si nécessaire
-                mesh.traverse((child) => {
-                    if (child.isMesh) {
-                        // Garder le matériau d'origine s'il existe
-                        if (!child.material) {
-                            child.material = new THREE.MeshStandardMaterial({
-                                color: 0x007bff,
-                                metalness: 0.5,
-                                roughness: 0.3
-                            });
+                // Succès
+                function(gltf) {
+                    console.log('✅ Modèle chargé avec succès depuis:', currentPath);
+                    mesh = gltf.scene;
+                    
+                    // Calculer la boîte englobante
+                    const box = new THREE.Box3().setFromObject(mesh);
+                    const center = box.getCenter(new THREE.Vector3());
+                    const size = box.getSize(new THREE.Vector3());
+                    
+                    console.log('Dimensions du modèle:', size);
+                    
+                    // Centrer
+                    mesh.position.x = -center.x;
+                    mesh.position.y = -center.y;
+                    mesh.position.z = -center.z;
+                    
+                    // Échelle automatique
+                    const maxDim = Math.max(size.x, size.y, size.z);
+                    const scale = maxDim > 0 ? 3 / maxDim : 1;
+                    mesh.scale.set(scale, scale, scale);
+                    
+                    // Groupe pour rotation
+                    const group = new THREE.Group();
+                    group.add(mesh);
+                    mesh = group;
+                    scene.add(mesh);
+                    
+                    // Appliquer matériaux
+                    mesh.traverse((child) => {
+                        if (child.isMesh) {
+                            if (!child.material) {
+                                child.material = new THREE.MeshStandardMaterial({
+                                    color: 0x007bff,
+                                    metalness: 0.5,
+                                    roughness: 0.3
+                                });
+                            }
+                            // Assurer que le matériau est visible
+                            child.material.needsUpdate = true;
+                            if (!material) material = child.material;
                         }
-                        // Sauvegarder le matériau original pour les modifications
-                        if (!material) {
-                            material = child.material;
-                        }
+                    });
+                    
+                    updateStats();
+                    document.getElementById('loading').style.display = 'none';
+                },
+                
+                // Progression
+                function(xhr) {
+                    const percent = (xhr.loaded / xhr.total * 100).toFixed(0);
+                    console.log(percent + '% chargé');
+                },
+                
+                // Erreur
+                function(error) {
+                    console.error('❌ Erreur chargement depuis:', currentPath, error);
+                    pathIndex++;
+                    
+                    // Essayer le chemin suivant
+                    if (pathIndex < possiblePaths.length) {
+                        console.log('Essai du chemin suivant...');
+                        tryLoadModel();
+                    } else {
+                        // Tous les chemins ont échoué
+                        console.error('Tous les chemins ont échoué. Utilisation du modèle de secours.');
+                        document.getElementById('loading').style.display = 'none';
+                        alert('⚠️ Impossible de charger 3Dtest.glb\n\nChemins testés:\n' + possiblePaths.join('\n') + '\n\nUtilisation du modèle de démonstration.');
+                        createFallbackModel();
                     }
-                });
-                
-                updateStats();
-                
-                // Cacher le loading
-                document.getElementById('loading').style.display = 'none';
-            },
-            
-            // Progression
-            function(xhr) {
-                console.log((xhr.loaded / xhr.total * 100) + '% chargé');
-            },
-            
-            // Erreur
-            function(error) {
-                console.error('Erreur de chargement du modèle:', error);
-                document.getElementById('loading').style.display = 'none';
-                
-                // Créer un modèle de secours si le fichier n'est pas trouvé
-                alert('Erreur: Impossible de charger le modèle 3Dtest.glb\n\nVérifiez que le fichier est bien dans: assets/img/3Dtest.glb');
-                createFallbackModel();
-            }
-        );
+                }
+            );
+        }
+        
+        // Démarrer le chargement
+        tryLoadModel();
     }
     
     // Modèle de secours en cas d'erreur
