@@ -1,7 +1,14 @@
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
-
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualisation 3D Interactive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+    
 <style>
     /* Variables pour adaptation Light/Dark */
     :root {
@@ -600,6 +607,8 @@
         }
     }
 </style>
+</head>
+<body>
 
 <section class="viewer-section">
     <div class="viewer-container">
@@ -766,7 +775,6 @@
 
     function init() {
         const canvas = document.getElementById('canvas-3d');
-        const container = canvas.parentElement;
 
         // Scene
         scene = new THREE.Scene();
@@ -814,130 +822,167 @@
         window.addEventListener('resize', onWindowResize);
     }
 
+    // 🔧 FONCTION PRINCIPALE - Changez les paramètres ici
     function createMechanicalPart() {
-        const loader = new THREE.GLTFLoader();
+        console.log('🚀 Démarrage du chargement du modèle 3D...');
         
-        // Afficher le loading
         document.getElementById('loading').style.display = 'flex';
         
-        // Liste des chemins et formats possibles
-        const possiblePaths = [
-            'assets/img/3Dtest.gltf',
-            'assets/img/3Dtest.glb',
-            './assets/img/3Dtest.gltf',
-            './assets/img/3Dtest.glb',
-            '../assets/img/3Dtest.gltf',
-            '../assets/img/3Dtest.glb',
-            '/assets/img/3Dtest.gltf',
-            '/assets/img/3Dtest.glb'
-        ];
+        // 🔧 CONFIGURATION : Changez ces 2 lignes pour votre fichier
+        const modelPath = '../assets/img/name.obj';
+        const modelType = 'obj';
         
-        let pathIndex = 0;
+        console.log('📂 Chargement:', modelPath, '(Type:', modelType + ')');
+        console.log('🌐 URL:', window.location.href);
         
-        function tryLoadModel() {
-            const currentPath = possiblePaths[pathIndex];
-            console.log('🔄 Tentative de chargement:', currentPath);
-            
-            loader.load(
-                currentPath,
-                
-                // Succès
-                function(gltf) {
-                    console.log('✅ Modèle chargé avec succès depuis:', currentPath);
-                    mesh = gltf.scene;
-                    
-                    // Calculer la boîte englobante
-                    const box = new THREE.Box3().setFromObject(mesh);
-                    const center = box.getCenter(new THREE.Vector3());
-                    const size = box.getSize(new THREE.Vector3());
-                    
-                    console.log('📏 Dimensions du modèle:', {
-                        x: size.x.toFixed(2),
-                        y: size.y.toFixed(2),
-                        z: size.z.toFixed(2)
-                    });
-                    
-                    // Centrer
-                    mesh.position.x = -center.x;
-                    mesh.position.y = -center.y;
-                    mesh.position.z = -center.z;
-                    
-                    // Échelle automatique
-                    const maxDim = Math.max(size.x, size.y, size.z);
-                    const scale = maxDim > 0 ? 3 / maxDim : 1;
-                    mesh.scale.set(scale, scale, scale);
-                    
-                    console.log('🔧 Échelle appliquée:', scale.toFixed(3));
-                    
-                    // Groupe pour rotation
-                    const group = new THREE.Group();
-                    group.add(mesh);
-                    mesh = group;
-                    scene.add(mesh);
-                    
-                    // Compter les meshes
-                    let meshCount = 0;
-                    mesh.traverse((child) => {
-                        if (child.isMesh) {
-                            meshCount++;
-                            // Appliquer un matériau si manquant
-                            if (!child.material) {
-                                child.material = new THREE.MeshStandardMaterial({
-                                    color: 0x007bff,
-                                    metalness: 0.5,
-                                    roughness: 0.3
-                                });
-                            }
-                            // S'assurer que le matériau répond à la lumière
-                            if (child.material) {
-                                child.material.needsUpdate = true;
-                                child.castShadow = true;
-                                child.receiveShadow = true;
-                            }
-                            if (!material) material = child.material;
-                        }
-                    });
-                    
-                    console.log('🎨 Nombre de meshes:', meshCount);
-                    
-                    updateStats();
-                    document.getElementById('loading').style.display = 'none';
-                },
-                
-                // Progression
-                function(xhr) {
-                    if (xhr.lengthComputable) {
-                        const percent = (xhr.loaded / xhr.total * 100).toFixed(0);
-                        console.log('⏳', percent + '% chargé');
-                    }
-                },
-                
-                // Erreur
-                function(error) {
-                    console.error('❌ Erreur chargement depuis:', currentPath, error.message || error);
-                    pathIndex++;
-                    
-                    // Essayer le chemin suivant
-                    if (pathIndex < possiblePaths.length) {
-                        console.log('🔄 Essai du chemin suivant...');
-                        setTimeout(tryLoadModel, 100);
-                    } else {
-                        // Tous les chemins ont échoué
-                        console.error('💥 Tous les chemins ont échoué');
-                        console.log('📂 Chemins testés:', possiblePaths);
-                        document.getElementById('loading').style.display = 'none';
-                        alert('⚠️ Impossible de charger le modèle 3D\n\nChemins testés:\n' + possiblePaths.slice(0, 4).join('\n') + '\n\n✅ Utilisez la console (F12) pour plus de détails\n\n🔄 Affichage du modèle de démonstration');
-                        createFallbackModel();
-                    }
-                }
-            );
+        if (modelType === 'obj') {
+            loadOBJ(modelPath);
+        } else {
+            loadGLTF(modelPath);
         }
-        
-        // Démarrer le chargement
-        tryLoadModel();
     }
     
-    // Modèle de secours en cas d'erreur
+    // Chargement OBJ
+    function loadOBJ(modelPath) {
+        const loader = new THREE.OBJLoader();
+        
+        loader.load(
+            modelPath,
+            
+            // ✅ Succès
+            function(object) {
+                console.log('✅ OBJ chargé avec succès!');
+                mesh = object;
+                
+                // Compter les meshes
+                let meshCount = 0;
+                mesh.traverse((child) => {
+                    if (child.isMesh) {
+                        meshCount++;
+                        // Appliquer un matériau par défaut
+                        child.material = new THREE.MeshStandardMaterial({
+                            color: 0x007bff,
+                            metalness: 0.5,
+                            roughness: 0.3
+                        });
+                    }
+                });
+                
+                console.log('📊 Meshes trouvés:', meshCount);
+                
+                if (meshCount === 0) {
+                    console.error('⚠️ Aucun mesh dans le fichier OBJ!');
+                    createFallbackModel();
+                    return;
+                }
+                
+                // Calculer dimensions
+                const box = new THREE.Box3().setFromObject(mesh);
+                const center = box.getCenter(new THREE.Vector3());
+                const size = box.getSize(new THREE.Vector3());
+                
+                console.log('📏 Dimensions:', size);
+                
+                // Centrer et scaler
+                mesh.position.sub(center);
+                const maxDim = Math.max(size.x, size.y, size.z);
+                if (maxDim > 0) {
+                    const scale = 3 / maxDim;
+                    mesh.scale.set(scale, scale, scale);
+                }
+                
+                // Groupe pour rotation
+                const group = new THREE.Group();
+                group.add(mesh);
+                mesh = group;
+                scene.add(mesh);
+                
+                // Sauvegarder le matériau
+                mesh.traverse((child) => {
+                    if (child.isMesh && !material) {
+                        material = child.material;
+                    }
+                });
+                
+                updateStats();
+                document.getElementById('loading').style.display = 'none';
+                console.log('🎉 Chargement OBJ terminé!');
+            },
+            
+            // ⏳ Progression
+            function(xhr) {
+                const percent = xhr.total > 0 ? (xhr.loaded / xhr.total * 100).toFixed(0) : '?';
+                console.log(`⏳ ${percent}%`);
+            },
+            
+            // ❌ Erreur
+            function(error) {
+                console.error('❌ Erreur chargement OBJ:', error);
+                document.getElementById('loading').style.display = 'none';
+                alert('Impossible de charger le fichier OBJ\nVérifiez la console (F12)');
+                createFallbackModel();
+            }
+        );
+    }
+    
+    // Chargement GLTF
+    function loadGLTF(modelPath) {
+        const loader = new THREE.GLTFLoader();
+        
+        loader.load(
+            modelPath,
+            
+            // ✅ Succès
+            function(gltf) {
+                console.log('✅ GLTF chargé!');
+                mesh = gltf.scene;
+                
+                const box = new THREE.Box3().setFromObject(mesh);
+                const center = box.getCenter(new THREE.Vector3());
+                const size = box.getSize(new THREE.Vector3());
+                
+                mesh.position.sub(center);
+                const maxDim = Math.max(size.x, size.y, size.z);
+                if (maxDim > 0) {
+                    const scale = 3 / maxDim;
+                    mesh.scale.set(scale, scale, scale);
+                }
+                
+                const group = new THREE.Group();
+                group.add(mesh);
+                mesh = group;
+                scene.add(mesh);
+                
+                mesh.traverse((child) => {
+                    if (child.isMesh) {
+                        if (!child.material) {
+                            child.material = new THREE.MeshStandardMaterial({
+                                color: 0x007bff,
+                                metalness: 0.5,
+                                roughness: 0.3
+                            });
+                        }
+                        if (!material) material = child.material;
+                    }
+                });
+                
+                updateStats();
+                document.getElementById('loading').style.display = 'none';
+            },
+            
+            function(xhr) {
+                console.log((xhr.loaded / xhr.total * 100).toFixed(0) + '%');
+            },
+            
+            function(error) {
+                console.error('❌ Erreur GLTF:', error);
+                document.getElementById('loading').style.display = 'none';
+                createFallbackModel();
+            }
+        );
+    }
+    
+    // Modèle de secours
     function createFallbackModel() {
         const group = new THREE.Group();
         const bodyGeometry = new THREE.CylinderGeometry(1.5, 1.5, 2, 32);
@@ -968,7 +1013,6 @@
     function setupControls() {
         const canvas = document.getElementById('canvas-3d');
 
-        // Mouse controls
         canvas.addEventListener('mousedown', (e) => {
             if (measureMode) {
                 handleMeasureClick(e);
@@ -1001,7 +1045,6 @@
             camera.position.z = Math.max(2, Math.min(10, camera.position.z));
         });
 
-        // Touch controls
         let touchStartX = 0, touchStartY = 0;
         let touchStartDistance = 0;
         let initialCameraZ = camera.position.z;
@@ -1071,7 +1114,6 @@
         renderer.setSize(canvas.clientWidth, canvas.clientHeight);
     }
 
-    // Controls
     function setRenderMode(mode) {
         document.getElementById('btn-solid').classList.remove('active');
         document.getElementById('btn-wireframe').classList.remove('active');
@@ -1098,7 +1140,6 @@
         if (mesh) {
             mesh.traverse((child) => {
                 if (child.isMesh && child.material) {
-                    // Créer un nouveau matériau si nécessaire
                     if (!child.material.color) {
                         child.material = new THREE.MeshStandardMaterial({
                             color: color,
@@ -1127,7 +1168,6 @@
         document.getElementById('metalness-value').textContent = value;
     }
 
-    // Stats
     function updateStats() {
         let vertices = 0, faces = 0;
         mesh.traverse((child) => {
@@ -1149,7 +1189,6 @@
         lastTime = now;
     }
 
-    // Dimensions
     function toggleDimensions() {
         dimensionsVisible = !dimensionsVisible;
         const btn = document.getElementById('btn-dimensions');
@@ -1205,7 +1244,6 @@
         dimensionElements = [];
     }
 
-    // Annotations
     function toggleAnnotations() {
         annotationsVisible = !annotationsVisible;
         const btn = document.getElementById('btn-annotations');
@@ -1276,7 +1314,6 @@
         };
     }
 
-    // Export
     function exportScreenshot() {
         renderer.render(scene, camera);
         const canvas = document.getElementById('canvas-3d');
@@ -1331,7 +1368,6 @@
         setTimeout(() => notif.classList.remove('show'), 3000);
     }
 
-    // Measure mode
     function toggleMeasureMode() {
         measureMode = !measureMode;
         const btn = document.getElementById('btn-measure');
@@ -1456,3 +1492,6 @@
     }
 
     window.addEventListener('load', init);
+</script>
+</body>
+</html>
