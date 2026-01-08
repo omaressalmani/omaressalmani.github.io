@@ -18,18 +18,18 @@
         --glass-shine: rgba(255, 255, 255, 0.1);
     }
 
-    .rec-section {
+    .reco-section {
         padding: 80px 20px;
         font-family: 'Poppins', sans-serif;
     }
 
     /* Header élégant */
-    .rec-header {
+    .reco-header {
         text-align: center;
         margin-bottom: 50px;
     }
 
-    .rec-title {
+    .reco-title {
         font-family: 'Playfair Display', serif;
         font-size: 3rem;
         font-style: italic;
@@ -39,14 +39,14 @@
         transition: color 0.3s ease;
     }
 
-    .rec-subtitle {
+    .reco-subtitle {
         font-size: 1rem;
         color: var(--rec-text-secondary);
         font-weight: 400;
     }
 
     /* Centrage de la carte */
-    .rec-grid {
+    .reco-grid {
         display: flex;
         justify-content: center;
         max-width: 1200px;
@@ -54,7 +54,7 @@
     }
 
     /* Carte glassmorphisme */
-    .rec-card {
+    .reco-card {
         background: var(--card-bg);
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
@@ -79,14 +79,14 @@
         }
     }
 
-    .rec-card:hover {
+    .reco-card:hover {
         transform: translateY(-8px);
         border-color: rgba(0, 123, 255, 0.3);
         box-shadow: 0 15px 45px rgba(0, 123, 255, 0.2);
     }
 
     /* Effet brillance au survol */
-    .rec-card::before {
+    .reco-card::before {
         content: '';
         position: absolute;
         top: -50%;
@@ -100,7 +100,7 @@
         pointer-events: none;
     }
 
-    .rec-card:hover::before {
+    .reco-card:hover::before {
         opacity: 1;
         left: 100%;
     }
@@ -136,7 +136,7 @@
     }
 
     /* Texte de la recommandation */
-    .rec-text {
+    .reco-text {
         font-size: 0.95rem;
         line-height: 1.7;
         color: var(--rec-text-main);
@@ -148,7 +148,7 @@
     }
 
     /* Profil */
-    .rec-profile {
+    .reco-profile {
         display: flex;
         align-items: center;
         gap: 18px;
@@ -166,7 +166,7 @@
         transition: all 0.3s;
     }
 
-    .rec-card:hover .profile-img {
+    .reco-card:hover .profile-img {
         border-color: #007bff;
         transform: scale(1.05);
     }
@@ -197,7 +197,7 @@
     }
 
     /* Bouton CTA */
-    .rec-cta {
+    .reco-cta {
         text-align: center;
         margin-top: 45px;
     }
@@ -229,19 +229,19 @@
 
     /* Responsive */
     @media (max-width: 768px) {
-        .rec-section {
+        .reco-section {
             padding: 60px 15px;
         }
 
-        .rec-title {
+        .reco-title {
             font-size: 2.2rem;
         }
 
-        .rec-card {
+        .reco-card {
             padding: 30px 25px;
         }
 
-        .rec-text {
+        .reco-text {
             font-size: 0.9rem;
         }
 
@@ -258,14 +258,14 @@
     }
 </style>
 
-<section class="rec-section">
-    <div class="rec-header">
-        <h2 class="rec-title">Recommendations</h2>
-        <p class="rec-subtitle">What my managers say about my dedication</p>
+<section class="reco-section">
+    <div class="reco-header">
+        <h2 class="reco-title">Recommendations</h2>
+        <p class="reco-subtitle">What my managers say about my dedication</p>
     </div>
 
-    <div class="rec-grid">
-        <div class="rec-card">
+    <div class="reco-grid">
+        <div class="reco-card">
             <div class="linkedin-badge">
                 <svg fill="currentColor" viewBox="0 0 24 24" width="14" height="14">
                     <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/>
@@ -274,12 +274,12 @@
             </div>
             <div class="quote-mark">"</div>
             
-            <p class="rec-text">
+            <p class="reco-text">
                 "Omar s'est rapidement intégré à l'équipe projet. Il assimile rapidement les problématiques et fait preuve d'esprit d'initiative. Ses tâches ont été variées avec des essais, une reprise de la conception 3D et la mise en plan 2D en cotation géométrique. Il a ensuite assuré la vérification du montage avec les chaînes de cote ainsi que le dimensionnement avec les calculs par éléments finis. Enfin, il a apporté un soin particulier à la mise en forme des résultats lors d'une présentation de synthèse très complète. Je recommande vivement Omar !"
             </p>
 
-            <div class="rec-profile">
-                <img src="../assets/img/Daval.jpeg" alt="Jean Daval" class="profile-img">
+            <div class="reco-profile">
+                <img src="/assets/img/Daval.jpeg" alt="Jean Daval" class="profile-img">
                 <div class="profile-info">
                     <h4 class="profile-name">Jean Daval</h4>
                     <p class="profile-role">Mechanical Engineer - Technical Lead</p>
@@ -289,7 +289,7 @@
         </div>
     </div>
 
-    <div class="rec-cta">
+    <div class="reco-cta">
         <a href="https://www.linkedin.com/in/omar-essalmani" target="_blank" class="btn-linkedin">
             <svg fill="currentColor" viewBox="0 0 24 24">
                 <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/>
