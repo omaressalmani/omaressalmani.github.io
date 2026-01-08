@@ -68,8 +68,8 @@ announcements:
         <p class="reco-subtitle">Restez informé de mes derniers projets et analyses techniques.</p>
     </div>
 
-<div class="reco-grid-unique">
-        <div class="reco-card-glass">
+<div class="rec-grid-unique">
+        <div class="rec-card-glass">
             <div class="linkedin-badge"><i class="fab fa-linkedin"></i> LinkedIn</div>
             <a href="https://www.linkedin.com/posts/omar-essalmani_utc-ensam-graduation-ugcPost-7407430842324553729-BBcX?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAADLEUCcBZosRbAVy07EE8qdAr5_C6LA6Fpo" target="_blank">
                 <img src="{{ '/assets/img/projects/Post.jpg' | relative_url }}" 
