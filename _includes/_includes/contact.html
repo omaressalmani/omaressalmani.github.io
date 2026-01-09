@@ -20,18 +20,18 @@
         --input-bg: rgba(255, 255, 255, 0.08);
     }
 
-    .contact-section {
+    .contacto-section {
         padding: 80px 20px;
         font-family: 'Poppins', sans-serif;
     }
 
-    .contact-container {
+    .contacto-container {
         max-width: 700px;
         margin: 0 auto;
     }
 
     /* Header élégant */
-    .contact-title {
+    .contacto-title {
         font-family: 'Playfair Display', serif;
         font-size: 3rem;
         font-style: italic;
@@ -42,7 +42,7 @@
         transition: color 0.3s ease;
     }
 
-    .contact-subtitle {
+    .contacto-subtitle {
         font-size: 1rem;
         color: var(--contact-text-secondary);
         font-weight: 400;
@@ -51,7 +51,7 @@
     }
 
     /* Carte du formulaire */
-    .contact-form {
+    .contacto-form {
         background: var(--card-bg);
         backdrop-filter: blur(15px);
         -webkit-backdrop-filter: blur(15px);
@@ -64,13 +64,13 @@
         transition: all 0.4s ease;
     }
 
-    .contact-form:hover {
+    .contacto-form:hover {
         border-color: rgba(0, 123, 255, 0.3);
         box-shadow: 0 15px 45px rgba(0, 123, 255, 0.2);
     }
 
     /* Effet brillance */
-    .contact-form::before {
+    .contacto-form::before {
         content: '';
         position: absolute;
         top: -50%;
@@ -84,7 +84,7 @@
         pointer-events: none;
     }
 
-    .contact-form:hover::before {
+    .contacto-form:hover::before {
         opacity: 1;
         left: 100%;
     }
@@ -219,15 +219,15 @@
 
     /* Responsive */
     @media (max-width: 768px) {
-        .contact-section {
+        .contacto-section {
             padding: 60px 15px;
         }
 
-        .contact-title {
+        .contacto-title {
             font-size: 2.2rem;
         }
 
-        .contact-form {
+        .contacto-form {
             padding: 30px 25px;
         }
 
@@ -239,12 +239,12 @@
     }
 </style>
 
-<section class="contact-section">
-    <div class="contact-container">
-        <h2 class="contact-title">Contactez-moi</h2>
-        <p class="contact-subtitle">Un projet en tête ? N'hésitez pas à m'envoyer un message</p>
+<section class="contacto-section">
+    <div class="contacto-container">
+        <h2 class="contacto-title">Contactez-moi</h2>
+        <p class="contacto-subtitle">Un projet en tête ? N'hésitez pas à m'envoyer un message</p>
         
-        <form id="contact-form" class="contact-form">
+        <form id="contacto-form" class="contacto-form">
             <div class="input-group">
                 <input type="text" name="name" placeholder="Votre nom" required>
             </div>
@@ -262,7 +262,7 @@
 </section>
 
 <script>
-    const form = document.getElementById('contact-form');
+    const form = document.getElementById('contacto-form');
     const submitBtn = document.getElementById('submit-btn');
 
     form.addEventListener('submit', async (e) => {
